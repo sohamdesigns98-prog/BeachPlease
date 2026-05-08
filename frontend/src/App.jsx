@@ -22,6 +22,7 @@ function HomeExperience() {
   const [isLandingExiting, setIsLandingExiting] = useState(false);
   const [hasEntered, setHasEntered] = useState(false);
   const [generatedPlan, setGeneratedPlan] = useState(null);
+  const [generationInput, setGenerationInput] = useState(null);
   const [resultVisible, setResultVisible] = useState(false);
   const [resultTransitioning, setResultTransitioning] = useState(false);
 
@@ -43,11 +44,12 @@ function HomeExperience() {
     }, removeDelay);
   }
 
-  function handlePlanGenerated(plan) {
+  function handlePlanGenerated(plan, input) {
     setResultTransitioning(true);
 
     window.setTimeout(() => {
       setGeneratedPlan(plan);
+      setGenerationInput(input || null);
       setResultVisible(false);
 
       window.setTimeout(() => {
@@ -60,7 +62,11 @@ function HomeExperience() {
   return (
     <div className="app-transition-frame">
       {hasEntered && generatedPlan ? (
-        <ResultExperience plan={generatedPlan} visible={resultVisible} />
+        <ResultExperience
+          plan={generatedPlan}
+          generationInput={generationInput}
+          visible={resultVisible}
+        />
       ) : hasEntered ? (
         <MainExperience
           visible={!resultTransitioning}

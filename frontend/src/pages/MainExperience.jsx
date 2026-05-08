@@ -1,23 +1,33 @@
-import { useEffect, useState } from "react";
-import { HelpCircle, LayoutGrid, X } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { HelpCircle } from "lucide-react";
 
-import { getMapConditions } from "@/api/conditions";
+import { getConditions } from "@/api/conditions";
 import { createPlan } from "@/api/plans";
+import StageFunnel from "@/components/funnel/StageFunnel";
 import GeneratingOverlay from "@/components/GeneratingOverlay";
-import MoodSearchBar from "@/components/MoodSearchBar";
-import ShoreMap from "@/components/ShoreMap";
-import { APP_COPY, VIBES } from "@/content/voice";
+import MapboxBeachMap from "@/components/map/MapboxBeachMap";
+import { REGION_CONFIG } from "@/components/map/regionConfig";
+import { VIBES } from "@/content/voice";
 import { useAuth } from "@/context/AuthContext";
 import {
-  getArcMessage,
   getMockPlanForMood,
-  getMoodRing,
-  getWordCount,
 } from "@/utils/voiceHelpers";
+import { selectCandidateBeaches } from "@/utils/candidateSelector";
+
+const INITIAL_FUNNEL_STATE = {
+  stage: 0,
+  region: null,
+  activity: null,
+  companion: null,
+  mood_phrase: "",
+  preferredBeachSlug: null,
+  candidateBeachSlugs: [],
+  selectedBeachSlug: null,
+};
 
 export default function MainExperience({ visible = false, onPlanGenerated }) {
   const { token } = useAuth();
-  const [mood, setMood] = useState("");
+  const [funnelState, setFunnelState] = useState(INITIAL_FUNNEL_STATE);
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState("");
   const [mapBeaches, setMapBeaches] = useState([]);
@@ -25,16 +35,51 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
   const [selectedBeachSlug, setSelectedBeachSlug] = useState("");
   const [selectedBeachName, setSelectedBeachName] = useState("");
   const [utilityPanel, setUtilityPanel] = useState("");
-  const moodRing = getMoodRing(mood);
-  const progressMessage = getArcMessage(getWordCount(mood));
+  const [generationInput, setGenerationInput] = useState(null);
   const useMocks = import.meta.env.VITE_USE_MOCKS === "true";
+  const candidates = useMemo(
+    () => selectCandidateBeaches({
+      conditions: mapBeaches,
+      region: funnelState.region,
+      activity: funnelState.activity,
+      companion: funnelState.companion,
+    }),
+    [funnelState.activity, funnelState.companion, funnelState.region, mapBeaches],
+  );
+  const candidateBeachSlugs = useMemo(
+    () => {
+      if (candidates.length > 0) {
+        return candidates.map((beach) => beach.slug);
+      }
+
+      if (funnelState.region && !funnelState.activity) {
+        return REGION_CONFIG[funnelState.region]?.slugs || [];
+      }
+
+      return [];
+    },
+    [candidates, funnelState.activity, funnelState.region],
+  );
+
+  useEffect(() => {
+    setFunnelState((current) => {
+      if (arraysMatch(current.candidateBeachSlugs, candidateBeachSlugs)) {
+        return current;
+      }
+
+      return {
+        ...current,
+        candidateBeachSlugs,
+      };
+    });
+  }, [candidateBeachSlugs]);
 
   useEffect(() => {
     let cancelled = false;
 
     async function loadMapConditions() {
       try {
-        const beaches = await getMapConditions();
+        const beaches = await getConditions();
         if (cancelled) return;
         setMapBeaches(Array.isArray(beaches) ? beaches : []);
         setMapFallbackActive(false);
@@ -52,13 +97,14 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
     };
   }, []);
 
-  async function generatePlan(nextMood = mood) {
+  async function generatePlan(nextPayload) {
     if (isGenerating) return;
 
-    const moodPhrase = nextMood.trim();
-    if (!moodPhrase) return;
+    const payload = nextPayload || buildPlanPayload(funnelState);
+    const moodPhrase = payload.mood_phrase || fallbackMoodFromFunnel(payload);
 
     setError("");
+    setGenerationInput(payload);
     setIsGenerating(true);
 
     if (useMocks) {
@@ -66,10 +112,15 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
         const mockPlan = {
           ...getMockPlanForMood(moodPhrase),
           mood_phrase: moodPhrase,
+          ...payload,
         };
         setSelectedBeachSlug(mockPlan.selected_beach_slug || "");
         setSelectedBeachName(mockPlan.selected_beach_name || mockPlan.beachName || "");
-        onPlanGenerated?.(mockPlan);
+        setFunnelState((current) => ({
+          ...current,
+          selectedBeachSlug: mockPlan.selected_beach_slug || "",
+        }));
+        onPlanGenerated?.(mockPlan, payload);
         setIsGenerating(false);
       }, 800);
       return;
@@ -80,31 +131,45 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
         const mockPlan = {
           ...getMockPlanForMood(moodPhrase),
           mood_phrase: moodPhrase,
+          ...payload,
           requiresAuthToSave: true,
         };
         setSelectedBeachSlug(mockPlan.selected_beach_slug || "");
         setSelectedBeachName(mockPlan.selected_beach_name || mockPlan.beachName || "");
-        onPlanGenerated?.(mockPlan);
+        setFunnelState((current) => ({
+          ...current,
+          selectedBeachSlug: mockPlan.selected_beach_slug || "",
+        }));
+        onPlanGenerated?.(mockPlan, payload);
         setIsGenerating(false);
       }, 800);
       return;
     }
 
     try {
-      const createdPlan = await createPlan({ mood_phrase: moodPhrase });
+      const createdPlan = await createPlan(payload);
       setSelectedBeachSlug(createdPlan.selected_beach_slug || "");
       setSelectedBeachName(createdPlan.selected_beach_name || "");
-      onPlanGenerated?.(createdPlan);
+      setFunnelState((current) => ({
+        ...current,
+        selectedBeachSlug: createdPlan.selected_beach_slug || "",
+      }));
+      onPlanGenerated?.(createdPlan, payload);
     } catch (caughtError) {
       if ([401, 403].includes(caughtError?.response?.status)) {
         const mockPlan = {
           ...getMockPlanForMood(moodPhrase),
           mood_phrase: moodPhrase,
+          ...payload,
           requiresAuthToSave: true,
         };
         setSelectedBeachSlug(mockPlan.selected_beach_slug || "");
         setSelectedBeachName(mockPlan.selected_beach_name || mockPlan.beachName || "");
-        onPlanGenerated?.(mockPlan);
+        setFunnelState((current) => ({
+          ...current,
+          selectedBeachSlug: mockPlan.selected_beach_slug || "",
+        }));
+        onPlanGenerated?.(mockPlan, payload);
         return;
       }
 
@@ -114,23 +179,37 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
     }
   }
 
-  function pickForMe() {
-    const vibe = VIBES[Math.floor(Math.random() * VIBES.length)];
-    setMood(vibe.phrase);
-    generatePlan(vibe.phrase);
-  }
-
   function handleBeachSelect(beach) {
-    setMood(`I want a beach day near ${beach.name}`);
+    setFunnelState((current) => ({
+      ...current,
+      preferredBeachSlug: beach.slug,
+    }));
+    setSelectedBeachName(beach.name || "");
   }
 
-  function selectPremadePlan(phrase) {
-    setMood(phrase);
-    setUtilityPanel("");
+  function handleFunnelChange(nextState) {
+    setFunnelState(nextState);
+    setSelectedBeachSlug(nextState.selectedBeachSlug || "");
+    const selected = mapBeaches.find((beach) => beach.slug === (
+      nextState.selectedBeachSlug || nextState.preferredBeachSlug
+    ));
+    setSelectedBeachName(selected?.name || "");
+  }
+
+  function handleGenerateFromFunnel(payload) {
+    generatePlan(payload || buildPlanPayload(funnelState));
+  }
+
+  function handleRegionSelect(region) {
+    handleFunnelChange({
+      ...funnelState,
+      region,
+      stage: 1,
+    });
   }
 
   return (
-    <main className={`main-app-shell app-flow-shell ${visible ? "is-visible" : ""}`}>
+    <main className={`main-app-shell main-experience-split ${visible ? "is-visible" : ""}`}>
       <section className="utility-button-rail" aria-label="Quick tools">
         <button
           type="button"
@@ -145,8 +224,8 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
 
       {utilityPanel && (
         <section
-          className={`utility-popover ${utilityPanel === "plans" ? "is-plans" : "is-help"}`}
-          aria-label={utilityPanel === "help" ? "How to use" : "Premade plans"}
+          className="utility-popover is-help"
+          aria-label="How to use"
         >
           <button
             type="button"
@@ -154,88 +233,74 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
             aria-label="Close panel"
             onClick={() => setUtilityPanel("")}
           >
-            <X aria-hidden="true" strokeWidth={1.7} />
+            ×
           </button>
 
-          {utilityPanel === "help" ? (
-            <div className="utility-help-copy">
-              <p className="utility-popover-kicker">HOW IT WORKS</p>
-              <ol>
-                <li>Say the mood. Plain English is best.</li>
-                <li>Pick a dot if you already have a beach in mind.</li>
-                <li>Hit get me a beach. We’ll sort the coast.</li>
-                <li>Like the ticket? Log in after to save it.</li>
-              </ol>
-            </div>
-          ) : (
-            <div className="premade-plan-list">
-              <p className="utility-popover-kicker">PREMADE STARTERS</p>
-              {VIBES.map((vibe) => (
-                <button
-                  key={vibe.id}
-                  type="button"
-                  onClick={() => selectPremadePlan(vibe.phrase)}
-                >
-                  <span>{vibe.emoji}</span>
-                  <strong>{vibe.label}</strong>
-                  <small>{vibe.phrase}</small>
-                </button>
-              ))}
-            </div>
-          )}
+          <div className="utility-help-copy">
+            <p className="utility-popover-kicker">HOW IT WORKS</p>
+            <ol>
+              <li>Pick a patch.</li>
+              <li>Say what you’re doing.</li>
+              <li>Choose who’s getting dragged along.</li>
+              <li>Add a vibe note if the coast needs context.</li>
+            </ol>
+          </div>
         </section>
       )}
 
-      <section className="minimal-headline" aria-label="BeachPlease prompt">
-        <h1>
-          {APP_COPY.home.headline.map((line) => (
-            <span key={line}>
-              {line}
-              <br />
-            </span>
-          ))}
-        </h1>
-      </section>
+      <StageFunnel
+        state={{
+          ...funnelState,
+          candidateBeachSlugs,
+        }}
+        conditions={mapBeaches}
+        candidates={candidates}
+        onChange={handleFunnelChange}
+        onGenerate={handleGenerateFromFunnel}
+      />
 
-      <ShoreMap
-        mapBeaches={mapBeaches}
+      <MapboxBeachMap
+        beaches={mapBeaches}
         isFallback={mapFallbackActive}
+        region={funnelState.region}
+        activity={funnelState.activity}
+        candidateBeachSlugs={candidateBeachSlugs}
+        preferredBeachSlug={funnelState.preferredBeachSlug || ""}
         selectedBeachSlug={selectedBeachSlug}
         selectedBeachName={selectedBeachName}
-        onBeachSelect={handleBeachSelect}
+        onBeachPreview={handleBeachSelect}
+        onRegionSelect={handleRegionSelect}
       />
-
-      <MoodSearchBar
-        value={mood}
-        isLoading={isGenerating}
-        moodRing={moodRing}
-        progressMessage={progressMessage}
-        onChange={setMood}
-        onSubmit={generatePlan}
-      />
-
-      <button
-        type="button"
-        className="search-grid-button"
-        aria-label="Open premade plans"
-        aria-expanded={utilityPanel === "plans"}
-        onClick={() => setUtilityPanel((current) => (current === "plans" ? "" : "plans"))}
-      >
-        <LayoutGrid aria-hidden="true" strokeWidth={1.7} />
-      </button>
-
-      <section className="home-action-row" aria-label="Plan actions">
-        <button type="button" onClick={() => generatePlan()}>
-          GET ME A BEACH →
-        </button>
-        <button type="button" onClick={pickForMe}>
-          ✦ nah, just pick for me
-        </button>
-      </section>
 
       {error && <p className="home-error" role="alert">{error}</p>}
 
-      <GeneratingOverlay mood={mood} isVisible={isGenerating} />
+      <GeneratingOverlay
+        mood={generationInput?.mood_phrase || funnelState.mood_phrase || fallbackMoodFromFunnel(funnelState)}
+        isVisible={isGenerating}
+      />
     </main>
   );
+}
+
+function arraysMatch(first = [], second = []) {
+  if (first.length !== second.length) return false;
+  return first.every((item, index) => item === second[index]);
+}
+
+function buildPlanPayload(state) {
+  return {
+    region: state.region,
+    activity: state.activity,
+    companion: state.companion,
+    mood_phrase: state.mood_phrase.trim() || undefined,
+    preferred_beach_slug: state.preferredBeachSlug || undefined,
+  };
+}
+
+function fallbackMoodFromFunnel(payload) {
+  if (payload.mood_phrase) return payload.mood_phrase;
+  if (payload.region && payload.activity && payload.companion) {
+    return `${payload.activity} beach day around ${payload.region} with ${payload.companion}`;
+  }
+  return VIBES[0].phrase;
 }

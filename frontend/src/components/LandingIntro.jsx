@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import { Button } from "@/components/ui/button";
 import { BUTTON_COPY, LANDING_COPY } from "@/content/voice";
 
 const CLOUD_VIDEO_SRC = "/CloudAsset.mp4";
@@ -125,7 +126,7 @@ export default function LandingIntro({ isExiting = false, onEnter }) {
           </p>
         ))}
 
-        <button
+        <Button
           type="button"
           className={`landing-intro__button ${showButton ? "is-visible" : ""}`}
           disabled={isExiting}
@@ -135,7 +136,7 @@ export default function LandingIntro({ isExiting = false, onEnter }) {
           }}
         >
           {BUTTON_COPY.enterExperience} →
-        </button>
+        </Button>
       </div>
     </section>
   );

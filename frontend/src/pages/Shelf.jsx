@@ -13,6 +13,11 @@ function formatDate(value) {
   return new Date(value).toLocaleString();
 }
 
+function formatField(value) {
+  if (!value) return "n/a";
+  return String(value).replaceAll("_", " ");
+}
+
 export default function Shelf() {
   const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -69,7 +74,10 @@ export default function Shelf() {
         {error && <p className="auth-error">{error}</p>}
 
         {!loading && plans.length === 0 && (
-          <p className="auth-muted">No saved plans yet. Go make one worth leaving the house for.</p>
+          <div className="plan-empty-state">
+            <p>NO PLANS YET //</p>
+            <span>Go on. Tell the coast what you&apos;re after.</span>
+          </div>
         )}
 
         <div className="plan-log-list">
@@ -78,9 +86,26 @@ export default function Shelf() {
             return (
               <article className="plan-log-row" key={id}>
                 <div>
-                  <p>{plan.mood_phrase}</p>
-                  <h2>{plan.selected_beach_name}</h2>
-                  <span>{formatDate(plan.created_at)}</span>
+                  <p>{plan.mood_phrase || "mood not logged"}</p>
+                  <h2>{plan.selected_beach_name || plan.beach_name || "Beach plan"}</h2>
+                  <dl className="plan-log-meta">
+                    <div>
+                      <dt>REGION</dt>
+                      <dd>{formatField(plan.region)}</dd>
+                    </div>
+                    <div>
+                      <dt>ACTIVITY</dt>
+                      <dd>{formatField(plan.activity)}</dd>
+                    </div>
+                    <div>
+                      <dt>COMPANION</dt>
+                      <dd>{formatField(plan.companion)}</dd>
+                    </div>
+                    <div>
+                      <dt>CREATED</dt>
+                      <dd>{formatDate(plan.created_at)}</dd>
+                    </div>
+                  </dl>
                 </div>
                 <div className="plan-log-actions">
                   <Link to={`/plans/${id}`}>OPEN</Link>

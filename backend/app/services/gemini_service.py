@@ -23,6 +23,7 @@ def compact_candidate_beach(beach: dict[str, Any]) -> dict[str, Any]:
         "slug": beach.get("slug"),
         "suburb": beach.get("suburb"),
         "region": beach.get("region"),
+        "region_key": beach.get("region_key"),
         "vibe_tags": beach.get("vibe_tags", []),
         "best_for": beach.get("best_for", []),
         "avoid_when": beach.get("avoid_when", []),
@@ -49,8 +50,10 @@ def build_prompt(
     mood_phrase: str,
     user_profile: dict,
     candidate_beaches: list[dict],
+    user_inputs: dict[str, Any] | None = None,
 ) -> str:
     candidates = [compact_candidate_beach(beach) for beach in candidate_beaches]
+    user_inputs = user_inputs or {}
     profile = {
         "suburb": user_profile.get("suburb"),
         "companions": user_profile.get("companions"),
@@ -58,15 +61,15 @@ def build_prompt(
     }
 
     return f"""
-You are BeachPlease, a Sydney beach curator.
+You are BeachPlease's beach curator. You are a Sydney local.
 
 Recommend exactly one beach using only the candidate beaches provided below.
-Consider the user's mood, profile, beach data, deterministic scores, and live conditions.
+Consider the user's funnel inputs, optional mood phrase, profile, beach data, deterministic scores, and live conditions.
 Do not invent weather data. Do not recommend a beach outside the candidate list.
 Return only valid JSON. Do not use markdown. Do not wrap the JSON in code fences.
 
 VOICE:
-You are BeachPlease, a Sydney beach curator.
+You are BeachPlease's beach curator. You are a Sydney local.
 Sound like a witty Sydney local who knows the beaches properly.
 Be warm, practical, specific, and lightly funny.
 Use occasional Australian phrasing naturally, such as:
@@ -144,6 +147,15 @@ Rules:
 Mood phrase:
 {mood_phrase}
 
+USER INPUTS:
+- Region: {user_inputs.get("region")}
+- Activity: {user_inputs.get("activity")}
+- Companion: {user_inputs.get("companion")}
+- Mood phrase: {mood_phrase}
+- Preferred beach: {user_inputs.get("preferred_beach_slug")}
+- Suburb: {profile.get("suburb")}
+- Travel mode: {profile.get("travel_mode")}
+
 User profile:
 {json.dumps(profile, ensure_ascii=False)}
 
@@ -217,13 +229,14 @@ async def generate_beach_plan_with_gemini(
     mood_phrase: str,
     user_profile: dict,
     candidate_beaches: list[dict],
+    user_inputs: dict[str, Any] | None = None,
 ) -> dict:
     if not settings.gemini_api_key:
         raise GeminiServiceError("GEMINI_API_KEY is not configured")
     if not candidate_beaches:
         raise GeminiServiceError("At least one candidate beach is required")
 
-    prompt = build_prompt(mood_phrase, user_profile, candidate_beaches)
+    prompt = build_prompt(mood_phrase, user_profile, candidate_beaches, user_inputs)
     payload = {
         "contents": [
             {

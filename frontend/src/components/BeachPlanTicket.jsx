@@ -12,6 +12,24 @@ export function validImageUrl(value) {
 function arrayFromConditions(conditions) {
   if (Array.isArray(conditions)) return conditions;
   if (!conditions) return APP_COPY.result.mockPlan.conditions;
+  if (typeof conditions === "object") {
+    const parts = [];
+
+    if (conditions.temperature !== null && conditions.temperature !== undefined) {
+      parts.push(`${conditions.temperature}°C`);
+    }
+    if (conditions.wind_kmh !== null && conditions.wind_kmh !== undefined) {
+      parts.push(`${conditions.wind_kmh}km/h wind`);
+    }
+    if (conditions.wave_height_m !== null && conditions.wave_height_m !== undefined) {
+      parts.push(`${conditions.wave_height_m}m swell`);
+    }
+    if (conditions.uv_index !== null && conditions.uv_index !== undefined) {
+      parts.push(`UV ${conditions.uv_index}`);
+    }
+
+    return parts.length ? parts : APP_COPY.result.mockPlan.conditions;
+  }
 
   return String(conditions)
     .split(/\s*·\s*/)
@@ -19,7 +37,7 @@ function arrayFromConditions(conditions) {
     .filter(Boolean);
 }
 
-export function normalisePlanForTicket(rawPlan) {
+export function normalisePlanForTicket(rawPlan, generationInput = {}) {
   if (!rawPlan) return APP_COPY.result.mockPlan;
   if (rawPlan.beachName) return rawPlan;
 
@@ -33,26 +51,28 @@ export function normalisePlanForTicket(rawPlan) {
 
   return {
     id: rawPlan._id || rawPlan.id,
+    slug: rawPlan.selected_beach_slug || rawPlan.slug,
     eyebrow: "YOUR BEACH PLAN · GENERATED NOW",
-    beachName: rawPlan.selected_beach_name || APP_COPY.result.mockPlan.beachName,
-    moodPhrase: rawPlan.mood_phrase || moodReading.summary || "",
+    beachName: rawPlan.selected_beach_name || rawPlan.beach_name || APP_COPY.result.mockPlan.beachName,
+    moodPhrase: rawPlan.mood_phrase || generationInput.mood_phrase || moodReading.summary || "",
     moodTags,
     bestTime: plan.when || "",
     where: plan.where || "",
     when: plan.when || "",
     why: plan.why || "",
-    conditions: plan.conditions_summary || "",
+    conditions: plan.conditions_summary || rawPlan.conditions || "",
     bring: Array.isArray(plan.bring) ? plan.bring : [],
     verdict: plan.gentle_warning || "— worth a look, conditions permitting.",
     imageUrl: validImageUrl(rawPlan.image_url) ? rawPlan.image_url : FALLBACK_IMAGE_URL,
+    generationInput,
     raw: rawPlan,
   };
 }
 
-export default function BeachPlanTicket({ plan }) {
+export default function BeachPlanTicket({ plan, generationInput }) {
   const ticket = {
     ...APP_COPY.result.mockPlan,
-    ...normalisePlanForTicket(plan),
+    ...normalisePlanForTicket(plan, generationInput),
   };
   const copy = APP_COPY.result.ticket;
   const conditions = arrayFromConditions(ticket.conditions);

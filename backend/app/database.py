@@ -1,8 +1,18 @@
+import certifi
 from motor.motor_asyncio import AsyncIOMotorClient
 
 from app.config import settings
 
-client = AsyncIOMotorClient(settings.mongodb_uri) if settings.mongodb_uri else None
+
+client = (
+    AsyncIOMotorClient(
+        settings.mongodb_uri,
+        tls=True,
+        tlsCAFile=certifi.where(),
+    )
+    if settings.mongodb_uri
+    else None
+)
 
 
 def get_database():

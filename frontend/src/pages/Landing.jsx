@@ -12,8 +12,6 @@ export default function Landing({ isLeaving = false, onEnter }) {
         <div className="landing-action">
           <Button
             type="button"
-            variant="outline"
-            className="rounded-full border-foreground/70 bg-transparent px-7 text-[13px] font-normal tracking-normal hover:bg-foreground hover:text-background"
             disabled={isLeaving}
             onClick={onEnter}
           >

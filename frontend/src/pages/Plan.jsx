@@ -3,11 +3,16 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { deletePlan, getPlan, replayPlan, updatePlanNotes } from "@/api/plans";
 import BeachPlanTicket from "@/components/BeachPlanTicket";
+import NotesEditor from "@/components/NotesEditor";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 
 function getPlanId(plan) {
   return plan?._id || plan?.id;
+}
+
+function formatField(value) {
+  if (!value) return "n/a";
+  return String(value).replaceAll("_", " ");
 }
 
 export default function Plan() {
@@ -89,22 +94,44 @@ export default function Plan() {
           <BeachPlanTicket plan={plan} />
 
           <aside className="plan-notes-panel">
+            <section className="plan-metadata" aria-label="Plan metadata">
+              <div>
+                <span>REGION //</span>
+                <p>{formatField(plan.region)}</p>
+              </div>
+              <div>
+                <span>ACTIVITY //</span>
+                <p>{formatField(plan.activity)}</p>
+              </div>
+              <div>
+                <span>COMPANION //</span>
+                <p>{formatField(plan.companion)}</p>
+              </div>
+              <div>
+                <span>MOOD //</span>
+                <p>{plan.mood_phrase || "n/a"}</p>
+              </div>
+            </section>
+
             <div className="auth-heading">
-              <p>NOTES</p>
+              <p>NOTES //</p>
               <h2>User notes</h2>
-              <span>Future you loves context. Occasionally.</span>
+              <span>Autosaves one second after you stop typing.</span>
             </div>
-            <Textarea
-              value={notes}
-              placeholder="Good spot near the rocks. Better after 5pm."
-              onChange={(event) => setNotes(event.target.value)}
+            <NotesEditor
+              planId={getPlanId(plan)}
+              initialNotes={notes}
+              onSaved={(updatedPlan) => {
+                setPlan(updatedPlan);
+                setNotes(updatedPlan.user_notes || "");
+              }}
             />
             {status && <p className="auth-success">{status}</p>}
             <div className="profile-actions">
               <Button type="button" onClick={handleSaveNotes}>SAVE NOTES</Button>
-              <Button type="button" variant="outline" onClick={handleReplay}>REPLAY</Button>
+              <Button type="button" variant="outline" onClick={handleReplay}>SAME MOOD · FRESH COAST</Button>
               <Button type="button" variant="outline" className="danger-button" onClick={handleDelete}>
-                DELETE
+                BIN IT
               </Button>
             </div>
           </aside>

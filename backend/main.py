@@ -1,6 +1,13 @@
+import logging
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo import ASCENDING
+
+try:
+    from apscheduler.schedulers.asyncio import AsyncIOScheduler
+except ImportError:
+    AsyncIOScheduler = None
 
 from app.config import settings
 from app.database import get_database
@@ -11,8 +18,15 @@ from app.routes.condition_routes import router as condition_router
 from app.routes.plan_routes import router as plan_router
 from app.routes.rank_routes import router as rank_router
 from app.routes.user_routes import router as user_router
+from app.services.conditions_cache import refresh_conditions_cache
 
 app = FastAPI(title="BeachPlease API")
+logger = logging.getLogger("beachplease")
+conditions_scheduler = (
+    AsyncIOScheduler(timezone="Australia/Sydney")
+    if AsyncIOScheduler is not None
+    else None
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -31,12 +45,47 @@ app.include_router(ai_router)
 app.include_router(plan_router)
 
 
+async def refresh_conditions_safely():
+    db = get_database()
+    if db is None:
+        logger.warning("Skipping conditions refresh because MONGODB_URI is not configured")
+        return
+
+    try:
+        await refresh_conditions_cache(db)
+        logger.info("Conditions cache refreshed")
+    except Exception as error:
+        logger.exception("Conditions cache refresh failed: %s", error)
+
+
 @app.on_event("startup")
-async def create_indexes():
+async def startup():
     db = get_database()
     if db is not None:
         await db.users.create_index([("email", ASCENDING)], unique=True)
         await db.beaches.create_index([("slug", ASCENDING)], unique=True)
+
+    await refresh_conditions_safely()
+
+    if conditions_scheduler is None:
+        logger.warning("APScheduler is not installed; conditions cache will refresh on demand only")
+        return
+
+    if not conditions_scheduler.running:
+        conditions_scheduler.add_job(
+            refresh_conditions_safely,
+            "interval",
+            minutes=30,
+            id="refresh_conditions_cache",
+            replace_existing=True,
+        )
+        conditions_scheduler.start()
+
+
+@app.on_event("shutdown")
+async def shutdown():
+    if conditions_scheduler is not None and conditions_scheduler.running:
+        conditions_scheduler.shutdown(wait=False)
 
 
 @app.get("/health")

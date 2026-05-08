@@ -6,14 +6,14 @@
 
 @layer base {
   :root {
-    --background: 180 33% 99%;
+    --background: 180 33% 99.4%;
     --foreground: 0 0% 12%;
-    --card: 180 33% 99%;
+    --card: 180 33% 99.4%;
     --card-foreground: 0 0% 12%;
-    --popover: 180 33% 99%;
+    --popover: 180 33% 99.4%;
     --popover-foreground: 0 0% 12%;
     --primary: 0 0% 12%;
-    --primary-foreground: 180 33% 99%;
+    --primary-foreground: 180 33% 99.4%;
     --secondary: 42 18% 88%;
     --secondary-foreground: 0 0% 12%;
     --muted: 42 18% 88%;
@@ -21,7 +21,7 @@
     --accent: 42 18% 88%;
     --accent-foreground: 0 0% 12%;
     --destructive: 0 72% 42%;
-    --destructive-foreground: 180 33% 99%;
+    --destructive-foreground: 180 33% 99.4%;
     --border: 38 16% 78%;
     --input: 38 16% 78%;
     --ring: 0 0% 18%;
@@ -80,7 +80,7 @@
   }
 
   .landing-intro__content {
-    @apply absolute left-1/2 top-[29%] z-10 w-[min(360px,calc(100vw-48px))] -translate-x-1/2 -translate-y-1/2 text-left font-mono text-[10px] font-medium leading-[1.32] text-white;
+    @apply absolute left-1/2 top-[29%] z-10 w-[min(360px,calc(100vw-48px))] -translate-x-1/2 -translate-y-1/2 text-left font-mono text-[10px] font-medium leading-[1.32] text-[#FDFEFE];
     opacity: 0;
     text-shadow: 0 1px 10px rgb(0 0 0 / 0.12);
     transform: translate(-50%, calc(-50% + 12px));
@@ -103,26 +103,22 @@
   }
 
   .landing-intro__button {
-    @apply mx-auto mt-7 flex h-9 min-w-0 items-center justify-center rounded-full border border-foreground bg-foreground px-5 text-center font-mono text-[10px] font-normal leading-none text-background shadow-none transition-colors hover:bg-foreground/90;
-    letter-spacing: 0;
+    @apply mx-auto mt-7;
     opacity: 0;
     pointer-events: none;
     transform: translateY(8px);
     transition:
       opacity 400ms ease-out,
       transform 400ms ease-out,
-      background-color 150ms ease-out;
+      background 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease;
   }
 
   .landing-intro__button.is-visible {
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);
-  }
-
-  .landing-intro__button:hover,
-  .landing-intro__button:focus-visible {
-    @apply text-background;
   }
 
   .landing-intro.landing-exiting {
@@ -185,7 +181,7 @@
   }
 
   .main-app-shell {
-    @apply relative min-h-screen overflow-hidden px-6 py-0 tracking-normal;
+    @apply relative min-h-screen overflow-x-hidden px-6 py-0 tracking-normal;
     opacity: 0;
     transition-duration: 600ms;
   }
@@ -198,6 +194,10 @@
     @apply w-full max-w-none overflow-hidden;
   }
 
+  .main-experience-split {
+    @apply grid h-screen min-h-screen grid-cols-[minmax(340px,40vw)_minmax(0,1fr)] gap-0 bg-background p-0;
+  }
+
   .utility-button-rail {
     @apply absolute z-30 flex items-center gap-2;
     right: 60px;
@@ -205,7 +205,7 @@
   }
 
   .round-utility-button {
-    @apply flex h-10 w-10 items-center justify-center rounded-full border border-foreground bg-foreground p-0 text-background shadow-none transition-colors hover:bg-foreground/90 hover:text-background;
+    @apply flex h-9 w-9 items-center justify-center rounded-full border border-foreground bg-foreground p-0 text-background shadow-none transition-colors hover:bg-foreground/90 hover:text-background;
   }
 
   .round-utility-button svg {
@@ -284,6 +284,149 @@
     top: 43%;
     transform: translate(-24%, -50%);
     width: min(26vw, 280px);
+  }
+
+  .mapbox-beach-map,
+  .mapbox-fallback-shell {
+    @apply relative inset-auto z-0 h-screen w-full overflow-hidden;
+  }
+
+  .mapbox-beach-map__canvas {
+    @apply h-full w-full;
+  }
+
+  .mapbox-beach-map .mapboxgl-canvas {
+    @apply outline-none;
+  }
+
+  .mapbox-beach-map .mapboxgl-ctrl-bottom-right {
+    opacity: 0.35;
+  }
+
+  .map-tooltip {
+    @apply pointer-events-none absolute left-0 top-0 z-30 grid min-w-[174px] gap-1 rounded-[6px] border border-[rgb(31_31_31_/_0.18)] bg-background/95 px-3 py-2 font-mono text-foreground backdrop-blur-sm;
+  }
+
+  .map-tooltip strong {
+    @apply text-[10px] font-medium uppercase leading-none;
+    letter-spacing: 0.09em;
+  }
+
+  .map-tooltip span,
+  .map-tooltip small {
+    @apply text-[9px] font-normal leading-4 text-foreground/60;
+  }
+
+  .map-tooltip small {
+    @apply text-foreground/50;
+  }
+
+  .mapbox-fallback-shell .minimal-map-area {
+    height: min(58vh, 560px);
+    left: 50%;
+    top: 44%;
+    transform: translate(-50%, -50%);
+    width: min(36vw, 380px);
+  }
+
+  .map-token-missing {
+    @apply absolute bottom-8 left-1/2 z-20 m-0 -translate-x-1/2 whitespace-nowrap rounded-full bg-background/75 px-3 py-1.5 text-[9px] text-foreground/40 backdrop-blur-sm;
+    letter-spacing: 0.1em;
+  }
+
+  .stage-funnel {
+    @apply relative z-10 flex h-screen flex-col justify-center border-r border-foreground/10 bg-background px-[clamp(32px,5vw,78px)] py-10 text-left;
+  }
+
+  .stage-funnel__intro {
+    @apply absolute left-[clamp(32px,5vw,78px)] right-10 top-10;
+  }
+
+  .stage-funnel__intro span,
+  .funnel-kicker {
+    @apply text-[10px] font-medium leading-none text-foreground/45;
+    letter-spacing: 0.12em;
+  }
+
+  .stage-funnel__intro p {
+    @apply m-0 mt-3 max-w-[360px] text-[11px] leading-5 text-foreground/55;
+  }
+
+  .stage-funnel__progress {
+    @apply absolute bottom-10 left-[clamp(32px,5vw,78px)] flex gap-2;
+  }
+
+  .stage-funnel__progress span {
+    @apply block h-1.5 w-8 rounded-full bg-foreground/15 transition-colors;
+  }
+
+  .stage-funnel__progress span.is-active {
+    @apply bg-foreground;
+  }
+
+  .funnel-stage {
+    @apply max-w-[460px];
+  }
+
+  .funnel-stage h2 {
+    @apply m-0 mt-4 max-w-[520px] text-[clamp(30px,4.2vw,56px)] font-medium leading-[1.02] text-foreground;
+    letter-spacing: 0;
+  }
+
+  .funnel-option-grid {
+    @apply mt-9 grid grid-cols-2 gap-3;
+  }
+
+  .funnel-option {
+    @apply h-9 rounded-full border border-foreground/20 bg-transparent px-4 text-[10px] font-medium uppercase tracking-[0.08em] text-foreground/65 shadow-none transition-colors hover:border-foreground hover:bg-foreground hover:text-background;
+  }
+
+  .funnel-option.is-selected {
+    @apply border-foreground bg-foreground text-background;
+  }
+
+  .candidate-beach-list {
+    @apply mt-7 grid gap-2;
+  }
+
+  .candidate-beach-list.is-empty {
+    @apply rounded-[8px] border border-foreground/15 px-4 py-3;
+  }
+
+  .candidate-beach-list.is-empty p {
+    @apply m-0 text-[11px] leading-5 text-foreground/50;
+  }
+
+  .candidate-beach {
+    @apply grid gap-1 rounded-[10px] border border-foreground/15 bg-transparent px-4 py-3 text-left text-foreground/65 transition-colors hover:border-foreground hover:text-foreground;
+  }
+
+  .candidate-beach.is-selected {
+    @apply border-foreground bg-foreground text-background;
+  }
+
+  .candidate-beach span {
+    @apply text-[12px] font-medium;
+  }
+
+  .candidate-beach small {
+    @apply text-[9px] font-normal leading-4 text-current opacity-65;
+  }
+
+  .funnel-mood-form {
+    @apply mt-8 grid gap-3;
+  }
+
+  .funnel-mood-form input {
+    @apply h-9 rounded-full border border-foreground/25 bg-transparent px-4 text-[12px] text-foreground outline-none transition-colors placeholder:text-foreground/35 focus:border-foreground;
+  }
+
+  .funnel-generate-button {
+    @apply h-9 rounded-full border border-foreground bg-foreground px-4 text-[10px] font-medium uppercase tracking-[0.08em] text-background shadow-none hover:bg-foreground/90 hover:text-background;
+  }
+
+  .funnel-back-button {
+    @apply absolute bottom-10 right-[clamp(32px,5vw,78px)] rounded-full border border-foreground/20 bg-transparent px-4 py-2 text-[10px] text-foreground/50 transition-colors hover:border-foreground hover:text-foreground;
   }
 
   .sydney-coast-map {
@@ -365,7 +508,7 @@
   }
 
   .search-grid-button {
-    @apply absolute z-20 flex h-11 w-11 items-center justify-center rounded-full border border-foreground bg-foreground p-0 text-background shadow-none transition-colors hover:bg-foreground/90 hover:text-background;
+    @apply absolute z-20 flex h-9 w-9 items-center justify-center rounded-full border border-foreground bg-foreground p-0 text-background shadow-none transition-colors hover:bg-foreground/90 hover:text-background;
     left: calc(50% + min(334px, calc(50vw - 56px)));
     top: 73%;
   }
@@ -418,8 +561,7 @@
   }
 
   .home-action-row button {
-    @apply h-10 rounded-full border border-foreground bg-foreground px-4 text-center font-mono text-[12px] font-normal leading-none text-background transition-colors hover:bg-foreground/90;
-    letter-spacing: 0;
+    @apply h-9 rounded-full border border-foreground bg-foreground px-4 text-center font-mono text-[10px] font-medium uppercase leading-none tracking-[0.08em] text-background transition-colors hover:bg-foreground/90;
   }
 
   .home-error {
@@ -505,7 +647,7 @@
 
   .auth-submit,
   .auth-link-button {
-    @apply mt-2 h-10 w-full rounded-full bg-foreground text-[12px] font-normal text-background hover:bg-foreground/90;
+    @apply mt-2 h-9 w-full rounded-full bg-foreground text-[10px] font-medium uppercase tracking-[0.08em] text-background hover:bg-foreground/90;
   }
 
   .auth-link-button {
@@ -553,6 +695,19 @@
     @apply mt-6 space-y-3;
   }
 
+  .plan-empty-state {
+    @apply mt-6 border border-foreground/15 px-4 py-5;
+  }
+
+  .plan-empty-state p {
+    @apply m-0 text-[11px] font-medium text-foreground/70;
+    letter-spacing: 0.1em;
+  }
+
+  .plan-empty-state span {
+    @apply mt-2 block text-[12px] leading-5 text-foreground/55;
+  }
+
   .plan-log-row {
     @apply grid gap-4 border border-foreground/15 p-4 md:grid-cols-[1fr_auto] md:items-center;
   }
@@ -573,6 +728,28 @@
 
   .plan-log-row span {
     @apply mt-2 block text-[10px] text-foreground/40;
+  }
+
+  .plan-log-meta {
+    @apply mt-3 grid gap-2 sm:grid-cols-4;
+  }
+
+  .plan-log-meta div {
+    @apply min-w-0;
+  }
+
+  .plan-log-meta dt,
+  .plan-log-meta dd {
+    @apply m-0;
+  }
+
+  .plan-log-meta dt {
+    @apply text-[8px] font-medium text-foreground/35;
+    letter-spacing: 0.12em;
+  }
+
+  .plan-log-meta dd {
+    @apply mt-1 truncate text-[10px] lowercase text-foreground/60;
   }
 
   .plan-log-actions {
@@ -613,7 +790,45 @@
   }
 
   .plan-notes-panel textarea {
-    @apply mb-4 min-h-40 rounded-none border-foreground/25 bg-transparent text-[13px];
+    @apply min-h-40 rounded-none border-foreground/25 bg-transparent text-[13px];
+  }
+
+  .notes-editor {
+    @apply mb-4;
+  }
+
+  .notes-editor-status {
+    @apply m-0 mt-2 min-h-4 text-[9px] font-medium text-foreground/35;
+    letter-spacing: 0.12em;
+  }
+
+  .notes-editor-status.is-saving {
+    @apply text-foreground/55;
+  }
+
+  .notes-editor-status.is-saved {
+    @apply text-foreground/60;
+  }
+
+  .notes-editor-status.is-error {
+    @apply text-destructive;
+  }
+
+  .plan-metadata {
+    @apply mb-6 grid gap-3 border-b border-foreground/15 pb-5;
+  }
+
+  .plan-metadata div {
+    @apply grid grid-cols-[96px_1fr] gap-3;
+  }
+
+  .plan-metadata span {
+    @apply text-[9px] font-medium text-foreground/40;
+    letter-spacing: 0.1em;
+  }
+
+  .plan-metadata p {
+    @apply m-0 text-[11px] lowercase leading-5 text-foreground/70;
   }
 
   .minimal-plan {
@@ -648,9 +863,87 @@
     @apply rounded-full bg-foreground px-3 py-1.5 text-[10px] uppercase tracking-[0.08em] text-background no-underline transition-opacity hover:opacity-80;
   }
 
+  .save-bar {
+    @apply fixed bottom-5 left-1/2 z-30 flex w-[min(620px,calc(100vw-32px))] -translate-x-1/2 items-center justify-between gap-4 rounded-full border border-background/60 bg-[rgb(253_254_254_/_0.92)] px-4 py-3 text-left font-mono text-foreground shadow-[0_12px_28px_rgb(0_0_0_/_0.16)] backdrop-blur-sm;
+  }
+
+  .save-bar p {
+    @apply m-0 text-[11px] leading-4 text-foreground/70;
+  }
+
+  .save-bar span {
+    @apply text-[10px] leading-4 text-foreground/55;
+  }
+
+  .save-bar div {
+    @apply flex shrink-0 items-center gap-2;
+  }
+
+  .save-bar-button {
+    @apply h-9 rounded-full border border-foreground bg-foreground px-4 text-[10px] font-normal lowercase text-background shadow-none hover:bg-foreground/90 hover:text-background;
+  }
+
+  .save-bar-button.is-muted {
+    @apply border-foreground/20 bg-transparent text-foreground/55 hover:border-foreground hover:bg-transparent hover:text-foreground;
+  }
+
+  .save-bar.is-saved {
+    @apply w-auto justify-center px-5;
+  }
+
+  .save-bar.is-saved p {
+    @apply text-foreground;
+  }
+
+  .auth-sheet {
+    @apply fixed bottom-5 left-1/2 z-40 grid w-[min(460px,calc(100vw-28px))] -translate-x-1/2 gap-4 rounded-[14px] border border-foreground/20 bg-background/95 p-5 text-left font-mono text-foreground shadow-[0_18px_44px_rgb(0_0_0_/_0.2)] backdrop-blur-md;
+  }
+
+  .auth-sheet-close {
+    @apply absolute right-3 top-3 h-8 w-8 rounded-full border border-foreground/15 bg-transparent text-[18px] leading-none text-foreground/45 transition-colors hover:border-foreground hover:text-foreground;
+  }
+
+  .auth-sheet-copy {
+    @apply pr-10;
+  }
+
+  .auth-sheet-copy p {
+    @apply m-0 text-[10px] font-medium text-foreground/45;
+    letter-spacing: 0.12em;
+  }
+
+  .auth-sheet-copy h2 {
+    @apply m-0 mt-2 text-[22px] font-medium lowercase leading-tight text-foreground;
+  }
+
+  .auth-sheet-copy span {
+    @apply mt-2 block text-[11px] leading-5 text-foreground/55;
+  }
+
+  .auth-sheet-form {
+    @apply grid gap-3;
+  }
+
+  .auth-sheet-form input {
+    @apply h-11 rounded-full border-foreground/25 bg-transparent px-4 font-mono text-[12px] text-foreground placeholder:text-foreground/35 focus-visible:ring-0;
+  }
+
+  .auth-sheet-primary {
+    @apply h-9 rounded-full border border-foreground bg-foreground text-[10px] font-medium text-background shadow-none hover:bg-foreground/90 hover:text-background;
+    letter-spacing: 0.06em;
+  }
+
+  .auth-sheet-mode {
+    @apply justify-self-center border-0 bg-transparent p-0 text-[10px] lowercase text-foreground/55 transition-colors hover:text-foreground;
+  }
+
+  .auth-sheet-error {
+    @apply m-0 text-[10px] leading-4 text-foreground/65;
+  }
+
   .beach-plan-ticket {
     @apply relative grid w-[min(500px,calc(100vw-32px))] overflow-visible rounded-[14px] p-6 text-left font-mono uppercase;
-    --ticket-fill: #f8f5ed;
+    --ticket-fill: #FDFEFE;
     --ticket-ink: #262626;
     --ticket-muted: #575757;
     --ticket-divider-y: 306px;
@@ -849,7 +1142,7 @@
   }
 
   .ticket-actions button {
-    @apply h-9 rounded-full border border-foreground bg-foreground px-3 text-[8.5px] uppercase text-background transition-colors hover:bg-foreground/90;
+    @apply h-9 rounded-full border border-foreground bg-foreground px-3 text-[8.5px] font-medium uppercase text-background transition-colors hover:bg-foreground/90;
     letter-spacing: 0.08em;
   }
 
@@ -925,18 +1218,47 @@
     }
   }
 
+  @media (max-width: 1100px) {
+    .main-experience-split {
+      @apply grid-cols-[minmax(320px,44vw)_minmax(0,1fr)];
+    }
+
+    .stage-funnel {
+      @apply px-8;
+    }
+
+    .stage-funnel__intro {
+      @apply left-8 right-8;
+    }
+
+    .stage-funnel__progress {
+      @apply left-8;
+    }
+
+    .funnel-stage h2 {
+      font-size: clamp(28px, 4.6vw, 44px);
+    }
+
+    .funnel-option-grid {
+      @apply gap-2;
+    }
+
+    .utility-button-rail {
+      right: 32px;
+    }
+  }
+
   @media (max-width: 760px) {
+    html,
+    body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
     .landing-intro__content {
       top: 24vh;
       width: min(330px, calc(100vw - 40px));
       font-size: 9.5px;
-    }
-
-    .landing-intro__button {
-      height: 36px;
-      min-width: 0;
-      padding-inline: 20px;
-      font-size: 10px;
     }
 
     .utility-button-rail {
@@ -955,6 +1277,114 @@
       right: auto;
       top: calc(67% - 230px);
       transform: none;
+    }
+
+    .main-experience-split {
+      @apply grid-cols-1 overflow-y-auto overflow-x-hidden;
+      height: auto;
+      min-height: 100vh;
+    }
+
+    .stage-funnel {
+      @apply h-auto min-h-0 border-r-0 border-b border-foreground/10 px-6 pb-10 pt-28;
+    }
+
+    .stage-funnel__intro {
+      @apply left-6 right-6 top-8;
+    }
+
+    .stage-funnel__progress {
+      @apply bottom-8 left-6;
+    }
+
+    .funnel-back-button {
+      @apply relative bottom-auto right-auto mt-8 w-fit;
+    }
+
+    .funnel-stage {
+      @apply max-w-none;
+    }
+
+    .funnel-stage h2 {
+      font-size: clamp(29px, 9vw, 40px);
+      line-height: 1.04;
+    }
+
+    .funnel-option-grid {
+      @apply mt-7 grid-cols-1;
+    }
+
+    .candidate-beach-list {
+      @apply mt-6;
+    }
+
+    .funnel-mood-form input {
+      @apply text-[16px];
+    }
+
+    .mapbox-beach-map,
+    .mapbox-fallback-shell {
+      height: 45vh;
+      min-height: 330px;
+      width: 100%;
+    }
+
+    .mapbox-fallback-shell .minimal-map-area {
+      height: min(38vh, 320px);
+      width: min(72vw, 320px);
+    }
+
+    .map-token-missing {
+      @apply bottom-4 max-w-[calc(100vw-32px)] whitespace-normal text-center;
+    }
+
+    .map-tooltip {
+      max-width: calc(100vw - 40px);
+    }
+
+    .result-experience {
+      @apply min-h-screen items-start overflow-y-auto px-4 py-5;
+      height: auto;
+    }
+
+    .beach-plan-ticket {
+      @apply w-[calc(100vw-32px)] p-5;
+      --ticket-divider-y: 284px;
+      height: auto;
+      min-height: min(760px, calc(100vh - 32px));
+      max-height: none;
+    }
+
+    .ticket-image {
+      height: 160px;
+    }
+
+    .ticket-rich-header h1 {
+      font-size: 22px;
+    }
+
+    .ticket-condition-grid {
+      @apply grid-cols-2;
+    }
+
+    .ticket-actions {
+      @apply grid-cols-1;
+    }
+
+    .save-bar {
+      @apply bottom-3 w-[calc(100vw-24px)] flex-col items-stretch rounded-[16px] px-4 text-center;
+    }
+
+    .save-bar div {
+      @apply justify-center;
+    }
+
+    .auth-sheet {
+      @apply bottom-3 max-h-[calc(100vh-24px)] w-[calc(100vw-24px)] overflow-y-auto p-4;
+    }
+
+    .auth-sheet-copy h2 {
+      font-size: 20px;
     }
 
     .minimal-headline {
@@ -992,11 +1422,11 @@
     }
 
     .search-grid-button {
-      height: 42px;
+      height: 36px;
       left: auto;
       right: 24px;
       top: 70%;
-      width: 42px;
+      width: 36px;
     }
 
     .home-action-row {
@@ -1007,8 +1437,8 @@
     }
 
     .home-action-row button {
-      height: 38px;
-      font-size: 12px;
+      height: 36px;
+      font-size: 10px;
     }
 
     .home-error {

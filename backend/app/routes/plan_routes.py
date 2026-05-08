@@ -12,7 +12,10 @@ from app.routes.rank_routes import (
     fetch_candidate_conditions,
     preselect_candidates,
 )
-from app.services.beach_selector import rank_candidate_beaches
+from app.services.beach_selector import (
+    rank_candidate_beaches,
+    region_key_for_beach,
+)
 from app.services.gemini_service import (
     GeminiServiceError,
     generate_beach_plan_with_gemini,
@@ -22,6 +25,7 @@ from app.services.gemini_service import (
 router = APIRouter(prefix="/plans", tags=["plans"])
 
 PLAN_CANDIDATE_LIMIT = 5
+PLAN_CONDITION_CANDIDATE_LIMIT = 18
 
 
 def require_database():
@@ -91,9 +95,13 @@ async def get_owned_plan_or_404(db, plan_id: str, user_id: str) -> dict:
 
 
 async def build_generated_plan_fields(
-    mood_phrase: str,
+    mood_phrase: str | None,
     current_user: dict,
     beaches: list[dict],
+    region: str | None = None,
+    activity: str | None = None,
+    companion: str | None = None,
+    preferred_beach_slug: str | None = None,
 ) -> dict:
     if not beaches:
         raise HTTPException(
@@ -101,23 +109,41 @@ async def build_generated_plan_fields(
             detail="No beaches found. Run the beach seed script first.",
         )
 
-    candidate_pool = preselect_candidates(mood_phrase, current_user, beaches)
+    effective_mood_phrase = mood_phrase or ""
+    candidate_pool = preselect_plan_candidates(
+        effective_mood_phrase,
+        current_user,
+        beaches,
+        region,
+        preferred_beach_slug,
+    )
     condition_pairs = await asyncio.gather(
         *(fetch_candidate_conditions(beach) for beach in candidate_pool)
     )
     conditions_by_slug = dict(condition_pairs)
     top_candidates = rank_candidate_beaches(
-        mood_phrase,
+        effective_mood_phrase,
         current_user,
         candidate_pool,
         conditions_by_slug,
+        region=region,
+        activity=activity,
+        companion=companion,
+        preferred_beach_slug=preferred_beach_slug,
     )[:PLAN_CANDIDATE_LIMIT]
 
     try:
         gemini_plan = await generate_beach_plan_with_gemini(
-            mood_phrase,
+            effective_mood_phrase,
             current_user,
             top_candidates,
+            {
+                "region": region,
+                "activity": activity,
+                "companion": companion,
+                "mood_phrase": mood_phrase,
+                "preferred_beach_slug": preferred_beach_slug,
+            },
         )
         validate_selected_beach(gemini_plan, top_candidates)
     except GeminiServiceError as error:
@@ -150,28 +176,77 @@ async def build_generated_plan_fields(
     }
 
 
+def preselect_plan_candidates(
+    mood_phrase: str,
+    current_user: dict,
+    beaches: list[dict],
+    region: str | None,
+    preferred_beach_slug: str | None,
+) -> list[dict]:
+    pool = beaches
+    if region:
+        region_matches = [
+            beach
+            for beach in beaches
+            if region_key_for_beach(beach) == region
+        ]
+        if region_matches:
+            pool = region_matches
+
+    candidates = preselect_candidates(mood_phrase, current_user, pool)
+    if preferred_beach_slug and not any(
+        beach.get("slug") == preferred_beach_slug for beach in candidates
+    ):
+        preferred = next(
+            (beach for beach in pool if beach.get("slug") == preferred_beach_slug),
+            None,
+        )
+        if preferred is not None:
+            candidates = [preferred, *candidates]
+
+    return candidates[:PLAN_CONDITION_CANDIDATE_LIMIT]
+
+
 @router.post("")
 async def create_plan(
     payload: PlanCreateRequest,
     current_user: dict = Depends(get_current_user),
 ):
+    if not payload.has_required_inputs():
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Provide either mood_phrase or complete funnel fields: region, activity, and companion",
+        )
+
     db = require_database()
     beaches = await db.beaches.find({}).to_list(length=None)
     generated_fields = await build_generated_plan_fields(
         payload.mood_phrase,
         current_user,
         beaches,
+        region=payload.region,
+        activity=payload.activity,
+        companion=payload.companion,
+        preferred_beach_slug=payload.preferred_beach_slug,
     )
 
     now = datetime.now(timezone.utc)
     document = {
         "user_id": current_user["id"],
         "mood_phrase": payload.mood_phrase,
+        "region": payload.region,
+        "activity": payload.activity,
+        "companion": payload.companion,
+        "preferred_beach_slug": payload.preferred_beach_slug,
         **generated_fields,
         "input_context": {
             "selected_mood": payload.selected_mood,
             "companion_context": payload.companion_context,
             "experience_tags": payload.experience_tags,
+            "region": payload.region,
+            "activity": payload.activity,
+            "companion": payload.companion,
+            "preferred_beach_slug": payload.preferred_beach_slug,
         },
         "user_notes": "",
         "created_at": now,
@@ -239,9 +314,13 @@ async def replay_plan(
     existing_plan = await get_owned_plan_or_404(db, plan_id, current_user["id"])
     beaches = await db.beaches.find({}).to_list(length=None)
     generated_fields = await build_generated_plan_fields(
-        existing_plan["mood_phrase"],
+        existing_plan.get("mood_phrase"),
         current_user,
         beaches,
+        region=existing_plan.get("region"),
+        activity=existing_plan.get("activity"),
+        companion=existing_plan.get("companion"),
+        preferred_beach_slug=existing_plan.get("preferred_beach_slug"),
     )
 
     now = datetime.now(timezone.utc)
