@@ -6,14 +6,14 @@
 
 @layer base {
   :root {
-    --background: 180 33% 99.4%;
+    --background: 43 39% 95.5%;
     --foreground: 0 0% 12%;
-    --card: 180 33% 99.4%;
+    --card: 43 39% 95.5%;
     --card-foreground: 0 0% 12%;
-    --popover: 180 33% 99.4%;
+    --popover: 43 39% 95.5%;
     --popover-foreground: 0 0% 12%;
     --primary: 0 0% 12%;
-    --primary-foreground: 180 33% 99.4%;
+    --primary-foreground: 43 39% 95.5%;
     --secondary: 42 18% 88%;
     --secondary-foreground: 0 0% 12%;
     --muted: 42 18% 88%;
@@ -21,7 +21,7 @@
     --accent: 42 18% 88%;
     --accent-foreground: 0 0% 12%;
     --destructive: 0 72% 42%;
-    --destructive-foreground: 180 33% 99.4%;
+    --destructive-foreground: 43 39% 95.5%;
     --border: 38 16% 78%;
     --input: 38 16% 78%;
     --ring: 0 0% 18%;
@@ -103,7 +103,7 @@
   }
 
   .landing-intro__button {
-    @apply mx-auto mt-7;
+    @apply mx-auto mt-7 h-9 min-w-[148px] rounded-full border border-foreground bg-foreground px-5 text-[10px] font-medium uppercase tracking-[0.08em] text-[#FDFEFE] shadow-none hover:bg-foreground hover:text-[#FDFEFE];
     opacity: 0;
     pointer-events: none;
     transform: translateY(8px);
@@ -837,8 +837,9 @@
   }
 
   .result-experience {
-    @apply flex h-screen min-h-screen items-center justify-center overflow-hidden bg-cover bg-center px-5 py-4 text-center text-foreground;
-    background-image: url("/landing-scroll.jpg");
+    @apply flex h-screen min-h-screen flex-col items-center justify-center overflow-hidden px-5 py-4 text-center text-foreground;
+    background: rgb(176 214 223 / 0.70);
+    backdrop-filter: blur(12px);
     opacity: 0;
     transform: translateY(0);
   }
@@ -1146,6 +1147,145 @@
     letter-spacing: 0.08em;
   }
 
+  .beach-plan-ticket.postcard-card {
+    @apply relative block overflow-visible rounded-[14px] bg-background p-0 text-left font-mono normal-case text-foreground;
+    --postcard-w: min(453px, calc(100vw - 36px));
+    aspect-ratio: 453.839 / 530;
+    height: auto;
+    max-height: min(72vh, 530px);
+    min-height: 0;
+    width: var(--postcard-w);
+    mask: none;
+    -webkit-mask: none;
+    filter: drop-shadow(1px 4px 8px rgba(0,0,0,0.18));
+    box-shadow: none;
+    letter-spacing: 0;
+  }
+
+  .beach-plan-ticket.postcard-card::before,
+  .beach-plan-ticket.postcard-card::after {
+    content: "";
+    @apply absolute z-10 h-8 w-8 rounded-full;
+    background: rgb(176 214 223 / 0.70);
+    top: 45.4%;
+    transform: translateY(-50%);
+  }
+
+  .beach-plan-ticket.postcard-card::before {
+    left: -16px;
+  }
+
+  .beach-plan-ticket.postcard-card::after {
+    right: -16px;
+  }
+
+  .postcard-card__image {
+    @apply absolute left-[7.7%] top-[4.9%] h-[34%] w-[84.6%] rounded-[12px] object-cover;
+  }
+
+  .postcard-card__tear {
+    @apply absolute left-[3.7%] right-[3.7%] top-[45.4%] h-px;
+    background-image: repeating-linear-gradient(
+      to right,
+      rgb(42 42 42 / 0.68) 0,
+      rgb(42 42 42 / 0.68) 9px,
+      transparent 9px,
+      transparent 20px
+    );
+  }
+
+  .postcard-card__content {
+    @apply absolute bottom-4 left-8 right-8 top-[48%] flex flex-col;
+  }
+
+  .postcard-card__title-row {
+    @apply grid grid-cols-[minmax(0,1fr)_66px] gap-5;
+  }
+
+  .postcard-card__eyebrow {
+    @apply m-0 text-[9px] font-medium uppercase leading-none text-foreground/25;
+    letter-spacing: 0.08em;
+  }
+
+  .postcard-card__title-row h1 {
+    @apply m-0 mt-3 truncate text-[22px] font-medium lowercase leading-none text-foreground;
+    letter-spacing: -0.05em;
+  }
+
+  .postcard-card__meta {
+    @apply m-0 mt-2 text-[11px] font-medium lowercase leading-none text-foreground/40;
+    letter-spacing: 0.04em;
+  }
+
+  .postcard-card__stamp {
+    @apply grid h-[58px] w-[58px] place-items-center border border-foreground/5 bg-transparent;
+  }
+
+  .postcard-card__stamp span {
+    @apply block h-5 w-5 rounded-full;
+    background: var(--stamp-accent, #91C059);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--stamp-accent, #91C059) 40%, transparent);
+  }
+
+  .postcard-card__stamp small {
+    @apply -mt-3 text-[7px] font-medium uppercase leading-none text-foreground/20;
+    letter-spacing: 0.05em;
+  }
+
+  .postcard-card__rule {
+    @apply mt-4 h-px w-full bg-foreground/[0.06];
+  }
+
+  .postcard-card__quote {
+    @apply m-0 mt-4 line-clamp-2 text-[10px] lowercase leading-5 text-foreground/45;
+  }
+
+  .postcard-card__poem {
+    @apply m-0 mt-3 line-clamp-2 text-[13px] font-medium lowercase leading-7 text-foreground/80;
+    letter-spacing: -0.03em;
+  }
+
+  .postcard-card__conditions {
+    @apply mt-auto grid grid-cols-3 gap-5 bg-[#F8F8F6] px-3 py-2.5;
+  }
+
+  .postcard-card__conditions div,
+  .postcard-card__conditions dt,
+  .postcard-card__conditions dd {
+    @apply m-0;
+  }
+
+  .postcard-card__conditions dt {
+    @apply text-[8px] font-medium uppercase leading-none text-foreground/25;
+    letter-spacing: 0.08em;
+  }
+
+  .postcard-card__conditions dd {
+    @apply mt-2 text-[12px] font-medium lowercase leading-none text-foreground/75;
+  }
+
+  .postcard-card__footer {
+    @apply mt-3 grid grid-cols-[minmax(0,1fr)_auto] gap-4;
+  }
+
+  .postcard-card__footer span {
+    @apply block text-[8px] font-medium lowercase leading-none text-foreground/20;
+    letter-spacing: 0.08em;
+  }
+
+  .postcard-card__footer p {
+    @apply m-0 mt-2 max-w-[230px] truncate text-[10px] font-medium lowercase leading-none text-foreground/45;
+  }
+
+  .postcard-card .ticket-actions {
+    @apply absolute -bottom-[64px] left-1/2 mt-0 flex -translate-x-1/2 grid-cols-none items-center justify-center gap-3;
+  }
+
+  .postcard-card .ticket-actions button {
+    @apply h-[30px] rounded-full border-0 bg-foreground px-6 text-[11px] font-medium lowercase text-background shadow-none transition-transform hover:-translate-y-0.5 hover:scale-105 hover:bg-foreground;
+    letter-spacing: 0.04em;
+  }
+
   .minimal-plan-top div,
   .minimal-plan-body span {
     @apply mb-2 block text-[9px] tracking-[0.16em] text-foreground/45;
@@ -1343,7 +1483,7 @@
     }
 
     .result-experience {
-      @apply min-h-screen items-start overflow-y-auto px-4 py-5;
+      @apply min-h-screen items-center overflow-hidden px-4 py-5;
       height: auto;
     }
 
@@ -1450,6 +1590,411 @@
       bottom: 18px;
       left: 24px;
       right: auto;
+    }
+  }
+
+  .mood-app-shell {
+    @apply fixed inset-0 min-h-screen overflow-hidden bg-background p-0;
+  }
+
+  .mood-app-header {
+    @apply fixed left-0 right-0 top-0 z-40 flex h-14 items-center justify-between bg-background px-11;
+  }
+
+  .mood-app-mark {
+    @apply block h-[7px] w-[7px] rounded-full bg-foreground;
+  }
+
+  .mode-toggle {
+    @apply flex items-center gap-5;
+  }
+
+  .mode-toggle button {
+    @apply relative border-0 border-b border-transparent bg-transparent p-0 pb-0.5 text-[11px] font-medium lowercase leading-none text-foreground/25 shadow-none transition-colors hover:text-foreground/70;
+    letter-spacing: 0.05em;
+  }
+
+  .mode-toggle button.is-active {
+    @apply border-foreground text-foreground;
+  }
+
+  .mode-toggle__badge {
+    @apply absolute -right-4 -top-2 rounded-full bg-foreground px-1.5 py-0.5 text-[8px] leading-none text-background;
+  }
+
+  .mood-mode-layer {
+    @apply pointer-events-none absolute inset-0 opacity-0;
+    transition: opacity 450ms ease-out;
+  }
+
+  .mood-mode-layer.is-active {
+    @apply pointer-events-auto opacity-100;
+  }
+
+  .mood-canvas-mode {
+    @apply fixed inset-0 overflow-hidden bg-background;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+  }
+
+  .mood-canvas-mode.is-dragging {
+    cursor: grabbing;
+  }
+
+  .mood-canvas-hint {
+    @apply pointer-events-none absolute bottom-24 left-1/2 z-20 m-0 -translate-x-1/2 text-[10px] text-foreground/25;
+    letter-spacing: 0.06em;
+    animation: canvas-hint-fade 600ms ease-out 3200ms forwards;
+  }
+
+  .mood-canvas-world {
+    @apply absolute left-0 top-0;
+    height: var(--world-h);
+    transform: translate3d(var(--pan-x), var(--pan-y), 0) scale(var(--zoom));
+    transform-origin: 0 0;
+    width: var(--world-w);
+    will-change: transform;
+  }
+
+  .beach-image-tile {
+    @apply absolute h-[120px] w-[160px] overflow-visible rounded-[10px] border border-foreground/[0.06] bg-background p-0 text-left shadow-[0_1px_6px_rgba(0,0,0,0.07)] transition-[opacity,border-color,box-shadow,transform] duration-200 ease-out;
+    left: var(--tile-x);
+    top: var(--tile-y);
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(var(--tile-rotate)) scale(1);
+    transform-origin: center;
+  }
+
+  .beach-image-tile.is-muted {
+    opacity: 0.14;
+  }
+
+  .beach-image-tile.is-highlighted {
+    border-color: color-mix(in srgb, var(--tile-accent) 46%, transparent);
+    box-shadow: 0 5px 22px var(--tile-glow), 0 1px 8px rgba(0,0,0,0.08);
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(var(--tile-rotate)) scale(1.04);
+  }
+
+  .beach-image-tile:hover,
+  .beach-image-tile:focus-visible {
+    @apply z-20 shadow-[0_3px_16px_rgba(0,0,0,0.14)] outline-none;
+    border-color: color-mix(in srgb, var(--tile-accent) 65%, transparent);
+    cursor: pointer;
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(var(--tile-rotate)) scale(1.06);
+  }
+
+  .mood-canvas-mode.is-dragging .beach-image-tile,
+  .mood-canvas-mode.is-dragging .beach-image-tile:hover {
+    cursor: grabbing;
+  }
+
+  .beach-image-tile.is-selected {
+    @apply z-30;
+    border: 2px solid var(--tile-accent);
+    box-shadow: 0 6px 32px var(--tile-glow), 0 2px 8px rgba(0,0,0,0.10);
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(var(--tile-rotate)) scale(1.12);
+  }
+
+  .beach-image-tile img {
+    @apply h-full w-full rounded-[10px] object-cover;
+    filter: var(--tile-image-filter);
+    object-position: var(--tile-image-position);
+    pointer-events: none;
+  }
+
+  .beach-image-tile__label {
+    @apply pointer-events-none absolute left-1/2 top-[calc(100%+8px)] -translate-x-1/2 whitespace-nowrap text-[11px] leading-none text-foreground opacity-0 transition-opacity duration-150;
+    letter-spacing: -0.01em;
+  }
+
+  .beach-image-tile:hover .beach-image-tile__label,
+  .beach-image-tile:focus-visible .beach-image-tile__label,
+  .beach-image-tile.is-selected .beach-image-tile__label {
+    @apply opacity-100;
+  }
+
+  .beach-image-tile__bubble {
+    @apply pointer-events-none absolute left-[calc(100%+10px)] top-0 hidden min-w-[180px] rounded-[10px] border bg-[#FDFCF8] px-3 py-2 shadow-[0_4px_20px_rgba(0,0,0,0.10)] backdrop-blur-sm;
+    border-color: color-mix(in srgb, var(--tile-accent) 35%, transparent);
+  }
+
+  .beach-image-tile:hover .beach-image-tile__bubble,
+  .beach-image-tile:focus-visible .beach-image-tile__bubble {
+    @apply grid gap-1;
+  }
+
+  .beach-image-tile__bubble strong {
+    @apply text-[10px] font-medium lowercase leading-none text-foreground;
+  }
+
+  .beach-image-tile__bubble small {
+    @apply text-[9px] font-normal leading-4 text-foreground/50;
+  }
+
+  .beach-info-tile {
+    @apply fixed bottom-0 right-0 top-0 z-50 flex w-[390px] flex-col overflow-hidden border-l bg-[#FDFEFE] px-10 pb-8 pt-10 text-left shadow-[0_0_32px_rgba(0,0,0,0.04)];
+    border-color: #ecebe6;
+  }
+
+  .beach-info-tile__close {
+    @apply absolute right-5 top-5 h-7 w-7 border-0 bg-transparent p-0 text-[22px] font-normal leading-none text-foreground/35 shadow-none transition-colors hover:bg-transparent hover:text-foreground;
+  }
+
+  .beach-info-tile__hero {
+    @apply grid grid-cols-[42px_minmax(0,1fr)] items-center gap-5 pr-7;
+  }
+
+  .beach-info-tile__accent {
+    @apply block h-10 w-10 rounded-full;
+    background: var(--beach-info-accent);
+    box-shadow: 0 0 22px color-mix(in srgb, var(--beach-info-accent) 48%, transparent);
+  }
+
+  .beach-info-tile__hero h2 {
+    @apply m-0 text-[24px] font-medium lowercase leading-none text-foreground;
+    letter-spacing: -0.05em;
+  }
+
+  .beach-info-tile__hero p {
+    @apply mt-2 text-[11px] font-medium lowercase leading-none text-foreground/40;
+    letter-spacing: 0.08em;
+  }
+
+  .beach-info-tile__image {
+    @apply mt-7 h-[130px] w-full rounded-[10px] object-cover;
+  }
+
+  .beach-info-tile__section {
+    @apply border-b py-4;
+    border-color: #ecebe6;
+  }
+
+  .beach-info-tile__section h3 {
+    @apply m-0 text-[11px] font-medium uppercase leading-none text-foreground/30;
+    letter-spacing: 0.08em;
+  }
+
+  .beach-info-tile__section p,
+  .beach-info-tile__section li {
+    @apply m-0 text-[13px] font-medium lowercase leading-6 text-foreground/70;
+    letter-spacing: -0.03em;
+  }
+
+  .beach-info-tile__section p {
+    @apply mt-3;
+  }
+
+  .beach-info-tile__conditions {
+    @apply mt-4 grid grid-cols-3 gap-x-4 gap-y-4;
+  }
+
+  .beach-info-tile__conditions div,
+  .beach-info-tile__conditions dt,
+  .beach-info-tile__conditions dd {
+    @apply m-0;
+  }
+
+  .beach-info-tile__conditions dt {
+    @apply text-[10px] font-medium uppercase leading-none text-foreground/25;
+    letter-spacing: 0.08em;
+  }
+
+  .beach-info-tile__conditions dd {
+    @apply mt-3 text-[17px] font-medium lowercase leading-none text-foreground;
+    letter-spacing: -0.05em;
+  }
+
+  .beach-info-tile__compact-section p {
+    @apply text-[20px] leading-none text-foreground;
+  }
+
+  .beach-info-tile__warning p {
+    @apply text-foreground;
+  }
+
+  .beach-info-tile__section ul {
+    @apply mt-3 grid gap-1 p-0;
+  }
+
+  .beach-info-tile__section li {
+    @apply list-none pl-0;
+  }
+
+  .beach-info-tile__section li::before {
+    content: "-";
+    @apply mr-3 text-foreground/25;
+  }
+
+  .beach-info-tile__generate {
+    @apply mt-auto h-12 w-full rounded-none border-0 bg-black px-6 text-[12px] font-medium uppercase text-[#FDFEFE] shadow-none hover:bg-[#111] hover:text-[#FDFEFE];
+    letter-spacing: 0.08em;
+  }
+
+  .mood-input-bar {
+    @apply fixed bottom-0 left-0 right-0 z-40 grid h-20 grid-cols-[minmax(240px,1fr)_auto_auto] items-center gap-5 bg-background px-11 transition-[right] duration-500 ease-out;
+  }
+
+  .mood-input-bar.has-info-tile {
+    right: 380px;
+  }
+
+  .mood-input-bar input {
+    @apply col-start-1 row-start-1 border-0 border-b border-[#D8D4CA] bg-transparent px-0 py-1.5 text-[13px] text-foreground outline-none transition-colors placeholder:text-foreground/30 focus:border-foreground;
+    letter-spacing: 0.01em;
+  }
+
+  .mood-input-bar > button {
+    @apply col-start-3 row-start-1 h-9 min-w-[132px] rounded-full border border-foreground bg-foreground px-4 text-[10px] font-medium uppercase text-background shadow-none transition-opacity hover:bg-foreground/90 hover:text-background hover:opacity-100;
+    letter-spacing: 0.08em;
+  }
+
+  .mood-chip-line {
+    @apply col-start-2 row-start-1 flex max-w-[520px] flex-wrap items-center justify-end gap-2;
+  }
+
+  .mood-chip {
+    @apply h-7 rounded-full border-0 px-3 text-[9px] font-medium lowercase leading-none text-foreground shadow-none transition-[opacity,transform,background-color,color] duration-200 hover:-translate-y-px hover:opacity-100;
+    background: color-mix(in srgb, var(--chip-color) 60%, transparent);
+    opacity: 0.62;
+    letter-spacing: 0.02em;
+  }
+
+  .mood-chip.is-active {
+    @apply text-foreground;
+    opacity: 1;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--chip-color) 70%, #111 30%);
+  }
+
+  .saved-mode-shell {
+    @apply fixed inset-0 overflow-y-auto bg-background px-11 pb-28 pt-24 text-foreground;
+  }
+
+  .saved-mode-shell__heading {
+    @apply mb-10 max-w-[520px];
+  }
+
+  .saved-mode-shell__heading p,
+  .saved-muted,
+  .saved-error,
+  .saved-empty-state p {
+    @apply m-0 text-[10px] font-medium text-foreground/40;
+    letter-spacing: 0.1em;
+  }
+
+  .saved-mode-shell__heading h1 {
+    @apply m-0 mt-3 text-[clamp(28px,4vw,52px)] font-medium lowercase leading-none text-foreground;
+    letter-spacing: -0.03em;
+  }
+
+  .saved-mode-shell__heading span,
+  .saved-empty-state span {
+    @apply mt-3 block text-[12px] leading-5 text-foreground/50;
+  }
+
+  .saved-empty-state {
+    @apply max-w-[420px] border border-foreground/10 px-5 py-4;
+    border-radius: 10px;
+  }
+
+  .saved-empty-state a {
+    @apply mt-4 inline-block text-[10px] font-medium text-foreground underline underline-offset-4;
+    letter-spacing: 0.08em;
+  }
+
+  .saved-postcard-grid {
+    @apply grid max-w-[920px] gap-3;
+  }
+
+  .saved-postcard-row {
+    @apply grid grid-cols-[minmax(0,1fr)_auto] items-center gap-6 border border-foreground/10 bg-background px-5 py-4;
+    border-radius: 10px;
+  }
+
+  .saved-postcard-row span {
+    @apply text-[9px] text-foreground/35;
+    letter-spacing: 0.08em;
+  }
+
+  .saved-postcard-row h2 {
+    @apply m-0 mt-1 text-[15px] font-medium lowercase text-foreground;
+  }
+
+  .saved-postcard-row p {
+    @apply m-0 mt-1 max-w-[520px] truncate text-[11px] text-foreground/50;
+  }
+
+  .saved-postcard-row > div:last-child {
+    @apply flex items-center gap-3;
+  }
+
+  .saved-postcard-row a,
+  .saved-postcard-row button {
+    @apply border-0 bg-transparent p-0 text-[10px] font-medium text-foreground/45 shadow-none transition-colors hover:text-foreground;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 760px) {
+    .mood-app-header {
+      @apply px-5;
+    }
+
+    .mode-toggle {
+      @apply gap-4;
+    }
+
+    .mood-canvas-world {
+      height: 150vh;
+      width: 260vw;
+    }
+
+    .beach-image-tile {
+      height: 96px;
+      width: 128px;
+    }
+
+    .beach-info-tile {
+      @apply left-0 top-auto h-auto max-h-[62vh] w-auto overflow-hidden border-l-0 border-t px-6 py-7;
+      bottom: 0;
+    }
+
+    .mood-input-bar,
+    .mood-input-bar.has-info-tile {
+      @apply right-0 h-auto min-h-20 grid-cols-1 gap-3 px-5 py-3;
+      bottom: 0;
+    }
+
+    .mood-input-bar.has-info-tile {
+      transform: translateY(-62vh);
+    }
+
+    .mood-input-bar input,
+    .mood-input-bar > button,
+    .mood-chip-line {
+      @apply col-start-1;
+    }
+
+    .mood-chip-line {
+      @apply row-start-2 max-w-none justify-start;
+    }
+
+    .mood-input-bar > button {
+      @apply row-start-3 w-fit;
+    }
+
+    .saved-mode-shell {
+      @apply px-5;
+    }
+
+    .saved-postcard-row {
+      @apply grid-cols-1;
+    }
+
+    .saved-postcard-row > div:last-child {
+      @apply justify-start;
     }
   }
 

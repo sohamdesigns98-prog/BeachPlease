@@ -135,7 +135,7 @@ export default function LandingIntro({ isExiting = false, onEnter }) {
             if (showButton) onEnter();
           }}
         >
-          {BUTTON_COPY.enterExperience} →
+          {BUTTON_COPY.enterExperience}
         </Button>
       </div>
     </section>

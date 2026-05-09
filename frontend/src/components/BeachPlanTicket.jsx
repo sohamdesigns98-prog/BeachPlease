@@ -1,3 +1,6 @@
+import { useRef, useState } from "react";
+import { toPng } from "html-to-image";
+
 import { APP_COPY } from "@/content/voice";
 
 const FALLBACK_IMAGE_URL = "/landing-scroll.jpg";
@@ -37,6 +40,41 @@ function arrayFromConditions(conditions) {
     .filter(Boolean);
 }
 
+function metricFromPlan(ticket, label, fallback = "n/a") {
+  const rawConditions = ticket.raw?.conditions;
+  if (label === "TEMP" && rawConditions?.temperature !== null && rawConditions?.temperature !== undefined) {
+    return `${rawConditions.temperature}°C`;
+  }
+  if (label === "WAVES" && rawConditions?.wave_height_m !== null && rawConditions?.wave_height_m !== undefined) {
+    return `${rawConditions.wave_height_m}m`;
+  }
+  if (label === "CROWD" && ticket.raw?.candidate_snapshot?.[0]?.crowd?.label) {
+    return ticket.raw.candidate_snapshot[0].crowd.label;
+  }
+
+  const conditions = arrayFromConditions(ticket.conditions);
+  if (label === "TEMP") return conditions.find((item) => item.includes("°")) || fallback;
+  if (label === "WAVES") return conditions.find((item) => item.toLowerCase().includes("m")) || fallback;
+  if (label === "CROWD") return ticket.raw?.crowd?.label || "moderate";
+  return fallback;
+}
+
+function formatPostcardDate(rawPlan) {
+  const source = rawPlan?.created_at || rawPlan?.updated_at;
+  const date = source ? new Date(source) : new Date();
+  return date.toLocaleDateString("en-AU", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+}
+
+function postcardLine(ticket) {
+  if (ticket.verdict) return ticket.verdict.replace(/^—\s*/, "");
+  if (ticket.why) return ticket.why;
+  return "salt-stung and full of it - this is what moving feels like.";
+}
+
 export function normalisePlanForTicket(rawPlan, generationInput = {}) {
   if (!rawPlan) return APP_COPY.result.mockPlan;
   if (rawPlan.beachName) return rawPlan;
@@ -64,32 +102,55 @@ export function normalisePlanForTicket(rawPlan, generationInput = {}) {
     bring: Array.isArray(plan.bring) ? plan.bring : [],
     verdict: plan.gentle_warning || "— worth a look, conditions permitting.",
     imageUrl: validImageUrl(rawPlan.image_url) ? rawPlan.image_url : FALLBACK_IMAGE_URL,
+    region: rawPlan.region || generationInput.region || "sydney",
+    activity: rawPlan.activity || generationInput.activity || moodReading.energy || "active",
+    accent: rawPlan.accent || "#91C059",
     generationInput,
     raw: rawPlan,
   };
 }
 
 export default function BeachPlanTicket({ plan, generationInput }) {
+  const postcardRef = useRef(null);
+  const [isDownloading, setIsDownloading] = useState(false);
   const ticket = {
     ...APP_COPY.result.mockPlan,
     ...normalisePlanForTicket(plan, generationInput),
   };
   const copy = APP_COPY.result.ticket;
-  const conditions = arrayFromConditions(ticket.conditions);
+  const postcardDate = formatPostcardDate(ticket.raw);
+  const metrics = [
+    ["TEMP", metricFromPlan(ticket, "TEMP")],
+    ["WAVES", metricFromPlan(ticket, "WAVES")],
+    ["CROWD", metricFromPlan(ticket, "CROWD")],
+  ];
+
+  async function downloadPostcard() {
+    if (!postcardRef.current || isDownloading) return;
+
+    setIsDownloading(true);
+    try {
+      const dataUrl = await toPng(postcardRef.current, {
+        cacheBust: true,
+        pixelRatio: 2,
+        backgroundColor: "#F8F6EF",
+        filter: (node) => !node?.classList?.contains("ticket-actions"),
+      });
+      const link = document.createElement("a");
+      link.href = dataUrl;
+      link.download = `${ticket.slug || ticket.beachName || "beachplease"}-postcard.png`
+        .toLowerCase()
+        .replace(/[^a-z0-9.-]+/g, "-");
+      link.click();
+    } finally {
+      setIsDownloading(false);
+    }
+  }
 
   return (
-    <article className="beach-plan-ticket" aria-label="Beach plan ticket">
-      <span className="ticket-notch ticket-notch-left" aria-hidden="true" />
-      <span className="ticket-notch ticket-notch-right" aria-hidden="true" />
-
-      <header className="ticket-rich-header">
-        <p className="ticket-eyebrow">{ticket.eyebrow}</p>
-        <h1>{ticket.beachName}</h1>
-        <p className="ticket-mood-quote">"{ticket.moodPhrase}"</p>
-      </header>
-
+    <article ref={postcardRef} className="beach-plan-ticket postcard-card" aria-label="Generated beach postcard">
       <img
-        className="ticket-image"
+        className="postcard-card__image"
         src={validImageUrl(ticket.imageUrl) ? ticket.imageUrl : FALLBACK_IMAGE_URL}
         alt={copy.imageAlt}
         onError={(event) => {
@@ -98,48 +159,53 @@ export default function BeachPlanTicket({ plan, generationInput }) {
         }}
       />
 
-      <section className="ticket-condition-grid" aria-label="Beach conditions">
-        {conditions.map((condition) => (
-          <span key={condition}>{condition}</span>
-        ))}
-      </section>
+      <div className="postcard-card__tear" aria-hidden="true" />
 
-      <div className="ticket-divider" aria-hidden="true" />
+      <section className="postcard-card__content">
+        <div className="postcard-card__title-row">
+          <div>
+            <p className="postcard-card__eyebrow">BeachPlease</p>
+            <h1>{ticket.beachName}</h1>
+            <p className="postcard-card__meta">{ticket.activity || "active"} · sydney</p>
+          </div>
 
-      <section className="ticket-body">
-        <div className="ticket-body-section ticket-section-where">
-          <h2>Where</h2>
-          <p>{ticket.where}</p>
+          <div className="postcard-card__stamp" aria-label="NSW stamp">
+            <span style={{ "--stamp-accent": ticket.accent }} />
+            <small>NSW</small>
+          </div>
         </div>
 
-        <div className="ticket-body-section ticket-section-when">
-          <h2>When</h2>
-          <p>{ticket.when}</p>
-        </div>
+        <div className="postcard-card__rule" aria-hidden="true" />
 
-        <div className="ticket-body-section ticket-section-bring">
-          <h2>{copy.bringLabel}</h2>
-          <ul className="ticket-bring-list">
-            {ticket.bring.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
+        <p className="postcard-card__quote">{ticket.moodPhrase ? `"${ticket.moodPhrase}"` : ticket.where}</p>
+        <p className="postcard-card__poem">{postcardLine(ticket)}</p>
 
-        <div className="ticket-body-section ticket-section-why">
-          <h2>Why this beach today</h2>
-          <p>{ticket.why}</p>
-        </div>
+        <dl className="postcard-card__conditions">
+          {metrics.map(([label, value]) => (
+            <div key={label}>
+              <dt>{label}</dt>
+              <dd>{value}</dd>
+            </div>
+          ))}
+        </dl>
 
-        <div className="ticket-body-section ticket-section-verdict">
-          <h2>Verdict</h2>
-          <p>{ticket.verdict}</p>
+        <div className="postcard-card__footer">
+          <div>
+            <span>posted from</span>
+            <p>{ticket.beachName.toLowerCase()}, sydney</p>
+          </div>
+          <div>
+            <span>date</span>
+            <p>{postcardDate}</p>
+          </div>
         </div>
       </section>
 
       <footer className="ticket-actions">
-        <button type="button">SHARE THIS PLAN ↗</button>
-        <button type="button">← different vibe</button>
+        <button type="button" onClick={downloadPostcard}>
+          {isDownloading ? "making png..." : "download postcard"}
+        </button>
+        <button type="button">share</button>
       </footer>
     </article>
   );

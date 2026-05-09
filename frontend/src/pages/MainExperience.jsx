@@ -1,145 +1,147 @@
 import { useEffect, useMemo, useState } from "react";
-import { HelpCircle } from "lucide-react";
 
+import { getBeaches } from "@/api/beaches";
 import { getConditions } from "@/api/conditions";
 import { createPlan } from "@/api/plans";
-import StageFunnel from "@/components/funnel/StageFunnel";
+import BeachInfoTile from "@/components/BeachInfoTile";
 import GeneratingOverlay from "@/components/GeneratingOverlay";
 import MapboxBeachMap from "@/components/map/MapboxBeachMap";
-import { REGION_CONFIG } from "@/components/map/regionConfig";
-import { VIBES } from "@/content/voice";
+import ModeToggle from "@/components/ModeToggle";
+import MoodCanvasShell from "@/components/MoodCanvasShell";
+import SavedModeShell from "@/components/SavedModeShell";
+import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
-import {
-  getMockPlanForMood,
-} from "@/utils/voiceHelpers";
-import { selectCandidateBeaches } from "@/utils/candidateSelector";
+import { normalizeBeachesForCanvas } from "@/utils/beachAdapter";
+import { buildGuestPlanFromCanvas, buildPlanPayloadFromCanvas } from "@/utils/planPayload";
 
-const INITIAL_FUNNEL_STATE = {
-  stage: 0,
-  region: null,
-  activity: null,
-  companion: null,
-  mood_phrase: "",
-  preferredBeachSlug: null,
-  candidateBeachSlugs: [],
-  selectedBeachSlug: null,
-};
+const ACTIVITY_HINTS = [
+  { id: "swim", color: "#ADD0EE" },
+  { id: "surf", color: "#91C059" },
+  { id: "relax", color: "#ECBCEE" },
+  { id: "snorkel", color: "#004724" },
+  { id: "walk", color: "#FEC200" },
+];
+const COMPANION_HINTS = [
+  { id: "solo", color: "#ADD0EE" },
+  { id: "partner", color: "#ECBCEE" },
+];
 
 export default function MainExperience({ visible = false, onPlanGenerated }) {
   const { token } = useAuth();
-  const [funnelState, setFunnelState] = useState(INITIAL_FUNNEL_STATE);
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [error, setError] = useState("");
-  const [mapBeaches, setMapBeaches] = useState([]);
-  const [mapFallbackActive, setMapFallbackActive] = useState(false);
+  const [activeMode, setActiveMode] = useState("mood");
+  const [moodPhrase, setMoodPhrase] = useState("");
   const [selectedBeachSlug, setSelectedBeachSlug] = useState("");
   const [selectedBeachName, setSelectedBeachName] = useState("");
-  const [utilityPanel, setUtilityPanel] = useState("");
+  const [selectedBeachData, setSelectedBeachData] = useState(null);
+  const [activityHint, setActivityHint] = useState("");
+  const [companionHint, setCompanionHint] = useState("");
+  const [beaches, setBeaches] = useState([]);
+  const [mapFallbackActive, setMapFallbackActive] = useState(false);
+  const [savedCount, setSavedCount] = useState(0);
+  const [isGenerating, setIsGenerating] = useState(false);
   const [generationInput, setGenerationInput] = useState(null);
+  const [error, setError] = useState("");
   const useMocks = import.meta.env.VITE_USE_MOCKS === "true";
-  const candidates = useMemo(
-    () => selectCandidateBeaches({
-      conditions: mapBeaches,
-      region: funnelState.region,
-      activity: funnelState.activity,
-      companion: funnelState.companion,
-    }),
-    [funnelState.activity, funnelState.companion, funnelState.region, mapBeaches],
-  );
-  const candidateBeachSlugs = useMemo(
+
+  const selectedBeach = useMemo(
     () => {
-      if (candidates.length > 0) {
-        return candidates.map((beach) => beach.slug);
-      }
-
-      if (funnelState.region && !funnelState.activity) {
-        return REGION_CONFIG[funnelState.region]?.slugs || [];
-      }
-
-      return [];
+      if (selectedBeachData?.slug === selectedBeachSlug) return selectedBeachData;
+      return beaches.find((beach) => beach.slug === selectedBeachSlug) || null;
     },
-    [candidates, funnelState.activity, funnelState.region],
+    [beaches, selectedBeachData, selectedBeachSlug],
   );
 
-  useEffect(() => {
-    setFunnelState((current) => {
-      if (arraysMatch(current.candidateBeachSlugs, candidateBeachSlugs)) {
-        return current;
-      }
+  const highlightedBeachSlugs = useMemo(
+    () => {
+      if (!moodPhrase.trim()) return [];
 
-      return {
-        ...current,
-        candidateBeachSlugs,
-      };
-    });
-  }, [candidateBeachSlugs]);
+      const words = moodPhrase.toLowerCase().split(/\s+/).filter((word) => word.length > 3);
+      return beaches
+        .filter((beach) => {
+          const haystack = [
+            beach.name,
+            beach.region,
+            beach.suburb,
+            ...(beach.vibe_tags || []),
+            ...(beach.best_for || []),
+            ...(beach.facilities || []),
+            ...(beach.access_tags || []),
+          ].join(" ").toLowerCase();
+
+          return words.some((word) => haystack.includes(word));
+        })
+        .slice(0, 12)
+        .map((beach) => beach.slug);
+    },
+    [beaches, moodPhrase],
+  );
 
   useEffect(() => {
     let cancelled = false;
 
-    async function loadMapConditions() {
+    async function loadBeachData() {
       try {
-        const beaches = await getConditions();
+        const [beachResponse, conditionResponse] = await Promise.allSettled([
+          getBeaches(),
+          getConditions(),
+        ]);
         if (cancelled) return;
-        setMapBeaches(Array.isArray(beaches) ? beaches : []);
-        setMapFallbackActive(false);
+
+        const nextBeaches = beachResponse.status === "fulfilled" && Array.isArray(beachResponse.value)
+          ? beachResponse.value
+          : [];
+        const nextConditions = conditionResponse.status === "fulfilled" && Array.isArray(conditionResponse.value)
+          ? conditionResponse.value
+          : [];
+
+        setBeaches(normalizeBeachesForCanvas(nextBeaches, nextConditions));
+        setMapFallbackActive(conditionResponse.status !== "fulfilled");
       } catch {
         if (cancelled) return;
-        setMapBeaches([]);
+        setBeaches(normalizeBeachesForCanvas([], []));
         setMapFallbackActive(true);
       }
     }
 
-    loadMapConditions();
+    loadBeachData();
 
     return () => {
       cancelled = true;
     };
   }, []);
 
-  async function generatePlan(nextPayload) {
+  function handleBeachSelect(beach) {
+    setSelectedBeachSlug(beach.slug || "");
+    setSelectedBeachName(beach.name || "");
+    setSelectedBeachData(beach);
+  }
+
+  function buildGenerationPayload() {
+    return buildPlanPayloadFromCanvas({
+      moodPhrase,
+      activityHint,
+      companionHint,
+      selectedBeach,
+    });
+  }
+
+  async function handleGeneratePostcard() {
     if (isGenerating) return;
 
-    const payload = nextPayload || buildPlanPayload(funnelState);
-    const moodPhrase = payload.mood_phrase || fallbackMoodFromFunnel(payload);
-
-    setError("");
+    const payload = buildGenerationPayload();
     setGenerationInput(payload);
     setIsGenerating(true);
+    setError("");
 
-    if (useMocks) {
+    if (useMocks || !token) {
       window.setTimeout(() => {
-        const mockPlan = {
-          ...getMockPlanForMood(moodPhrase),
-          mood_phrase: moodPhrase,
-          ...payload,
-        };
-        setSelectedBeachSlug(mockPlan.selected_beach_slug || "");
-        setSelectedBeachName(mockPlan.selected_beach_name || mockPlan.beachName || "");
-        setFunnelState((current) => ({
-          ...current,
-          selectedBeachSlug: mockPlan.selected_beach_slug || "",
-        }));
-        onPlanGenerated?.(mockPlan, payload);
-        setIsGenerating(false);
-      }, 800);
-      return;
-    }
-
-    if (!token) {
-      window.setTimeout(() => {
-        const mockPlan = {
-          ...getMockPlanForMood(moodPhrase),
-          mood_phrase: moodPhrase,
-          ...payload,
-          requiresAuthToSave: true,
-        };
-        setSelectedBeachSlug(mockPlan.selected_beach_slug || "");
-        setSelectedBeachName(mockPlan.selected_beach_name || mockPlan.beachName || "");
-        setFunnelState((current) => ({
-          ...current,
-          selectedBeachSlug: mockPlan.selected_beach_slug || "",
-        }));
+        const fallbackBeach = beaches.find((beach) => beach.slug === highlightedBeachSlugs[0]) || beaches[0];
+        const mockPlan = buildGuestPlanFromCanvas({
+          payload,
+          selectedBeach,
+          fallbackBeach,
+          requiresAuthToSave: !token,
+        });
         onPlanGenerated?.(mockPlan, payload);
         setIsGenerating(false);
       }, 800);
@@ -148,159 +150,116 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
 
     try {
       const createdPlan = await createPlan(payload);
-      setSelectedBeachSlug(createdPlan.selected_beach_slug || "");
-      setSelectedBeachName(createdPlan.selected_beach_name || "");
-      setFunnelState((current) => ({
-        ...current,
-        selectedBeachSlug: createdPlan.selected_beach_slug || "",
-      }));
+      setSelectedBeachSlug(createdPlan.selected_beach_slug || selectedBeachSlug);
+      setSelectedBeachName(createdPlan.selected_beach_name || selectedBeachName);
       onPlanGenerated?.(createdPlan, payload);
     } catch (caughtError) {
-      if ([401, 403].includes(caughtError?.response?.status)) {
-        const mockPlan = {
-          ...getMockPlanForMood(moodPhrase),
-          mood_phrase: moodPhrase,
-          ...payload,
-          requiresAuthToSave: true,
-        };
-        setSelectedBeachSlug(mockPlan.selected_beach_slug || "");
-        setSelectedBeachName(mockPlan.selected_beach_name || mockPlan.beachName || "");
-        setFunnelState((current) => ({
-          ...current,
-          selectedBeachSlug: mockPlan.selected_beach_slug || "",
-        }));
-        onPlanGenerated?.(mockPlan, payload);
-        return;
-      }
-
-      setError(caughtError?.response?.data?.detail || "Couldn’t generate a plan right now.");
+      setError(caughtError?.response?.data?.detail || "Couldn’t generate a postcard right now.");
     } finally {
       setIsGenerating(false);
     }
   }
 
-  function handleBeachSelect(beach) {
-    setFunnelState((current) => ({
-      ...current,
-      preferredBeachSlug: beach.slug,
-    }));
-    setSelectedBeachName(beach.name || "");
-  }
-
-  function handleFunnelChange(nextState) {
-    setFunnelState(nextState);
-    setSelectedBeachSlug(nextState.selectedBeachSlug || "");
-    const selected = mapBeaches.find((beach) => beach.slug === (
-      nextState.selectedBeachSlug || nextState.preferredBeachSlug
-    ));
-    setSelectedBeachName(selected?.name || "");
-  }
-
-  function handleGenerateFromFunnel(payload) {
-    generatePlan(payload || buildPlanPayload(funnelState));
-  }
-
-  function handleRegionSelect(region) {
-    handleFunnelChange({
-      ...funnelState,
-      region,
-      stage: 1,
-    });
-  }
-
   return (
-    <main className={`main-app-shell main-experience-split ${visible ? "is-visible" : ""}`}>
-      <section className="utility-button-rail" aria-label="Quick tools">
-        <button
-          type="button"
-          className="round-utility-button"
-          aria-label="How to use BeachPlease"
-          aria-expanded={utilityPanel === "help"}
-          onClick={() => setUtilityPanel((current) => (current === "help" ? "" : "help"))}
-        >
-          <HelpCircle aria-hidden="true" strokeWidth={1.7} />
-        </button>
+    <main className={`main-app-shell mood-app-shell ${visible ? "is-visible" : ""}`}>
+      <header className="mood-app-header">
+        <span className="mood-app-mark" aria-hidden="true" />
+        <ModeToggle
+          activeMode={activeMode}
+          savedCount={savedCount}
+          onChange={setActiveMode}
+        />
+      </header>
+
+      <section className={`mood-mode-layer ${activeMode === "mood" ? "is-active" : ""}`} aria-hidden={activeMode !== "mood"}>
+        <MoodCanvasShell
+          beaches={beaches}
+          moodPhrase={moodPhrase}
+          activityHint={activityHint}
+          companionHint={companionHint}
+          selectedBeachSlug={selectedBeachSlug}
+          onBeachSelect={handleBeachSelect}
+        />
       </section>
 
-      {utilityPanel && (
-        <section
-          className="utility-popover is-help"
-          aria-label="How to use"
-        >
-          <button
-            type="button"
-            className="utility-popover-close"
-            aria-label="Close panel"
-            onClick={() => setUtilityPanel("")}
-          >
-            ×
-          </button>
+      <section className={`mood-mode-layer ${activeMode === "saved" ? "is-active" : ""}`} aria-hidden={activeMode !== "saved"}>
+        <SavedModeShell onCountChange={setSavedCount} />
+      </section>
 
-          <div className="utility-help-copy">
-            <p className="utility-popover-kicker">HOW IT WORKS</p>
-            <ol>
-              <li>Pick a patch.</li>
-              <li>Say what you’re doing.</li>
-              <li>Choose who’s getting dragged along.</li>
-              <li>Add a vibe note if the coast needs context.</li>
-            </ol>
-          </div>
-        </section>
+      <section className={`mood-mode-layer ${activeMode === "map" ? "is-active" : ""}`} aria-hidden={activeMode !== "map"}>
+        <MapboxBeachMap
+          beaches={beaches}
+          isFallback={mapFallbackActive}
+          candidateBeachSlugs={highlightedBeachSlugs}
+          preferredBeachSlug={selectedBeachSlug}
+          selectedBeachSlug={selectedBeachSlug}
+          selectedBeachName={selectedBeachName}
+          onBeachPreview={handleBeachSelect}
+        />
+      </section>
+
+      {selectedBeach && activeMode !== "saved" && (
+        <BeachInfoTile
+          beach={selectedBeach}
+          isGenerating={isGenerating}
+          onClose={() => {
+            setSelectedBeachSlug("");
+            setSelectedBeachName("");
+            setSelectedBeachData(null);
+          }}
+          onGenerate={handleGeneratePostcard}
+        />
       )}
 
-      <StageFunnel
-        state={{
-          ...funnelState,
-          candidateBeachSlugs,
-        }}
-        conditions={mapBeaches}
-        candidates={candidates}
-        onChange={handleFunnelChange}
-        onGenerate={handleGenerateFromFunnel}
-      />
-
-      <MapboxBeachMap
-        beaches={mapBeaches}
-        isFallback={mapFallbackActive}
-        region={funnelState.region}
-        activity={funnelState.activity}
-        candidateBeachSlugs={candidateBeachSlugs}
-        preferredBeachSlug={funnelState.preferredBeachSlug || ""}
-        selectedBeachSlug={selectedBeachSlug}
-        selectedBeachName={selectedBeachName}
-        onBeachPreview={handleBeachSelect}
-        onRegionSelect={handleRegionSelect}
-      />
+      {activeMode !== "saved" && (
+        <form
+          className={`mood-input-bar ${selectedBeach ? "has-info-tile" : ""}`}
+          onSubmit={(event) => {
+            event.preventDefault();
+            handleGeneratePostcard();
+          }}
+        >
+          <input
+            value={moodPhrase}
+            placeholder="what kind of beach day do you need?"
+            onChange={(event) => setMoodPhrase(event.target.value)}
+          />
+          <div className="mood-chip-line" aria-label="Mood filters">
+            {ACTIVITY_HINTS.map((hint) => (
+              <button
+                key={hint.id}
+                type="button"
+                className={`mood-chip ${activityHint === hint.id ? "is-active" : ""}`}
+                style={{ "--chip-color": hint.color }}
+                onClick={() => setActivityHint((current) => (current === hint.id ? "" : hint.id))}
+              >
+                {hint.id}
+              </button>
+            ))}
+            {COMPANION_HINTS.map((hint) => (
+              <button
+                key={hint.id}
+                type="button"
+                className={`mood-chip ${companionHint === hint.id ? "is-active" : ""}`}
+                style={{ "--chip-color": hint.color }}
+                onClick={() => setCompanionHint((current) => (current === hint.id ? "" : hint.id))}
+              >
+                {hint.id}
+              </button>
+            ))}
+          </div>
+          <Button type="submit" disabled={isGenerating}>
+            {isGenerating ? "checking..." : "Find My Beach"}
+          </Button>
+        </form>
+      )}
 
       {error && <p className="home-error" role="alert">{error}</p>}
 
       <GeneratingOverlay
-        mood={generationInput?.mood_phrase || funnelState.mood_phrase || fallbackMoodFromFunnel(funnelState)}
+        mood={generationInput?.mood_phrase || moodPhrase}
         isVisible={isGenerating}
       />
     </main>
   );
-}
-
-function arraysMatch(first = [], second = []) {
-  if (first.length !== second.length) return false;
-  return first.every((item, index) => item === second[index]);
-}
-
-function buildPlanPayload(state) {
-  return {
-    region: state.region,
-    activity: state.activity,
-    companion: state.companion,
-    mood_phrase: state.mood_phrase.trim() || undefined,
-    preferred_beach_slug: state.preferredBeachSlug || undefined,
-  };
-}
-
-function fallbackMoodFromFunnel(payload) {
-  if (payload.mood_phrase) return payload.mood_phrase;
-  if (payload.region && payload.activity && payload.companion) {
-    return `${payload.activity} beach day around ${payload.region} with ${payload.companion}`;
-  }
-  return VIBES[0].phrase;
 }
