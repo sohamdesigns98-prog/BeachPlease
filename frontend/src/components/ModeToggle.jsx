@@ -1,6 +1,6 @@
-const MODES = ["saved", "mood", "map"];
+const MODES = ["clusters", "mood", "map"];
 
-export default function ModeToggle({ activeMode = "mood", savedCount = 0, onChange }) {
+export default function ModeToggle({ activeMode = "mood", clusterCount = 0, onChange }) {
   return (
     <nav className="mode-toggle" aria-label="BeachPlease modes">
       {MODES.map((mode) => (
@@ -12,8 +12,8 @@ export default function ModeToggle({ activeMode = "mood", savedCount = 0, onChan
           onClick={() => onChange?.(mode)}
         >
           {mode}
-          {mode === "saved" && savedCount > 0 && (
-            <span className="mode-toggle__badge">{savedCount}</span>
+          {mode === "clusters" && clusterCount > 0 && (
+            <span className="mode-toggle__badge">{clusterCount}</span>
           )}
         </button>
       ))}

@@ -1658,10 +1658,12 @@
   }
 
   .beach-image-tile {
-    @apply absolute h-[120px] w-[160px] overflow-visible rounded-[10px] border border-foreground/[0.06] bg-background p-0 text-left shadow-[0_1px_6px_rgba(0,0,0,0.07)] transition-[opacity,border-color,box-shadow,transform] duration-200 ease-out;
+    @apply absolute h-[120px] w-[160px] overflow-visible rounded-[10px] border border-foreground/[0.06] bg-background p-0 text-left shadow-[0_1px_6px_rgba(0,0,0,0.07)] duration-200 ease-out;
     left: var(--tile-x);
     top: var(--tile-y);
+    cursor: grab;
     opacity: 1;
+    transition-property: opacity, border-color, box-shadow, transform, left, top;
     transform: translate(-50%, -50%) rotate(var(--tile-rotate)) scale(1);
     transform-origin: center;
   }
@@ -1677,11 +1679,16 @@
     transform: translate(-50%, -50%) rotate(var(--tile-rotate)) scale(1.04);
   }
 
+  .beach-image-tile.is-clustered {
+    transition-duration: 460ms;
+    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
   .beach-image-tile:hover,
   .beach-image-tile:focus-visible {
     @apply z-20 shadow-[0_3px_16px_rgba(0,0,0,0.14)] outline-none;
     border-color: color-mix(in srgb, var(--tile-accent) 65%, transparent);
-    cursor: pointer;
+    cursor: grab;
     opacity: 1;
     transform: translate(-50%, -50%) rotate(var(--tile-rotate)) scale(1.06);
   }
@@ -1697,6 +1704,18 @@
     box-shadow: 0 6px 32px var(--tile-glow), 0 2px 8px rgba(0,0,0,0.10);
     opacity: 1;
     transform: translate(-50%, -50%) rotate(var(--tile-rotate)) scale(1.12);
+  }
+
+  .beach-tile-add-button {
+    @apply absolute -right-3 -top-3 z-40 grid h-7 w-7 place-items-center rounded-full border-0 bg-foreground p-0 text-[18px] font-normal leading-none text-background opacity-0 shadow-[0_5px_18px_rgba(0,0,0,0.16)] transition-[opacity,transform] duration-150 hover:bg-foreground hover:text-background focus-visible:opacity-100 focus-visible:outline-none;
+    transform: scale(0.88);
+  }
+
+  .beach-image-tile:hover .beach-tile-add-button,
+  .beach-image-tile:focus-within .beach-tile-add-button,
+  .beach-image-tile.is-selected .beach-tile-add-button {
+    opacity: 1;
+    transform: scale(1);
   }
 
   .beach-image-tile img {
@@ -1829,8 +1848,13 @@
     @apply mr-3 text-foreground/25;
   }
 
+  .beach-info-tile__cluster {
+    @apply mt-auto h-10 w-full rounded-none border border-foreground/15 bg-transparent px-5 text-[10px] font-medium uppercase text-foreground/55 shadow-none hover:border-foreground hover:bg-transparent hover:text-foreground;
+    letter-spacing: 0.08em;
+  }
+
   .beach-info-tile__generate {
-    @apply mt-auto h-12 w-full rounded-none border-0 bg-black px-6 text-[12px] font-medium uppercase text-[#FDFEFE] shadow-none hover:bg-[#111] hover:text-[#FDFEFE];
+    @apply mt-3 h-12 w-full rounded-none border-0 bg-black px-6 text-[12px] font-medium uppercase text-[#FDFEFE] shadow-none hover:bg-[#111] hover:text-[#FDFEFE];
     letter-spacing: 0.08em;
   }
 
@@ -1909,9 +1933,25 @@
     @apply grid max-w-[920px] gap-3;
   }
 
+  .saved-mode-layout {
+    @apply grid gap-6;
+  }
+
+  .saved-mode-layout.has-detail {
+    @apply grid-cols-[minmax(320px,0.8fr)_minmax(460px,1fr)] items-start;
+  }
+
   .saved-postcard-row {
-    @apply grid grid-cols-[minmax(0,1fr)_auto] items-center gap-6 border border-foreground/10 bg-background px-5 py-4;
+    @apply grid grid-cols-[minmax(0,1fr)_auto] items-center gap-6 border border-foreground/10 bg-background px-5 py-4 transition-colors;
     border-radius: 10px;
+  }
+
+  .saved-postcard-row.is-selected {
+    @apply border-foreground/40;
+  }
+
+  .saved-postcard-row__main {
+    @apply block min-w-0 border-0 bg-transparent p-0 text-left shadow-none;
   }
 
   .saved-postcard-row span {
@@ -1927,6 +1967,25 @@
     @apply m-0 mt-1 max-w-[520px] truncate text-[11px] text-foreground/50;
   }
 
+  .saved-postcard-meta {
+    @apply mt-3 grid grid-cols-3 gap-3;
+  }
+
+  .saved-postcard-meta div,
+  .saved-postcard-meta dt,
+  .saved-postcard-meta dd {
+    @apply m-0 min-w-0;
+  }
+
+  .saved-postcard-meta dt {
+    @apply text-[8px] font-medium text-foreground/30;
+    letter-spacing: 0.1em;
+  }
+
+  .saved-postcard-meta dd {
+    @apply mt-1 truncate text-[10px] lowercase text-foreground/50;
+  }
+
   .saved-postcard-row > div:last-child {
     @apply flex items-center gap-3;
   }
@@ -1935,6 +1994,211 @@
   .saved-postcard-row button {
     @apply border-0 bg-transparent p-0 text-[10px] font-medium text-foreground/45 shadow-none transition-colors hover:text-foreground;
     letter-spacing: 0.08em;
+  }
+
+  .cluster-tray {
+    @apply fixed inset-0 overflow-y-auto bg-background px-11 pb-28 pt-24 text-left text-foreground;
+  }
+
+  .cluster-tray__heading {
+    @apply mb-9 max-w-[560px];
+  }
+
+  .cluster-tray__heading p,
+  .cluster-empty-state p,
+  .cluster-muted,
+  .cluster-error {
+    @apply m-0 text-[10px] font-medium text-foreground/40;
+    letter-spacing: 0.1em;
+  }
+
+  .cluster-tray__heading h1 {
+    @apply m-0 mt-3 text-[clamp(30px,4vw,54px)] font-medium lowercase leading-none text-foreground;
+    letter-spacing: -0.04em;
+  }
+
+  .cluster-tray__heading span,
+  .cluster-empty-state span {
+    @apply mt-3 block text-[12px] leading-5 text-foreground/50;
+  }
+
+  .cluster-tray__toolbar {
+    @apply mb-5 flex flex-wrap items-center gap-4;
+  }
+
+  .cluster-tray__toolbar span {
+    @apply text-[10px] lowercase text-foreground/40;
+    letter-spacing: 0.06em;
+  }
+
+  .cluster-empty-state {
+    @apply max-w-[460px] border border-foreground/10 px-5 py-4;
+    border-radius: 10px;
+  }
+
+  .cluster-empty-state a {
+    @apply mt-4 inline-block text-[10px] font-medium text-foreground underline underline-offset-4;
+    letter-spacing: 0.08em;
+  }
+
+  .cluster-list {
+    @apply grid max-w-[1040px] gap-3 md:grid-cols-2;
+  }
+
+  .cluster-card {
+    @apply border border-foreground/10 bg-background p-5;
+    border-radius: 10px;
+  }
+
+  .cluster-card__top {
+    @apply grid grid-cols-[minmax(0,1fr)_auto] gap-4;
+  }
+
+  .cluster-card__top span {
+    @apply text-[9px] text-foreground/35;
+    letter-spacing: 0.08em;
+  }
+
+  .cluster-card__top h2 {
+    @apply m-0 mt-1 text-[19px] font-medium lowercase leading-tight text-foreground;
+    letter-spacing: -0.04em;
+  }
+
+  .cluster-card__top p {
+    @apply m-0 mt-2 text-[11px] lowercase leading-5 text-foreground/55;
+  }
+
+  .cluster-card__top small {
+    @apply mt-2 block text-[10px] lowercase leading-4 text-foreground/35;
+  }
+
+  .cluster-card__top > button,
+  .cluster-card__add {
+    @apply border-0 bg-transparent p-0 text-[10px] font-medium uppercase text-foreground/40 shadow-none transition-colors hover:text-foreground disabled:pointer-events-none disabled:text-foreground/20;
+    letter-spacing: 0.08em;
+  }
+
+  .cluster-beach-list {
+    @apply mt-5 flex flex-wrap gap-2;
+  }
+
+  .cluster-beach-list em {
+    @apply text-[11px] lowercase not-italic text-foreground/35;
+  }
+
+  .cluster-beach-list span {
+    @apply inline-flex items-center gap-2 rounded-full border border-foreground/10 px-3 py-1 text-[10px] lowercase text-foreground/60;
+  }
+
+  .cluster-beach-list button {
+    @apply border-0 bg-transparent p-0 text-[14px] leading-none text-foreground/30 shadow-none hover:text-foreground;
+  }
+
+  .cluster-card__add {
+    @apply mt-5 block;
+  }
+
+  .cluster-dialog-backdrop {
+    @apply fixed inset-0 z-[80] flex items-center justify-center bg-background/65 px-5 backdrop-blur-sm;
+  }
+
+  .cluster-dialog {
+    @apply relative grid w-[min(430px,calc(100vw-32px))] gap-4 border border-foreground/15 bg-[#FDFEFE] p-6 text-left font-mono text-foreground shadow-[0_18px_44px_rgba(0,0,0,0.14)];
+    border-radius: 14px;
+  }
+
+  .cluster-dialog__close {
+    @apply absolute right-4 top-4 h-7 w-7 border-0 bg-transparent p-0 text-[22px] leading-none text-foreground/35 shadow-none hover:text-foreground;
+  }
+
+  .cluster-dialog > p {
+    @apply m-0 text-[10px] font-medium text-foreground/40;
+    letter-spacing: 0.1em;
+  }
+
+  .cluster-dialog h2 {
+    @apply m-0 pr-8 text-[24px] font-medium lowercase leading-tight text-foreground;
+    letter-spacing: -0.04em;
+  }
+
+  .cluster-dialog > span,
+  .cluster-dialog strong {
+    @apply text-[11px] font-normal lowercase leading-5 text-foreground/55;
+  }
+
+  .cluster-dialog strong {
+    @apply text-destructive;
+  }
+
+  .cluster-dialog label {
+    @apply grid gap-2;
+  }
+
+  .cluster-dialog small {
+    @apply text-[9px] font-medium text-foreground/35;
+    letter-spacing: 0.1em;
+  }
+
+  .cluster-dialog input,
+  .cluster-dialog textarea {
+    @apply rounded-none border-0 border-b border-[#D8D4CA] bg-transparent px-0 py-2 text-[13px] text-foreground outline-none focus:border-foreground;
+  }
+
+  .cluster-dialog textarea {
+    @apply min-h-20 resize-none;
+  }
+
+  .saved-plan-detail {
+    @apply relative max-h-[calc(100vh-132px)] overflow-hidden border border-foreground/10 bg-background/75 p-6;
+    border-radius: 14px;
+  }
+
+  .saved-plan-detail__close {
+    @apply absolute right-4 top-4 z-20 h-7 w-7 border-0 bg-transparent p-0 text-[22px] leading-none text-foreground/35 shadow-none hover:text-foreground;
+  }
+
+  .saved-plan-detail .beach-plan-ticket.postcard-card {
+    --postcard-w: min(390px, calc(100vw - 64px));
+    margin-inline: auto;
+    max-height: 455px;
+  }
+
+  .saved-plan-detail .postcard-card .ticket-actions {
+    @apply hidden;
+  }
+
+  .saved-plan-detail__meta {
+    @apply mt-16 grid grid-cols-2 gap-3 border-t border-foreground/10 pt-4;
+  }
+
+  .saved-plan-detail__meta div {
+    @apply min-w-0;
+  }
+
+  .saved-plan-detail__meta span,
+  .saved-plan-detail__notes > p {
+    @apply m-0 text-[9px] font-medium text-foreground/35;
+    letter-spacing: 0.1em;
+  }
+
+  .saved-plan-detail__meta p {
+    @apply m-0 mt-1 truncate text-[11px] lowercase text-foreground/65;
+  }
+
+  .saved-plan-detail__notes {
+    @apply mt-5;
+  }
+
+  .saved-plan-detail__notes textarea {
+    @apply mt-3 min-h-24;
+  }
+
+  .saved-success {
+    @apply m-0 mt-3 text-[10px] lowercase text-foreground/45;
+  }
+
+  .saved-plan-detail__actions {
+    @apply mt-4 flex flex-wrap gap-2;
   }
 
   @media (max-width: 760px) {
@@ -1989,12 +2253,24 @@
       @apply px-5;
     }
 
+    .saved-mode-layout.has-detail {
+      @apply grid-cols-1;
+    }
+
+    .saved-postcard-meta {
+      @apply grid-cols-1;
+    }
+
     .saved-postcard-row {
       @apply grid-cols-1;
     }
 
     .saved-postcard-row > div:last-child {
       @apply justify-start;
+    }
+
+    .saved-plan-detail {
+      @apply max-h-none overflow-visible px-4;
     }
   }
 

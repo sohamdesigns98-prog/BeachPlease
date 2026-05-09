@@ -57,6 +57,7 @@ export default function BeachInfoTile({
   isGenerating = false,
   onClose,
   onGenerate,
+  onAddToCluster,
 }) {
   const [imageSrc, setImageSrc] = useState(beach?.imageUrl || FALLBACK_IMAGE);
 
@@ -145,6 +146,15 @@ export default function BeachInfoTile({
           ))}
         </ul>
       </section>
+
+      <Button
+        className="beach-info-tile__cluster"
+        type="button"
+        variant="outline"
+        onClick={onAddToCluster}
+      >
+        Add to Cluster
+      </Button>
 
       <Button
         className="beach-info-tile__generate"

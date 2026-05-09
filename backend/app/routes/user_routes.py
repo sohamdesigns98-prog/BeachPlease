@@ -90,6 +90,8 @@ async def delete_current_user(current_user: dict = Depends(get_current_user)):
         await db.beach_plans.delete_many(
             {"user_id": {"$in": [current_user["id"], user_id]}}
         )
+    if "mood_clusters" in collection_names:
+        await db.mood_clusters.delete_many({"user_id": current_user["id"]})
 
     return {
         "message": "Account deleted successfully",

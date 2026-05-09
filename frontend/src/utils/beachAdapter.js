@@ -21,16 +21,6 @@ export const VIBE_KEYWORDS = {
   artistic: ["sunset", "romantic", "date", "scenic", "golden", "views"],
 };
 
-const VIBE_CENTERS = {
-  solo: { x: 760, y: 700 },
-  calm: { x: 1380, y: 660 },
-  social: { x: 2050, y: 720 },
-  active: { x: 1120, y: 1220 },
-  adventure: { x: 1780, y: 1260 },
-  family: { x: 2260, y: 1250 },
-  artistic: { x: 1540, y: 1550 },
-};
-
 const REGION_KEY_BY_SLUG = {
   "palm-beach": "northern",
   "whale-beach": "northern",
@@ -194,14 +184,19 @@ export function inferBeachVibe(beach = {}) {
 }
 
 export function moodPositionForBeach(beach = {}, index = 0, vibe = "calm") {
-  const center = VIBE_CENTERS[vibe] || VIBE_CENTERS.calm;
   const seed = hashString(beach.slug || beach.name);
-  const spreadX = ((seed % 100) - 50) * 5.2;
-  const spreadY = (((seed * 7) % 100) - 50) * 3.6;
+  const columns = 8;
+  const cellW = 315;
+  const cellH = 235;
+  const column = index % columns;
+  const row = Math.floor(index / columns);
+  const jitterX = ((seed % 100) - 50) * 1.15;
+  const jitterY = (((seed * 7) % 100) - 50) * 0.85;
+  const rowOffset = row % 2 ? 120 : 0;
 
   return {
-    x: Math.max(120, Math.min(WORLD_W - 220, center.x + spreadX + (index % 3) * 46)),
-    y: Math.max(120, Math.min(WORLD_H - 180, center.y + spreadY + (index % 4) * 34)),
+    x: Math.max(150, Math.min(WORLD_W - 220, 210 + column * cellW + rowOffset + jitterX)),
+    y: Math.max(150, Math.min(WORLD_H - 180, 170 + row * cellH + jitterY)),
   };
 }
 

@@ -14,6 +14,7 @@ from app.database import get_database
 from app.routes.ai_routes import router as ai_router
 from app.routes.auth_routes import router as auth_router
 from app.routes.beach_routes import router as beach_router
+from app.routes.cluster_routes import router as cluster_router
 from app.routes.condition_routes import router as condition_router
 from app.routes.plan_routes import router as plan_router
 from app.routes.rank_routes import router as rank_router
@@ -43,6 +44,7 @@ app.include_router(condition_router)
 app.include_router(rank_router)
 app.include_router(ai_router)
 app.include_router(plan_router)
+app.include_router(cluster_router)
 
 
 async def refresh_conditions_safely():
@@ -64,6 +66,7 @@ async def startup():
     if db is not None:
         await db.users.create_index([("email", ASCENDING)], unique=True)
         await db.beaches.create_index([("slug", ASCENDING)], unique=True)
+        await db.mood_clusters.create_index([("user_id", ASCENDING)])
 
     await refresh_conditions_safely()
 
