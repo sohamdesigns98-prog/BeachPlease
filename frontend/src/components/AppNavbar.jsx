@@ -1,11 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { getClusters } from "@/api/clusters";
 import { getCachedPlans, getPlans } from "@/api/plans";
 import AudioToggle from "@/components/audio/AudioToggle";
 import AccountPill from "@/components/AccountPill";
-import ModeToggle from "@/components/ModeToggle";
 import { useAuth } from "@/context/AuthContext";
 
 export default function AppNavbar() {
@@ -15,13 +14,10 @@ export default function AppNavbar() {
   const [savedCount, setSavedCount] = useState(0);
   const [clusterCount, setClusterCount] = useState(0);
 
-  const activeMode = useMemo(() => {
-    if (location.pathname.startsWith("/saved-plans")) return "saved";
-    if (location.pathname.includes("/experience/cluster")) return "cluster";
-    if (location.pathname.includes("/experience/map")) return "map";
-    if (location.pathname.includes("/experience/mood") || location.pathname === "/experience") return "mood";
-    return "";
-  }, [location.pathname]);
+  const isExploreActive = useMemo(
+    () => location.pathname.startsWith("/explore") || location.pathname.startsWith("/experience"),
+    [location.pathname],
+  );
 
   useEffect(() => {
     let cancelled = false;
@@ -64,30 +60,28 @@ export default function AppNavbar() {
     };
   }, [token]);
 
-  function handleModeChange(nextMode) {
-    if (nextMode === "saved") {
-      navigate("/saved-plans");
-      return;
-    }
-
-    navigate(`/experience/${nextMode}`);
-  }
-
   return (
     <header className="app-navbar">
       <div className="app-navbar__left">
-        <button type="button" className="app-navbar__mark" onClick={() => navigate("/experience/mood")} aria-label="Go to mood">
+        <button type="button" className="app-navbar__mark" onClick={() => navigate("/explore/canvas")} aria-label="Go to explore">
           BeachPlease
         </button>
         <AudioToggle />
       </div>
       <div className="app-navbar__right">
-        <ModeToggle
-          activeMode={activeMode}
-          savedCount={savedCount}
-          clusterCount={clusterCount}
-          onChange={handleModeChange}
-        />
+        <nav className="app-navbar__page-links" aria-label="Saved beach pages">
+          <Link className={isExploreActive ? "is-active" : ""} to="/explore/canvas">
+            explore
+          </Link>
+          <Link className={location.pathname.startsWith("/clusters") ? "is-active" : ""} to="/clusters">
+            cluster
+            {clusterCount > 0 && <span>{clusterCount}</span>}
+          </Link>
+          <Link className={location.pathname.startsWith("/saved-plans") || location.pathname.startsWith("/plans/") ? "is-active" : ""} to="/saved-plans">
+            saved
+            {savedCount > 0 && <span>{savedCount}</span>}
+          </Link>
+        </nav>
         <AccountPill />
       </div>
     </header>

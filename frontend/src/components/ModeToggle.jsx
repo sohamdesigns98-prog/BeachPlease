@@ -1,9 +1,7 @@
-const MODES = ["cluster", "mood", "map", "saved"];
+const MODES = ["canvas", "map"];
 
 export default function ModeToggle({
   activeMode = "",
-  savedCount = 0,
-  clusterCount = 0,
   onChange,
 }) {
   return (
@@ -17,12 +15,6 @@ export default function ModeToggle({
           onClick={() => onChange?.(mode)}
         >
           {mode}
-          {mode === "cluster" && clusterCount > 0 && (
-            <span className="mode-toggle__badge">{clusterCount}</span>
-          )}
-          {mode === "saved" && savedCount > 0 && (
-            <span className="mode-toggle__badge">{savedCount}</span>
-          )}
         </button>
       ))}
     </nav>

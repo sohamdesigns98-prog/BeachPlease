@@ -847,11 +847,11 @@
   }
 
   .plan-detail-page {
-    @apply min-h-screen bg-background px-6 py-8 text-foreground;
+    @apply min-h-screen bg-background px-6 pb-10 pt-24 text-foreground;
   }
 
   .plan-detail-top {
-    @apply mx-auto mb-6 flex w-full max-w-[1080px] items-center justify-between;
+    @apply mx-auto mb-6 flex w-full max-w-[1160px] items-center justify-between;
   }
 
   .plan-detail-top a {
@@ -863,7 +863,7 @@
   }
 
   .plan-detail-grid {
-    @apply mx-auto grid w-full max-w-[1080px] gap-8 lg:grid-cols-[minmax(420px,560px)_minmax(280px,1fr)] lg:items-start;
+    @apply mx-auto grid w-full max-w-[1160px] justify-center gap-8 lg:grid-cols-[minmax(390px,453px)_minmax(420px,620px)] lg:items-start;
   }
 
   .plan-detail-grid .beach-plan-ticket {
@@ -916,13 +916,73 @@
     @apply m-0 text-[11px] lowercase leading-5 text-foreground/70;
   }
 
+  .plan-full-section {
+    @apply mb-6 border-b border-foreground/15 pb-5;
+  }
+
+  .plan-full-section > p {
+    @apply m-0 mb-3 text-[10px] font-medium text-foreground/40;
+    letter-spacing: 0.1em;
+  }
+
+  .plan-full-section h2 {
+    @apply m-0 mb-4 text-[20px] font-medium lowercase leading-tight text-foreground;
+    letter-spacing: -0.03em;
+  }
+
+  .plan-full-section div + div {
+    @apply mt-4;
+  }
+
+  .plan-full-section span {
+    @apply block text-[9px] font-medium text-foreground/35;
+    letter-spacing: 0.1em;
+  }
+
+  .plan-full-section p,
+  .plan-full-section li {
+    @apply text-[12px] leading-6 text-foreground/65;
+  }
+
+  .plan-full-section ul {
+    @apply m-0 mt-2 grid gap-1 pl-4;
+  }
+
+  .plan-candidate-list,
+  .plan-rejected-list {
+    @apply grid gap-2;
+  }
+
+  .plan-candidate-list article,
+  .plan-rejected-list article {
+    @apply rounded-[10px] border border-foreground/10 px-4 py-3;
+  }
+
+  .plan-candidate-list article {
+    @apply grid grid-cols-[1fr_auto] gap-x-3;
+  }
+
+  .plan-candidate-list strong,
+  .plan-rejected-list strong {
+    @apply text-[12px] font-medium lowercase text-foreground;
+  }
+
+  .plan-candidate-list span {
+    @apply text-[10px] text-foreground/35;
+  }
+
+  .plan-candidate-list p,
+  .plan-rejected-list p {
+    @apply col-span-2 m-0 mt-1 text-[11px] leading-5 text-foreground/55;
+  }
+
   .minimal-plan {
     @apply absolute bottom-8 right-8 z-20 w-[min(420px,calc(100vw-48px))] border border-foreground/50 bg-background/95 p-5 backdrop-blur-sm;
     animation: plan-rise 0.35s cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   .result-experience {
-    @apply flex h-screen min-h-screen flex-col items-center justify-center overflow-hidden px-5 py-4 text-center text-foreground;
+    @apply flex min-h-screen flex-col items-center justify-center overflow-y-auto px-6 pb-28 pt-24 text-left text-foreground;
     background: rgb(176 214 223 / 0.70);
     backdrop-filter: blur(12px);
     opacity: 0;
@@ -931,6 +991,57 @@
 
   .result-experience.is-visible {
     opacity: 1;
+  }
+
+  .result-experience__layout {
+    @apply mx-auto grid w-full max-w-[1180px] items-center gap-8 lg:grid-cols-[minmax(390px,453px)_minmax(420px,1fr)];
+  }
+
+  .generated-plan-panel {
+    @apply max-h-[calc(100vh-180px)] overflow-y-auto rounded-[18px] border border-background/70 bg-background/70 p-7 font-mono shadow-[0_18px_48px_rgb(17_17_17_/_0.08)] backdrop-blur-lg;
+  }
+
+  .generated-plan-panel__eyebrow {
+    @apply m-0 text-[9px] font-medium uppercase text-foreground/35;
+    letter-spacing: 0.12em;
+  }
+
+  .generated-plan-panel h1 {
+    @apply m-0 mt-3 text-[34px] font-medium lowercase leading-none text-foreground;
+    letter-spacing: 0;
+  }
+
+  .generated-plan-panel__summary {
+    @apply m-0 mt-4 text-[13px] leading-6 text-foreground/60;
+  }
+
+  .generated-plan-panel__grid {
+    @apply mt-6 grid gap-3 md:grid-cols-2;
+  }
+
+  .generated-plan-panel__grid article {
+    @apply rounded-[12px] border border-foreground/10 bg-background/45 p-4;
+  }
+
+  .generated-plan-panel__grid article.is-wide {
+    @apply md:col-span-2;
+  }
+
+  .generated-plan-panel__grid span {
+    @apply block text-[9px] font-medium uppercase text-foreground/35;
+    letter-spacing: 0.1em;
+  }
+
+  .generated-plan-panel__grid p {
+    @apply m-0 mt-2 text-[12px] lowercase leading-6 text-foreground/70;
+  }
+
+  .generated-plan-panel__chips {
+    @apply mt-5 flex flex-wrap gap-2;
+  }
+
+  .generated-plan-panel__chips span {
+    @apply rounded-full border border-foreground/15 bg-background/55 px-3 py-1.5 text-[10px] lowercase text-foreground/60;
   }
 
   .result-auth-nudge {
@@ -1293,8 +1404,8 @@
   }
 
   .postcard-card__title-row h1 {
-    @apply m-0 mt-3 truncate text-[22px] font-medium lowercase leading-none text-foreground;
-    letter-spacing: -0.05em;
+    @apply m-0 mt-3 line-clamp-2 text-[22px] font-medium lowercase leading-none text-foreground;
+    letter-spacing: 0;
   }
 
   .postcard-card__meta {
@@ -1322,12 +1433,12 @@
   }
 
   .postcard-card__quote {
-    @apply m-0 mt-4 line-clamp-2 text-[10px] lowercase leading-5 text-foreground/45;
+    @apply m-0 mt-4 line-clamp-3 text-[10px] lowercase leading-5 text-foreground/45;
   }
 
   .postcard-card__poem {
-    @apply m-0 mt-3 line-clamp-2 text-[13px] font-medium lowercase leading-7 text-foreground/80;
-    letter-spacing: -0.03em;
+    @apply m-0 mt-3 line-clamp-3 text-[13px] font-medium lowercase leading-7 text-foreground/80;
+    letter-spacing: 0;
   }
 
   .postcard-card__conditions {
@@ -1363,11 +1474,11 @@
   }
 
   .postcard-card .ticket-actions {
-    @apply absolute -bottom-[64px] left-1/2 mt-0 flex -translate-x-1/2 grid-cols-none items-center justify-center gap-3;
+    @apply absolute -bottom-[64px] left-1/2 mt-0 flex -translate-x-1/2 grid-cols-none flex-nowrap items-center justify-center gap-3;
   }
 
   .postcard-card .ticket-actions button {
-    @apply h-[30px] rounded-full border-0 bg-foreground px-6 text-[11px] font-medium lowercase text-background shadow-none transition-transform hover:-translate-y-0.5 hover:scale-105 hover:bg-foreground;
+    @apply h-[30px] min-w-max whitespace-nowrap rounded-full border-0 bg-foreground px-6 text-[11px] font-medium lowercase text-background shadow-none transition-transform hover:-translate-y-0.5 hover:scale-105 hover:bg-foreground;
     letter-spacing: 0.04em;
   }
 
@@ -1568,8 +1679,20 @@
     }
 
     .result-experience {
-      @apply min-h-screen items-center overflow-hidden px-4 py-5;
+      @apply min-h-screen items-center overflow-y-auto px-4 pb-32 pt-24;
       height: auto;
+    }
+
+    .result-experience__layout {
+      @apply grid-cols-1 gap-24;
+    }
+
+    .generated-plan-panel {
+      @apply max-h-none rounded-[16px] p-5;
+    }
+
+    .generated-plan-panel h1 {
+      font-size: 28px;
     }
 
     .beach-plan-ticket {
@@ -1704,6 +1827,23 @@
     @apply flex items-center gap-7;
   }
 
+  .app-navbar__page-links {
+    @apply flex items-center gap-5;
+  }
+
+  .app-navbar__page-links a {
+    @apply relative border-0 border-b border-transparent bg-transparent p-0 pb-0.5 text-[11px] font-medium lowercase leading-none text-foreground/35 no-underline transition-colors hover:text-foreground/70;
+    letter-spacing: 0.05em;
+  }
+
+  .app-navbar__page-links a.is-active {
+    @apply border-foreground text-foreground;
+  }
+
+  .app-navbar__page-links span {
+    @apply absolute -right-4 -top-2 rounded-full bg-foreground px-1.5 py-0.5 text-[8px] leading-none text-background;
+  }
+
   .audio-toggle {
     @apply grid h-9 w-9 place-items-center rounded-full border border-foreground/20 bg-transparent p-0 text-foreground shadow-none transition-colors hover:border-foreground/45 hover:bg-transparent hover:text-foreground;
   }
@@ -1714,6 +1854,10 @@
 
   .mode-toggle {
     @apply flex items-center gap-5;
+  }
+
+  .explore-mode-pill {
+    @apply fixed left-1/2 top-[72px] z-[60] -translate-x-1/2 rounded-full border border-background/55 bg-background/55 px-4 py-2 shadow-[0_12px_32px_rgb(17_17_17_/_0.08)] backdrop-blur-xl;
   }
 
   .mood-app-nav {
@@ -2035,31 +2179,35 @@
     letter-spacing: 0.08em;
   }
 
+  .beach-info-tile__cluster-note {
+    @apply m-0 mt-2 text-[10px] lowercase leading-4 text-foreground/45;
+  }
+
   .beach-info-tile__generate {
     @apply mt-3 h-12 w-full rounded-none border-0 bg-black px-6 text-[12px] font-medium uppercase text-[#FDFEFE] shadow-none hover:bg-[#111] hover:text-[#FDFEFE];
     letter-spacing: 0.08em;
   }
 
   .mood-input-bar {
-    @apply fixed bottom-0 left-0 right-0 z-40 grid h-20 grid-cols-[minmax(240px,1fr)_auto_auto] items-center gap-5 bg-background px-11 transition-[right] duration-500 ease-out;
+    @apply fixed bottom-8 left-8 z-40 grid w-[min(480px,calc(100vw-440px))] grid-cols-1 items-start gap-3 rounded-[18px] border border-background/70 bg-background/70 px-5 py-4 shadow-[0_18px_44px_rgb(17_17_17_/_0.09)] backdrop-blur-xl transition-[transform,opacity] duration-300 ease-out;
   }
 
   .mood-input-bar.has-info-tile {
-    right: 380px;
+    @apply w-[min(420px,calc(100vw-460px))];
   }
 
   .mood-input-bar input {
-    @apply col-start-1 row-start-1 border-0 border-b border-[#D8D4CA] bg-transparent px-0 py-1.5 text-[13px] text-foreground outline-none transition-colors placeholder:text-foreground/30 focus:border-foreground;
+    @apply col-start-1 row-start-1 w-full border-0 border-b border-[#D8D4CA] bg-transparent px-0 py-1.5 text-[13px] text-foreground outline-none transition-colors placeholder:text-foreground/30 focus:border-foreground;
     letter-spacing: 0.01em;
   }
 
   .mood-input-bar > button {
-    @apply col-start-3 row-start-1 h-9 min-w-[132px] rounded-full border border-foreground bg-foreground px-4 text-[10px] font-medium uppercase text-background shadow-none transition-opacity hover:bg-foreground/90 hover:text-background hover:opacity-100;
+    @apply col-start-1 row-start-3 h-9 w-fit min-w-[132px] rounded-full border border-foreground bg-foreground px-4 text-[10px] font-medium uppercase text-background shadow-none transition-opacity hover:bg-foreground/90 hover:text-background hover:opacity-100;
     letter-spacing: 0.08em;
   }
 
   .mood-chip-line {
-    @apply col-start-2 row-start-1 flex max-w-[520px] flex-wrap items-center justify-end gap-2;
+    @apply col-start-1 row-start-2 flex max-w-none flex-wrap items-center justify-start gap-2;
   }
 
   .mood-chip {
@@ -2077,6 +2225,7 @@
 
   .saved-mode-shell {
     @apply fixed inset-0 overflow-y-auto bg-background px-11 pb-28 pt-24 text-foreground;
+    contain: layout paint;
   }
 
   .saved-mode-shell__heading {
@@ -2093,7 +2242,7 @@
 
   .saved-mode-shell__heading h1 {
     @apply m-0 mt-3 text-[clamp(28px,4vw,52px)] font-medium lowercase leading-none text-foreground;
-    letter-spacing: -0.03em;
+    letter-spacing: 0;
   }
 
   .saved-mode-shell__heading span,
@@ -2120,12 +2269,16 @@
   }
 
   .saved-mode-layout.has-detail {
-    @apply grid-cols-[minmax(320px,0.8fr)_minmax(460px,1fr)] items-start;
+    @apply grid-cols-[minmax(380px,0.75fr)_minmax(580px,1fr)] items-start;
   }
 
   .saved-postcard-row {
-    @apply grid grid-cols-[minmax(0,1fr)_auto] items-center gap-6 border border-foreground/10 bg-background px-5 py-4 transition-colors;
+    @apply grid grid-cols-[96px_minmax(0,1fr)_auto] items-center gap-5 border border-foreground/10 bg-background px-5 py-4 transition-colors;
     border-radius: 10px;
+  }
+
+  .saved-postcard-row__image {
+    @apply h-20 w-24 rounded-[8px] object-cover;
   }
 
   .saved-postcard-row.is-selected {
@@ -2146,7 +2299,7 @@
   }
 
   .saved-postcard-row p {
-    @apply m-0 mt-1 max-w-[520px] truncate text-[11px] text-foreground/50;
+    @apply m-0 mt-1 max-w-[620px] text-[11px] leading-5 text-foreground/50;
   }
 
   .saved-postcard-meta {
@@ -2288,12 +2441,7 @@
     @apply mt-5 block;
   }
 
-  .cluster-dialog-backdrop {
-    @apply fixed inset-0 z-[80] flex items-center justify-center bg-background/65 px-5 backdrop-blur-sm;
-  }
-
   .cluster-dialog {
-    @apply relative grid w-[min(430px,calc(100vw-32px))] gap-4 border border-foreground/15 bg-[#FDFEFE] p-6 text-left font-mono text-foreground shadow-[0_18px_44px_rgba(0,0,0,0.14)];
     border-radius: 14px;
   }
 
@@ -2311,7 +2459,10 @@
     letter-spacing: -0.04em;
   }
 
-  .cluster-dialog > span,
+  .cluster-dialog__form {
+    @apply grid gap-4;
+  }
+
   .cluster-dialog strong {
     @apply text-[11px] font-normal lowercase leading-5 text-foreground/55;
   }
@@ -2336,6 +2487,26 @@
 
   .cluster-dialog textarea {
     @apply min-h-20 resize-none;
+  }
+
+  .cluster-picker-list {
+    @apply grid max-h-64 gap-2 overflow-auto;
+  }
+
+  .cluster-picker-list button {
+    @apply flex items-center justify-between rounded-[10px] border border-foreground/10 bg-transparent px-4 py-3 text-left transition-colors hover:border-foreground/35 hover:bg-foreground/[0.03];
+  }
+
+  .cluster-picker-list button:disabled {
+    @apply cursor-default border-foreground/5 bg-foreground/[0.03] opacity-55;
+  }
+
+  .cluster-picker-list strong {
+    @apply text-[12px] font-medium lowercase text-foreground;
+  }
+
+  .cluster-picker-list span {
+    @apply text-[10px] lowercase text-foreground/45;
   }
 
   .saved-plan-detail {
@@ -2378,6 +2549,37 @@
     @apply mt-5;
   }
 
+  .saved-plan-detail__summary {
+    @apply mt-5 border-t border-foreground/10 pt-4;
+  }
+
+  .saved-plan-detail__summary > p {
+    @apply m-0 text-[9px] font-medium text-foreground/35;
+    letter-spacing: 0.1em;
+  }
+
+  .saved-plan-detail__summary strong {
+    @apply mt-2 block text-[14px] font-medium lowercase leading-5 text-foreground;
+  }
+
+  .saved-plan-detail__summary div {
+    @apply mt-3;
+  }
+
+  .saved-plan-detail__summary span {
+    @apply block text-[9px] font-medium text-foreground/35;
+    letter-spacing: 0.1em;
+  }
+
+  .saved-plan-detail__summary p:not(:first-child) {
+    @apply m-0 mt-1 text-[11px] leading-5 text-foreground/60;
+  }
+
+  .saved-plan-detail__summary a {
+    @apply mt-4 inline-block text-[10px] font-medium text-foreground underline underline-offset-4;
+    letter-spacing: 0.08em;
+  }
+
   .saved-plan-detail__notes textarea {
     @apply mt-3 min-h-24;
   }
@@ -2404,6 +2606,10 @@
       @apply items-start;
     }
 
+    .app-navbar__page-links {
+      @apply gap-4;
+    }
+
     .account-pill--user small {
       @apply max-w-[74px];
     }
@@ -2411,6 +2617,10 @@
     .mode-toggle {
       @apply min-w-0 flex-1 justify-between gap-2 overflow-x-auto pb-1;
       scrollbar-width: none;
+    }
+
+    .explore-mode-pill {
+      @apply top-[106px] max-w-[calc(100vw-32px)] px-3;
     }
 
     .mode-toggle::-webkit-scrollbar {
@@ -2472,7 +2682,7 @@
 
     .mood-input-bar,
     .mood-input-bar.has-info-tile {
-      @apply right-0 h-auto min-h-20 grid-cols-1 gap-3 px-5 py-3;
+      @apply left-0 right-0 h-auto min-h-20 w-auto grid-cols-1 gap-3 rounded-none border-x-0 border-b-0 px-5 py-3;
       bottom: 0;
     }
 

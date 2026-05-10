@@ -16,6 +16,17 @@ function formatField(value) {
   return String(value).replaceAll("_", " ");
 }
 
+function listItems(value) {
+  if (Array.isArray(value)) return value.filter(Boolean);
+  if (!value) return [];
+  return [String(value)];
+}
+
+function candidateScore(candidate) {
+  if (candidate?.score === null || candidate?.score === undefined) return "";
+  return `${Math.round(candidate.score)}%`;
+}
+
 export default function Plan() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -100,6 +111,74 @@ export default function Plan() {
                 <p>{plan.mood_phrase || "n/a"}</p>
               </div>
             </section>
+
+            <section className="plan-full-section">
+              <p>FULL PLAN //</p>
+              <h2>{plan.plan?.where || plan.selected_beach_name}</h2>
+              {plan.plan?.when && (
+                <div>
+                  <span>WHEN</span>
+                  <p>{plan.plan.when}</p>
+                </div>
+              )}
+              {plan.plan?.why && (
+                <div>
+                  <span>WHY</span>
+                  <p>{plan.plan.why}</p>
+                </div>
+              )}
+              {plan.plan?.conditions_summary && (
+                <div>
+                  <span>CONDITIONS</span>
+                  <p>{plan.plan.conditions_summary}</p>
+                </div>
+              )}
+              {plan.plan?.gentle_warning && (
+                <div>
+                  <span>HEADS UP</span>
+                  <p>{plan.plan.gentle_warning}</p>
+                </div>
+              )}
+              {listItems(plan.plan?.bring).length > 0 && (
+                <div>
+                  <span>BRING</span>
+                  <ul>
+                    {listItems(plan.plan?.bring).map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </section>
+
+            {Array.isArray(plan.candidate_snapshot) && plan.candidate_snapshot.length > 0 && (
+              <section className="plan-full-section">
+                <p>CANDIDATES //</p>
+                <div className="plan-candidate-list">
+                  {plan.candidate_snapshot.slice(0, 5).map((candidate) => (
+                    <article key={candidate.slug || candidate.name}>
+                      <strong>{candidate.name}</strong>
+                      <span>{candidateScore(candidate)}</span>
+                      <p>{listItems(candidate.matched_reasons).slice(0, 2).join(" · ") || "candidate beach"}</p>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {Array.isArray(plan.rejected_beaches) && plan.rejected_beaches.length > 0 && (
+              <section className="plan-full-section">
+                <p>WHY NOT THE OTHERS //</p>
+                <div className="plan-rejected-list">
+                  {plan.rejected_beaches.map((item) => (
+                    <article key={item.name}>
+                      <strong>{item.name}</strong>
+                      <p>{item.reason}</p>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            )}
 
             <div className="auth-heading">
               <p>NOTES //</p>

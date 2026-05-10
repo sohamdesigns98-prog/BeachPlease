@@ -22,6 +22,12 @@ function formatField(value) {
   return String(value).replaceAll("_", " ");
 }
 
+function listItems(value) {
+  if (Array.isArray(value)) return value.filter(Boolean);
+  if (!value) return [];
+  return [String(value)];
+}
+
 export default function SavedModeShell({ onCountChange }) {
   const { token } = useAuth();
   const [plans, setPlans] = useState(() => getCachedPlans() || []);
@@ -135,6 +141,15 @@ export default function SavedModeShell({ onCountChange }) {
             const selected = selectedPlan ? getPlanId(selectedPlan) === id : false;
             return (
               <article className={`saved-postcard-row ${selected ? "is-selected" : ""}`} key={id}>
+                <img
+                  className="saved-postcard-row__image"
+                  src={plan.image_url || "/landing-scroll.jpg"}
+                  alt={plan.selected_beach_name || "Saved beach plan"}
+                  loading="lazy"
+                  onError={(event) => {
+                    event.currentTarget.src = "/landing-scroll.jpg";
+                  }}
+                />
                 <button type="button" className="saved-postcard-row__main" onClick={() => handleOpen(id)}>
                   <span>{formatDate(plan.created_at)}</span>
                   <h2>{plan.selected_beach_name || "Beach plan"}</h2>
@@ -205,6 +220,36 @@ export default function SavedModeShell({ onCountChange }) {
                     <span>MOOD //</span>
                     <p>{selectedPlan.mood_phrase || "n/a"}</p>
                   </div>
+                </section>
+
+                <section className="saved-plan-detail__summary">
+                  <p>PLAN //</p>
+                  {selectedPlan.plan?.where && <strong>{selectedPlan.plan.where}</strong>}
+                  {selectedPlan.plan?.when && (
+                    <div>
+                      <span>WHEN</span>
+                      <p>{selectedPlan.plan.when}</p>
+                    </div>
+                  )}
+                  {selectedPlan.plan?.why && (
+                    <div>
+                      <span>WHY</span>
+                      <p>{selectedPlan.plan.why}</p>
+                    </div>
+                  )}
+                  {selectedPlan.plan?.conditions_summary && (
+                    <div>
+                      <span>CONDITIONS</span>
+                      <p>{selectedPlan.plan.conditions_summary}</p>
+                    </div>
+                  )}
+                  {listItems(selectedPlan.plan?.bring).length > 0 && (
+                    <div>
+                      <span>BRING</span>
+                      <p>{listItems(selectedPlan.plan?.bring).join(" / ")}</p>
+                    </div>
+                  )}
+                  <Link to={`/plans/${getPlanId(selectedPlan)}`}>OPEN FULL DETAIL</Link>
                 </section>
 
                 <section className="saved-plan-detail__notes">

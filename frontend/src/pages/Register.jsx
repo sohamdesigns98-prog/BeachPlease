@@ -50,13 +50,13 @@ export default function Register() {
     formState: { errors, isSubmitting },
   } = form;
 
-  if (token) return <Navigate to="/experience/mood" replace />;
+  if (token) return <Navigate to="/explore/canvas" replace />;
 
   async function onSubmit(form) {
     try {
       await createAccount(form);
       toast.success("Account made. Your beach memory is on.");
-      navigate("/experience/mood", { replace: true });
+      navigate("/explore/canvas", { replace: true });
     } catch (caughtError) {
       toast.error(getApiErrorMessage(caughtError, "Couldn't create the account. Give it another go."));
     }
@@ -66,7 +66,7 @@ export default function Register() {
     try {
       const response = await loginWithGoogle(credential);
       toast.success(response.user?.profile_complete ? "Google signup is ready." : "Google signup is ready. Add your beach settings next.");
-      navigate(response.user?.profile_complete ? "/experience/mood" : "/profile", { replace: true });
+      navigate(response.user?.profile_complete ? "/explore/canvas" : "/profile", { replace: true });
     } catch (caughtError) {
       toast.error(getApiErrorMessage(caughtError, "Couldn't continue with Google."));
     }

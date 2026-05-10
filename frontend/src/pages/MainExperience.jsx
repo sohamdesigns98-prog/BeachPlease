@@ -12,10 +12,12 @@ import {
 import { getCondition } from "@/api/conditions";
 import { generatePlanPreview } from "@/api/plans";
 import BeachInfoTile from "@/components/BeachInfoTile";
+import ClusterPickerDialog from "@/components/ClusterPickerDialog";
 import ClusterTray from "@/components/ClusterTray";
 import CreateClusterDialog from "@/components/CreateClusterDialog";
 import GeneratingOverlay from "@/components/GeneratingOverlay";
 import MapboxBeachMap from "@/components/map/MapboxBeachMap";
+import ModeToggle from "@/components/ModeToggle";
 import MoodCanvasShell from "@/components/MoodCanvasShell";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
@@ -33,7 +35,7 @@ const COMPANION_HINTS = [
   { id: "solo", color: "#ADD0EE" },
   { id: "partner", color: "#ECBCEE" },
 ];
-const EXPERIENCE_MODES = new Set(["cluster", "mood", "map"]);
+const EXPERIENCE_MODES = new Set(["cluster", "canvas", "map"]);
 
 function getClusterId(cluster) {
   return cluster?._id || cluster?.id;
@@ -43,11 +45,12 @@ function uniqueBeachSlugs(slugs = []) {
   return Array.from(new Set(slugs.filter(Boolean)));
 }
 
-export default function MainExperience({ visible = false, onPlanGenerated }) {
+export default function MainExperience({ visible = false, modeOverride = "", onPlanGenerated }) {
   const { token } = useAuth();
   const navigate = useNavigate();
   const { mode } = useParams();
-  const activeMode = EXPERIENCE_MODES.has(mode) ? mode : "mood";
+  const routeMode = mode === "mood" ? "canvas" : mode;
+  const activeMode = modeOverride || (EXPERIENCE_MODES.has(routeMode) ? routeMode : "canvas");
   const [moodPhrase, setMoodPhrase] = useState("");
   const [selectedBeachSlug, setSelectedBeachSlug] = useState("");
   const [selectedBeachName, setSelectedBeachName] = useState("");
@@ -62,6 +65,7 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
   const [conditionsBySlug, setConditionsBySlug] = useState({});
   const [loadingConditionSlugs, setLoadingConditionSlugs] = useState({});
   const [isClusterDialogOpen, setIsClusterDialogOpen] = useState(false);
+  const [clusterPickerBeach, setClusterPickerBeach] = useState(null);
   const [isClusterSaving, setIsClusterSaving] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [generationInput, setGenerationInput] = useState(null);
@@ -105,6 +109,16 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
   const beachesBySlug = useMemo(
     () => Object.fromEntries(beaches.map((beach) => [beach.slug, beach])),
     [beaches],
+  );
+
+  const selectedBeachClusters = useMemo(
+    () => {
+      if (!selectedBeach?.slug) return [];
+      return clusters.filter((cluster) => (
+        Array.isArray(cluster.beach_slugs) && cluster.beach_slugs.includes(selectedBeach.slug)
+      ));
+    },
+    [clusters, selectedBeach],
   );
 
   useEffect(() => {
@@ -166,7 +180,7 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
 
   useEffect(() => {
     if (mode && !EXPERIENCE_MODES.has(mode)) {
-      navigate("/experience/mood", { replace: true });
+      navigate("/explore/canvas", { replace: true });
     }
   }, [mode, navigate]);
 
@@ -298,7 +312,7 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
       const createdCluster = await createCluster(payload);
       setClusters((currentClusters) => [createdCluster, ...currentClusters]);
       setIsClusterDialogOpen(false);
-      if (activate) navigate("/experience/mood");
+      if (activate) navigate("/explore/canvas");
     } catch (caughtError) {
       setClusterError(caughtError?.response?.data?.detail || "Couldn't create that cluster.");
     } finally {
@@ -379,7 +393,11 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
       return;
     }
     if (selectedBeach) {
-      handleAddBeachToCluster(clusters[0], selectedBeach);
+      if (clusters.length === 1) {
+        handleAddBeachToCluster(clusters[0], selectedBeach);
+        return;
+      }
+      setClusterPickerBeach(selectedBeach);
     }
   }
 
@@ -400,12 +418,34 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
       return;
     }
 
-    handleAddBeachToCluster(clusters[0], beach);
+    if (clusters.length === 1) {
+      handleAddBeachToCluster(clusters[0], beach);
+      return;
+    }
+
+    setClusterPickerBeach(beach);
+  }
+
+  function handleCreateClusterFromPicker() {
+    setSelectedBeachSlug(clusterPickerBeach?.slug || "");
+    setSelectedBeachName(clusterPickerBeach?.name || "");
+    setSelectedBeachData(clusterPickerBeach);
+    setClusterPickerBeach(null);
+    setIsClusterDialogOpen(true);
   }
 
   return (
     <main className={`main-app-shell mood-app-shell ${visible ? "is-visible" : ""}`}>
-      <section className={`mood-mode-layer ${activeMode === "mood" ? "is-active" : ""}`} aria-hidden={activeMode !== "mood"}>
+      {activeMode !== "cluster" && (
+        <div className="explore-mode-pill">
+          <ModeToggle
+            activeMode={activeMode}
+            onChange={(nextMode) => navigate(`/explore/${nextMode}`)}
+          />
+        </div>
+      )}
+
+      <section className={`mood-mode-layer ${activeMode === "canvas" ? "is-active" : ""}`} aria-hidden={activeMode !== "canvas"}>
         <MoodCanvasShell
           beaches={beaches}
           moodPhrase={moodPhrase}
@@ -456,6 +496,7 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
           beach={selectedBeach}
           conditionLoading={Boolean(loadingConditionSlugs[selectedBeach.slug])}
           isGenerating={isGenerating}
+          clusterMembership={selectedBeachClusters}
           onClose={() => {
             setSelectedBeachSlug("");
             setSelectedBeachName("");
@@ -518,12 +559,25 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
 
       <CreateClusterDialog
         isOpen={isClusterDialogOpen}
-        selectedBeach={selectedBeach}
+        selectedBeach={selectedBeach || clusterPickerBeach}
         moodPhrase={moodPhrase}
         isSubmitting={isClusterSaving}
         error={clusterError}
         onClose={() => setIsClusterDialogOpen(false)}
         onCreate={handleCreateCluster}
+      />
+
+      <ClusterPickerDialog
+        isOpen={Boolean(clusterPickerBeach)}
+        beach={clusterPickerBeach}
+        clusters={clusters}
+        onClose={() => setClusterPickerBeach(null)}
+        onCreateNew={handleCreateClusterFromPicker}
+        onPick={(cluster) => {
+          const beachToAdd = clusterPickerBeach;
+          setClusterPickerBeach(null);
+          handleAddBeachToCluster(cluster, beachToAdd);
+        }}
       />
     </main>
   );

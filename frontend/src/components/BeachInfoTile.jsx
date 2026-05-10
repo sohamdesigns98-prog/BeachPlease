@@ -65,6 +65,7 @@ export default function BeachInfoTile({
   beach,
   conditionLoading = false,
   isGenerating = false,
+  clusterMembership = [],
   onClose,
   onGenerate,
   onAddToCluster,
@@ -79,6 +80,7 @@ export default function BeachInfoTile({
 
   const warning = getWarning(beach);
   const bring = getBringList(beach);
+  const clusterCount = Array.isArray(clusterMembership) ? clusterMembership.length : 0;
   const drawer = (
     <aside
       className="beach-info-tile"
@@ -162,8 +164,14 @@ export default function BeachInfoTile({
         variant="outline"
         onClick={onAddToCluster}
       >
-        Add to Cluster
+        {clusterCount > 0 ? `Saved in ${clusterCount} cluster${clusterCount > 1 ? "s" : ""}` : "Add to Cluster"}
       </Button>
+      {clusterCount > 0 && (
+        <p className="beach-info-tile__cluster-note">
+          {clusterMembership.slice(0, 2).map((cluster) => cluster.name).join(" / ")}
+          {clusterCount > 2 ? ` +${clusterCount - 2}` : ""} · add to another cluster anytime
+        </p>
+      )}
 
       <Button
         className="beach-info-tile__generate"

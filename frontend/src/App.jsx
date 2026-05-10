@@ -29,7 +29,7 @@ function GeneratedPlanRoute() {
   const state = location.state || {};
 
   if (!state.plan) {
-    return <Navigate to="/experience/mood" replace />;
+    return <Navigate to="/explore/canvas" replace />;
   }
 
   return (
@@ -41,10 +41,10 @@ function GeneratedPlanRoute() {
   );
 }
 
-function HomeExperience() {
+function HomeExperience({ modeOverride = "" }) {
   const location = useLocation();
   const navigate = useNavigate();
-  const startsInExperience = location.pathname.startsWith("/experience");
+  const startsInExperience = location.pathname.startsWith("/explore") || location.pathname.startsWith("/experience") || Boolean(modeOverride);
   const [showLanding, setShowLanding] = useState(true);
   const [isLandingExiting, setIsLandingExiting] = useState(false);
   const [hasEntered, setHasEntered] = useState(startsInExperience);
@@ -68,7 +68,7 @@ function HomeExperience() {
 
     window.setTimeout(() => {
       setHasEntered(true);
-      navigate("/experience/mood");
+      navigate("/explore/canvas");
     }, splashDelay);
 
     window.setTimeout(() => {
@@ -95,6 +95,7 @@ function HomeExperience() {
       {hasEntered ? (
         <MainExperience
           visible={!resultTransitioning}
+          modeOverride={modeOverride}
           onPlanGenerated={handlePlanGenerated}
         />
       ) : (
@@ -123,8 +124,15 @@ export default function App() {
         <AppNavbar />
         <Routes>
           <Route path="/" element={<HomeExperience />} />
-          <Route path="/experience" element={<Navigate to="/experience/mood" replace />} />
+          <Route path="/explore" element={<Navigate to="/explore/canvas" replace />} />
+          <Route path="/explore/:mode" element={<HomeExperience />} />
+          <Route path="/experience" element={<Navigate to="/explore/canvas" replace />} />
+          <Route path="/experience/mood" element={<Navigate to="/explore/canvas" replace />} />
+          <Route path="/experience/canvas" element={<Navigate to="/explore/canvas" replace />} />
+          <Route path="/experience/map" element={<Navigate to="/explore/map" replace />} />
+          <Route path="/experience/cluster" element={<Navigate to="/clusters" replace />} />
           <Route path="/experience/:mode" element={<HomeExperience />} />
+          <Route path="/clusters" element={<HomeExperience modeOverride="cluster" />} />
           <Route path="/generated-plan" element={<GeneratedPlanRoute />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

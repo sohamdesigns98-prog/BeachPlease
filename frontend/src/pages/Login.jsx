@@ -28,7 +28,7 @@ export default function Login() {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = form;
-  const from = "/experience/mood";
+  const from = "/explore/canvas";
 
   if (token) return <Navigate to={from} replace />;
 

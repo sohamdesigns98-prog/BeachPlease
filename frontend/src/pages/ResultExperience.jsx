@@ -11,6 +11,12 @@ function getPlanId(plan) {
   return plan?._id || plan?.id;
 }
 
+function planItems(value) {
+  if (Array.isArray(value)) return value.filter(Boolean);
+  if (!value) return [];
+  return [String(value)];
+}
+
 export default function ResultExperience({ plan, generationInput, visible = false }) {
   const { token, login, register } = useAuth();
   const [isSaveDismissed, setIsSaveDismissed] = useState(false);
@@ -21,6 +27,9 @@ export default function ResultExperience({ plan, generationInput, visible = fals
   const isSaved = Boolean(savedPlan || getPlanId(plan));
   const savedPlanId = getPlanId(savedPlan || (token ? plan : null));
   const showSaveBar = visible && !isSaved && !isSaveDismissed;
+  const activePlan = savedPlan || plan;
+  const planBody = activePlan?.plan || {};
+  const bringItems = planItems(planBody.bring);
 
   async function saveCurrentPlan() {
     if (!plan) {
@@ -80,7 +89,54 @@ export default function ResultExperience({ plan, generationInput, visible = fals
 
   return (
     <main className={`result-experience ${visible ? "is-visible" : ""}`} aria-label="BeachPlease result">
-      <BeachPlanTicket plan={savedPlan || plan} generationInput={generationInput} />
+      <div className="result-experience__layout">
+        <BeachPlanTicket plan={activePlan} generationInput={generationInput} />
+
+        <section className="generated-plan-panel" aria-label="Generated plan details">
+          <p className="generated-plan-panel__eyebrow">generated plan</p>
+          <h1>{activePlan?.selected_beach_name || planBody.where || "your beach day"}</h1>
+          {activePlan?.mood_reading?.summary && <p className="generated-plan-panel__summary">{activePlan.mood_reading.summary}</p>}
+
+          <div className="generated-plan-panel__grid">
+            {planBody.where && (
+              <article>
+                <span>where</span>
+                <p>{planBody.where}</p>
+              </article>
+            )}
+            {planBody.when && (
+              <article>
+                <span>when</span>
+                <p>{planBody.when}</p>
+              </article>
+            )}
+            {planBody.why && (
+              <article className="is-wide">
+                <span>why</span>
+                <p>{planBody.why}</p>
+              </article>
+            )}
+            {planBody.conditions_summary && (
+              <article className="is-wide">
+                <span>conditions</span>
+                <p>{planBody.conditions_summary}</p>
+              </article>
+            )}
+            {planBody.gentle_warning && (
+              <article className="is-wide">
+                <span>heads up</span>
+                <p>{planBody.gentle_warning}</p>
+              </article>
+            )}
+          </div>
+
+          {bringItems.length > 0 && (
+            <div className="generated-plan-panel__chips" aria-label="What to bring">
+              {bringItems.map((item) => <span key={item}>{item}</span>)}
+            </div>
+          )}
+        </section>
+      </div>
       {showSaveBar && (
         <SaveBar
           isSaved={isSaved}
