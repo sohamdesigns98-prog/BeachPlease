@@ -15,6 +15,8 @@ const MIN_ZOOM = 0.2;
 const MAX_ZOOM = 5;
 const DRAG_THRESHOLD = 6;
 const TILE_POSITIONS_KEY = "beachplease_tile_positions";
+const VIEWPORT_STATE_KEY = "beachplease_mood_canvas_viewport";
+const FOCUS_ANIMATION_MS = 520;
 
 const ACTIVITY_TO_VIBES = {
   swim: ["calm", "active", "family"],
@@ -141,6 +143,25 @@ function saveTilePositions(positions) {
   }
 }
 
+function loadViewportState() {
+  try {
+    if (typeof window === "undefined") return null;
+    const stored = window.sessionStorage.getItem(VIEWPORT_STATE_KEY);
+    return stored ? JSON.parse(stored) : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveViewportState(state) {
+  try {
+    if (typeof window === "undefined") return;
+    window.sessionStorage.setItem(VIEWPORT_STATE_KEY, JSON.stringify(state));
+  } catch {
+    // Viewport restore is only for polish.
+  }
+}
+
 export default function MoodCanvasShell({
   beaches = [],
   moodPhrase = "",
@@ -151,12 +172,18 @@ export default function MoodCanvasShell({
   onBeachAddToCluster,
 }) {
   const viewportRef = useRef(null);
+  const worldRef = useRef(null);
   const dragRef = useRef(null);
   const tileDragRef = useRef(null);
+  const displayTilesRef = useRef([]);
   const suppressClickRef = useRef(false);
+  const panAnimationRef = useRef(null);
+  const initialViewportRef = useRef(loadViewportState());
+  const panRef = useRef(initialViewportRef.current?.pan || { x: 0, y: 0 });
+  const zoomRef = useRef(initialViewportRef.current?.zoom || 1);
   const [tilePositions, setTilePositions] = useState(loadTilePositions);
-  const [pan, setPan] = useState({ x: 0, y: 0 });
-  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState(panRef.current);
+  const [zoom, setZoom] = useState(zoomRef.current);
   const [isDragging, setIsDragging] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
 
@@ -189,15 +216,24 @@ export default function MoodCanvasShell({
   }, [activityHint, companionHint, moodPhrase, tiles]);
 
   useEffect(() => {
+    displayTilesRef.current = displayTiles;
+  }, [displayTiles]);
+
+  useEffect(() => {
+    applyViewport(panRef.current, zoomRef.current);
+  }, []);
+
+  useEffect(() => {
     const element = viewportRef.current;
     if (!element) return undefined;
 
     function updateSize() {
+      if (initialViewportRef.current?.pan) return;
       const rect = element.getBoundingClientRect();
-      setPan({
+      applyViewport({
         x: rect.width / 2 - WORLD_W * 0.46,
         y: rect.height / 2 - WORLD_H * 0.48,
-      });
+      }, zoomRef.current, { commitState: true });
     }
 
     updateSize();
@@ -207,6 +243,93 @@ export default function MoodCanvasShell({
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (selectedBeachSlug) {
+      focusBeachBySlug(selectedBeachSlug);
+    }
+  }, [selectedBeachSlug]);
+
+  useEffect(() => () => cancelPanAnimation(), []);
+
+  function markInteraction() {
+    cancelPanAnimation();
+    setHasInteracted(true);
+  }
+
+  function cancelPanAnimation() {
+    if (panAnimationRef.current) {
+      window.cancelAnimationFrame(panAnimationRef.current);
+      panAnimationRef.current = null;
+    }
+  }
+
+  function applyViewport(nextPan, nextZoom = zoomRef.current, options = {}) {
+    const { commitState = false } = options;
+    panRef.current = nextPan;
+    zoomRef.current = nextZoom;
+
+    if (worldRef.current) {
+      worldRef.current.style.setProperty("--pan-x", `${nextPan.x}px`);
+      worldRef.current.style.setProperty("--pan-y", `${nextPan.y}px`);
+      worldRef.current.style.setProperty("--zoom", nextZoom);
+    }
+
+    saveViewportState({ pan: nextPan, zoom: nextZoom });
+
+    if (commitState) {
+      setPan(nextPan);
+      setZoom(nextZoom);
+    }
+  }
+
+  function animatePanTo(nextPan, options = {}) {
+    const { immediate = false } = options;
+    cancelPanAnimation();
+
+    if (immediate) {
+      applyViewport(nextPan, zoomRef.current, { commitState: true });
+      return;
+    }
+
+    const startPan = { ...panRef.current };
+    const startedAt = performance.now();
+    const ease = (value) => 1 - Math.pow(1 - value, 3);
+
+    function step(now) {
+      const progress = clamp((now - startedAt) / FOCUS_ANIMATION_MS, 0, 1);
+      const eased = ease(progress);
+
+      const framePan = {
+        x: startPan.x + (nextPan.x - startPan.x) * eased,
+        y: startPan.y + (nextPan.y - startPan.y) * eased,
+      };
+
+      applyViewport(framePan, zoomRef.current, { commitState: progress >= 1 });
+
+      if (progress < 1) {
+        panAnimationRef.current = window.requestAnimationFrame(step);
+        return;
+      }
+
+      panAnimationRef.current = null;
+    }
+
+    panAnimationRef.current = window.requestAnimationFrame(step);
+  }
+
+  function focusBeachBySlug(slug) {
+    const match = displayTilesRef.current.find(({ tile }) => tile.slug === slug);
+    if (!match || !viewportRef.current) return;
+
+    const position = match.clusteredPosition || tilePositions[slug] || match.tile.moodPos;
+    const rect = viewportRef.current.getBoundingClientRect();
+
+    animatePanTo({
+      x: rect.width / 2 - position.x * zoomRef.current,
+      y: rect.height / 2 - position.y * zoomRef.current,
+    });
+  }
+
   function handlePointerDown(event) {
     if (event.button !== 0) return;
     if (event.target.closest(".beach-image-tile")) return;
@@ -215,22 +338,23 @@ export default function MoodCanvasShell({
     dragRef.current = {
       startX: event.clientX,
       startY: event.clientY,
-      panX: pan.x,
-      panY: pan.y,
+      panX: panRef.current.x,
+      panY: panRef.current.y,
       active: false,
     };
     suppressClickRef.current = false;
+    markInteraction();
   }
 
   function handlePointerMove(event) {
     if (tileDragRef.current) {
-      const dx = (event.clientX - tileDragRef.current.startX) / zoom;
-      const dy = (event.clientY - tileDragRef.current.startY) / zoom;
+      const dx = (event.clientX - tileDragRef.current.startX) / zoomRef.current;
+      const dy = (event.clientY - tileDragRef.current.startY) / zoomRef.current;
 
       if (!tileDragRef.current.active && (Math.abs(dx) > DRAG_THRESHOLD || Math.abs(dy) > DRAG_THRESHOLD)) {
         tileDragRef.current.active = true;
         setIsDragging(true);
-        setHasInteracted(true);
+        markInteraction();
       }
 
       if (tileDragRef.current.active) {
@@ -259,11 +383,11 @@ export default function MoodCanvasShell({
     if (!dragRef.current.active && (Math.abs(dx) > DRAG_THRESHOLD || Math.abs(dy) > DRAG_THRESHOLD)) {
       dragRef.current.active = true;
       setIsDragging(true);
-      setHasInteracted(true);
+      markInteraction();
     }
 
     if (dragRef.current.active) {
-      setPan({
+      applyViewport({
         x: dragRef.current.panX + dx,
         y: dragRef.current.panY + dy,
       });
@@ -295,6 +419,7 @@ export default function MoodCanvasShell({
     setIsDragging(false);
 
     if (wasDragging) {
+      setPan(panRef.current);
       suppressClickRef.current = true;
       event.preventDefault();
       event.stopPropagation();
@@ -306,21 +431,20 @@ export default function MoodCanvasShell({
 
   function handleWheel(event) {
     event.preventDefault();
-    setHasInteracted(true);
+    markInteraction();
 
     const rect = viewportRef.current.getBoundingClientRect();
     const cursorX = event.clientX - rect.left;
     const cursorY = event.clientY - rect.top;
     const factor = event.deltaY < 0 ? 1.1 : 1 / 1.1;
-    const nextZoom = clamp(zoom * factor, MIN_ZOOM, MAX_ZOOM);
-    const worldX = (cursorX - pan.x) / zoom;
-    const worldY = (cursorY - pan.y) / zoom;
+    const nextZoom = clamp(zoomRef.current * factor, MIN_ZOOM, MAX_ZOOM);
+    const worldX = (cursorX - panRef.current.x) / zoomRef.current;
+    const worldY = (cursorY - panRef.current.y) / zoomRef.current;
 
-    setZoom(nextZoom);
-    setPan({
+    applyViewport({
       x: cursorX - worldX * nextZoom,
       y: cursorY - worldY * nextZoom,
-    });
+    }, nextZoom, { commitState: true });
   }
 
   function handleTileClick(tile, event) {
@@ -328,6 +452,7 @@ export default function MoodCanvasShell({
       event.preventDefault();
       return;
     }
+    markInteraction();
     onBeachSelect?.(tile);
   }
 
@@ -348,11 +473,13 @@ export default function MoodCanvasShell({
       nextPositions: null,
     };
     suppressClickRef.current = false;
+    markInteraction();
   }
 
   function handleTileKeyDown(tile, event) {
     if (event.key !== "Enter" && event.key !== " ") return;
     event.preventDefault();
+    markInteraction();
     onBeachSelect?.(tile);
   }
 
@@ -369,6 +496,7 @@ export default function MoodCanvasShell({
     >
       {!hasInteracted && <p className="mood-canvas-hint">drag to explore</p>}
       <div
+        ref={worldRef}
         className="mood-canvas-world"
         style={{
           "--world-w": `${WORLD_W}px`,

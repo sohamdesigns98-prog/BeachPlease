@@ -1,4 +1,4 @@
-from typing import Literal, Optional
+from typing import Any, Literal, Optional
 
 from pydantic import BaseModel, Field, field_validator
 
@@ -34,3 +34,8 @@ class PlanCreateRequest(BaseModel):
 
 class PlanNotesUpdateRequest(BaseModel):
     user_notes: str = ""
+
+
+class PlanSnapshotSaveRequest(BaseModel):
+    plan: dict[str, Any]
+    generation_input: dict[str, Any] = Field(default_factory=dict)

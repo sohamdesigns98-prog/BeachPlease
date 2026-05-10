@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Toaster } from "sonner";
 
 import {
   prepareBeachAmbience,
   setBeachAmbienceEntered,
   startBeachAmbience,
 } from "@/audio/beachAmbience";
+import AppNavbar from "@/components/AppNavbar";
 import LandingIntro from "@/components/LandingIntro";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { AuthProvider } from "@/context/AuthContext";
@@ -22,13 +24,30 @@ const SPLASH_FADE_MS = 500;
 const MAIN_FADE_MS = 600;
 const REDUCED_MOTION_TRANSITION_MS = 250;
 
+function GeneratedPlanRoute() {
+  const location = useLocation();
+  const state = location.state || {};
+
+  if (!state.plan) {
+    return <Navigate to="/experience/mood" replace />;
+  }
+
+  return (
+    <ResultExperience
+      plan={state.plan}
+      generationInput={state.generationInput}
+      visible
+    />
+  );
+}
+
 function HomeExperience() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const startsInExperience = location.pathname.startsWith("/experience");
   const [showLanding, setShowLanding] = useState(true);
   const [isLandingExiting, setIsLandingExiting] = useState(false);
-  const [hasEntered, setHasEntered] = useState(false);
-  const [generatedPlan, setGeneratedPlan] = useState(null);
-  const [generationInput, setGenerationInput] = useState(null);
-  const [resultVisible, setResultVisible] = useState(false);
+  const [hasEntered, setHasEntered] = useState(startsInExperience);
   const [resultTransitioning, setResultTransitioning] = useState(false);
 
   useEffect(() => {
@@ -49,6 +68,7 @@ function HomeExperience() {
 
     window.setTimeout(() => {
       setHasEntered(true);
+      navigate("/experience/mood");
     }, splashDelay);
 
     window.setTimeout(() => {
@@ -60,26 +80,19 @@ function HomeExperience() {
     setResultTransitioning(true);
 
     window.setTimeout(() => {
-      setGeneratedPlan(plan);
-      setGenerationInput(input || null);
-      setResultVisible(false);
-
-      window.setTimeout(() => {
-        setResultVisible(true);
-        setResultTransitioning(false);
-      }, 20);
+      navigate("/generated-plan", {
+        state: {
+          plan,
+          generationInput: input || null,
+        },
+      });
+      setResultTransitioning(false);
     }, TRANSITION_MS);
   }
 
   return (
     <div className="app-transition-frame">
-      {hasEntered && generatedPlan ? (
-        <ResultExperience
-          plan={generatedPlan}
-          generationInput={generationInput}
-          visible={resultVisible}
-        />
-      ) : hasEntered ? (
+      {hasEntered ? (
         <MainExperience
           visible={!resultTransitioning}
           onPlanGenerated={handlePlanGenerated}
@@ -87,7 +100,7 @@ function HomeExperience() {
       ) : (
         <div className="pre-entry-app-shell" aria-hidden="true" />
       )}
-      {showLanding && (
+      {showLanding && !startsInExperience && (
         <LandingIntro
           isExiting={isLandingExiting}
           onEnter={handleEnterExperience}
@@ -101,18 +114,29 @@ export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            className: "app-toast",
+          }}
+        />
+        <AppNavbar />
         <Routes>
           <Route path="/" element={<HomeExperience />} />
+          <Route path="/experience" element={<Navigate to="/experience/mood" replace />} />
+          <Route path="/experience/:mode" element={<HomeExperience />} />
+          <Route path="/generated-plan" element={<GeneratedPlanRoute />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route
-            path="/shelf"
+            path="/saved-plans"
             element={(
               <ProtectedRoute>
                 <Shelf />
               </ProtectedRoute>
             )}
           />
+          <Route path="/shelf" element={<Navigate to="/saved-plans" replace />} />
           <Route
             path="/plans/:id"
             element={(

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-import { deletePlan, getPlan, replayPlan, updatePlanNotes } from "@/api/plans";
+import { deletePlan, getPlan, updatePlanNotes } from "@/api/plans";
 import BeachPlanTicket from "@/components/BeachPlanTicket";
+import ConfirmDeleteDialog from "@/components/ConfirmDeleteDialog";
 import NotesEditor from "@/components/NotesEditor";
 import { Button } from "@/components/ui/button";
 
@@ -33,7 +34,7 @@ export default function Plan() {
         setPlan(loadedPlan);
         setNotes(loadedPlan.user_notes || "");
       } catch (caughtError) {
-        setError(caughtError?.response?.data?.detail || "Couldn’t load that plan.");
+        setError(caughtError?.response?.data?.detail || "Couldn't load that plan.");
       } finally {
         setLoading(false);
       }
@@ -49,22 +50,9 @@ export default function Plan() {
       const updatedPlan = await updatePlanNotes(getPlanId(plan), notes);
       setPlan(updatedPlan);
       setNotes(updatedPlan.user_notes || "");
-      setStatus("notes saved. tidy.");
+      setStatus("notes saved.");
     } catch (caughtError) {
-      setError(caughtError?.response?.data?.detail || "Couldn’t save notes.");
-    }
-  }
-
-  async function handleReplay() {
-    setStatus("");
-    setError("");
-    try {
-      const updatedPlan = await replayPlan(getPlanId(plan));
-      setPlan(updatedPlan);
-      setNotes(updatedPlan.user_notes || "");
-      setStatus("same mood, fresh coast.");
-    } catch (caughtError) {
-      setError(caughtError?.response?.data?.detail || "Couldn’t replay that plan.");
+      setError(caughtError?.response?.data?.detail || "Couldn't save notes.");
     }
   }
 
@@ -73,20 +61,20 @@ export default function Plan() {
     setError("");
     try {
       await deletePlan(getPlanId(plan));
-      navigate("/shelf", { replace: true });
+      navigate("/saved-plans", { replace: true });
     } catch (caughtError) {
-      setError(caughtError?.response?.data?.detail || "Couldn’t delete that plan.");
+      setError(caughtError?.response?.data?.detail || "Couldn't delete that plan.");
     }
   }
 
   return (
     <main className="plan-detail-page">
       <div className="plan-detail-top">
-        <Link to="/shelf">← shelf</Link>
+        <Link to="/saved-plans">saved plans</Link>
         <h1>Saved plan</h1>
       </div>
 
-      {loading && <p className="auth-muted">loading the ticket…</p>}
+      {loading && <p className="auth-muted">loading the ticket...</p>}
       {error && <p className="auth-error">{error}</p>}
 
       {plan && (
@@ -116,7 +104,7 @@ export default function Plan() {
             <div className="auth-heading">
               <p>NOTES //</p>
               <h2>User notes</h2>
-              <span>Autosaves one second after you stop typing.</span>
+              <span>Autosaves after you stop typing.</span>
             </div>
             <NotesEditor
               planId={getPlanId(plan)}
@@ -129,10 +117,16 @@ export default function Plan() {
             {status && <p className="auth-success">{status}</p>}
             <div className="profile-actions">
               <Button type="button" onClick={handleSaveNotes}>SAVE NOTES</Button>
-              <Button type="button" variant="outline" onClick={handleReplay}>SAME MOOD · FRESH COAST</Button>
-              <Button type="button" variant="outline" className="danger-button" onClick={handleDelete}>
-                BIN IT
-              </Button>
+              <ConfirmDeleteDialog
+                title="Delete this saved plan?"
+                description="This removes the saved postcard and its notes. You can generate another plan later."
+                confirmLabel="DELETE PLAN"
+                onConfirm={handleDelete}
+              >
+                <Button type="button" variant="outline" className="danger-button">
+                  DELETE PLAN
+                </Button>
+              </ConfirmDeleteDialog>
             </div>
           </aside>
         </div>

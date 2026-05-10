@@ -570,7 +570,7 @@
   }
 
   .generating-overlay {
-    @apply pointer-events-none fixed inset-0 z-50 flex flex-col items-center justify-center bg-background/90 px-6 text-center opacity-0 transition-opacity;
+    @apply pointer-events-none fixed inset-0 z-[120] flex flex-col items-center justify-center bg-background/90 px-6 text-center opacity-0 transition-opacity;
     transition-duration: 250ms;
     transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
   }
@@ -609,6 +609,11 @@
     @apply flex min-h-screen items-center justify-center bg-background px-6 py-12 text-foreground;
   }
 
+  .back-to-experience {
+    @apply fixed left-6 top-6 z-50 rounded-full border border-foreground/15 bg-background/80 px-3 py-2 text-[10px] lowercase leading-none text-foreground/55 no-underline backdrop-blur transition-colors hover:border-foreground/35 hover:text-foreground;
+    letter-spacing: 0.05em;
+  }
+
   .auth-panel {
     @apply w-full max-w-[440px] border border-foreground/20 bg-background/70 p-6;
   }
@@ -645,9 +650,46 @@
     @apply mt-2 h-10 w-full rounded-none border border-foreground/25 bg-transparent px-3 text-[13px] text-foreground outline-none transition-colors focus:border-foreground;
   }
 
+  .auth-panel input[aria-invalid="true"],
+  .auth-panel select[aria-invalid="true"],
+  .auth-sheet input[aria-invalid="true"] {
+    @apply border-destructive;
+  }
+
+  .auth-field-error {
+    @apply mt-1 block text-[10px] normal-case leading-4 text-destructive;
+    letter-spacing: 0;
+  }
+
   .auth-submit,
   .auth-link-button {
     @apply mt-2 h-9 w-full rounded-full bg-foreground text-[10px] font-medium uppercase tracking-[0.08em] text-background hover:bg-foreground/90;
+  }
+
+  .oauth-button {
+    @apply mt-3 h-9 w-full rounded-full border border-foreground/20 bg-transparent text-[10px] font-medium uppercase text-foreground/65 transition-colors hover:border-foreground/45 hover:text-foreground;
+    letter-spacing: 0.08em;
+  }
+
+  .google-oauth-slot {
+    @apply relative mt-3 flex min-h-10 w-full items-center justify-center overflow-hidden rounded-full border border-foreground/15 bg-background/35;
+  }
+
+  .google-oauth-slot > div {
+    @apply flex w-full justify-center;
+  }
+
+  .google-oauth-slot span {
+    @apply absolute text-[10px] uppercase text-foreground/40;
+    letter-spacing: 0.08em;
+  }
+
+  .google-oauth-slot.is-ready {
+    @apply border-transparent bg-transparent;
+  }
+
+  .google-oauth-slot.is-disabled {
+    @apply pointer-events-none opacity-50;
   }
 
   .auth-link-button {
@@ -675,12 +717,55 @@
     @apply text-foreground/65;
   }
 
+  .suburb-select {
+    @apply relative mt-2;
+  }
+
+  .suburb-select input {
+    @apply mt-0;
+  }
+
+  .suburb-select__hint,
+  .suburb-select__fallback {
+    @apply mt-1 block text-[10px] normal-case leading-4 text-foreground/40;
+    letter-spacing: 0;
+  }
+
+  .suburb-select__menu {
+    @apply absolute left-0 right-0 top-[44px] z-50 max-h-52 overflow-auto border border-foreground/20 bg-background shadow-sm;
+  }
+
+  .suburb-select__menu button {
+    @apply flex w-full items-center justify-between border-0 border-b border-foreground/10 bg-background px-3 py-2 text-left text-[12px] text-foreground transition-colors hover:bg-foreground/5;
+  }
+
+  .suburb-select__menu small {
+    @apply text-[10px] text-foreground/45;
+  }
+
+  .app-toast {
+    border-radius: 999px !important;
+    border: 1px solid rgb(17 17 17 / 0.18) !important;
+    background: rgb(248 246 239 / 0.96) !important;
+    color: #111111 !important;
+    font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    font-size: 11px !important;
+  }
+
   .profile-actions {
     @apply grid gap-2;
   }
 
   .danger-button {
     @apply border-destructive/50 text-destructive hover:bg-destructive hover:text-destructive-foreground;
+  }
+
+  .danger-text-button {
+    @apply text-destructive hover:text-destructive;
+  }
+
+  .danger-confirm-button {
+    @apply border-destructive bg-destructive text-destructive-foreground hover:border-destructive hover:bg-destructive/90;
   }
 
   .shelf-page {
@@ -1597,19 +1682,25 @@
     @apply fixed inset-0 min-h-screen overflow-hidden bg-background p-0;
   }
 
-  .mood-app-header {
-    @apply fixed left-0 right-0 top-0 z-40 flex h-14 items-center justify-between bg-background px-11;
+  .app-navbar {
+    @apply fixed left-0 right-0 top-0 z-[70] flex h-14 items-center justify-between px-11;
+    background: rgb(248 246 239 / 0.28);
+    border-bottom: 1px solid rgb(17 17 17 / 0.07);
+    box-shadow: 0 10px 34px rgb(17 17 17 / 0.04);
+    backdrop-filter: blur(18px) saturate(1.22);
+    -webkit-backdrop-filter: blur(18px) saturate(1.22);
   }
 
-  .mood-app-mark {
-    @apply block h-[7px] w-[7px] rounded-full bg-foreground;
+  .app-navbar__mark {
+    @apply border-0 bg-transparent p-0 text-[11px] font-medium lowercase leading-none text-foreground/55 shadow-none transition-colors hover:bg-transparent hover:text-foreground;
+    letter-spacing: 0.04em;
   }
 
-  .mood-app-left-controls {
+  .app-navbar__left {
     @apply flex items-center gap-4;
   }
 
-  .mood-app-controls {
+  .app-navbar__right {
     @apply flex items-center gap-7;
   }
 
@@ -1625,6 +1716,10 @@
     @apply flex items-center gap-5;
   }
 
+  .mood-app-nav {
+    @apply flex items-center gap-5;
+  }
+
   .mode-toggle button {
     @apply relative border-0 border-b border-transparent bg-transparent p-0 pb-0.5 text-[11px] font-medium lowercase leading-none text-foreground/25 shadow-none transition-colors hover:text-foreground/70;
     letter-spacing: 0.05em;
@@ -1636,6 +1731,31 @@
 
   .mode-toggle__badge {
     @apply absolute -right-4 -top-2 rounded-full bg-foreground px-1.5 py-0.5 text-[8px] leading-none text-background;
+  }
+
+  .account-pill {
+    @apply inline-flex h-8 items-center rounded-full border border-foreground/15 px-3 text-[10px] lowercase leading-none text-foreground/50 no-underline transition-colors hover:border-foreground/35 hover:text-foreground;
+    letter-spacing: 0.05em;
+  }
+
+  .account-pill--user {
+    @apply gap-2 px-2;
+  }
+
+  .account-pill--user a {
+    @apply flex items-center gap-2 text-foreground/70 no-underline;
+  }
+
+  .account-pill--user span {
+    @apply flex h-5 w-5 items-center justify-center rounded-full bg-foreground text-[9px] text-background;
+  }
+
+  .account-pill--user small {
+    @apply max-w-[120px] truncate text-[9px] text-foreground/45;
+  }
+
+  .account-pill--user button {
+    @apply border-0 bg-transparent p-0 text-[9px] lowercase text-foreground/35 transition-colors hover:text-foreground;
   }
 
   .mood-mode-layer {
@@ -1805,7 +1925,7 @@
   }
 
   .beach-info-tile {
-    @apply fixed bottom-0 right-0 top-0 z-50 flex w-[390px] flex-col overflow-hidden border-l bg-[#FDFEFE] px-10 pb-8 pt-10 text-left shadow-[0_0_32px_rgba(0,0,0,0.04)];
+    @apply fixed bottom-0 right-0 top-0 z-[90] flex w-[390px] flex-col overflow-hidden border-l bg-[#FDFEFE] px-10 pb-8 pt-20 text-left shadow-[0_0_32px_rgba(0,0,0,0.04)];
     border-color: #ecebe6;
   }
 
@@ -1875,6 +1995,18 @@
   .beach-info-tile__conditions dd {
     @apply mt-3 text-[17px] font-medium lowercase leading-none text-foreground;
     letter-spacing: -0.05em;
+  }
+
+  .beach-info-tile__loading {
+    @apply mt-3 block h-[17px] w-12 overflow-hidden rounded-full bg-foreground/10;
+    position: relative;
+  }
+
+  .beach-info-tile__loading::after {
+    @apply absolute inset-y-0 w-6 bg-foreground/15;
+    content: "";
+    left: -24px;
+    animation: condition-shimmer 950ms ease-in-out infinite;
   }
 
   .beach-info-tile__compact-section p {
@@ -2046,6 +2178,10 @@
     letter-spacing: 0.08em;
   }
 
+  .saved-postcard-row button.danger-text-button {
+    @apply text-destructive hover:text-destructive;
+  }
+
   .cluster-tray {
     @apply fixed inset-0 overflow-y-auto bg-background px-11 pb-28 pt-24 text-left text-foreground;
   }
@@ -2128,6 +2264,10 @@
     letter-spacing: 0.08em;
   }
 
+  .cluster-card__top > button.danger-text-button {
+    @apply text-destructive hover:text-destructive;
+  }
+
   .cluster-beach-list {
     @apply mt-5 flex flex-wrap gap-2;
   }
@@ -2199,7 +2339,7 @@
   }
 
   .saved-plan-detail {
-    @apply relative max-h-[calc(100vh-132px)] overflow-hidden border border-foreground/10 bg-background/75 p-6;
+    @apply relative max-h-none overflow-visible border border-foreground/10 bg-background/75 p-6;
     border-radius: 14px;
   }
 
@@ -2210,7 +2350,6 @@
   .saved-plan-detail .beach-plan-ticket.postcard-card {
     --postcard-w: min(390px, calc(100vw - 64px));
     margin-inline: auto;
-    max-height: 455px;
   }
 
   .saved-plan-detail .postcard-card .ticket-actions {
@@ -2252,12 +2391,68 @@
   }
 
   @media (max-width: 760px) {
-    .mood-app-header {
-      @apply px-5;
+    .app-navbar {
+      @apply h-auto flex-wrap gap-3 px-4 py-3;
+    }
+
+    .app-navbar__left,
+    .app-navbar__right {
+      @apply w-full justify-between gap-3;
+    }
+
+    .app-navbar__right {
+      @apply items-start;
+    }
+
+    .account-pill--user small {
+      @apply max-w-[74px];
     }
 
     .mode-toggle {
-      @apply gap-4;
+      @apply min-w-0 flex-1 justify-between gap-2 overflow-x-auto pb-1;
+      scrollbar-width: none;
+    }
+
+    .mode-toggle::-webkit-scrollbar {
+      display: none;
+    }
+
+    .mode-toggle button {
+      @apply shrink-0 text-[10px];
+    }
+
+    .auth-page {
+      @apply items-start px-4 pb-8 pt-32;
+    }
+
+    .auth-panel {
+      @apply max-w-none p-5;
+    }
+
+    .profile-actions {
+      @apply gap-2;
+    }
+
+    .profile-actions .inline-flex,
+    .profile-actions button,
+    .profile-actions [role="button"] {
+      @apply w-full;
+    }
+
+    .plan-detail-page {
+      @apply px-4 pb-8 pt-32;
+    }
+
+    .plan-detail-top {
+      @apply mb-5 items-start gap-3;
+    }
+
+    .plan-detail-grid {
+      @apply gap-5;
+    }
+
+    .plan-detail-grid .beach-plan-ticket.postcard-card {
+      --postcard-w: min(100%, calc(100vw - 32px));
     }
 
     .mood-canvas-world {
@@ -2300,7 +2495,7 @@
     }
 
     .saved-mode-shell {
-      @apply px-5;
+      @apply px-4 pt-32;
     }
 
     .saved-mode-layout.has-detail {
@@ -2321,6 +2516,14 @@
 
     .saved-plan-detail {
       @apply max-h-none overflow-visible px-4;
+    }
+
+    .cluster-tray {
+      @apply px-4 pt-32;
+    }
+
+    .cluster-card__top {
+      @apply grid-cols-1 gap-3;
     }
   }
 
@@ -2359,6 +2562,16 @@
   50%,
   100% {
     opacity: 0;
+  }
+}
+
+@keyframes condition-shimmer {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(72px);
   }
 }
 

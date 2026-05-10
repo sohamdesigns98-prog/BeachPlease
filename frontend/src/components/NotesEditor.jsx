@@ -13,10 +13,18 @@ export default function NotesEditor({
   const [notes, setNotes] = useState(initialNotes || "");
   const [status, setStatus] = useState("idle");
   const hasMountedRef = useRef(false);
+  const lastSavedNotesRef = useRef(initialNotes || "");
+  const onSavedRef = useRef(onSaved);
   const timerRef = useRef(null);
 
   useEffect(() => {
-    setNotes(initialNotes || "");
+    onSavedRef.current = onSaved;
+  }, [onSaved]);
+
+  useEffect(() => {
+    const nextNotes = initialNotes || "";
+    setNotes(nextNotes);
+    lastSavedNotesRef.current = nextNotes;
     setStatus("idle");
     hasMountedRef.current = false;
   }, [initialNotes, planId]);
@@ -27,6 +35,11 @@ export default function NotesEditor({
       return undefined;
     }
 
+    if (notes === lastSavedNotesRef.current) {
+      setStatus("idle");
+      return undefined;
+    }
+
     window.clearTimeout(timerRef.current);
 
     timerRef.current = window.setTimeout(async () => {
@@ -34,8 +47,9 @@ export default function NotesEditor({
 
       try {
         const updatedPlan = await updatePlanNotes(planId, notes);
+        lastSavedNotesRef.current = updatedPlan.user_notes || "";
         setStatus("saved");
-        onSaved?.(updatedPlan);
+        onSavedRef.current?.(updatedPlan);
       } catch {
         setStatus("error");
       }
@@ -44,7 +58,7 @@ export default function NotesEditor({
     return () => {
       window.clearTimeout(timerRef.current);
     };
-  }, [notes, onSaved, planId]);
+  }, [notes, planId]);
 
   return (
     <div className="notes-editor">

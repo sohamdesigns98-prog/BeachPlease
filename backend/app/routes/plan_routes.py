@@ -7,7 +7,11 @@ from fastapi import APIRouter, Depends, HTTPException, status
 
 from app.auth import get_current_user
 from app.database import get_database
-from app.models.plan import PlanCreateRequest, PlanNotesUpdateRequest
+from app.models.plan import (
+    PlanCreateRequest,
+    PlanNotesUpdateRequest,
+    PlanSnapshotSaveRequest,
+)
 from app.routes.rank_routes import (
     fetch_candidate_conditions,
     preselect_candidates,
@@ -25,7 +29,7 @@ from app.services.gemini_service import (
 router = APIRouter(prefix="/plans", tags=["plans"])
 
 PLAN_CANDIDATE_LIMIT = 5
-PLAN_CONDITION_CANDIDATE_LIMIT = 18
+PLAN_CONDITION_CANDIDATE_LIMIT = 8
 
 
 def require_database():
@@ -176,6 +180,59 @@ async def build_generated_plan_fields(
     }
 
 
+def build_saved_snapshot_document(
+    snapshot: dict,
+    generation_input: dict,
+    current_user: dict,
+) -> dict:
+    selected_beach_name = snapshot.get("selected_beach_name") or snapshot.get("beach_name")
+    selected_beach_slug = snapshot.get("selected_beach_slug") or snapshot.get("slug")
+    if not selected_beach_name or not selected_beach_slug:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Saved plan snapshot must include a selected beach",
+        )
+
+    now = datetime.now(timezone.utc)
+    return {
+        "user_id": current_user["id"],
+        "mood_phrase": generation_input.get("mood_phrase") or snapshot.get("mood_phrase"),
+        "region": generation_input.get("region") or snapshot.get("region"),
+        "activity": generation_input.get("activity") or snapshot.get("activity"),
+        "companion": generation_input.get("companion") or snapshot.get("companion"),
+        "preferred_beach_slug": (
+            generation_input.get("preferred_beach_slug")
+            or snapshot.get("preferred_beach_slug")
+        ),
+        "selected_beach_name": selected_beach_name,
+        "selected_beach_slug": selected_beach_slug,
+        "image_url": snapshot.get("image_url", ""),
+        "mood_reading": snapshot.get("mood_reading", {}),
+        "plan": snapshot.get("plan", {}),
+        "conditions": snapshot.get("conditions", {}),
+        "candidate_snapshot": snapshot.get("candidate_snapshot", []),
+        "rejected_beaches": snapshot.get("rejected_beaches", []),
+        "confidence": snapshot.get("confidence", 0),
+        "recommendation_type": snapshot.get("recommendation_type", "beach_plan"),
+        "input_context": {
+            "selected_mood": generation_input.get("selected_mood"),
+            "companion_context": generation_input.get("companion_context"),
+            "experience_tags": generation_input.get("experience_tags", []),
+            "region": generation_input.get("region") or snapshot.get("region"),
+            "activity": generation_input.get("activity") or snapshot.get("activity"),
+            "companion": generation_input.get("companion") or snapshot.get("companion"),
+            "preferred_beach_slug": (
+                generation_input.get("preferred_beach_slug")
+                or snapshot.get("preferred_beach_slug")
+            ),
+        },
+        "user_notes": snapshot.get("user_notes", ""),
+        "created_at": now,
+        "updated_at": now,
+        "replayed_at": None,
+    }
+
+
 def preselect_plan_candidates(
     mood_phrase: str,
     current_user: dict,
@@ -254,6 +311,67 @@ async def create_plan(
         "replayed_at": None,
     }
 
+    result = await db.beach_plans.insert_one(document)
+    saved_plan = await db.beach_plans.find_one({"_id": result.inserted_id})
+    return serialize_for_json(saved_plan)
+
+
+@router.post("/preview")
+async def preview_plan(
+    payload: PlanCreateRequest,
+    current_user: dict = Depends(get_current_user),
+):
+    if not payload.has_required_inputs():
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Provide either mood_phrase or complete funnel fields: region, activity, and companion",
+        )
+
+    db = require_database()
+    beaches = await db.beaches.find({}).to_list(length=None)
+    generated_fields = await build_generated_plan_fields(
+        payload.mood_phrase,
+        current_user,
+        beaches,
+        region=payload.region,
+        activity=payload.activity,
+        companion=payload.companion,
+        preferred_beach_slug=payload.preferred_beach_slug,
+    )
+
+    preview = {
+        "mood_phrase": payload.mood_phrase,
+        "region": payload.region,
+        "activity": payload.activity,
+        "companion": payload.companion,
+        "preferred_beach_slug": payload.preferred_beach_slug,
+        **generated_fields,
+        "input_context": {
+            "selected_mood": payload.selected_mood,
+            "companion_context": payload.companion_context,
+            "experience_tags": payload.experience_tags,
+            "region": payload.region,
+            "activity": payload.activity,
+            "companion": payload.companion,
+            "preferred_beach_slug": payload.preferred_beach_slug,
+        },
+        "user_notes": "",
+        "requires_save": True,
+    }
+    return serialize_for_json(preview)
+
+
+@router.post("/save-snapshot")
+async def save_plan_snapshot(
+    payload: PlanSnapshotSaveRequest,
+    current_user: dict = Depends(get_current_user),
+):
+    db = require_database()
+    document = build_saved_snapshot_document(
+        payload.plan,
+        payload.generation_input,
+        current_user,
+    )
     result = await db.beach_plans.insert_one(document)
     saved_plan = await db.beach_plans.find_one({"_id": result.inserted_id})
     return serialize_for_json(saved_plan)

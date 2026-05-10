@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { deletePlan, getPlan, getPlans, replayPlan } from "@/api/plans";
+import { deletePlan, getCachedPlans, getPlan, getPlans } from "@/api/plans";
 import BeachPlanTicket from "@/components/BeachPlanTicket";
+import ConfirmDeleteDialog from "@/components/ConfirmDeleteDialog";
 import NotesEditor from "@/components/NotesEditor";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 
 function getPlanId(plan) {
-  return plan._id || plan.id;
+  return plan?._id || plan?.id;
 }
 
 function formatDate(value) {
@@ -23,9 +24,9 @@ function formatField(value) {
 
 export default function SavedModeShell({ onCountChange }) {
   const { token } = useAuth();
-  const [plans, setPlans] = useState([]);
+  const [plans, setPlans] = useState(() => getCachedPlans() || []);
   const [selectedPlan, setSelectedPlan] = useState(null);
-  const [loading, setLoading] = useState(Boolean(token));
+  const [loading, setLoading] = useState(Boolean(token && !getCachedPlans()));
   const [detailLoading, setDetailLoading] = useState(false);
   const [status, setStatus] = useState("");
   const [error, setError] = useState("");
@@ -55,8 +56,7 @@ export default function SavedModeShell({ onCountChange }) {
           return nextPlans.find((plan) => getPlanId(plan) === currentId) || null;
         });
       } catch (caughtError) {
-        if (cancelled) return;
-        setError(caughtError?.response?.data?.detail || "Couldn’t load saved postcards.");
+        if (!cancelled) setError(caughtError?.response?.data?.detail || "Couldn't load saved plans.");
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -76,26 +76,9 @@ export default function SavedModeShell({ onCountChange }) {
     try {
       setSelectedPlan(await getPlan(id));
     } catch (caughtError) {
-      setError(caughtError?.response?.data?.detail || "Couldn’t open that postcard.");
+      setError(caughtError?.response?.data?.detail || "Couldn't open that saved plan.");
     } finally {
       setDetailLoading(false);
-    }
-  }
-
-  async function handleReplay(id) {
-    setStatus("");
-    setError("");
-    try {
-      const updatedPlan = await replayPlan(id);
-      setPlans((currentPlans) => currentPlans.map((plan) => (
-        getPlanId(plan) === id ? updatedPlan : plan
-      )));
-      setSelectedPlan((currentPlan) => (
-        getPlanId(currentPlan) === id ? updatedPlan : currentPlan
-      ));
-      setStatus("same mood, fresh coast.");
-    } catch (caughtError) {
-      setError(caughtError?.response?.data?.detail || "Couldn’t replay that one.");
     }
   }
 
@@ -112,35 +95,35 @@ export default function SavedModeShell({ onCountChange }) {
       setSelectedPlan((currentPlan) => (
         getPlanId(currentPlan) === id ? null : currentPlan
       ));
-      setStatus("gone. probably for the best.");
+      setStatus("plan deleted.");
     } catch (caughtError) {
-      setError(caughtError?.response?.data?.detail || "Couldn’t delete that one.");
+      setError(caughtError?.response?.data?.detail || "Couldn't delete that plan.");
     }
   }
 
   return (
-    <section className="saved-mode-shell" aria-label="Saved postcards">
+    <section className="saved-mode-shell" aria-label="Saved plans">
       <div className="saved-mode-shell__heading">
         <p>SAVED</p>
-        <h1>postcards you kept</h1>
-        <span>Same coast, less memory work.</span>
+        <h1>saved generated plans</h1>
+        <span>Postcards you chose to keep, with notes and a stable detail page.</span>
       </div>
 
       {!token && (
         <div className="saved-empty-state">
-          <p>LOG IN TO SEE SAVED POSTCARDS //</p>
-          <span>Generated beaches can still appear first. Saving comes after.</span>
+          <p>LOG IN TO SEE SAVED PLANS //</p>
+          <span>Generated plans are only stored when you choose save.</span>
           <Link to="/login">LOG IN</Link>
         </div>
       )}
 
-      {token && loading && <p className="saved-muted">checking the shelf…</p>}
+      {token && loading && <p className="saved-muted">checking saved plans...</p>}
       {error && <p className="saved-error">{error}</p>}
 
       {token && !loading && plans.length === 0 && (
         <div className="saved-empty-state">
-          <p>NO POSTCARDS YET //</p>
-          <span>Go on. Tell the coast what you’re after.</span>
+          <p>NO SAVED PLANS YET //</p>
+          <span>Generate a plan, then save it when it feels worth keeping.</span>
         </div>
       )}
 
@@ -148,12 +131,13 @@ export default function SavedModeShell({ onCountChange }) {
         <div className="saved-postcard-grid">
           {plans.map((plan) => {
             const id = getPlanId(plan);
-            const selected = getPlanId(selectedPlan) === id;
+            if (!id) return null;
+            const selected = selectedPlan ? getPlanId(selectedPlan) === id : false;
             return (
               <article className={`saved-postcard-row ${selected ? "is-selected" : ""}`} key={id}>
                 <button type="button" className="saved-postcard-row__main" onClick={() => handleOpen(id)}>
                   <span>{formatDate(plan.created_at)}</span>
-                  <h2>{plan.selected_beach_name || "Beach postcard"}</h2>
+                  <h2>{plan.selected_beach_name || "Beach plan"}</h2>
                   <p>{plan.mood_phrase || "mood not logged"}</p>
                   <dl className="saved-postcard-meta">
                     <div>
@@ -171,9 +155,16 @@ export default function SavedModeShell({ onCountChange }) {
                   </dl>
                 </button>
                 <div>
-                  <button type="button" onClick={() => handleOpen(id)}>OPEN</button>
-                  <button type="button" onClick={() => handleReplay(id)}>REPLAY</button>
-                  <button type="button" onClick={() => handleDelete(id)}>DELETE</button>
+                  <button type="button" onClick={() => handleOpen(id)}>PREVIEW</button>
+                  <Link to={`/plans/${id}`}>DETAILS</Link>
+                  <ConfirmDeleteDialog
+                    title="Delete this saved plan?"
+                    description="This removes the saved postcard and its notes. You can generate another plan later."
+                    confirmLabel="DELETE PLAN"
+                    onConfirm={() => handleDelete(id)}
+                  >
+                    <button type="button" className="danger-text-button">DELETE</button>
+                  </ConfirmDeleteDialog>
                 </div>
               </article>
             );
@@ -181,17 +172,17 @@ export default function SavedModeShell({ onCountChange }) {
         </div>
 
         {(selectedPlan || detailLoading) && (
-          <aside className="saved-plan-detail" aria-label="Saved postcard detail">
+          <aside className="saved-plan-detail" aria-label="Saved plan preview">
             <button
               type="button"
               className="saved-plan-detail__close"
               onClick={() => setSelectedPlan(null)}
-              aria-label="Close saved postcard"
+              aria-label="Close saved plan"
             >
-              ×
+              x
             </button>
 
-            {detailLoading && <p className="saved-muted">opening postcard…</p>}
+            {detailLoading && <p className="saved-muted">opening saved plan...</p>}
 
             {selectedPlan && (
               <>
@@ -233,12 +224,16 @@ export default function SavedModeShell({ onCountChange }) {
                 {status && <p className="saved-success">{status}</p>}
 
                 <div className="saved-plan-detail__actions">
-                  <Button type="button" onClick={() => handleReplay(getPlanId(selectedPlan))}>
-                    SAME MOOD · FRESH COAST
-                  </Button>
-                  <Button type="button" variant="outline" onClick={() => handleDelete(getPlanId(selectedPlan))}>
-                    BIN IT
-                  </Button>
+                  <ConfirmDeleteDialog
+                    title="Delete this saved plan?"
+                    description="This removes the saved postcard and its notes. You can generate another plan later."
+                    confirmLabel="DELETE PLAN"
+                    onConfirm={() => handleDelete(getPlanId(selectedPlan))}
+                  >
+                    <Button type="button" variant="outline" className="danger-button">
+                      DELETE PLAN
+                    </Button>
+                  </ConfirmDeleteDialog>
                 </div>
               </>
             )}

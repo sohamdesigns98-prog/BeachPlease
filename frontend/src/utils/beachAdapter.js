@@ -204,12 +204,13 @@ function pickImage(beach = {}, vibe = "calm") {
   if (validImageUrl(beach.image_url)) {
     return {
       imageUrl: beach.image_url,
-      imageAttribution: beach.attribution || "Beach image",
+      imageAttribution: beach.image_attribution || beach.attribution || "Beach image",
     };
   }
 
-  const vibeMatch = UNSPLASH_IMAGES.find((image) => image.vibes.includes(vibe));
-  const image = vibeMatch || UNSPLASH_IMAGES[hashString(beach.slug || beach.name) % UNSPLASH_IMAGES.length];
+  const vibeMatches = UNSPLASH_IMAGES.filter((image) => image.vibes.includes(vibe));
+  const imagePool = vibeMatches.length ? vibeMatches : UNSPLASH_IMAGES;
+  const image = imagePool[hashString(beach.slug || beach.name) % imagePool.length];
 
   return {
     imageUrl: image.url,

@@ -5,7 +5,7 @@ import httpx
 
 from app.config import settings
 
-GEMINI_MODEL = "gemini-2.0-flash"
+GEMINI_MODEL = "gemini-2.5-flash"
 GEMINI_URL = (
     f"https://generativelanguage.googleapis.com/v1beta/models/"
     f"{GEMINI_MODEL}:generateContent"
@@ -56,6 +56,9 @@ def build_prompt(
     user_inputs = user_inputs or {}
     profile = {
         "suburb": user_profile.get("suburb"),
+        "postcode": user_profile.get("postcode"),
+        "suburb_lat": user_profile.get("suburb_lat"),
+        "suburb_lng": user_profile.get("suburb_lng"),
         "companions": user_profile.get("companions"),
         "travel_mode": user_profile.get("travel_mode"),
     }
@@ -143,6 +146,9 @@ Rules:
 - confidence must be a number from 0 to 100.
 - rejected_beaches should mention the strongest alternatives from the candidate list.
 - Use a concise Sydney-local voice.
+- If profile suburb coordinates are present, prefer closer beaches when the vibe and conditions are similar.
+- Do not choose a closer beach if live conditions or safety are clearly worse.
+- Use score_breakdown.profile_distance_km to explain travel fit when it is useful.
 
 Mood phrase:
 {mood_phrase}
@@ -154,6 +160,8 @@ USER INPUTS:
 - Mood phrase: {mood_phrase}
 - Preferred beach: {user_inputs.get("preferred_beach_slug")}
 - Suburb: {profile.get("suburb")}
+- Postcode: {profile.get("postcode")}
+- Profile coordinates: {profile.get("suburb_lat")}, {profile.get("suburb_lng")}
 - Travel mode: {profile.get("travel_mode")}
 
 User profile:
@@ -260,8 +268,9 @@ async def generate_beach_plan_with_gemini(
     try:
         response.raise_for_status()
     except httpx.HTTPStatusError as error:
+        response_detail = response.text[:500]
         raise GeminiServiceError(
-            f"Gemini request failed with status {response.status_code}"
+            f"Gemini request failed with status {response.status_code}: {response_detail}"
         ) from error
 
     text = extract_text_from_response(response.json())

@@ -1,5 +1,5 @@
 import asyncio
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Any
 from zoneinfo import ZoneInfo
 
@@ -8,6 +8,8 @@ from app.services.weather_service import get_conditions_for_beach
 conditions_cache: dict[str, dict[str, Any]] = {}
 
 SYDNEY_TZ = ZoneInfo("Australia/Sydney")
+SUCCESS_CACHE_SECONDS = 30 * 60
+ERROR_CACHE_SECONDS = 2 * 60
 
 CROWD_DEFAULT_SCORES = {
     "low": 15,
@@ -163,6 +165,24 @@ def build_cache_object(beach: dict[str, Any], conditions: dict[str, Any]) -> dic
     return response
 
 
+def cached_condition_is_fresh(condition: dict[str, Any]) -> bool:
+    conditions = condition.get("conditions") or {}
+    fetched_at = conditions.get("fetched_at")
+    if not fetched_at:
+        return False
+
+    try:
+        fetched = datetime.fromisoformat(fetched_at)
+    except ValueError:
+        return False
+
+    if fetched.tzinfo is None:
+        fetched = fetched.replace(tzinfo=timezone.utc)
+
+    max_age = ERROR_CACHE_SECONDS if condition.get("conditions_unavailable") else SUCCESS_CACHE_SECONDS
+    return datetime.now(timezone.utc) - fetched < timedelta(seconds=max_age)
+
+
 async def fetch_condition_for_beach(beach: dict[str, Any]) -> dict[str, Any]:
     try:
         conditions = await get_conditions_for_beach(beach["lat"], beach["lng"])
@@ -202,7 +222,11 @@ async def get_all_cached_conditions(db) -> list[dict[str, Any]]:
 
 
 async def get_cached_condition_by_slug(db, slug: str) -> dict[str, Any] | None:
-    if not conditions_cache:
-        await refresh_conditions_cache(db)
+    cached = conditions_cache.get(slug)
+    if cached is None or not cached_condition_is_fresh(cached):
+        beach = await db.beaches.find_one({"slug": slug})
+        if beach is None:
+            return None
+        conditions_cache[slug] = await fetch_condition_for_beach(beach)
 
     return conditions_cache.get(slug)

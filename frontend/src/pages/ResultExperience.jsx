@@ -1,10 +1,15 @@
 import { useState } from "react";
 
-import { createPlan } from "@/api/plans";
+import { savePlanSnapshot } from "@/api/plans";
 import AuthSheet from "@/components/AuthSheet";
 import BeachPlanTicket from "@/components/BeachPlanTicket";
 import SaveBar from "@/components/SaveBar";
 import { useAuth } from "@/context/AuthContext";
+import { getApiErrorMessage } from "@/utils/apiError";
+
+function getPlanId(plan) {
+  return plan?._id || plan?.id;
+}
 
 export default function ResultExperience({ plan, generationInput, visible = false }) {
   const { token, login, register } = useAuth();
@@ -13,12 +18,35 @@ export default function ResultExperience({ plan, generationInput, visible = fals
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState("");
   const [savedPlan, setSavedPlan] = useState(null);
-  const isSaved = Boolean(savedPlan || (token && !plan?.requiresAuthToSave));
-  const showSaveBar = visible && !token && !isSaveDismissed;
+  const isSaved = Boolean(savedPlan || getPlanId(plan));
+  const savedPlanId = getPlanId(savedPlan || (token ? plan : null));
+  const showSaveBar = visible && !isSaved && !isSaveDismissed;
+
+  async function saveCurrentPlan() {
+    if (!plan) {
+      setSaveError("Couldn't find the generated plan. Try generating it again.");
+      return;
+    }
+
+    setIsSaving(true);
+    setSaveError("");
+    try {
+      const createdPlan = await savePlanSnapshot({
+        plan,
+        generation_input: generationInput || plan.input_context || {},
+      });
+      setSavedPlan(createdPlan);
+      setIsSaveDismissed(false);
+    } catch (error) {
+      setSaveError(getApiErrorMessage(error, "Couldn't save it. Give it another go."));
+    } finally {
+      setIsSaving(false);
+    }
+  }
 
   async function saveAfterAuth(authAction, credentials) {
-    if (!generationInput) {
-      setSaveError("Couldn’t find the original beach request. Try generating it again.");
+    if (!plan) {
+      setSaveError("Couldn't find the generated plan. Try generating it again.");
       return;
     }
 
@@ -27,12 +55,15 @@ export default function ResultExperience({ plan, generationInput, visible = fals
 
     try {
       await authAction(credentials);
-      const createdPlan = await createPlan(generationInput);
+      const createdPlan = await savePlanSnapshot({
+        plan,
+        generation_input: generationInput || plan.input_context || {},
+      });
       setSavedPlan(createdPlan);
       setIsAuthSheetOpen(false);
       setIsSaveDismissed(false);
     } catch (error) {
-      setSaveError(error?.response?.data?.detail || "Couldn’t save it. Give it another go.");
+      setSaveError(getApiErrorMessage(error, "Couldn't save it. Give it another go."));
     } finally {
       setIsSaving(false);
     }
@@ -41,7 +72,7 @@ export default function ResultExperience({ plan, generationInput, visible = fals
   function buildRegisterPayload(credentials) {
     return {
       ...credentials,
-      suburb: "Sydney",
+      suburb: credentials.suburb,
       companions: companionForProfile(generationInput?.companion),
       travel_mode: "public_transport",
     };
@@ -58,11 +89,15 @@ export default function ResultExperience({ plan, generationInput, visible = fals
           onDismiss={() => setIsSaveDismissed(true)}
           onSave={() => {
             setSaveError("");
+            if (token) {
+              saveCurrentPlan();
+              return;
+            }
             setIsAuthSheetOpen(true);
           }}
         />
       )}
-      {savedPlan && <SaveBar isSaved />}
+      {visible && isSaved && savedPlanId && <SaveBar isSaved savedPlanId={savedPlanId} />}
       <AuthSheet
         isOpen={isAuthSheetOpen}
         isSubmitting={isSaving}
