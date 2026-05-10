@@ -570,7 +570,7 @@
   }
 
   .generating-overlay {
-    @apply pointer-events-none fixed inset-0 z-50 flex flex-col items-center justify-center bg-background/90 px-6 text-center opacity-0 transition-opacity;
+    @apply pointer-events-none fixed inset-0 z-[120] flex flex-col items-center justify-center bg-background/90 px-6 text-center opacity-0 transition-opacity;
     transition-duration: 250ms;
     transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
   }
@@ -609,6 +609,11 @@
     @apply flex min-h-screen items-center justify-center bg-background px-6 py-12 text-foreground;
   }
 
+  .back-to-experience {
+    @apply fixed left-6 top-6 z-50 rounded-full border border-foreground/15 bg-background/80 px-3 py-2 text-[10px] lowercase leading-none text-foreground/55 no-underline backdrop-blur transition-colors hover:border-foreground/35 hover:text-foreground;
+    letter-spacing: 0.05em;
+  }
+
   .auth-panel {
     @apply w-full max-w-[440px] border border-foreground/20 bg-background/70 p-6;
   }
@@ -645,9 +650,46 @@
     @apply mt-2 h-10 w-full rounded-none border border-foreground/25 bg-transparent px-3 text-[13px] text-foreground outline-none transition-colors focus:border-foreground;
   }
 
+  .auth-panel input[aria-invalid="true"],
+  .auth-panel select[aria-invalid="true"],
+  .auth-sheet input[aria-invalid="true"] {
+    @apply border-destructive;
+  }
+
+  .auth-field-error {
+    @apply mt-1 block text-[10px] normal-case leading-4 text-destructive;
+    letter-spacing: 0;
+  }
+
   .auth-submit,
   .auth-link-button {
     @apply mt-2 h-9 w-full rounded-full bg-foreground text-[10px] font-medium uppercase tracking-[0.08em] text-background hover:bg-foreground/90;
+  }
+
+  .oauth-button {
+    @apply mt-3 h-9 w-full rounded-full border border-foreground/20 bg-transparent text-[10px] font-medium uppercase text-foreground/65 transition-colors hover:border-foreground/45 hover:text-foreground;
+    letter-spacing: 0.08em;
+  }
+
+  .google-oauth-slot {
+    @apply relative mt-3 flex min-h-10 w-full items-center justify-center overflow-hidden rounded-full border border-foreground/15 bg-background/35;
+  }
+
+  .google-oauth-slot > div {
+    @apply flex w-full justify-center;
+  }
+
+  .google-oauth-slot span {
+    @apply absolute text-[10px] uppercase text-foreground/40;
+    letter-spacing: 0.08em;
+  }
+
+  .google-oauth-slot.is-ready {
+    @apply border-transparent bg-transparent;
+  }
+
+  .google-oauth-slot.is-disabled {
+    @apply pointer-events-none opacity-50;
   }
 
   .auth-link-button {
@@ -675,12 +717,55 @@
     @apply text-foreground/65;
   }
 
+  .suburb-select {
+    @apply relative mt-2;
+  }
+
+  .suburb-select input {
+    @apply mt-0;
+  }
+
+  .suburb-select__hint,
+  .suburb-select__fallback {
+    @apply mt-1 block text-[10px] normal-case leading-4 text-foreground/40;
+    letter-spacing: 0;
+  }
+
+  .suburb-select__menu {
+    @apply absolute left-0 right-0 top-[44px] z-50 max-h-52 overflow-auto border border-foreground/20 bg-background shadow-sm;
+  }
+
+  .suburb-select__menu button {
+    @apply flex w-full items-center justify-between border-0 border-b border-foreground/10 bg-background px-3 py-2 text-left text-[12px] text-foreground transition-colors hover:bg-foreground/5;
+  }
+
+  .suburb-select__menu small {
+    @apply text-[10px] text-foreground/45;
+  }
+
+  .app-toast {
+    border-radius: 999px !important;
+    border: 1px solid rgb(17 17 17 / 0.18) !important;
+    background: rgb(248 246 239 / 0.96) !important;
+    color: #111111 !important;
+    font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    font-size: 11px !important;
+  }
+
   .profile-actions {
     @apply grid gap-2;
   }
 
   .danger-button {
     @apply border-destructive/50 text-destructive hover:bg-destructive hover:text-destructive-foreground;
+  }
+
+  .danger-text-button {
+    @apply text-destructive hover:text-destructive;
+  }
+
+  .danger-confirm-button {
+    @apply border-destructive bg-destructive text-destructive-foreground hover:border-destructive hover:bg-destructive/90;
   }
 
   .shelf-page {
@@ -762,11 +847,11 @@
   }
 
   .plan-detail-page {
-    @apply min-h-screen bg-background px-6 py-8 text-foreground;
+    @apply min-h-screen bg-background px-6 pb-10 pt-24 text-foreground;
   }
 
   .plan-detail-top {
-    @apply mx-auto mb-6 flex w-full max-w-[1080px] items-center justify-between;
+    @apply mx-auto mb-6 flex w-full max-w-[1160px] items-center justify-between;
   }
 
   .plan-detail-top a {
@@ -778,11 +863,17 @@
   }
 
   .plan-detail-grid {
-    @apply mx-auto grid w-full max-w-[1080px] gap-8 lg:grid-cols-[minmax(420px,560px)_minmax(280px,1fr)] lg:items-start;
+    @apply mx-auto grid w-full max-w-[1160px] justify-center gap-8 lg:grid-cols-[minmax(390px,453px)_minmax(420px,620px)] lg:items-start;
   }
 
   .plan-detail-grid .beach-plan-ticket {
     @apply mx-auto;
+    opacity: 1;
+    transform: none;
+  }
+
+  .plan-detail-grid .beach-plan-ticket.postcard-card {
+    justify-self: center;
   }
 
   .plan-notes-panel {
@@ -831,13 +922,73 @@
     @apply m-0 text-[11px] lowercase leading-5 text-foreground/70;
   }
 
+  .plan-full-section {
+    @apply mb-6 border-b border-foreground/15 pb-5;
+  }
+
+  .plan-full-section > p {
+    @apply m-0 mb-3 text-[10px] font-medium text-foreground/40;
+    letter-spacing: 0.1em;
+  }
+
+  .plan-full-section h2 {
+    @apply m-0 mb-4 text-[20px] font-medium lowercase leading-tight text-foreground;
+    letter-spacing: -0.03em;
+  }
+
+  .plan-full-section div + div {
+    @apply mt-4;
+  }
+
+  .plan-full-section span {
+    @apply block text-[9px] font-medium text-foreground/35;
+    letter-spacing: 0.1em;
+  }
+
+  .plan-full-section p,
+  .plan-full-section li {
+    @apply text-[12px] leading-6 text-foreground/65;
+  }
+
+  .plan-full-section ul {
+    @apply m-0 mt-2 grid gap-1 pl-4;
+  }
+
+  .plan-candidate-list,
+  .plan-rejected-list {
+    @apply grid gap-2;
+  }
+
+  .plan-candidate-list article,
+  .plan-rejected-list article {
+    @apply rounded-[10px] border border-foreground/10 px-4 py-3;
+  }
+
+  .plan-candidate-list article {
+    @apply grid grid-cols-[1fr_auto] gap-x-3;
+  }
+
+  .plan-candidate-list strong,
+  .plan-rejected-list strong {
+    @apply text-[12px] font-medium lowercase text-foreground;
+  }
+
+  .plan-candidate-list span {
+    @apply text-[10px] text-foreground/35;
+  }
+
+  .plan-candidate-list p,
+  .plan-rejected-list p {
+    @apply col-span-2 m-0 mt-1 text-[11px] leading-5 text-foreground/55;
+  }
+
   .minimal-plan {
     @apply absolute bottom-8 right-8 z-20 w-[min(420px,calc(100vw-48px))] border border-foreground/50 bg-background/95 p-5 backdrop-blur-sm;
     animation: plan-rise 0.35s cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   .result-experience {
-    @apply flex h-screen min-h-screen flex-col items-center justify-center overflow-hidden px-5 py-4 text-center text-foreground;
+    @apply flex min-h-screen flex-col items-center justify-center overflow-y-auto px-6 pb-28 pt-24 text-left text-foreground;
     background: rgb(176 214 223 / 0.70);
     backdrop-filter: blur(12px);
     opacity: 0;
@@ -846,6 +997,57 @@
 
   .result-experience.is-visible {
     opacity: 1;
+  }
+
+  .result-experience__layout {
+    @apply mx-auto grid w-full max-w-[1180px] items-center gap-8 lg:grid-cols-[minmax(390px,453px)_minmax(420px,1fr)];
+  }
+
+  .generated-plan-panel {
+    @apply max-h-[calc(100vh-180px)] overflow-y-auto rounded-[18px] border border-background/70 bg-background/70 p-7 font-mono shadow-[0_18px_48px_rgb(17_17_17_/_0.08)] backdrop-blur-lg;
+  }
+
+  .generated-plan-panel__eyebrow {
+    @apply m-0 text-[9px] font-medium uppercase text-foreground/35;
+    letter-spacing: 0.12em;
+  }
+
+  .generated-plan-panel h1 {
+    @apply m-0 mt-3 text-[34px] font-medium lowercase leading-none text-foreground;
+    letter-spacing: 0;
+  }
+
+  .generated-plan-panel__summary {
+    @apply m-0 mt-4 text-[13px] leading-6 text-foreground/60;
+  }
+
+  .generated-plan-panel__grid {
+    @apply mt-6 grid gap-3 md:grid-cols-2;
+  }
+
+  .generated-plan-panel__grid article {
+    @apply rounded-[12px] border border-foreground/10 bg-background/45 p-4;
+  }
+
+  .generated-plan-panel__grid article.is-wide {
+    @apply md:col-span-2;
+  }
+
+  .generated-plan-panel__grid span {
+    @apply block text-[9px] font-medium uppercase text-foreground/35;
+    letter-spacing: 0.1em;
+  }
+
+  .generated-plan-panel__grid p {
+    @apply m-0 mt-2 text-[12px] lowercase leading-6 text-foreground/70;
+  }
+
+  .generated-plan-panel__chips {
+    @apply mt-5 flex flex-wrap gap-2;
+  }
+
+  .generated-plan-panel__chips span {
+    @apply rounded-full border border-foreground/15 bg-background/55 px-3 py-1.5 text-[10px] lowercase text-foreground/60;
   }
 
   .result-auth-nudge {
@@ -1208,8 +1410,8 @@
   }
 
   .postcard-card__title-row h1 {
-    @apply m-0 mt-3 truncate text-[22px] font-medium lowercase leading-none text-foreground;
-    letter-spacing: -0.05em;
+    @apply m-0 mt-3 line-clamp-2 text-[22px] font-medium lowercase leading-none text-foreground;
+    letter-spacing: 0;
   }
 
   .postcard-card__meta {
@@ -1237,12 +1439,12 @@
   }
 
   .postcard-card__quote {
-    @apply m-0 mt-4 line-clamp-2 text-[10px] lowercase leading-5 text-foreground/45;
+    @apply m-0 mt-4 line-clamp-3 text-[10px] lowercase leading-5 text-foreground/45;
   }
 
   .postcard-card__poem {
-    @apply m-0 mt-3 line-clamp-2 text-[13px] font-medium lowercase leading-7 text-foreground/80;
-    letter-spacing: -0.03em;
+    @apply m-0 mt-3 line-clamp-3 text-[13px] font-medium lowercase leading-7 text-foreground/80;
+    letter-spacing: 0;
   }
 
   .postcard-card__conditions {
@@ -1278,11 +1480,11 @@
   }
 
   .postcard-card .ticket-actions {
-    @apply absolute -bottom-[64px] left-1/2 mt-0 flex -translate-x-1/2 grid-cols-none items-center justify-center gap-3;
+    @apply absolute -bottom-[64px] left-1/2 mt-0 flex -translate-x-1/2 grid-cols-none flex-nowrap items-center justify-center gap-3;
   }
 
   .postcard-card .ticket-actions button {
-    @apply h-[30px] rounded-full border-0 bg-foreground px-6 text-[11px] font-medium lowercase text-background shadow-none transition-transform hover:-translate-y-0.5 hover:scale-105 hover:bg-foreground;
+    @apply h-[30px] min-w-max whitespace-nowrap rounded-full border-0 bg-foreground px-6 text-[11px] font-medium lowercase text-background shadow-none transition-transform hover:-translate-y-0.5 hover:scale-105 hover:bg-foreground;
     letter-spacing: 0.04em;
   }
 
@@ -1483,8 +1685,20 @@
     }
 
     .result-experience {
-      @apply min-h-screen items-center overflow-hidden px-4 py-5;
+      @apply min-h-screen items-center overflow-y-auto px-4 pb-32 pt-24;
       height: auto;
+    }
+
+    .result-experience__layout {
+      @apply grid-cols-1 gap-24;
+    }
+
+    .generated-plan-panel {
+      @apply max-h-none rounded-[16px] p-5;
+    }
+
+    .generated-plan-panel h1 {
+      font-size: 28px;
     }
 
     .beach-plan-ticket {
@@ -1597,24 +1811,48 @@
     @apply fixed inset-0 min-h-screen overflow-hidden bg-background p-0;
   }
 
-  .mood-app-header {
-    @apply fixed left-0 right-0 top-0 z-40 flex h-14 items-center justify-between bg-background px-11;
+  .app-navbar {
+    @apply fixed left-0 right-0 top-0 z-[70] flex h-16 items-center justify-between px-11;
+    background: linear-gradient(to bottom, rgb(248 246 239 / 0.78), rgb(248 246 239 / 0));
+    border-bottom: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
-  .mood-app-mark {
-    @apply block h-[7px] w-[7px] rounded-full bg-foreground;
+  .app-navbar__mark {
+    @apply border-0 bg-transparent p-0 text-[11px] font-medium lowercase leading-none text-foreground/55 shadow-none transition-colors hover:bg-transparent hover:text-foreground;
+    letter-spacing: 0.04em;
   }
 
-  .mood-app-left-controls {
+  .app-navbar__left {
     @apply flex items-center gap-4;
   }
 
-  .mood-app-controls {
+  .app-navbar__right {
     @apply flex items-center gap-7;
   }
 
+  .app-navbar__page-links {
+    @apply flex items-center gap-5;
+  }
+
+  .app-navbar__page-links a {
+    @apply relative border-0 border-b border-transparent bg-transparent p-0 pb-0.5 text-[11px] font-medium lowercase leading-none text-foreground/45 no-underline transition-colors hover:text-foreground/75;
+    letter-spacing: 0.05em;
+    text-shadow: 0 1px 12px rgb(248 246 239 / 0.95);
+  }
+
+  .app-navbar__page-links a.is-active {
+    @apply border-foreground text-foreground;
+  }
+
+  .app-navbar__page-links span {
+    @apply absolute -right-4 -top-2 rounded-full bg-foreground px-1.5 py-0.5 text-[8px] leading-none text-background;
+  }
+
   .audio-toggle {
-    @apply grid h-9 w-9 place-items-center rounded-full border border-foreground/20 bg-transparent p-0 text-foreground shadow-none transition-colors hover:border-foreground/45 hover:bg-transparent hover:text-foreground;
+    @apply grid h-9 w-9 place-items-center rounded-full border border-foreground/15 bg-background/35 p-0 text-foreground shadow-none transition-colors hover:border-foreground/45 hover:bg-background/45 hover:text-foreground;
   }
 
   .audio-toggle[aria-pressed="true"] {
@@ -1622,6 +1860,14 @@
   }
 
   .mode-toggle {
+    @apply flex items-center gap-5;
+  }
+
+  .explore-mode-pill {
+    @apply fixed left-1/2 top-[72px] z-[60] -translate-x-1/2 rounded-full border border-background/55 bg-background/55 px-4 py-2 shadow-[0_12px_32px_rgb(17_17_17_/_0.08)] backdrop-blur-xl;
+  }
+
+  .mood-app-nav {
     @apply flex items-center gap-5;
   }
 
@@ -1636,6 +1882,31 @@
 
   .mode-toggle__badge {
     @apply absolute -right-4 -top-2 rounded-full bg-foreground px-1.5 py-0.5 text-[8px] leading-none text-background;
+  }
+
+  .account-pill {
+    @apply inline-flex h-8 items-center rounded-full border border-foreground/15 px-3 text-[10px] lowercase leading-none text-foreground/50 no-underline transition-colors hover:border-foreground/35 hover:text-foreground;
+    letter-spacing: 0.05em;
+  }
+
+  .account-pill--user {
+    @apply gap-2 px-2;
+  }
+
+  .account-pill--user a {
+    @apply flex items-center gap-2 text-foreground/70 no-underline;
+  }
+
+  .account-pill--user span {
+    @apply flex h-5 w-5 items-center justify-center rounded-full bg-foreground text-[9px] text-background;
+  }
+
+  .account-pill--user small {
+    @apply max-w-[120px] truncate text-[9px] text-foreground/45;
+  }
+
+  .account-pill--user button {
+    @apply border-0 bg-transparent p-0 text-[9px] lowercase text-foreground/35 transition-colors hover:text-foreground;
   }
 
   .mood-mode-layer {
@@ -1673,6 +1944,58 @@
     will-change: transform;
   }
 
+  .cluster-focus-strip {
+    @apply fixed left-8 top-[118px] z-40 flex max-w-[min(560px,calc(100vw-420px))] flex-wrap items-center gap-2;
+  }
+
+  .cluster-focus-strip button {
+    @apply h-8 rounded-full border border-foreground/10 bg-background/60 px-3 text-[10px] lowercase text-foreground/45 shadow-[0_8px_24px_rgb(17_17_17_/_0.05)] transition-[border-color,background-color,color,transform] hover:-translate-y-px hover:text-foreground;
+    border-color: color-mix(in srgb, var(--cluster-color, #111) 18%, transparent);
+  }
+
+  .cluster-focus-strip button.is-active {
+    @apply text-foreground;
+    background: color-mix(in srgb, var(--cluster-color, #111) 18%, #F8F6EF 82%);
+    border-color: color-mix(in srgb, var(--cluster-color, #111) 54%, transparent);
+  }
+
+  .cluster-drop-shelf {
+    @apply fixed bottom-6 left-1/2 z-[65] w-[min(860px,calc(100vw-48px))] -translate-x-1/2 rounded-[22px] border border-foreground/10 bg-background/90 p-4 text-left font-mono shadow-[0_22px_58px_rgb(17_17_17_/_0.18)];
+    animation: cluster-shelf-rise 180ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .cluster-drop-shelf p {
+    @apply m-0 mb-3 text-[10px] lowercase text-foreground/45;
+    letter-spacing: 0.05em;
+  }
+
+  .cluster-drop-shelf > div {
+    @apply grid gap-2 md:grid-cols-3;
+  }
+
+  .cluster-drop-shelf button {
+    @apply grid rounded-[14px] border bg-transparent px-4 py-3 text-left transition-[border-color,background-color,transform] hover:-translate-y-px;
+    border-color: color-mix(in srgb, var(--cluster-color) 32%, transparent);
+  }
+
+  .cluster-drop-shelf button.is-hovered {
+    @apply scale-[1.02];
+    background: color-mix(in srgb, var(--cluster-color) 22%, #F8F6EF 78%);
+    border-color: color-mix(in srgb, var(--cluster-color) 78%, transparent);
+  }
+
+  .cluster-drop-shelf button.is-saved {
+    @apply opacity-60;
+  }
+
+  .cluster-drop-shelf strong {
+    @apply text-[12px] font-medium lowercase text-foreground;
+  }
+
+  .cluster-drop-shelf span {
+    @apply mt-1 text-[10px] lowercase text-foreground/45;
+  }
+
   .beach-image-tile {
     @apply absolute h-[120px] w-[160px] overflow-visible rounded-[10px] border border-foreground/[0.06] bg-background p-0 text-left shadow-[0_1px_6px_rgba(0,0,0,0.07)] duration-200 ease-out;
     left: var(--tile-x);
@@ -1689,6 +2012,15 @@
     transition-property: opacity, border-color, box-shadow, transform, left, top;
     transform: translate(-50%, -50%) rotate(var(--tile-rotate)) scale(1);
     transform-origin: center;
+  }
+
+  .beach-image-tile__clusters {
+    @apply pointer-events-none absolute -left-2 -top-2 z-30 flex max-w-[calc(100%+24px)] flex-wrap gap-1;
+  }
+
+  .beach-image-tile__clusters span {
+    @apply max-w-[112px] truncate rounded-full px-2 py-1 text-[8px] font-medium lowercase leading-none text-foreground shadow-[0_5px_12px_rgb(17_17_17_/_0.12)];
+    background: color-mix(in srgb, var(--cluster-color) 72%, #F8F6EF 28%);
   }
 
   .beach-image-tile.is-muted {
@@ -1805,7 +2137,7 @@
   }
 
   .beach-info-tile {
-    @apply fixed bottom-0 right-0 top-0 z-50 flex w-[390px] flex-col overflow-hidden border-l bg-[#FDFEFE] px-10 pb-8 pt-10 text-left shadow-[0_0_32px_rgba(0,0,0,0.04)];
+    @apply fixed bottom-0 right-0 top-0 z-[90] flex w-[390px] flex-col overflow-hidden border-l bg-[#FDFEFE] px-10 pb-8 pt-20 text-left shadow-[0_0_32px_rgba(0,0,0,0.04)];
     border-color: #ecebe6;
   }
 
@@ -1877,6 +2209,18 @@
     letter-spacing: -0.05em;
   }
 
+  .beach-info-tile__loading {
+    @apply mt-3 block h-[17px] w-12 overflow-hidden rounded-full bg-foreground/10;
+    position: relative;
+  }
+
+  .beach-info-tile__loading::after {
+    @apply absolute inset-y-0 w-6 bg-foreground/15;
+    content: "";
+    left: -24px;
+    animation: condition-shimmer 950ms ease-in-out infinite;
+  }
+
   .beach-info-tile__compact-section p {
     @apply text-[20px] leading-none text-foreground;
   }
@@ -1903,31 +2247,35 @@
     letter-spacing: 0.08em;
   }
 
+  .beach-info-tile__cluster-note {
+    @apply m-0 mt-2 text-[10px] lowercase leading-4 text-foreground/45;
+  }
+
   .beach-info-tile__generate {
     @apply mt-3 h-12 w-full rounded-none border-0 bg-black px-6 text-[12px] font-medium uppercase text-[#FDFEFE] shadow-none hover:bg-[#111] hover:text-[#FDFEFE];
     letter-spacing: 0.08em;
   }
 
   .mood-input-bar {
-    @apply fixed bottom-0 left-0 right-0 z-40 grid h-20 grid-cols-[minmax(240px,1fr)_auto_auto] items-center gap-5 bg-background px-11 transition-[right] duration-500 ease-out;
+    @apply fixed bottom-8 left-8 z-40 grid w-[min(480px,calc(100vw-440px))] grid-cols-1 items-start gap-3 rounded-[18px] border border-background/70 bg-background/70 px-5 py-4 shadow-[0_18px_44px_rgb(17_17_17_/_0.09)] backdrop-blur-xl transition-[transform,opacity] duration-300 ease-out;
   }
 
   .mood-input-bar.has-info-tile {
-    right: 380px;
+    @apply w-[min(420px,calc(100vw-460px))];
   }
 
   .mood-input-bar input {
-    @apply col-start-1 row-start-1 border-0 border-b border-[#D8D4CA] bg-transparent px-0 py-1.5 text-[13px] text-foreground outline-none transition-colors placeholder:text-foreground/30 focus:border-foreground;
+    @apply col-start-1 row-start-1 w-full border-0 border-b border-[#D8D4CA] bg-transparent px-0 py-1.5 text-[13px] text-foreground outline-none transition-colors placeholder:text-foreground/30 focus:border-foreground;
     letter-spacing: 0.01em;
   }
 
   .mood-input-bar > button {
-    @apply col-start-3 row-start-1 h-9 min-w-[132px] rounded-full border border-foreground bg-foreground px-4 text-[10px] font-medium uppercase text-background shadow-none transition-opacity hover:bg-foreground/90 hover:text-background hover:opacity-100;
+    @apply col-start-1 row-start-3 h-9 w-fit min-w-[132px] rounded-full border border-foreground bg-foreground px-4 text-[10px] font-medium uppercase text-background shadow-none transition-opacity hover:bg-foreground/90 hover:text-background hover:opacity-100;
     letter-spacing: 0.08em;
   }
 
   .mood-chip-line {
-    @apply col-start-2 row-start-1 flex max-w-[520px] flex-wrap items-center justify-end gap-2;
+    @apply col-start-1 row-start-2 flex max-w-none flex-wrap items-center justify-start gap-2;
   }
 
   .mood-chip {
@@ -1945,6 +2293,7 @@
 
   .saved-mode-shell {
     @apply fixed inset-0 overflow-y-auto bg-background px-11 pb-28 pt-24 text-foreground;
+    contain: layout paint;
   }
 
   .saved-mode-shell__heading {
@@ -1961,7 +2310,7 @@
 
   .saved-mode-shell__heading h1 {
     @apply m-0 mt-3 text-[clamp(28px,4vw,52px)] font-medium lowercase leading-none text-foreground;
-    letter-spacing: -0.03em;
+    letter-spacing: 0;
   }
 
   .saved-mode-shell__heading span,
@@ -1988,12 +2337,16 @@
   }
 
   .saved-mode-layout.has-detail {
-    @apply grid-cols-[minmax(320px,0.8fr)_minmax(460px,1fr)] items-start;
+    @apply grid-cols-[minmax(380px,0.75fr)_minmax(580px,1fr)] items-start;
   }
 
   .saved-postcard-row {
-    @apply grid grid-cols-[minmax(0,1fr)_auto] items-center gap-6 border border-foreground/10 bg-background px-5 py-4 transition-colors;
+    @apply grid grid-cols-[96px_minmax(0,1fr)_auto] items-center gap-5 border border-foreground/10 bg-background px-5 py-4 transition-colors;
     border-radius: 10px;
+  }
+
+  .saved-postcard-row__image {
+    @apply h-20 w-24 rounded-[8px] object-cover;
   }
 
   .saved-postcard-row.is-selected {
@@ -2014,7 +2367,7 @@
   }
 
   .saved-postcard-row p {
-    @apply m-0 mt-1 max-w-[520px] truncate text-[11px] text-foreground/50;
+    @apply m-0 mt-1 max-w-[620px] text-[11px] leading-5 text-foreground/50;
   }
 
   .saved-postcard-meta {
@@ -2044,6 +2397,10 @@
   .saved-postcard-row button {
     @apply border-0 bg-transparent p-0 text-[10px] font-medium text-foreground/45 shadow-none transition-colors hover:text-foreground;
     letter-spacing: 0.08em;
+  }
+
+  .saved-postcard-row button.danger-text-button {
+    @apply text-destructive hover:text-destructive;
   }
 
   .cluster-tray {
@@ -2096,8 +2453,13 @@
   }
 
   .cluster-card {
-    @apply border border-foreground/10 bg-background p-5;
+    @apply relative overflow-hidden border border-foreground/10 bg-background p-5;
     border-radius: 10px;
+  }
+
+  .cluster-card__color {
+    @apply absolute left-0 top-0 h-full w-1.5;
+    background: var(--cluster-color, #91C059);
   }
 
   .cluster-card__top {
@@ -2122,10 +2484,18 @@
     @apply mt-2 block text-[10px] lowercase leading-4 text-foreground/35;
   }
 
-  .cluster-card__top > button,
+  .cluster-card__actions {
+    @apply flex items-start gap-3;
+  }
+
+  .cluster-card__actions button,
   .cluster-card__add {
     @apply border-0 bg-transparent p-0 text-[10px] font-medium uppercase text-foreground/40 shadow-none transition-colors hover:text-foreground disabled:pointer-events-none disabled:text-foreground/20;
     letter-spacing: 0.08em;
+  }
+
+  .cluster-card__actions button.danger-text-button {
+    @apply text-destructive hover:text-destructive;
   }
 
   .cluster-beach-list {
@@ -2148,12 +2518,7 @@
     @apply mt-5 block;
   }
 
-  .cluster-dialog-backdrop {
-    @apply fixed inset-0 z-[80] flex items-center justify-center bg-background/65 px-5 backdrop-blur-sm;
-  }
-
   .cluster-dialog {
-    @apply relative grid w-[min(430px,calc(100vw-32px))] gap-4 border border-foreground/15 bg-[#FDFEFE] p-6 text-left font-mono text-foreground shadow-[0_18px_44px_rgba(0,0,0,0.14)];
     border-radius: 14px;
   }
 
@@ -2171,7 +2536,10 @@
     letter-spacing: -0.04em;
   }
 
-  .cluster-dialog > span,
+  .cluster-dialog__form {
+    @apply grid gap-4;
+  }
+
   .cluster-dialog strong {
     @apply text-[11px] font-normal lowercase leading-5 text-foreground/55;
   }
@@ -2198,8 +2566,51 @@
     @apply min-h-20 resize-none;
   }
 
+  .cluster-color-field {
+    @apply m-0 border-0 p-0;
+  }
+
+  .cluster-color-field legend {
+    @apply mb-2 text-[9px] font-medium text-foreground/35;
+    letter-spacing: 0.1em;
+  }
+
+  .cluster-color-field div {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .cluster-color-field button {
+    @apply h-8 w-8 rounded-full border border-foreground/10 p-0 transition-transform hover:scale-105;
+    background: var(--cluster-color);
+  }
+
+  .cluster-color-field button.is-active {
+    @apply ring-2 ring-foreground ring-offset-2 ring-offset-background;
+  }
+
+  .cluster-picker-list {
+    @apply grid max-h-64 gap-2 overflow-auto;
+  }
+
+  .cluster-picker-list button {
+    @apply flex items-center justify-between rounded-[10px] border border-foreground/10 bg-transparent px-4 py-3 text-left transition-colors hover:border-foreground/35 hover:bg-foreground/[0.03];
+    border-color: color-mix(in srgb, var(--cluster-color, #111) 18%, transparent);
+  }
+
+  .cluster-picker-list button:disabled {
+    @apply cursor-default border-foreground/5 bg-foreground/[0.03] opacity-55;
+  }
+
+  .cluster-picker-list strong {
+    @apply text-[12px] font-medium lowercase text-foreground;
+  }
+
+  .cluster-picker-list span {
+    @apply text-[10px] lowercase text-foreground/45;
+  }
+
   .saved-plan-detail {
-    @apply relative max-h-[calc(100vh-132px)] overflow-hidden border border-foreground/10 bg-background/75 p-6;
+    @apply relative max-h-none overflow-visible border border-foreground/10 bg-background/75 p-6;
     border-radius: 14px;
   }
 
@@ -2210,7 +2621,8 @@
   .saved-plan-detail .beach-plan-ticket.postcard-card {
     --postcard-w: min(390px, calc(100vw - 64px));
     margin-inline: auto;
-    max-height: 455px;
+    opacity: 1;
+    transform: none;
   }
 
   .saved-plan-detail .postcard-card .ticket-actions {
@@ -2239,6 +2651,37 @@
     @apply mt-5;
   }
 
+  .saved-plan-detail__summary {
+    @apply mt-5 border-t border-foreground/10 pt-4;
+  }
+
+  .saved-plan-detail__summary > p {
+    @apply m-0 text-[9px] font-medium text-foreground/35;
+    letter-spacing: 0.1em;
+  }
+
+  .saved-plan-detail__summary strong {
+    @apply mt-2 block text-[14px] font-medium lowercase leading-5 text-foreground;
+  }
+
+  .saved-plan-detail__summary div {
+    @apply mt-3;
+  }
+
+  .saved-plan-detail__summary span {
+    @apply block text-[9px] font-medium text-foreground/35;
+    letter-spacing: 0.1em;
+  }
+
+  .saved-plan-detail__summary p:not(:first-child) {
+    @apply m-0 mt-1 text-[11px] leading-5 text-foreground/60;
+  }
+
+  .saved-plan-detail__summary a {
+    @apply mt-4 inline-block text-[10px] font-medium text-foreground underline underline-offset-4;
+    letter-spacing: 0.08em;
+  }
+
   .saved-plan-detail__notes textarea {
     @apply mt-3 min-h-24;
   }
@@ -2252,17 +2695,93 @@
   }
 
   @media (max-width: 760px) {
-    .mood-app-header {
-      @apply px-5;
+    .app-navbar {
+      @apply h-auto flex-wrap gap-3 px-4 py-3;
+    }
+
+    .app-navbar__left,
+    .app-navbar__right {
+      @apply w-full justify-between gap-3;
+    }
+
+    .app-navbar__right {
+      @apply items-start;
+    }
+
+    .app-navbar__page-links {
+      @apply gap-4;
+    }
+
+    .account-pill--user small {
+      @apply max-w-[74px];
     }
 
     .mode-toggle {
-      @apply gap-4;
+      @apply min-w-0 flex-1 justify-between gap-2 overflow-x-auto pb-1;
+      scrollbar-width: none;
+    }
+
+    .explore-mode-pill {
+      @apply top-[106px] max-w-[calc(100vw-32px)] px-3;
+    }
+
+    .mode-toggle::-webkit-scrollbar {
+      display: none;
+    }
+
+    .mode-toggle button {
+      @apply shrink-0 text-[10px];
+    }
+
+    .auth-page {
+      @apply items-start px-4 pb-8 pt-32;
+    }
+
+    .auth-panel {
+      @apply max-w-none p-5;
+    }
+
+    .profile-actions {
+      @apply gap-2;
+    }
+
+    .profile-actions .inline-flex,
+    .profile-actions button,
+    .profile-actions [role="button"] {
+      @apply w-full;
+    }
+
+    .plan-detail-page {
+      @apply px-4 pb-8 pt-32;
+    }
+
+    .plan-detail-top {
+      @apply mb-5 items-start gap-3;
+    }
+
+    .plan-detail-grid {
+      @apply gap-5;
+    }
+
+    .plan-detail-grid .beach-plan-ticket.postcard-card {
+      --postcard-w: min(100%, calc(100vw - 32px));
     }
 
     .mood-canvas-world {
       height: 150vh;
       width: 260vw;
+    }
+
+    .cluster-focus-strip {
+      @apply left-4 right-4 top-[154px] max-w-none overflow-x-auto flex-nowrap pb-1;
+    }
+
+    .cluster-drop-shelf {
+      @apply bottom-4 w-[calc(100vw-24px)] rounded-[18px] p-3;
+    }
+
+    .cluster-drop-shelf > div {
+      @apply grid-cols-1;
     }
 
     .beach-image-tile {
@@ -2277,7 +2796,7 @@
 
     .mood-input-bar,
     .mood-input-bar.has-info-tile {
-      @apply right-0 h-auto min-h-20 grid-cols-1 gap-3 px-5 py-3;
+      @apply left-0 right-0 h-auto min-h-20 w-auto grid-cols-1 gap-3 rounded-none border-x-0 border-b-0 px-5 py-3;
       bottom: 0;
     }
 
@@ -2300,7 +2819,7 @@
     }
 
     .saved-mode-shell {
-      @apply px-5;
+      @apply px-4 pt-32;
     }
 
     .saved-mode-layout.has-detail {
@@ -2321,6 +2840,14 @@
 
     .saved-plan-detail {
       @apply max-h-none overflow-visible px-4;
+    }
+
+    .cluster-tray {
+      @apply px-4 pt-32;
+    }
+
+    .cluster-card__top {
+      @apply grid-cols-1 gap-3;
     }
   }
 
@@ -2362,6 +2889,16 @@
   }
 }
 
+@keyframes condition-shimmer {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(72px);
+  }
+}
+
 @keyframes plan-rise {
   from {
     opacity: 0;
@@ -2371,6 +2908,24 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes canvas-hint-fade {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes cluster-shelf-rise {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
   }
 }
 

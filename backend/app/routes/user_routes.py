@@ -8,12 +8,16 @@ from pydantic import BaseModel, Field, field_validator
 from app.auth import get_current_user
 from app.database import get_database
 from app.models.user import Companions, TravelMode, UserPublic, user_document_to_public
+from app.services.suburb_validation import canonical_suburb
 
 router = APIRouter(prefix="/users", tags=["users"])
 
 
 class UserProfileUpdate(BaseModel):
     suburb: Optional[str] = Field(default=None, min_length=1)
+    postcode: Optional[str] = None
+    suburb_lat: Optional[float] = None
+    suburb_lng: Optional[float] = None
     companions: Optional[Companions] = None
     travel_mode: Optional[TravelMode] = None
 
@@ -48,6 +52,9 @@ async def update_current_user(
         )
 
     update_data = payload.model_dump(exclude_unset=True)
+    if "suburb" in update_data:
+        update_data["suburb"] = canonical_suburb(update_data["suburb"])
+        update_data["profile_complete"] = True
     if "companions" in update_data:
         update_data["companions"] = update_data["companions"].value
     if "travel_mode" in update_data:

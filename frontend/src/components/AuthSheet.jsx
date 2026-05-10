@@ -1,7 +1,25 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 
+import SydneySuburbSelect from "@/components/SydneySuburbSelect";
 import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+
+const loginSchema = z.object({
+  email: z.string().trim().email("Use a valid email."),
+  password: z.string().min(6, "Password needs at least 6 characters."),
+});
+
+const registerSchema = loginSchema.extend({
+  suburb: z.string().min(1, "Choose a Sydney suburb from the list."),
+  postcode: z.string().optional(),
+  suburb_lat: z.number().nullable().optional(),
+  suburb_lng: z.number().nullable().optional(),
+});
 
 export default function AuthSheet({
   isOpen = false,
@@ -12,21 +30,44 @@ export default function AuthSheet({
   onRegister,
 }) {
   const [mode, setMode] = useState("register");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const schema = useMemo(() => (mode === "login" ? loginSchema : registerSchema), [mode]);
+  const form = useForm({
+    resolver: zodResolver(schema),
+    defaultValues: { email: "", password: "", suburb: "", postcode: "", suburb_lat: null, suburb_lng: null },
+  });
+  const {
+    control,
+    register,
+    reset,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = form;
+
+  useEffect(() => {
+    reset({ email: "", password: "", suburb: "", postcode: "", suburb_lat: null, suburb_lng: null });
+  }, [mode, reset]);
+
+  useEffect(() => {
+    if (error) toast.error(error);
+  }, [error]);
 
   if (!isOpen) return null;
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    const payload = { email, password };
-
+  function onSubmit(payload) {
     if (mode === "login") {
-      onLogin?.(payload);
+      onLogin?.({ email: payload.email, password: payload.password });
       return;
     }
 
-    onRegister?.(payload);
+    onRegister?.({
+      email: payload.email,
+      password: payload.password,
+      suburb: payload.suburb,
+      postcode: payload.postcode || "",
+      suburb_lat: payload.suburb_lat ?? null,
+      suburb_lng: payload.suburb_lng ?? null,
+    });
   }
 
   return (
@@ -37,44 +78,68 @@ export default function AuthSheet({
         aria-label="Close save sheet"
         onClick={onClose}
       >
-        ×
+        x
       </button>
 
       <div className="auth-sheet-copy">
         <p>SAVE THIS ONE</p>
         <h2>{mode === "login" ? "log in + save" : "make an account, keep the beach"}</h2>
-        <span>No ceremony. Email, password, done.</span>
+        <span>Your saved beaches, notes, and regenerated plans stay attached to you.</span>
       </div>
 
-      <form className="auth-sheet-form" onSubmit={handleSubmit}>
-        <Input
-          type="email"
-          value={email}
-          placeholder="email"
-          autoComplete="email"
-          required
-          onChange={(event) => setEmail(event.target.value)}
-        />
+      <Form {...form}>
+        <form className="auth-sheet-form" onSubmit={handleSubmit(onSubmit)} noValidate>
+          <Input
+            type="email"
+            placeholder="email"
+            autoComplete="email"
+            aria-invalid={Boolean(errors.email)}
+            {...register("email")}
+          />
+          {errors.email && <span className="auth-field-error">{errors.email.message}</span>}
+
         <Input
           type="password"
-          value={password}
           placeholder="password"
           autoComplete={mode === "login" ? "current-password" : "new-password"}
-          minLength={6}
-          required
-          onChange={(event) => setPassword(event.target.value)}
+          aria-invalid={Boolean(errors.password)}
+          {...register("password")}
         />
+        {errors.password && <span className="auth-field-error">{errors.password.message}</span>}
 
-        {error && <p className="auth-sheet-error">{error}</p>}
+        {mode === "register" && (
+          <>
+            <Controller
+              control={control}
+              name="suburb"
+              render={({ field }) => (
+                <SydneySuburbSelect
+                  value={field.value}
+                  error={errors.suburb?.message}
+                  disabled={isSubmitting}
+                  onBlur={field.onBlur}
+                  onChange={field.onChange}
+                  onSelectMeta={(meta) => {
+                    setValue("postcode", meta.postcode || "");
+                    setValue("suburb_lat", meta.suburb_lat ?? null);
+                    setValue("suburb_lng", meta.suburb_lng ?? null);
+                  }}
+                />
+              )}
+            />
+            {errors.suburb && <span className="auth-field-error">{errors.suburb.message}</span>}
+          </>
+        )}
 
-        <Button type="submit" className="auth-sheet-primary" disabled={isSubmitting}>
-          {isSubmitting
-            ? "saving..."
-            : mode === "login"
-              ? "LOG IN + SAVE →"
-              : "CREATE ACCOUNT + SAVE →"}
-        </Button>
-      </form>
+          <Button type="submit" className="auth-sheet-primary" disabled={isSubmitting}>
+            {isSubmitting
+              ? "saving..."
+              : mode === "login"
+                ? "LOG IN + SAVE"
+                : "CREATE ACCOUNT + SAVE"}
+          </Button>
+        </form>
+      </Form>
 
       <button
         type="button"

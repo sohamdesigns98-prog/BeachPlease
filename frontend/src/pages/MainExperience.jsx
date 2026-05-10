@@ -1,16 +1,18 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { getBeaches } from "@/api/beaches";
+import { getBeaches, getCachedBeaches } from "@/api/beaches";
 import {
   createCluster,
   deleteCluster,
+  getCachedClusters,
   getClusters,
   updateCluster,
 } from "@/api/clusters";
-import { getConditions } from "@/api/conditions";
-import { createPlan } from "@/api/plans";
-import AudioToggle from "@/components/audio/AudioToggle";
+import { getCondition } from "@/api/conditions";
+import { generatePlanPreview } from "@/api/plans";
 import BeachInfoTile from "@/components/BeachInfoTile";
+import ClusterPickerDialog from "@/components/ClusterPickerDialog";
 import ClusterTray from "@/components/ClusterTray";
 import CreateClusterDialog from "@/components/CreateClusterDialog";
 import GeneratingOverlay from "@/components/GeneratingOverlay";
@@ -19,7 +21,7 @@ import ModeToggle from "@/components/ModeToggle";
 import MoodCanvasShell from "@/components/MoodCanvasShell";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
-import { normalizeBeachesForCanvas } from "@/utils/beachAdapter";
+import { normalizeBeach, normalizeBeachesForCanvas } from "@/utils/beachAdapter";
 import { buildGuestPlanFromCanvas, buildPlanPayloadFromCanvas } from "@/utils/planPayload";
 
 const ACTIVITY_HINTS = [
@@ -33,7 +35,7 @@ const COMPANION_HINTS = [
   { id: "solo", color: "#ADD0EE" },
   { id: "partner", color: "#ECBCEE" },
 ];
-const LOCAL_CLUSTERS_KEY = "beachplease_guest_clusters";
+const EXPERIENCE_MODES = new Set(["cluster", "canvas", "map"]);
 
 function getClusterId(cluster) {
   return cluster?._id || cluster?.id;
@@ -43,60 +45,35 @@ function uniqueBeachSlugs(slugs = []) {
   return Array.from(new Set(slugs.filter(Boolean)));
 }
 
-function loadLocalClusters() {
-  try {
-    if (typeof window === "undefined") return [];
-    const stored = window.localStorage.getItem(LOCAL_CLUSTERS_KEY);
-    const parsed = stored ? JSON.parse(stored) : [];
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
-}
-
-function saveLocalClusters(clusters) {
-  try {
-    if (typeof window === "undefined") return;
-    window.localStorage.setItem(LOCAL_CLUSTERS_KEY, JSON.stringify(clusters));
-  } catch {
-    // Guest clusters are a convenience layer; the app can continue without persistence.
-  }
-}
-
-function makeLocalCluster(payload) {
-  const timestamp = new Date().toISOString();
-  return {
-    id: `local-${Date.now()}`,
-    user_id: "guest",
-    name: payload.name,
-    description: payload.description || "",
-    mood_phrase: payload.mood_phrase || "",
-    beach_slugs: uniqueBeachSlugs(payload.beach_slugs || []),
-    created_at: timestamp,
-    updated_at: timestamp,
-  };
-}
-
-export default function MainExperience({ visible = false, onPlanGenerated }) {
+export default function MainExperience({ visible = false, modeOverride = "", onPlanGenerated }) {
   const { token } = useAuth();
-  const [activeMode, setActiveMode] = useState("mood");
+  const navigate = useNavigate();
+  const { mode } = useParams();
+  const routeMode = mode === "mood" ? "canvas" : mode;
+  const activeMode = modeOverride || (EXPERIENCE_MODES.has(routeMode) ? routeMode : "canvas");
   const [moodPhrase, setMoodPhrase] = useState("");
   const [selectedBeachSlug, setSelectedBeachSlug] = useState("");
   const [selectedBeachName, setSelectedBeachName] = useState("");
   const [selectedBeachData, setSelectedBeachData] = useState(null);
   const [activityHint, setActivityHint] = useState("");
   const [companionHint, setCompanionHint] = useState("");
-  const [beaches, setBeaches] = useState([]);
+  const [beaches, setBeaches] = useState(() => normalizeBeachesForCanvas(getCachedBeaches() || [], []));
   const [mapFallbackActive, setMapFallbackActive] = useState(false);
-  const [clusters, setClusters] = useState([]);
+  const [clusters, setClusters] = useState(() => (token ? getCachedClusters() || [] : []));
   const [clustersLoading, setClustersLoading] = useState(false);
   const [clusterError, setClusterError] = useState("");
+  const [conditionsBySlug, setConditionsBySlug] = useState({});
+  const [loadingConditionSlugs, setLoadingConditionSlugs] = useState({});
   const [isClusterDialogOpen, setIsClusterDialogOpen] = useState(false);
+  const [editingCluster, setEditingCluster] = useState(null);
+  const [focusedClusterId, setFocusedClusterId] = useState("");
+  const [clusterPickerBeach, setClusterPickerBeach] = useState(null);
   const [isClusterSaving, setIsClusterSaving] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [generationInput, setGenerationInput] = useState(null);
   const [error, setError] = useState("");
   const useMocks = import.meta.env.VITE_USE_MOCKS === "true";
+  const previousModeRef = useRef(activeMode);
 
   const selectedBeach = useMemo(
     () => {
@@ -136,9 +113,14 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
     [beaches],
   );
 
-  const clusteredBeachCount = useMemo(
-    () => uniqueBeachSlugs(clusters.flatMap((cluster) => cluster.beach_slugs || [])).length,
-    [clusters],
+  const selectedBeachClusters = useMemo(
+    () => {
+      if (!selectedBeach?.slug) return [];
+      return clusters.filter((cluster) => (
+        Array.isArray(cluster.beach_slugs) && cluster.beach_slugs.includes(selectedBeach.slug)
+      ));
+    },
+    [clusters, selectedBeach],
   );
 
   useEffect(() => {
@@ -146,21 +128,12 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
 
     async function loadBeachData() {
       try {
-        const [beachResponse, conditionResponse] = await Promise.allSettled([
-          getBeaches(),
-          getConditions(),
-        ]);
+        const beachResponse = await getBeaches();
         if (cancelled) return;
 
-        const nextBeaches = beachResponse.status === "fulfilled" && Array.isArray(beachResponse.value)
-          ? beachResponse.value
-          : [];
-        const nextConditions = conditionResponse.status === "fulfilled" && Array.isArray(conditionResponse.value)
-          ? conditionResponse.value
-          : [];
-
-        setBeaches(normalizeBeachesForCanvas(nextBeaches, nextConditions));
-        setMapFallbackActive(conditionResponse.status !== "fulfilled");
+        const nextBeaches = Array.isArray(beachResponse) ? beachResponse : [];
+        setBeaches(normalizeBeachesForCanvas(nextBeaches, []));
+        setMapFallbackActive(true);
       } catch {
         if (cancelled) return;
         setBeaches(normalizeBeachesForCanvas([], []));
@@ -180,7 +153,7 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
 
     async function loadClusters() {
       if (!token) {
-        setClusters(loadLocalClusters());
+        setClusters([]);
         setClustersLoading(false);
         setClusterError("");
         return;
@@ -193,7 +166,7 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
         if (!cancelled) setClusters(Array.isArray(nextClusters) ? nextClusters : []);
       } catch (caughtError) {
         if (!cancelled) {
-          setClusterError(caughtError?.response?.data?.detail || "Couldn’t load clusters.");
+          setClusterError(caughtError?.response?.data?.detail || "Couldn't load clusters.");
         }
       } finally {
         if (!cancelled) setClustersLoading(false);
@@ -207,10 +180,75 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
     };
   }, [token]);
 
+  useEffect(() => {
+    if (mode && !EXPERIENCE_MODES.has(mode)) {
+      navigate("/explore/canvas", { replace: true });
+    }
+  }, [mode, navigate]);
+
+  useEffect(() => {
+    if (previousModeRef.current !== activeMode) {
+      setSelectedBeachSlug("");
+      setSelectedBeachName("");
+      setSelectedBeachData(null);
+      previousModeRef.current = activeMode;
+    }
+  }, [activeMode]);
+
+  async function hydrateBeachConditions(beach) {
+    if (!beach?.slug) return;
+    if (loadingConditionSlugs[beach.slug]) return;
+    if (conditionsBySlug[beach.slug] && !conditionsBySlug[beach.slug]?.conditions_unavailable) return;
+
+    setLoadingConditionSlugs((currentSlugs) => ({
+      ...currentSlugs,
+      [beach.slug]: true,
+    }));
+
+    try {
+      const condition = await getCondition(beach.slug);
+      setConditionsBySlug((currentConditions) => ({
+        ...currentConditions,
+        [beach.slug]: condition,
+      }));
+      if (condition?.conditions_unavailable) {
+        setSelectedBeachData((currentBeach) => (
+          currentBeach?.slug === beach.slug
+            ? normalizeBeach(currentBeach, { [beach.slug]: condition }, 0)
+            : currentBeach
+        ));
+        return;
+      }
+
+      setBeaches((currentBeaches) => currentBeaches.map((currentBeach, index) => (
+        currentBeach.slug === beach.slug
+          ? normalizeBeach(currentBeach, { [beach.slug]: condition }, index)
+          : currentBeach
+      )));
+      setSelectedBeachData((currentBeach) => (
+        currentBeach?.slug === beach.slug
+          ? normalizeBeach(currentBeach, { [beach.slug]: condition }, 0)
+          : currentBeach
+      ));
+    } catch {
+      setSelectedBeachData((currentBeach) => (
+        currentBeach?.slug === beach.slug
+          ? { ...currentBeach, conditions_unavailable: true }
+          : currentBeach
+      ));
+    } finally {
+      setLoadingConditionSlugs((currentSlugs) => ({
+        ...currentSlugs,
+        [beach.slug]: false,
+      }));
+    }
+  }
+
   function handleBeachSelect(beach) {
     setSelectedBeachSlug(beach.slug || "");
     setSelectedBeachName(beach.name || "");
     setSelectedBeachData(beach);
+    hydrateBeachConditions(beach);
   }
 
   function buildGenerationPayload() {
@@ -229,6 +267,9 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
     setGenerationInput(payload);
     setIsGenerating(true);
     setError("");
+    setSelectedBeachSlug("");
+    setSelectedBeachName("");
+    setSelectedBeachData(null);
 
     if (useMocks || !token) {
       window.setTimeout(() => {
@@ -246,12 +287,12 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
     }
 
     try {
-      const createdPlan = await createPlan(payload);
-      setSelectedBeachSlug(createdPlan.selected_beach_slug || selectedBeachSlug);
-      setSelectedBeachName(createdPlan.selected_beach_name || selectedBeachName);
-      onPlanGenerated?.(createdPlan, payload);
+      const previewPlan = await generatePlanPreview(payload);
+      setSelectedBeachSlug(previewPlan.selected_beach_slug || selectedBeachSlug);
+      setSelectedBeachName(previewPlan.selected_beach_name || selectedBeachName);
+      onPlanGenerated?.(previewPlan, payload);
     } catch (caughtError) {
-      setError(caughtError?.response?.data?.detail || "Couldn’t generate a postcard right now.");
+      setError(caughtError?.response?.data?.detail || "Couldn't generate a postcard right now.");
     } finally {
       setIsGenerating(false);
     }
@@ -261,28 +302,21 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
     if (isClusterSaving) return;
 
     const { activate = true } = options;
-    setIsClusterSaving(true);
-    setClusterError("");
     if (!token) {
-      const createdCluster = makeLocalCluster(payload);
-      setClusters((currentClusters) => {
-        const nextClusters = [createdCluster, ...currentClusters];
-        saveLocalClusters(nextClusters);
-        return nextClusters;
-      });
-      setIsClusterDialogOpen(false);
-      if (activate) setActiveMode("clusters");
-      setIsClusterSaving(false);
+      navigate("/login");
       return;
     }
 
+    setIsClusterSaving(true);
+    setClusterError("");
+
     try {
       const createdCluster = await createCluster(payload);
-      setClusters((currentClusters) => [createdCluster, ...currentClusters]);
+      setClusters((currentClusters) => [{ ...payload, ...createdCluster }, ...currentClusters]);
       setIsClusterDialogOpen(false);
-      if (activate) setActiveMode("clusters");
+      if (activate) navigate("/explore/canvas");
     } catch (caughtError) {
-      setClusterError(caughtError?.response?.data?.detail || "Couldn’t create that cluster.");
+      setClusterError(caughtError?.response?.data?.detail || "Couldn't create that cluster.");
     } finally {
       setIsClusterSaving(false);
     }
@@ -290,24 +324,15 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
 
   async function handleAddBeachToCluster(cluster, beach) {
     if (!cluster || !beach?.slug) return;
-
-    const clusterId = getClusterId(cluster);
-    const beachSlugs = uniqueBeachSlugs([...(cluster.beach_slugs || []), beach.slug]);
-    setClusterError("");
-
     if (!token) {
-      setClusters((currentClusters) => {
-        const timestamp = new Date().toISOString();
-        const nextClusters = currentClusters.map((currentCluster) => (
-          getClusterId(currentCluster) === clusterId
-            ? { ...currentCluster, beach_slugs: beachSlugs, updated_at: timestamp }
-            : currentCluster
-        ));
-        saveLocalClusters(nextClusters);
-        return nextClusters;
-      });
+      navigate("/login");
       return;
     }
+
+    const clusterId = getClusterId(cluster);
+    if ((cluster.beach_slugs || []).includes(beach.slug)) return;
+    const beachSlugs = uniqueBeachSlugs([...(cluster.beach_slugs || []), beach.slug]);
+    setClusterError("");
 
     try {
       const updatedCluster = await updateCluster(clusterId, { beach_slugs: beachSlugs });
@@ -315,30 +340,46 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
         getClusterId(currentCluster) === clusterId ? updatedCluster : currentCluster
       )));
     } catch (caughtError) {
-      setClusterError(caughtError?.response?.data?.detail || "Couldn’t add that beach.");
+      setClusterError(caughtError?.response?.data?.detail || "Couldn't add that beach.");
+    }
+  }
+
+  async function handleUpdateCluster(cluster, payload) {
+    const clusterId = getClusterId(cluster);
+    if (!clusterId) return;
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    setIsClusterSaving(true);
+    setClusterError("");
+
+    try {
+      const updatedCluster = await updateCluster(clusterId, payload);
+      const nextCluster = { ...updatedCluster, ...payload };
+      setClusters((currentClusters) => currentClusters.map((currentCluster) => (
+        getClusterId(currentCluster) === clusterId ? nextCluster : currentCluster
+      )));
+      setEditingCluster(null);
+      setIsClusterDialogOpen(false);
+    } catch (caughtError) {
+      setClusterError(caughtError?.response?.data?.detail || "Couldn't update that cluster.");
+    } finally {
+      setIsClusterSaving(false);
     }
   }
 
   async function handleRemoveBeachFromCluster(cluster, beachSlug) {
     const clusterId = getClusterId(cluster);
     if (!clusterId || !beachSlug) return;
+    if (!token) {
+      navigate("/login");
+      return;
+    }
 
     const beachSlugs = (cluster.beach_slugs || []).filter((slug) => slug !== beachSlug);
     setClusterError("");
-
-    if (!token) {
-      setClusters((currentClusters) => {
-        const timestamp = new Date().toISOString();
-        const nextClusters = currentClusters.map((currentCluster) => (
-          getClusterId(currentCluster) === clusterId
-            ? { ...currentCluster, beach_slugs: beachSlugs, updated_at: timestamp }
-            : currentCluster
-        ));
-        saveLocalClusters(nextClusters);
-        return nextClusters;
-      });
-      return;
-    }
 
     try {
       const updatedCluster = await updateCluster(clusterId, { beach_slugs: beachSlugs });
@@ -346,24 +387,19 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
         getClusterId(currentCluster) === clusterId ? updatedCluster : currentCluster
       )));
     } catch (caughtError) {
-      setClusterError(caughtError?.response?.data?.detail || "Couldn’t remove that beach.");
+      setClusterError(caughtError?.response?.data?.detail || "Couldn't remove that beach.");
     }
   }
 
   async function handleDeleteCluster(cluster) {
     const clusterId = getClusterId(cluster);
     if (!clusterId) return;
-
-    setClusterError("");
-
     if (!token) {
-      setClusters((currentClusters) => {
-        const nextClusters = currentClusters.filter((currentCluster) => getClusterId(currentCluster) !== clusterId);
-        saveLocalClusters(nextClusters);
-        return nextClusters;
-      });
+      navigate("/login");
       return;
     }
+
+    setClusterError("");
 
     try {
       await deleteCluster(clusterId);
@@ -371,73 +407,108 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
         getClusterId(currentCluster) !== clusterId
       )));
     } catch (caughtError) {
-      setClusterError(caughtError?.response?.data?.detail || "Couldn’t delete that cluster.");
+      setClusterError(caughtError?.response?.data?.detail || "Couldn't delete that cluster.");
     }
   }
 
   function handleOpenClusterAdd() {
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
     if (clusters.length === 0) {
       setIsClusterDialogOpen(true);
       return;
     }
     if (selectedBeach) {
-      handleAddBeachToCluster(clusters[0], selectedBeach);
+      if (clusters.length === 1) {
+        handleAddBeachToCluster(clusters[0], selectedBeach);
+        return;
+      }
+      setClusterPickerBeach(selectedBeach);
     }
   }
 
   function handleQuickAddBeachToCluster(beach) {
     if (!beach?.slug) return;
+    if (!token) {
+      navigate("/login");
+      return;
+    }
 
     if (clusters.length === 0) {
       handleCreateCluster({
         name: "my beaches",
         description: "quick saves from the canvas",
         mood_phrase: moodPhrase,
+        color: "#ADD0EE",
         beach_slugs: [beach.slug],
       }, { activate: false });
       return;
     }
 
-    handleAddBeachToCluster(clusters[0], beach);
+    if (clusters.length === 1) {
+      handleAddBeachToCluster(clusters[0], beach);
+      return;
+    }
+
+    setClusterPickerBeach(beach);
+  }
+
+  function handleCreateClusterFromPicker() {
+    setSelectedBeachSlug(clusterPickerBeach?.slug || "");
+    setSelectedBeachName(clusterPickerBeach?.name || "");
+    setSelectedBeachData(clusterPickerBeach);
+    setClusterPickerBeach(null);
+    setIsClusterDialogOpen(true);
   }
 
   return (
     <main className={`main-app-shell mood-app-shell ${visible ? "is-visible" : ""}`}>
-      <header className="mood-app-header">
-        <div className="mood-app-left-controls">
-          <span className="mood-app-mark" aria-hidden="true" />
-          <AudioToggle />
-        </div>
-        <div className="mood-app-controls">
+      {activeMode !== "cluster" && (
+        <div className="explore-mode-pill">
           <ModeToggle
             activeMode={activeMode}
-            clusterCount={clusteredBeachCount}
-            onChange={setActiveMode}
+            onChange={(nextMode) => navigate(`/explore/${nextMode}`)}
           />
         </div>
-      </header>
+      )}
 
-      <section className={`mood-mode-layer ${activeMode === "mood" ? "is-active" : ""}`} aria-hidden={activeMode !== "mood"}>
+      <section className={`mood-mode-layer ${activeMode === "canvas" ? "is-active" : ""}`} aria-hidden={activeMode !== "canvas"}>
         <MoodCanvasShell
           beaches={beaches}
           moodPhrase={moodPhrase}
           activityHint={activityHint}
           companionHint={companionHint}
           selectedBeachSlug={selectedBeachSlug}
+          clusters={clusters}
+          focusedClusterId={focusedClusterId}
           onBeachSelect={handleBeachSelect}
           onBeachAddToCluster={handleQuickAddBeachToCluster}
+          onBeachDropToCluster={handleAddBeachToCluster}
+          onClusterFocus={setFocusedClusterId}
         />
       </section>
 
-      <section className={`mood-mode-layer ${activeMode === "clusters" ? "is-active" : ""}`} aria-hidden={activeMode !== "clusters"}>
+      <section className={`mood-mode-layer ${activeMode === "cluster" ? "is-active" : ""}`} aria-hidden={activeMode !== "cluster"}>
         <ClusterTray
           clusters={clusters}
           beachesBySlug={beachesBySlug}
           selectedBeach={selectedBeach}
           loading={clustersLoading}
           error={clusterError}
-          onCreate={() => setIsClusterDialogOpen(true)}
+          requiresAuth={!token}
+          onLogin={() => navigate("/login")}
+          onCreate={() => {
+            if (!token) {
+              navigate("/login");
+              return;
+            }
+            setIsClusterDialogOpen(true);
+          }}
           onDelete={handleDeleteCluster}
+          onEdit={setEditingCluster}
           onAddBeach={handleAddBeachToCluster}
           onRemoveBeach={handleRemoveBeachFromCluster}
         />
@@ -455,10 +526,12 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
         />
       </section>
 
-      {selectedBeach && activeMode !== "clusters" && (
+      {selectedBeach && activeMode !== "cluster" && (
         <BeachInfoTile
           beach={selectedBeach}
+          conditionLoading={Boolean(loadingConditionSlugs[selectedBeach.slug])}
           isGenerating={isGenerating}
+          clusterMembership={selectedBeachClusters}
           onClose={() => {
             setSelectedBeachSlug("");
             setSelectedBeachName("");
@@ -469,7 +542,7 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
         />
       )}
 
-      {activeMode !== "clusters" && (
+      {activeMode !== "cluster" && (
         <form
           className={`mood-input-bar ${selectedBeach ? "has-info-tile" : ""}`}
           onSubmit={(event) => {
@@ -520,13 +593,31 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
       />
 
       <CreateClusterDialog
-        isOpen={isClusterDialogOpen}
-        selectedBeach={selectedBeach}
+        isOpen={isClusterDialogOpen || Boolean(editingCluster)}
+        cluster={editingCluster}
+        selectedBeach={selectedBeach || clusterPickerBeach}
         moodPhrase={moodPhrase}
         isSubmitting={isClusterSaving}
         error={clusterError}
-        onClose={() => setIsClusterDialogOpen(false)}
+        onClose={() => {
+          setIsClusterDialogOpen(false);
+          setEditingCluster(null);
+        }}
         onCreate={handleCreateCluster}
+        onUpdate={handleUpdateCluster}
+      />
+
+      <ClusterPickerDialog
+        isOpen={Boolean(clusterPickerBeach)}
+        beach={clusterPickerBeach}
+        clusters={clusters}
+        onClose={() => setClusterPickerBeach(null)}
+        onCreateNew={handleCreateClusterFromPicker}
+        onPick={(cluster) => {
+          const beachToAdd = clusterPickerBeach;
+          setClusterPickerBeach(null);
+          handleAddBeachToCluster(cluster, beachToAdd);
+        }}
       />
     </main>
   );

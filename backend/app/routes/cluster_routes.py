@@ -75,6 +75,7 @@ async def create_cluster(
         "name": payload.name,
         "description": payload.description,
         "mood_phrase": payload.mood_phrase,
+        "color": payload.color,
         "beach_slugs": payload.beach_slugs,
         "created_at": now,
         "updated_at": now,

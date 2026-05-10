@@ -1,4 +1,5 @@
 from datetime import datetime
+from math import atan2, cos, radians, sin, sqrt
 from typing import Any
 
 MOOD_TAG_MAPPING = {
@@ -264,11 +265,44 @@ def score_mood_match(mood_tags: list[str], beach: dict) -> float:
     return clamp_score(score)
 
 
+def distance_km(lat_a: float, lng_a: float, lat_b: float, lng_b: float) -> float:
+    radius_km = 6371.0
+    dlat = radians(lat_b - lat_a)
+    dlng = radians(lng_b - lng_a)
+    a = (
+        sin(dlat / 2) ** 2
+        + cos(radians(lat_a)) * cos(radians(lat_b)) * sin(dlng / 2) ** 2
+    )
+    return radius_km * 2 * atan2(sqrt(a), sqrt(1 - a))
+
+
+def suburb_distance_to_beach(user_profile: dict, beach: dict) -> float | None:
+    user_lat = user_profile.get("suburb_lat")
+    user_lng = user_profile.get("suburb_lng")
+    beach_lat = beach.get("lat")
+    beach_lng = beach.get("lng")
+
+    if None in {user_lat, user_lng, beach_lat, beach_lng}:
+        return None
+
+    try:
+        return distance_km(
+            float(user_lat),
+            float(user_lng),
+            float(beach_lat),
+            float(beach_lng),
+        )
+    except (TypeError, ValueError):
+        return None
+
+
 def score_profile_match(user_profile: dict, beach: dict) -> float:
     score = 50.0
     tags = beach_tags(beach)
     companions = user_profile.get("companions")
     travel_mode = user_profile.get("travel_mode")
+    profile_suburb = str(user_profile.get("suburb") or "").strip().lower()
+    beach_suburb = str(beach.get("suburb") or "").strip().lower()
     facilities = set(beach.get("facilities", []))
     access_tags = set(beach.get("access_tags", []))
     dog_access = beach.get("dog_access")
@@ -426,6 +460,13 @@ def score_reason_details(
 
     companions = user_profile.get("companions")
     travel_mode = user_profile.get("travel_mode")
+    distance = suburb_distance_to_beach(user_profile, beach)
+
+    if distance is not None:
+        if distance <= 12:
+            matched_reasons.append(f"Close to profile suburb: about {round(distance)}km away")
+        elif distance >= 45 and travel_mode != "drive":
+            penalties.append(f"Longer trip from profile suburb: about {round(distance)}km")
 
     if companions == "dog":
         if "dog_friendly" in tags:
@@ -542,6 +583,11 @@ def rank_candidate_beaches(
                     "region_score": round(region_score, 2),
                     "activity_score": round(activity_score, 2),
                     "companion_score": round(companion_score, 2),
+                    "profile_distance_km": (
+                        round(suburb_distance_to_beach(user_profile, beach), 1)
+                        if suburb_distance_to_beach(user_profile, beach) is not None
+                        else None
+                    ),
                 },
                 "matched_reasons": matched_reasons,
                 "penalties": penalties,
@@ -550,3 +596,16 @@ def rank_candidate_beaches(
         )
 
     return sorted(ranked, key=lambda beach: beach["score"], reverse=True)
+    if profile_suburb and profile_suburb == beach_suburb:
+        score += 28
+
+    distance = suburb_distance_to_beach(user_profile, beach)
+    if distance is not None:
+        if distance <= 5:
+            score += 24
+        elif distance <= 12:
+            score += 18
+        elif distance <= 25:
+            score += 10
+        elif distance >= 45 and travel_mode != "drive":
+            score -= 12

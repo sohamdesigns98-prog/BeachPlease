@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 import { Button } from "@/components/ui/button";
 
@@ -52,9 +53,19 @@ function getWarning(beach) {
   return "";
 }
 
+function ConditionValue({ children, loading }) {
+  if (loading) {
+    return <dd className="beach-info-tile__loading" aria-label="Loading condition" />;
+  }
+
+  return <dd>{children}</dd>;
+}
+
 export default function BeachInfoTile({
   beach,
+  conditionLoading = false,
   isGenerating = false,
+  clusterMembership = [],
   onClose,
   onGenerate,
   onAddToCluster,
@@ -69,15 +80,15 @@ export default function BeachInfoTile({
 
   const warning = getWarning(beach);
   const bring = getBringList(beach);
-
-  return (
+  const clusterCount = Array.isArray(clusterMembership) ? clusterMembership.length : 0;
+  const drawer = (
     <aside
       className="beach-info-tile"
       style={{ "--beach-info-accent": beach.accent || "#91C059" }}
       aria-label={`${beach.name} beach information`}
     >
       <button className="beach-info-tile__close" type="button" onClick={onClose} aria-label="Close beach info">
-        ×
+        x
       </button>
 
       <header className="beach-info-tile__hero">
@@ -100,23 +111,23 @@ export default function BeachInfoTile({
         <dl className="beach-info-tile__conditions">
           <div>
             <dt>TEMP</dt>
-            <dd>{formatNumber(beach.temp, "°C")}</dd>
+            <ConditionValue loading={conditionLoading}>{formatNumber(beach.temp, "°C")}</ConditionValue>
           </div>
           <div>
             <dt>WAVES</dt>
-            <dd>{formatNumber(beach.waves, "m")}</dd>
+            <ConditionValue loading={conditionLoading}>{formatNumber(beach.waves, "m")}</ConditionValue>
           </div>
           <div>
             <dt>WIND</dt>
-            <dd>{formatNumber(beach.windKmh, "km/h")}</dd>
+            <ConditionValue loading={conditionLoading}>{formatNumber(beach.windKmh, "km/h")}</ConditionValue>
           </div>
           <div>
             <dt>UV</dt>
-            <dd>{formatNumber(beach.uv)}</dd>
+            <ConditionValue loading={conditionLoading}>{formatNumber(beach.uv)}</ConditionValue>
           </div>
           <div>
             <dt>CROWD</dt>
-            <dd>{beach.crowd?.label || "moderate"}</dd>
+            <ConditionValue loading={conditionLoading}>{beach.crowd?.label || "moderate"}</ConditionValue>
           </div>
         </dl>
       </section>
@@ -153,8 +164,14 @@ export default function BeachInfoTile({
         variant="outline"
         onClick={onAddToCluster}
       >
-        Add to Cluster
+        {clusterCount > 0 ? `Saved in ${clusterCount} cluster${clusterCount > 1 ? "s" : ""}` : "Add to Cluster"}
       </Button>
+      {clusterCount > 0 && (
+        <p className="beach-info-tile__cluster-note">
+          {clusterMembership.slice(0, 2).map((cluster) => cluster.name).join(" / ")}
+          {clusterCount > 2 ? ` +${clusterCount - 2}` : ""} · add to another cluster anytime
+        </p>
+      )}
 
       <Button
         className="beach-info-tile__generate"
@@ -166,4 +183,6 @@ export default function BeachInfoTile({
       </Button>
     </aside>
   );
+
+  return createPortal(drawer, document.body);
 }

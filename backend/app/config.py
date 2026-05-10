@@ -17,6 +17,7 @@ class Settings:
     jwt_secret: str
     gemini_api_key: str
     client_url: str
+    google_client_id: str
 
 
 settings = Settings(
@@ -25,4 +26,5 @@ settings = Settings(
     jwt_secret=os.getenv("JWT_SECRET", ""),
     gemini_api_key=os.getenv("GEMINI_API_KEY", ""),
     client_url=os.getenv("CLIENT_URL", "http://localhost:5173"),
+    google_client_id=os.getenv("GOOGLE_CLIENT_ID", ""),
 )

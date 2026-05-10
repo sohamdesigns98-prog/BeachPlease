@@ -1,9 +1,17 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 import { TOKEN_KEY } from "@/api/client";
+import { clearClustersCache } from "@/api/clusters";
+import { clearPlansCache } from "@/api/plans";
 import * as authApi from "@/api/auth";
 
 const AuthContext = createContext(null);
+
+function clearUserScopedCaches() {
+  clearClustersCache();
+  clearPlansCache();
+  window.localStorage.removeItem("beachplease_guest_clusters");
+}
 
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => localStorage.getItem(TOKEN_KEY));
@@ -23,6 +31,7 @@ export function AuthProvider({ children }) {
       setUser(currentUser);
       return currentUser;
     } catch (error) {
+      clearUserScopedCaches();
       localStorage.removeItem(TOKEN_KEY);
       setToken(null);
       setUser(null);
@@ -42,6 +51,7 @@ export function AuthProvider({ children }) {
   }, [token]);
 
   async function register(payload) {
+    clearUserScopedCaches();
     const response = await authApi.register(payload);
     localStorage.setItem(TOKEN_KEY, response.access_token);
     setToken(response.access_token);
@@ -50,6 +60,7 @@ export function AuthProvider({ children }) {
   }
 
   async function login(payload) {
+    clearUserScopedCaches();
     const response = await authApi.login(payload);
     localStorage.setItem(TOKEN_KEY, response.access_token);
     setToken(response.access_token);
@@ -57,7 +68,17 @@ export function AuthProvider({ children }) {
     return response;
   }
 
+  async function loginWithGoogle(credential) {
+    clearUserScopedCaches();
+    const response = await authApi.loginWithGoogle(credential);
+    localStorage.setItem(TOKEN_KEY, response.access_token);
+    setToken(response.access_token);
+    setUser(response.user);
+    return response;
+  }
+
   function logout() {
+    clearUserScopedCaches();
     localStorage.removeItem(TOKEN_KEY);
     setToken(null);
     setUser(null);
@@ -82,6 +103,7 @@ export function AuthProvider({ children }) {
       loading,
       register,
       login,
+      loginWithGoogle,
       logout,
       refreshUser,
       updateProfile,

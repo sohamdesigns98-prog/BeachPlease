@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 from pymongo import ASCENDING
 
 from app.database import get_database
+from app.seed.beach_images import WIKIMEDIA_BEACH_IMAGES
 
 
 def build_beach(
@@ -121,8 +122,10 @@ async def seed_beaches():
     now = datetime.now(timezone.utc)
 
     for beach in BEACHES:
+        image_fields = WIKIMEDIA_BEACH_IMAGES.get(beach["slug"], {})
         document = {
             **beach,
+            **image_fields,
             "created_at": now,
             "updated_at": now,
         }

@@ -19,6 +19,7 @@ class MoodClusterCreateRequest(BaseModel):
     name: str = Field(min_length=1)
     description: str = ""
     mood_phrase: str = ""
+    color: str = "#91C059"
     beach_slugs: list[str] = Field(default_factory=list)
 
     @field_validator("name")
@@ -34,6 +35,14 @@ class MoodClusterCreateRequest(BaseModel):
     def strip_optional_text(cls, value: str) -> str:
         return value.strip()
 
+    @field_validator("color")
+    @classmethod
+    def validate_color(cls, value: str) -> str:
+        stripped = value.strip()
+        if not stripped.startswith("#") or len(stripped) not in {4, 7}:
+            return "#91C059"
+        return stripped
+
     @field_validator("beach_slugs")
     @classmethod
     def validate_beach_slugs(cls, value: list[str]) -> list[str]:
@@ -44,6 +53,7 @@ class MoodClusterUpdateRequest(BaseModel):
     name: Optional[str] = None
     description: Optional[str] = None
     mood_phrase: Optional[str] = None
+    color: Optional[str] = None
     beach_slugs: Optional[list[str]] = None
 
     @field_validator("name")
@@ -63,6 +73,16 @@ class MoodClusterUpdateRequest(BaseModel):
         if value is None:
             return value
         return value.strip()
+
+    @field_validator("color")
+    @classmethod
+    def validate_color(cls, value: Optional[str]) -> Optional[str]:
+        if value is None:
+            return value
+        stripped = value.strip()
+        if not stripped.startswith("#") or len(stripped) not in {4, 7}:
+            return "#91C059"
+        return stripped
 
     @field_validator("beach_slugs")
     @classmethod

@@ -26,6 +26,21 @@ The core experience should feel like:
 
 > A calm but slightly cheeky Sydney beach mate, wrapped in a visual coastal map of moods, images, and live conditions.
 
+### Current UX Direction: Explore
+
+The primary logged-in or guest experience should now be **Explore**:
+
+- Global navbar: `Explore | Cluster | Saved | Profile/account`.
+- Explore contains the internal `canvas | map` pill switch.
+- Canvas and map share mood input, suggestion chips, selected beach drawer, and generated-plan entry point.
+- Cluster is a separate page for favourite/upcoming beaches tied to the current user profile.
+- Saved is a separate page for generated plans, notes, and full plan detail.
+- Generated plan should not rely only on a decorative ticket. It must show the postcard image plus readable plan detail such as where, when, why, conditions, warning, and bring list.
+- Clusters are visual objects, not plain folders: users can assign a color, edit the name/description/mood, drag a beach from the canvas into a cluster, and see cluster color badges on canvas beach tiles.
+- Explore should support cluster focus, where choosing a cluster pulls its beaches into the highlighted center arrangement and mutes the rest.
+
+This replaces the older idea that `Saved | Mood | Map` are all equivalent top-level modes.
+
 ---
 
 ## 3. Core Product Principle
@@ -1156,9 +1171,71 @@ Mitigation:
 - avoid over-heavy animation
 - keep Mapbox separate in Map mode
 
+### Risk 6: Login feeling pointless
+
+Mitigation:
+
+- make login unlock saved postcards, notes, regenerated plans, profile-aware ranking, and future calendar actions
+- return users to the main experience after login/signup
+- keep profile onboarding lightweight and tied to recommendation quality
+
 ---
 
-## 37. Open Questions
+## 37. Recent Refinements
+
+### Auth and Profile
+
+- Profile suburb comes from the postcode API where available.
+- Store postcode, suburb latitude, and suburb longitude when selected.
+- Backend ranking should use profile suburb proximity against beach coordinates.
+- Gemini should consider proximity when vibe and conditions are otherwise similar.
+- Google OAuth should use Google Identity Services on the frontend and verify the returned ID token on the backend before issuing the app JWT.
+- New Google users should be marked profile-incomplete until suburb, companion, and travel settings are saved.
+
+### Mood Canvas Interaction
+
+- BeachPlease should not auto-select a beach while the user is idle; selection should stay user-driven.
+- When a beach is selected, the canvas should glide that tile toward the viewport centre without a hard jump.
+- Rendering 50 beach tiles is acceptable for the current prototype, but image weight and animation cost must be watched as the dataset grows.
+- Mobile layouts should avoid horizontal overflow, keep global navigation usable in two compact rows, and give auth/saved/profile/plan pages enough top padding below the fixed nav.
+
+### Saved Plans and Clusters
+
+- Primary app structure should be: main experience with two pill tabs (`canvas` and `map`), standalone `clusters`, standalone `saved`, saved detail, profile, generated plan, login, and register.
+- Saved generated plans should live at a dedicated URL, currently `/saved-plans`.
+- Generating a plan should produce a preview first, not automatically save.
+- A generated plan is stored in MongoDB `beach_plans` only after the user chooses Save.
+- Saved plans should support previewing the saved postcard, opening a detail page, updating notes, and deleting the plan.
+- Saved plan detail should expose the full generated snapshot, including where/when/why, bring list, conditions summary, rejected alternatives, and candidate reasoning.
+- Destructive actions such as deleting plans, clusters, or accounts should use a confirmation modal and red danger styling.
+- Clusters are for upcoming beaches or loose shortlists, not for storing generated plans, and require login because they belong to a user profile.
+- When adding a beach to clusters, users with more than one cluster must choose the destination cluster instead of defaulting to the first cluster.
+- A beach may belong to multiple clusters because clusters represent different contexts, such as solo swims, weekend ideas, or family options. The same beach should not be duplicated inside one cluster.
+- User-scoped frontend caches for clusters and saved plans must be cleared on login, logout, register, Google auth, and auth refresh failure so switching accounts cannot show another profile's data.
+- The saved plans surface should feel exploratory and canvas-like over time, while still keeping clear update/delete controls.
+- The Cluster tab should remain available as a favorites/shortlist surface.
+- The top navigation should persist across all app pages, so separate back buttons are not needed.
+- Generated plan preview should have its own route, currently `/generated-plan`, so switching to Mood or Map leaves the preview.
+
+### Conditions and Imagery
+
+- Live beach-level conditions are useful only when they affect a decision the user understands.
+- Prefer plain-language condition labels such as "gentle swim", "windy", "high UV", or "better after 4pm" over raw metrics as the primary UI.
+- Raw metrics like UV, temperature, and swell can be secondary details or tooltips, not the main reason to choose a beach.
+- If public condition APIs rate-limit, cache condition responses and fall back to regional/day-level summaries rather than showing broken null values.
+- Do not fetch every beach condition on initial canvas load. Fetch beach-level conditions when a user opens a beach or when plan generation needs final candidates.
+- Failed condition fetches such as API 429 should not be cached forever; retry them after a short cooldown.
+- Beach images do not need to be manually added one by one forever; use a pipeline that imports from licensed/static sources, then allows manual curation for hero-quality beaches.
+- The first image pass should seed curated Wikimedia Commons images for high-traffic beaches, preserve attribution/license/source metadata, and keep deterministic fallback images for beaches not curated yet.
+
+### Integrations
+
+- Google OAuth is a lower-friction auth option, but should still lead into profile/suburb onboarding.
+- Google Calendar is a strong future premium feature because it turns a generated beach plan into a scheduled trip.
+
+---
+
+## 38. Open Questions
 
 These should be resolved during implementation:
 
@@ -1173,7 +1250,7 @@ These should be resolved during implementation:
 
 ---
 
-## 38. Current Decisions Locked
+## 39. Current Decisions Locked
 
 ```txt
 Default mode after entering: Mood

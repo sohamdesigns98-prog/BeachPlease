@@ -4,6 +4,21 @@ import { toPng } from "html-to-image";
 import { APP_COPY } from "@/content/voice";
 
 const FALLBACK_IMAGE_URL = "/landing-scroll.jpg";
+const PLAN_FALLBACK_IMAGES = [
+  "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=900&q=80",
+];
+
+function hashString(value = "") {
+  return Array.from(String(value)).reduce((total, char) => total + char.charCodeAt(0), 0);
+}
+
+function fallbackImageForPlan(rawPlan = {}) {
+  const key = rawPlan.selected_beach_slug || rawPlan.selected_beach_name || rawPlan.slug || "";
+  return PLAN_FALLBACK_IMAGES[hashString(key) % PLAN_FALLBACK_IMAGES.length] || FALLBACK_IMAGE_URL;
+}
 
 export function validImageUrl(value) {
   if (!value) return false;
@@ -101,7 +116,7 @@ export function normalisePlanForTicket(rawPlan, generationInput = {}) {
     conditions: plan.conditions_summary || rawPlan.conditions || "",
     bring: Array.isArray(plan.bring) ? plan.bring : [],
     verdict: plan.gentle_warning || "— worth a look, conditions permitting.",
-    imageUrl: validImageUrl(rawPlan.image_url) ? rawPlan.image_url : FALLBACK_IMAGE_URL,
+    imageUrl: validImageUrl(rawPlan.image_url) ? rawPlan.image_url : fallbackImageForPlan(rawPlan),
     region: rawPlan.region || generationInput.region || "sydney",
     activity: rawPlan.activity || generationInput.activity || moodReading.energy || "active",
     accent: rawPlan.accent || "#91C059",
