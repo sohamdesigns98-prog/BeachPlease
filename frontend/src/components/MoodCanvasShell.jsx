@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import ParallaxBeachTile from "@/components/ParallaxBeachTile";
 import {
   FALLBACK_BEACH_SEED,
   VIBE_KEYWORDS,
@@ -12,7 +13,7 @@ const WORLD_W = 2900;
 const WORLD_H = 2000;
 const MIN_ZOOM = 0.2;
 const MAX_ZOOM = 5;
-const DRAG_THRESHOLD = 4;
+const DRAG_THRESHOLD = 6;
 const TILE_POSITIONS_KEY = "beachplease_tile_positions";
 
 const ACTIVITY_TO_VIBES = {
@@ -386,10 +387,9 @@ export default function MoodCanvasShell({
           const tilePosition = clusteredPosition || tilePositions[tile.slug] || tile.moodPos;
 
           return (
-            <div
+            <ParallaxBeachTile
               key={tile.id}
-              role="button"
-              tabIndex={0}
+              tile={tile}
               className={`beach-image-tile ${selected ? "is-selected" : ""} ${matched ? "is-matched" : "is-muted"} ${hasInput && matched ? "is-highlighted" : ""} ${hasChipCluster && matched ? "is-clustered" : ""}`}
               style={{
                 "--tile-x": `${tilePosition.x}px`,
@@ -400,39 +400,15 @@ export default function MoodCanvasShell({
                 "--tile-image-position": imagePositionForSlug(tile.slug),
                 "--tile-image-filter": imageToneForSlug(tile.slug),
               }}
+              imageUrl={imageUrl}
+              matchLabel={matchPercent ? `${matchPercent}% match` : tile.name.toLowerCase()}
+              conditionLine={formatConditionLine(tile)}
+              regionLabel={tile.region || "sydney"}
               onPointerDown={(event) => handleTilePointerDown(tile, tilePosition, event)}
               onClick={(event) => handleTileClick(tile, event)}
               onKeyDown={(event) => handleTileKeyDown(tile, event)}
-            >
-              <button
-                type="button"
-                className="beach-tile-add-button"
-                aria-label={`Add ${tile.name} to cluster`}
-                onPointerDown={(event) => event.stopPropagation()}
-                onClick={(event) => {
-                  event.stopPropagation();
-                  onBeachAddToCluster?.(tile);
-                }}
-              >
-                +
-              </button>
-              <img
-                src={imageUrl}
-                alt=""
-                draggable="false"
-                onError={(event) => {
-                  if (!event.currentTarget.src.endsWith(FALLBACK_IMAGE)) {
-                    event.currentTarget.src = FALLBACK_IMAGE;
-                  }
-                }}
-              />
-              <span className="beach-image-tile__label">{tile.name.toLowerCase()}</span>
-              <span className="beach-image-tile__bubble">
-                <strong>{matchPercent ? `${matchPercent}% match` : tile.name.toLowerCase()}</strong>
-                <small>{formatConditionLine(tile)}</small>
-                <small>{tile.region || "sydney"}</small>
-              </span>
-            </div>
+              onAddToCluster={onBeachAddToCluster}
+            />
           );
         })}
       </div>

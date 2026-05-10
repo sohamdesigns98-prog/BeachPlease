@@ -9,6 +9,7 @@ import {
 } from "@/api/clusters";
 import { getConditions } from "@/api/conditions";
 import { createPlan } from "@/api/plans";
+import AudioToggle from "@/components/audio/AudioToggle";
 import BeachInfoTile from "@/components/BeachInfoTile";
 import ClusterTray from "@/components/ClusterTray";
 import CreateClusterDialog from "@/components/CreateClusterDialog";
@@ -403,12 +404,17 @@ export default function MainExperience({ visible = false, onPlanGenerated }) {
   return (
     <main className={`main-app-shell mood-app-shell ${visible ? "is-visible" : ""}`}>
       <header className="mood-app-header">
-        <span className="mood-app-mark" aria-hidden="true" />
-        <ModeToggle
-          activeMode={activeMode}
-          clusterCount={clusteredBeachCount}
-          onChange={setActiveMode}
-        />
+        <div className="mood-app-left-controls">
+          <span className="mood-app-mark" aria-hidden="true" />
+          <AudioToggle />
+        </div>
+        <div className="mood-app-controls">
+          <ModeToggle
+            activeMode={activeMode}
+            clusterCount={clusteredBeachCount}
+            onChange={setActiveMode}
+          />
+        </div>
       </header>
 
       <section className={`mood-mode-layer ${activeMode === "mood" ? "is-active" : ""}`} aria-hidden={activeMode !== "mood"}>

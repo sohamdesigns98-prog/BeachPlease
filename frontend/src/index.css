@@ -103,7 +103,7 @@
   }
 
   .landing-intro__button {
-    @apply mx-auto mt-7 h-9 min-w-[148px] rounded-full border border-foreground bg-foreground px-5 text-[10px] font-medium uppercase tracking-[0.08em] text-[#FDFEFE] shadow-none hover:bg-foreground hover:text-[#FDFEFE];
+    @apply mx-auto mt-[70px] inline-flex h-9 min-w-[148px] items-center justify-center rounded-full border border-foreground bg-foreground px-5 text-center text-[12px] font-medium uppercase tracking-[0.08em] text-[#FDFEFE] shadow-none hover:bg-foreground hover:text-[#FDFEFE];
     opacity: 0;
     pointer-events: none;
     transform: translateY(8px);
@@ -1605,6 +1605,22 @@
     @apply block h-[7px] w-[7px] rounded-full bg-foreground;
   }
 
+  .mood-app-left-controls {
+    @apply flex items-center gap-4;
+  }
+
+  .mood-app-controls {
+    @apply flex items-center gap-7;
+  }
+
+  .audio-toggle {
+    @apply grid h-9 w-9 place-items-center rounded-full border border-foreground/20 bg-transparent p-0 text-foreground shadow-none transition-colors hover:border-foreground/45 hover:bg-transparent hover:text-foreground;
+  }
+
+  .audio-toggle[aria-pressed="true"] {
+    @apply border-foreground/25 text-foreground;
+  }
+
   .mode-toggle {
     @apply flex items-center gap-5;
   }
@@ -1663,6 +1679,13 @@
     top: var(--tile-y);
     cursor: grab;
     opacity: 1;
+    perspective: 700px;
+    --parallax-rotate-x: 0deg;
+    --parallax-rotate-y: 0deg;
+    --parallax-shift-x: 0px;
+    --parallax-shift-y: 0px;
+    --parallax-glow-x: 50%;
+    --parallax-glow-y: 50%;
     transition-property: opacity, border-color, box-shadow, transform, left, top;
     transform: translate(-50%, -50%) rotate(var(--tile-rotate)) scale(1);
     transform-origin: center;
@@ -1690,7 +1713,7 @@
     border-color: color-mix(in srgb, var(--tile-accent) 65%, transparent);
     cursor: grab;
     opacity: 1;
-    transform: translate(-50%, -50%) rotate(var(--tile-rotate)) scale(1.06);
+    transform: translate(-50%, -50%) rotate(var(--tile-rotate)) scale(1.08);
   }
 
   .mood-canvas-mode.is-dragging .beach-image-tile,
@@ -1711,6 +1734,32 @@
     transform: scale(0.88);
   }
 
+  .beach-image-tile__parallax {
+    @apply relative h-full w-full overflow-hidden rounded-[10px];
+    transform: rotateX(var(--parallax-rotate-x)) rotateY(var(--parallax-rotate-y)) translate3d(var(--parallax-shift-x), var(--parallax-shift-y), 0);
+    transform-style: preserve-3d;
+    transition: transform 120ms cubic-bezier(0.19, 1, 0.22, 1);
+    will-change: transform;
+  }
+
+  .beach-image-tile__parallax::after {
+    @apply pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-150;
+    background:
+      radial-gradient(
+        circle at var(--parallax-glow-x) var(--parallax-glow-y),
+        rgba(255,255,255,0.34),
+        rgba(255,255,255,0.08) 32%,
+        transparent 58%
+      );
+    content: "";
+    mix-blend-mode: screen;
+  }
+
+  .beach-image-tile:hover .beach-image-tile__parallax::after,
+  .beach-image-tile:focus-visible .beach-image-tile__parallax::after {
+    opacity: 1;
+  }
+
   .beach-image-tile:hover .beach-tile-add-button,
   .beach-image-tile:focus-within .beach-tile-add-button,
   .beach-image-tile.is-selected .beach-tile-add-button {
@@ -1723,6 +1772,7 @@
     filter: var(--tile-image-filter);
     object-position: var(--tile-image-position);
     pointer-events: none;
+    transform: scale(1.1);
   }
 
   .beach-image-tile__label {
@@ -2287,6 +2337,15 @@
 
     .landing-intro.landing-exiting .landing-intro__video {
       transform: translateY(-4vh) scale(1);
+    }
+
+    .beach-image-tile,
+    .beach-image-tile__parallax {
+      transition-duration: 0ms;
+    }
+
+    .beach-image-tile__parallax {
+      transform: none !important;
     }
   }
 }

@@ -1,6 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import {
+  prepareBeachAmbience,
+  setBeachAmbienceEntered,
+  startBeachAmbience,
+} from "@/audio/beachAmbience";
 import LandingIntro from "@/components/LandingIntro";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { AuthProvider } from "@/context/AuthContext";
@@ -26,7 +31,14 @@ function HomeExperience() {
   const [resultVisible, setResultVisible] = useState(false);
   const [resultTransitioning, setResultTransitioning] = useState(false);
 
+  useEffect(() => {
+    prepareBeachAmbience();
+  }, []);
+
   function handleEnterExperience() {
+    prepareBeachAmbience();
+    startBeachAmbience({ fadeIn: true });
+    setBeachAmbienceEntered();
     setIsLandingExiting(true);
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

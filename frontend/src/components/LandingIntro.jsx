@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import { prepareBeachAmbience } from "@/audio/beachAmbience";
 import { Button } from "@/components/ui/button";
 import { BUTTON_COPY, LANDING_COPY } from "@/content/voice";
 
@@ -45,6 +46,7 @@ export default function LandingIntro({ isExiting = false, onEnter }) {
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => setIsContentVisible(true));
+    prepareBeachAmbience();
 
     return () => window.cancelAnimationFrame(frame);
   }, []);
