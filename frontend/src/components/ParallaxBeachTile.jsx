@@ -30,6 +30,7 @@ export default function ParallaxBeachTile({
   matchLabel,
   conditionLine,
   regionLabel,
+  clusterBadges = [],
   onPointerDown,
   onClick,
   onKeyDown,
@@ -80,6 +81,16 @@ export default function ParallaxBeachTile({
       onClick={onClick}
       onKeyDown={onKeyDown}
     >
+      {clusterBadges.length > 0 && (
+        <div className="beach-image-tile__clusters" aria-label="Saved clusters">
+          {clusterBadges.slice(0, 2).map((cluster) => (
+            <span key={cluster.id || cluster._id || cluster.name} style={{ "--cluster-color": cluster.color || "#91C059" }}>
+              {cluster.name}
+            </span>
+          ))}
+          {clusterBadges.length > 2 && <span style={{ "--cluster-color": "#111111" }}>+{clusterBadges.length - 2}</span>}
+        </div>
+      )}
       <button
         type="button"
         className="beach-tile-add-button"

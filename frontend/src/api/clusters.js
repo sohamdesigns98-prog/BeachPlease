@@ -5,8 +5,9 @@ let clustersRequest = null;
 
 export async function createCluster(payload) {
   const { data } = await apiClient.post("/clusters", payload);
-  clustersCache = Array.isArray(clustersCache) ? [data, ...clustersCache] : null;
-  return data;
+  const createdCluster = { ...payload, ...data, color: data.color || payload.color };
+  clustersCache = Array.isArray(clustersCache) ? [createdCluster, ...clustersCache] : null;
+  return createdCluster;
 }
 
 export async function getClusters() {
@@ -47,12 +48,13 @@ export async function getCluster(id) {
 
 export async function updateCluster(id, payload) {
   const { data } = await apiClient.patch(`/clusters/${id}`, payload);
+  const updatedCluster = { ...data, ...payload, _id: data._id || id, id: data.id || id };
   if (Array.isArray(clustersCache)) {
     clustersCache = clustersCache.map((cluster) => (
-      (cluster._id || cluster.id) === id ? data : cluster
+      (cluster._id || cluster.id) === id ? updatedCluster : cluster
     ));
   }
-  return data;
+  return updatedCluster;
 }
 
 export async function deleteCluster(id) {

@@ -65,6 +65,8 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
   const [conditionsBySlug, setConditionsBySlug] = useState({});
   const [loadingConditionSlugs, setLoadingConditionSlugs] = useState({});
   const [isClusterDialogOpen, setIsClusterDialogOpen] = useState(false);
+  const [editingCluster, setEditingCluster] = useState(null);
+  const [focusedClusterId, setFocusedClusterId] = useState("");
   const [clusterPickerBeach, setClusterPickerBeach] = useState(null);
   const [isClusterSaving, setIsClusterSaving] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -310,7 +312,7 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
 
     try {
       const createdCluster = await createCluster(payload);
-      setClusters((currentClusters) => [createdCluster, ...currentClusters]);
+      setClusters((currentClusters) => [{ ...payload, ...createdCluster }, ...currentClusters]);
       setIsClusterDialogOpen(false);
       if (activate) navigate("/explore/canvas");
     } catch (caughtError) {
@@ -328,6 +330,7 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
     }
 
     const clusterId = getClusterId(cluster);
+    if ((cluster.beach_slugs || []).includes(beach.slug)) return;
     const beachSlugs = uniqueBeachSlugs([...(cluster.beach_slugs || []), beach.slug]);
     setClusterError("");
 
@@ -338,6 +341,32 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
       )));
     } catch (caughtError) {
       setClusterError(caughtError?.response?.data?.detail || "Couldn't add that beach.");
+    }
+  }
+
+  async function handleUpdateCluster(cluster, payload) {
+    const clusterId = getClusterId(cluster);
+    if (!clusterId) return;
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    setIsClusterSaving(true);
+    setClusterError("");
+
+    try {
+      const updatedCluster = await updateCluster(clusterId, payload);
+      const nextCluster = { ...updatedCluster, ...payload };
+      setClusters((currentClusters) => currentClusters.map((currentCluster) => (
+        getClusterId(currentCluster) === clusterId ? nextCluster : currentCluster
+      )));
+      setEditingCluster(null);
+      setIsClusterDialogOpen(false);
+    } catch (caughtError) {
+      setClusterError(caughtError?.response?.data?.detail || "Couldn't update that cluster.");
+    } finally {
+      setIsClusterSaving(false);
     }
   }
 
@@ -413,6 +442,7 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
         name: "my beaches",
         description: "quick saves from the canvas",
         mood_phrase: moodPhrase,
+        color: "#ADD0EE",
         beach_slugs: [beach.slug],
       }, { activate: false });
       return;
@@ -452,8 +482,12 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
           activityHint={activityHint}
           companionHint={companionHint}
           selectedBeachSlug={selectedBeachSlug}
+          clusters={clusters}
+          focusedClusterId={focusedClusterId}
           onBeachSelect={handleBeachSelect}
           onBeachAddToCluster={handleQuickAddBeachToCluster}
+          onBeachDropToCluster={handleAddBeachToCluster}
+          onClusterFocus={setFocusedClusterId}
         />
       </section>
 
@@ -474,6 +508,7 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
             setIsClusterDialogOpen(true);
           }}
           onDelete={handleDeleteCluster}
+          onEdit={setEditingCluster}
           onAddBeach={handleAddBeachToCluster}
           onRemoveBeach={handleRemoveBeachFromCluster}
         />
@@ -558,13 +593,18 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
       />
 
       <CreateClusterDialog
-        isOpen={isClusterDialogOpen}
+        isOpen={isClusterDialogOpen || Boolean(editingCluster)}
+        cluster={editingCluster}
         selectedBeach={selectedBeach || clusterPickerBeach}
         moodPhrase={moodPhrase}
         isSubmitting={isClusterSaving}
         error={clusterError}
-        onClose={() => setIsClusterDialogOpen(false)}
+        onClose={() => {
+          setIsClusterDialogOpen(false);
+          setEditingCluster(null);
+        }}
         onCreate={handleCreateCluster}
+        onUpdate={handleUpdateCluster}
       />
 
       <ClusterPickerDialog

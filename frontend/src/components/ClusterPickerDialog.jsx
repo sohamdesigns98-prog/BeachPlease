@@ -44,7 +44,13 @@ export default function ClusterPickerDialog({
             const beachCount = Array.isArray(cluster.beach_slugs) ? cluster.beach_slugs.length : 0;
             const alreadySaved = Boolean(beach?.slug && cluster.beach_slugs?.includes(beach.slug));
             return (
-              <button key={id} type="button" disabled={alreadySaved} onClick={() => onPick?.(cluster)}>
+              <button
+                key={id}
+                type="button"
+                disabled={alreadySaved}
+                style={{ "--cluster-color": cluster.color || "#91C059" }}
+                onClick={() => onPick?.(cluster)}
+              >
                 <strong>{cluster.name}</strong>
                 <span>{alreadySaved ? "already saved" : `${beachCount} beaches`}</span>
               </button>

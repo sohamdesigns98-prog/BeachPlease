@@ -36,6 +36,8 @@ The primary logged-in or guest experience should now be **Explore**:
 - Cluster is a separate page for favourite/upcoming beaches tied to the current user profile.
 - Saved is a separate page for generated plans, notes, and full plan detail.
 - Generated plan should not rely only on a decorative ticket. It must show the postcard image plus readable plan detail such as where, when, why, conditions, warning, and bring list.
+- Clusters are visual objects, not plain folders: users can assign a color, edit the name/description/mood, drag a beach from the canvas into a cluster, and see cluster color badges on canvas beach tiles.
+- Explore should support cluster focus, where choosing a cluster pulls its beaches into the highlighted center arrangement and mutes the rest.
 
 This replaces the older idea that `Saved | Mood | Map` are all equivalent top-level modes.
 

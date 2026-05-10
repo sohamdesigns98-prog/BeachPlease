@@ -7,6 +7,7 @@ import ConfirmDeleteDialog from "@/components/ConfirmDeleteDialog";
 import NotesEditor from "@/components/NotesEditor";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
+import { getPlanBody, listItems, planText } from "@/utils/planDisplay";
 
 function getPlanId(plan) {
   return plan?._id || plan?.id;
@@ -20,12 +21,6 @@ function formatDate(value) {
 function formatField(value) {
   if (!value) return "n/a";
   return String(value).replaceAll("_", " ");
-}
-
-function listItems(value) {
-  if (Array.isArray(value)) return value.filter(Boolean);
-  if (!value) return [];
-  return [String(value)];
 }
 
 export default function SavedModeShell({ onCountChange }) {
@@ -139,6 +134,7 @@ export default function SavedModeShell({ onCountChange }) {
             const id = getPlanId(plan);
             if (!id) return null;
             const selected = selectedPlan ? getPlanId(selectedPlan) === id : false;
+            const rowPlanBody = getPlanBody(plan);
             return (
               <article className={`saved-postcard-row ${selected ? "is-selected" : ""}`} key={id}>
                 <img
@@ -153,7 +149,7 @@ export default function SavedModeShell({ onCountChange }) {
                 <button type="button" className="saved-postcard-row__main" onClick={() => handleOpen(id)}>
                   <span>{formatDate(plan.created_at)}</span>
                   <h2>{plan.selected_beach_name || "Beach plan"}</h2>
-                  <p>{plan.mood_phrase || "mood not logged"}</p>
+                  <p>{rowPlanBody.why || plan.mood_phrase || "mood not logged"}</p>
                   <dl className="saved-postcard-meta">
                     <div>
                       <dt>REGION</dt>
@@ -202,7 +198,12 @@ export default function SavedModeShell({ onCountChange }) {
             {selectedPlan && (
               <>
                 <BeachPlanTicket plan={selectedPlan} />
+                {(() => {
+                  const planBody = getPlanBody(selectedPlan);
+                  const bringItems = listItems(planBody.bring);
 
+                  return (
+                    <>
                 <section className="saved-plan-detail__meta">
                   <div>
                     <span>REGION //</span>
@@ -224,33 +225,34 @@ export default function SavedModeShell({ onCountChange }) {
 
                 <section className="saved-plan-detail__summary">
                   <p>PLAN //</p>
-                  {selectedPlan.plan?.where && <strong>{selectedPlan.plan.where}</strong>}
-                  {selectedPlan.plan?.when && (
-                    <div>
-                      <span>WHEN</span>
-                      <p>{selectedPlan.plan.when}</p>
-                    </div>
-                  )}
-                  {selectedPlan.plan?.why && (
-                    <div>
-                      <span>WHY</span>
-                      <p>{selectedPlan.plan.why}</p>
-                    </div>
-                  )}
-                  {selectedPlan.plan?.conditions_summary && (
-                    <div>
-                      <span>CONDITIONS</span>
-                      <p>{selectedPlan.plan.conditions_summary}</p>
-                    </div>
-                  )}
-                  {listItems(selectedPlan.plan?.bring).length > 0 && (
+                  <strong>{planText(planBody.where, "No beach destination was included.")}</strong>
+                  <div>
+                    <span>WHEN</span>
+                    <p>{planText(planBody.when, "No timing was included.")}</p>
+                  </div>
+                  <div>
+                    <span>WHY</span>
+                    <p>{planText(planBody.why, "No reasoning was included.")}</p>
+                  </div>
+                  <div>
+                    <span>CONDITIONS</span>
+                    <p>{planText(planBody.conditions_summary, "No condition summary was included.")}</p>
+                  </div>
+                  <div>
+                    <span>HEADS UP</span>
+                    <p>{planText(planBody.gentle_warning, "No warning was included.")}</p>
+                  </div>
+                  {bringItems.length > 0 && (
                     <div>
                       <span>BRING</span>
-                      <p>{listItems(selectedPlan.plan?.bring).join(" / ")}</p>
+                      <p>{bringItems.join(" / ")}</p>
                     </div>
                   )}
                   <Link to={`/plans/${getPlanId(selectedPlan)}`}>OPEN FULL DETAIL</Link>
                 </section>
+                    </>
+                  );
+                })()}
 
                 <section className="saved-plan-detail__notes">
                   <p>NOTES //</p>

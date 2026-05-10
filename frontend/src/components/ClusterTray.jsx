@@ -19,6 +19,7 @@ export default function ClusterTray({
   onLogin,
   onCreate,
   onDelete,
+  onEdit,
   onAddBeach,
   onRemoveBeach,
 }) {
@@ -66,6 +67,7 @@ export default function ClusterTray({
 
             return (
               <article className="cluster-card" key={id}>
+                <span className="cluster-card__color" style={{ "--cluster-color": cluster.color || "#91C059" }} />
                 <div className="cluster-card__top">
                   <div>
                     <span>{slugs.length} beaches</span>
@@ -73,14 +75,17 @@ export default function ClusterTray({
                     {cluster.description && <p>{cluster.description}</p>}
                     {cluster.mood_phrase && <small>{cluster.mood_phrase}</small>}
                   </div>
-                  <ConfirmDeleteDialog
-                    title={`Delete ${cluster.name}?`}
-                    description="This removes the cluster. The beach data stays available."
-                    confirmLabel="DELETE CLUSTER"
-                    onConfirm={() => onDelete?.(cluster)}
-                  >
-                    <button type="button" className="danger-text-button">DELETE</button>
-                  </ConfirmDeleteDialog>
+                  <div className="cluster-card__actions">
+                    <button type="button" onClick={() => onEdit?.(cluster)}>EDIT</button>
+                    <ConfirmDeleteDialog
+                      title={`Delete ${cluster.name}?`}
+                      description="This removes the cluster. The beach data stays available."
+                      confirmLabel="DELETE CLUSTER"
+                      onConfirm={() => onDelete?.(cluster)}
+                    >
+                      <button type="button" className="danger-text-button">DELETE</button>
+                    </ConfirmDeleteDialog>
+                  </div>
                 </div>
 
                 <div className="cluster-beach-list">

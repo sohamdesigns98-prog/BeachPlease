@@ -6,6 +6,7 @@ import BeachPlanTicket from "@/components/BeachPlanTicket";
 import ConfirmDeleteDialog from "@/components/ConfirmDeleteDialog";
 import NotesEditor from "@/components/NotesEditor";
 import { Button } from "@/components/ui/button";
+import { getPlanBody, listItems, planText } from "@/utils/planDisplay";
 
 function getPlanId(plan) {
   return plan?._id || plan?.id;
@@ -14,12 +15,6 @@ function getPlanId(plan) {
 function formatField(value) {
   if (!value) return "n/a";
   return String(value).replaceAll("_", " ");
-}
-
-function listItems(value) {
-  if (Array.isArray(value)) return value.filter(Boolean);
-  if (!value) return [];
-  return [String(value)];
 }
 
 function candidateScore(candidate) {
@@ -93,6 +88,12 @@ export default function Plan() {
           <BeachPlanTicket plan={plan} />
 
           <aside className="plan-notes-panel">
+            {(() => {
+              const planBody = getPlanBody(plan);
+              const bringItems = listItems(planBody.bring);
+
+              return (
+                <>
             <section className="plan-metadata" aria-label="Plan metadata">
               <div>
                 <span>REGION //</span>
@@ -114,42 +115,37 @@ export default function Plan() {
 
             <section className="plan-full-section">
               <p>FULL PLAN //</p>
-              <h2>{plan.plan?.where || plan.selected_beach_name}</h2>
-              {plan.plan?.when && (
-                <div>
-                  <span>WHEN</span>
-                  <p>{plan.plan.when}</p>
-                </div>
-              )}
-              {plan.plan?.why && (
-                <div>
-                  <span>WHY</span>
-                  <p>{plan.plan.why}</p>
-                </div>
-              )}
-              {plan.plan?.conditions_summary && (
-                <div>
-                  <span>CONDITIONS</span>
-                  <p>{plan.plan.conditions_summary}</p>
-                </div>
-              )}
-              {plan.plan?.gentle_warning && (
-                <div>
-                  <span>HEADS UP</span>
-                  <p>{plan.plan.gentle_warning}</p>
-                </div>
-              )}
-              {listItems(plan.plan?.bring).length > 0 && (
+              <h2>{planText(planBody.where || plan.selected_beach_name, "No beach destination was included.")}</h2>
+              <div>
+                <span>WHEN</span>
+                <p>{planText(planBody.when, "No timing was included.")}</p>
+              </div>
+              <div>
+                <span>WHY</span>
+                <p>{planText(planBody.why, "No reasoning was included.")}</p>
+              </div>
+              <div>
+                <span>CONDITIONS</span>
+                <p>{planText(planBody.conditions_summary, "No condition summary was included.")}</p>
+              </div>
+              <div>
+                <span>HEADS UP</span>
+                <p>{planText(planBody.gentle_warning, "No warning was included.")}</p>
+              </div>
+              {bringItems.length > 0 && (
                 <div>
                   <span>BRING</span>
                   <ul>
-                    {listItems(plan.plan?.bring).map((item) => (
+                    {bringItems.map((item) => (
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
                 </div>
               )}
             </section>
+                </>
+              );
+            })()}
 
             {Array.isArray(plan.candidate_snapshot) && plan.candidate_snapshot.length > 0 && (
               <section className="plan-full-section">

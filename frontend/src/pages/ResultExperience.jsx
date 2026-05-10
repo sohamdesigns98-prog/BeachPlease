@@ -6,15 +6,10 @@ import BeachPlanTicket from "@/components/BeachPlanTicket";
 import SaveBar from "@/components/SaveBar";
 import { useAuth } from "@/context/AuthContext";
 import { getApiErrorMessage } from "@/utils/apiError";
+import { getPlanBody, listItems, planText } from "@/utils/planDisplay";
 
 function getPlanId(plan) {
   return plan?._id || plan?.id;
-}
-
-function planItems(value) {
-  if (Array.isArray(value)) return value.filter(Boolean);
-  if (!value) return [];
-  return [String(value)];
 }
 
 export default function ResultExperience({ plan, generationInput, visible = false }) {
@@ -28,8 +23,8 @@ export default function ResultExperience({ plan, generationInput, visible = fals
   const savedPlanId = getPlanId(savedPlan || (token ? plan : null));
   const showSaveBar = visible && !isSaved && !isSaveDismissed;
   const activePlan = savedPlan || plan;
-  const planBody = activePlan?.plan || {};
-  const bringItems = planItems(planBody.bring);
+  const planBody = getPlanBody(activePlan);
+  const bringItems = listItems(planBody.bring);
 
   async function saveCurrentPlan() {
     if (!plan) {
@@ -98,36 +93,26 @@ export default function ResultExperience({ plan, generationInput, visible = fals
           {activePlan?.mood_reading?.summary && <p className="generated-plan-panel__summary">{activePlan.mood_reading.summary}</p>}
 
           <div className="generated-plan-panel__grid">
-            {planBody.where && (
-              <article>
-                <span>where</span>
-                <p>{planBody.where}</p>
-              </article>
-            )}
-            {planBody.when && (
-              <article>
-                <span>when</span>
-                <p>{planBody.when}</p>
-              </article>
-            )}
-            {planBody.why && (
-              <article className="is-wide">
-                <span>why</span>
-                <p>{planBody.why}</p>
-              </article>
-            )}
-            {planBody.conditions_summary && (
-              <article className="is-wide">
-                <span>conditions</span>
-                <p>{planBody.conditions_summary}</p>
-              </article>
-            )}
-            {planBody.gentle_warning && (
-              <article className="is-wide">
-                <span>heads up</span>
-                <p>{planBody.gentle_warning}</p>
-              </article>
-            )}
+            <article>
+              <span>where</span>
+              <p>{planText(planBody.where, "No beach destination was included.")}</p>
+            </article>
+            <article>
+              <span>when</span>
+              <p>{planText(planBody.when, "No timing was included.")}</p>
+            </article>
+            <article className="is-wide">
+              <span>why</span>
+              <p>{planText(planBody.why, "No reasoning was included.")}</p>
+            </article>
+            <article className="is-wide">
+              <span>conditions</span>
+              <p>{planText(planBody.conditions_summary, "No condition summary was included.")}</p>
+            </article>
+            <article className="is-wide">
+              <span>heads up</span>
+              <p>{planText(planBody.gentle_warning, "No warning was included.")}</p>
+            </article>
           </div>
 
           {bringItems.length > 0 && (

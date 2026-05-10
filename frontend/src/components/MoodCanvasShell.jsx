@@ -13,9 +13,10 @@ const WORLD_W = 2900;
 const WORLD_H = 2000;
 const MIN_ZOOM = 0.2;
 const MAX_ZOOM = 5;
+const DEFAULT_ZOOM = 1.16;
 const DRAG_THRESHOLD = 6;
 const TILE_POSITIONS_KEY = "beachplease_tile_positions";
-const VIEWPORT_STATE_KEY = "beachplease_mood_canvas_viewport";
+const VIEWPORT_STATE_KEY = "beachplease_mood_canvas_viewport_v2";
 const FOCUS_ANIMATION_MS = 520;
 
 const ACTIVITY_TO_VIBES = {
@@ -168,8 +169,12 @@ export default function MoodCanvasShell({
   activityHint = "",
   companionHint = "",
   selectedBeachSlug = "",
+  clusters = [],
+  focusedClusterId = "",
   onBeachSelect,
   onBeachAddToCluster,
+  onBeachDropToCluster,
+  onClusterFocus,
 }) {
   const viewportRef = useRef(null);
   const worldRef = useRef(null);
@@ -180,12 +185,35 @@ export default function MoodCanvasShell({
   const panAnimationRef = useRef(null);
   const initialViewportRef = useRef(loadViewportState());
   const panRef = useRef(initialViewportRef.current?.pan || { x: 0, y: 0 });
-  const zoomRef = useRef(initialViewportRef.current?.zoom || 1);
+  const zoomRef = useRef(initialViewportRef.current?.zoom || DEFAULT_ZOOM);
   const [tilePositions, setTilePositions] = useState(loadTilePositions);
   const [pan, setPan] = useState(panRef.current);
   const [zoom, setZoom] = useState(zoomRef.current);
   const [isDragging, setIsDragging] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [draggingBeach, setDraggingBeach] = useState(null);
+  const [hoveredClusterId, setHoveredClusterId] = useState("");
+
+  const clusterBadgesBySlug = useMemo(() => {
+    const nextBadges = {};
+    clusters.forEach((cluster) => {
+      const id = cluster._id || cluster.id || cluster.name;
+      (cluster.beach_slugs || []).forEach((slug) => {
+        if (!nextBadges[slug]) nextBadges[slug] = [];
+        nextBadges[slug].push({
+          id,
+          name: cluster.name,
+          color: cluster.color || "#91C059",
+        });
+      });
+    });
+    return nextBadges;
+  }, [clusters]);
+
+  const focusedCluster = useMemo(
+    () => clusters.find((cluster) => (cluster._id || cluster.id || cluster.name) === focusedClusterId) || null,
+    [clusters, focusedClusterId],
+  );
 
   const tiles = useMemo(
     () => (beaches.length ? beaches : normalizeBeachesForCanvas(FALLBACK_BEACH_SEED, [])).slice(0, 50),
@@ -197,10 +225,14 @@ export default function MoodCanvasShell({
       const score = getMatchScore(tile, moodPhrase, activityHint, companionHint);
       return { tile, score };
     });
-    const hasChipCluster = Boolean(activityHint || companionHint);
-    const matchedTiles = hasChipCluster ? scoredTiles.filter(({ score }) => score > 0) : [];
+    const focusedSlugs = new Set(focusedCluster?.beach_slugs || []);
+    const hasChipCluster = Boolean(activityHint || companionHint || focusedCluster);
+    const matchedTiles = hasChipCluster
+      ? scoredTiles.filter(({ score, tile }) => (focusedCluster ? focusedSlugs.has(tile.slug) : score > 0))
+      : [];
 
     return scoredTiles.map(({ tile, score }) => {
+      const clusterMatch = focusedCluster ? focusedSlugs.has(tile.slug) : score > 0;
       const clusterIndex = matchedTiles.findIndex((match) => match.tile.slug === tile.slug);
       const clusteredPosition = hasChipCluster && clusterIndex >= 0
         ? getClusteredPosition(tile, clusterIndex, matchedTiles.length)
@@ -208,12 +240,12 @@ export default function MoodCanvasShell({
 
       return {
         tile,
-        score,
+        score: focusedCluster && !clusterMatch ? 0 : score,
         clusteredPosition,
         hasChipCluster,
       };
     });
-  }, [activityHint, companionHint, moodPhrase, tiles]);
+  }, [activityHint, companionHint, focusedCluster, moodPhrase, tiles]);
 
   useEffect(() => {
     displayTilesRef.current = displayTiles;
@@ -231,8 +263,8 @@ export default function MoodCanvasShell({
       if (initialViewportRef.current?.pan) return;
       const rect = element.getBoundingClientRect();
       applyViewport({
-        x: rect.width / 2 - WORLD_W * 0.46,
-        y: rect.height / 2 - WORLD_H * 0.48,
+        x: rect.width / 2 - WORLD_W * 0.46 * zoomRef.current,
+        y: rect.height / 2 - WORLD_H * 0.48 * zoomRef.current,
       }, zoomRef.current, { commitState: true });
     }
 
@@ -354,10 +386,12 @@ export default function MoodCanvasShell({
       if (!tileDragRef.current.active && (Math.abs(dx) > DRAG_THRESHOLD || Math.abs(dy) > DRAG_THRESHOLD)) {
         tileDragRef.current.active = true;
         setIsDragging(true);
+        setDraggingBeach(tileDragRef.current.tile);
         markInteraction();
       }
 
       if (tileDragRef.current.active) {
+        updateHoveredDropCluster(event);
         const nextPosition = {
           x: clamp(tileDragRef.current.originX + dx, 90, WORLD_W - 90),
           y: clamp(tileDragRef.current.originY + dy, 90, WORLD_H - 90),
@@ -397,11 +431,22 @@ export default function MoodCanvasShell({
   function handlePointerUp(event) {
     if (tileDragRef.current) {
       const wasDragging = tileDragRef.current.active;
-      if (tileDragRef.current.nextPositions) {
-        saveTilePositions(tileDragRef.current.nextPositions);
+      const dropCluster = wasDragging ? getDropClusterFromPoint(event.clientX, event.clientY) : null;
+
+      if (dropCluster) {
+        const previousPositions = tileDragRef.current.previousPositions || {};
+        setTilePositions(previousPositions);
+        saveTilePositions(previousPositions);
+        onBeachDropToCluster?.(dropCluster, tileDragRef.current.tile);
+      } else if (tileDragRef.current.nextPositions) {
+        const previousPositions = tileDragRef.current.previousPositions || {};
+        setTilePositions(previousPositions);
+        saveTilePositions(previousPositions);
       }
       tileDragRef.current = null;
       setIsDragging(false);
+      setDraggingBeach(null);
+      setHoveredClusterId("");
 
       if (wasDragging) {
         suppressClickRef.current = true;
@@ -469,8 +514,10 @@ export default function MoodCanvasShell({
       startY: event.clientY,
       originX: currentPosition.x,
       originY: currentPosition.y,
+      tile,
       active: false,
       nextPositions: null,
+      previousPositions: tilePositions,
     };
     suppressClickRef.current = false;
     markInteraction();
@@ -481,6 +528,19 @@ export default function MoodCanvasShell({
     event.preventDefault();
     markInteraction();
     onBeachSelect?.(tile);
+  }
+
+  function getDropClusterFromPoint(clientX, clientY) {
+    const element = document.elementFromPoint(clientX, clientY);
+    const dropTarget = element?.closest?.("[data-cluster-drop-id]");
+    const clusterId = dropTarget?.getAttribute("data-cluster-drop-id");
+    if (!clusterId) return null;
+    return clusters.find((cluster) => (cluster._id || cluster.id || cluster.name) === clusterId) || null;
+  }
+
+  function updateHoveredDropCluster(event) {
+    const dropCluster = getDropClusterFromPoint(event.clientX, event.clientY);
+    setHoveredClusterId(dropCluster ? (dropCluster._id || dropCluster.id || dropCluster.name) : "");
   }
 
   return (
@@ -495,6 +555,55 @@ export default function MoodCanvasShell({
       onWheel={handleWheel}
     >
       {!hasInteracted && <p className="mood-canvas-hint">drag to explore</p>}
+      {clusters.length > 0 && (
+        <div className="cluster-focus-strip" aria-label="Cluster filters">
+          <button
+            type="button"
+            className={!focusedClusterId ? "is-active" : ""}
+            onClick={() => onClusterFocus?.("")}
+          >
+            all
+          </button>
+          {clusters.map((cluster) => {
+            const id = cluster._id || cluster.id || cluster.name;
+            return (
+              <button
+                key={id}
+                type="button"
+                className={focusedClusterId === id ? "is-active" : ""}
+                style={{ "--cluster-color": cluster.color || "#91C059" }}
+                onClick={() => onClusterFocus?.(focusedClusterId === id ? "" : id)}
+              >
+                {cluster.name}
+              </button>
+            );
+          })}
+        </div>
+      )}
+      {draggingBeach && clusters.length > 0 && (
+        <div className="cluster-drop-shelf" aria-label="Drop beach into a cluster">
+          <p>drop {draggingBeach.name.toLowerCase()} into a cluster</p>
+          <div>
+            {clusters.map((cluster) => {
+              const id = cluster._id || cluster.id || cluster.name;
+              const alreadySaved = cluster.beach_slugs?.includes(draggingBeach.slug);
+              return (
+                <button
+                  key={id}
+                  type="button"
+                  data-cluster-drop-id={id}
+                  className={`${hoveredClusterId === id ? "is-hovered" : ""} ${alreadySaved ? "is-saved" : ""}`}
+                  style={{ "--cluster-color": cluster.color || "#91C059" }}
+                  onClick={() => onClusterFocus?.(id)}
+                >
+                  <strong>{cluster.name}</strong>
+                  <span>{alreadySaved ? "already saved" : `${cluster.beach_slugs?.length || 0} beaches`}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
       <div
         ref={worldRef}
         className="mood-canvas-world"
@@ -532,6 +641,7 @@ export default function MoodCanvasShell({
               matchLabel={matchPercent ? `${matchPercent}% match` : tile.name.toLowerCase()}
               conditionLine={formatConditionLine(tile)}
               regionLabel={tile.region || "sydney"}
+              clusterBadges={clusterBadgesBySlug[tile.slug] || []}
               onPointerDown={(event) => handleTilePointerDown(tile, tilePosition, event)}
               onClick={(event) => handleTileClick(tile, event)}
               onKeyDown={(event) => handleTileKeyDown(tile, event)}
