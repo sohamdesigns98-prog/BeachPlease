@@ -12,12 +12,14 @@ except ImportError:
 from app.config import settings
 from app.database import get_database
 from app.routes.ai_routes import router as ai_router
+from app.routes.admin_routes import router as admin_router
 from app.routes.auth_routes import router as auth_router
 from app.routes.beach_routes import router as beach_router
 from app.routes.cluster_routes import router as cluster_router
 from app.routes.condition_routes import router as condition_router
 from app.routes.plan_routes import router as plan_router
 from app.routes.rank_routes import router as rank_router
+from app.routes.suburb_routes import router as suburb_router
 from app.routes.user_routes import router as user_router
 from app.services.conditions_cache import refresh_conditions_cache
 
@@ -31,7 +33,11 @@ conditions_scheduler = (
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.client_url],
+    allow_origins=list({
+        settings.client_url,
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    }),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -45,6 +51,8 @@ app.include_router(rank_router)
 app.include_router(ai_router)
 app.include_router(plan_router)
 app.include_router(cluster_router)
+app.include_router(admin_router)
+app.include_router(suburb_router)
 
 
 async def refresh_conditions_safely():
@@ -67,6 +75,8 @@ async def startup():
         await db.users.create_index([("email", ASCENDING)], unique=True)
         await db.beaches.create_index([("slug", ASCENDING)], unique=True)
         await db.mood_clusters.create_index([("user_id", ASCENDING)])
+        await db.beach_plans.create_index([("user_id", ASCENDING)])
+        await db.user_activities.create_index([("created_at", ASCENDING)])
 
     await refresh_conditions_safely()
 

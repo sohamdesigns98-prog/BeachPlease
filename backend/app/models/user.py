@@ -49,6 +49,7 @@ class UserPublic(BaseModel):
     companions: Companions
     travel_mode: TravelMode
     auth_provider: str = "password"
+    role: str = "user"
     profile_complete: bool = True
     created_at: datetime
     updated_at: datetime
@@ -71,6 +72,7 @@ def user_document_to_public(user: dict[str, Any]) -> dict[str, Any]:
         "companions": user["companions"],
         "travel_mode": user["travel_mode"],
         "auth_provider": user.get("auth_provider", "password"),
+        "role": user.get("role", "user"),
         "profile_complete": user.get("profile_complete", bool(user.get("suburb"))),
         "created_at": user["created_at"],
         "updated_at": user["updated_at"],

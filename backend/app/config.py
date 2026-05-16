@@ -18,6 +18,7 @@ class Settings:
     gemini_api_key: str
     client_url: str
     google_client_id: str
+    admin_emails: frozenset[str]
 
 
 settings = Settings(
@@ -27,4 +28,9 @@ settings = Settings(
     gemini_api_key=os.getenv("GEMINI_API_KEY", ""),
     client_url=os.getenv("CLIENT_URL", "http://localhost:5173"),
     google_client_id=os.getenv("GOOGLE_CLIENT_ID", ""),
+    admin_emails=frozenset(
+        email.strip().lower()
+        for email in os.getenv("ADMIN_EMAILS", "").split(",")
+        if email.strip()
+    ),
 )

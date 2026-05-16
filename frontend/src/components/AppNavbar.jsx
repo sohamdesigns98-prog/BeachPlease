@@ -8,7 +8,7 @@ import AccountPill from "@/components/AccountPill";
 import { useAuth } from "@/context/AuthContext";
 
 export default function AppNavbar() {
-  const { token } = useAuth();
+  const { token, user } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const [savedCount, setSavedCount] = useState(0);
@@ -81,6 +81,11 @@ export default function AppNavbar() {
             saved
             {savedCount > 0 && <span>{savedCount}</span>}
           </Link>
+          {user?.role === "admin" && (
+            <Link className={location.pathname.startsWith("/admin") ? "is-active" : ""} to="/admin">
+              admin
+            </Link>
+          )}
         </nav>
         <AccountPill />
       </div>

@@ -8,9 +8,11 @@ import {
   startBeachAmbience,
 } from "@/audio/beachAmbience";
 import AppNavbar from "@/components/AppNavbar";
+import AdminRoute from "@/components/AdminRoute";
 import LandingIntro from "@/components/LandingIntro";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { AuthProvider } from "@/context/AuthContext";
+import Admin from "@/pages/Admin";
 import Login from "@/pages/Login";
 import MainExperience from "@/pages/MainExperience";
 import Plan from "@/pages/Plan";
@@ -159,6 +161,14 @@ export default function App() {
               <ProtectedRoute>
                 <Profile />
               </ProtectedRoute>
+            )}
+          />
+          <Route
+            path="/admin"
+            element={(
+              <AdminRoute>
+                <Admin />
+              </AdminRoute>
             )}
           />
         </Routes>

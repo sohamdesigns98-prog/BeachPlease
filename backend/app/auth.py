@@ -18,6 +18,13 @@ password_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 bearer_scheme = HTTPBearer()
 
 
+def role_for_email(email: str, stored_role: str | None = None) -> str:
+    normalized_email = str(email or "").lower()
+    if normalized_email in settings.admin_emails:
+        return "admin"
+    return stored_role or "user"
+
+
 def hash_password(password: str) -> str:
     return password_context.hash(password)
 
@@ -82,4 +89,15 @@ async def get_current_user(
             detail="User not found",
         )
 
-    return user_document_to_public(user)
+    public_user = user_document_to_public(user)
+    public_user["role"] = role_for_email(public_user["email"], public_user.get("role"))
+    return public_user
+
+
+async def require_admin(current_user: dict[str, Any] = Depends(get_current_user)) -> dict[str, Any]:
+    if current_user.get("role") != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Admin access is required",
+        )
+    return current_user

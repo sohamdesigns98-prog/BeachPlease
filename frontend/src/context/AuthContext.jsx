@@ -78,6 +78,9 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
+    if (localStorage.getItem(TOKEN_KEY)) {
+      authApi.logout().catch(() => {});
+    }
     clearUserScopedCaches();
     localStorage.removeItem(TOKEN_KEY);
     setToken(null);

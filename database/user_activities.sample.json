@@ -1,0 +1,32 @@
+[
+  {
+    "_id": "sample_activity_001",
+    "user_id": "sample_user_001",
+    "email": "demo.admin@example.com",
+    "actor_role": "admin",
+    "action": "create",
+    "entity_type": "beach",
+    "entity_id": "sample_beach_001",
+    "label": "Bondi Beach",
+    "metadata": {
+      "region": "Eastern Suburbs",
+      "suburb": "Bondi"
+    },
+    "created_at": "2026-05-13T09:00:00+00:00"
+  },
+  {
+    "_id": "sample_activity_002",
+    "user_id": "sample_user_002",
+    "email": "demo.user@example.com",
+    "actor_role": "user",
+    "action": "save_snapshot",
+    "entity_type": "plan",
+    "entity_id": "sample_plan_001",
+    "label": "Balmoral Beach",
+    "metadata": {
+      "region": "harbour",
+      "activity": "relax"
+    },
+    "created_at": "2026-05-13T09:10:00+00:00"
+  }
+]

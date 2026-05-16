@@ -1,0 +1,22 @@
+[
+  {
+    "email": "student.user@example.com",
+    "suburb": "Newtown",
+    "postcode": "2042",
+    "companions": "solo",
+    "travel_mode": "public_transport",
+    "auth_provider": "password",
+    "role": "user",
+    "profile_complete": true
+  },
+  {
+    "email": "admin@example.com",
+    "suburb": "Sydney",
+    "postcode": "2000",
+    "companions": "friends",
+    "travel_mode": "public_transport",
+    "auth_provider": "password",
+    "role": "admin",
+    "profile_complete": true
+  }
+]

@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { getBeaches } from "@/api/beaches";
+import { searchSydneySuburbs } from "@/api/suburbs";
 import { Input } from "@/components/ui/input";
-
-const POSTCODE_API = "https://v0.postcodeapi.com.au/suburbs.json";
 
 function normalizeSuburb(value = "") {
   return String(value)
@@ -111,10 +110,7 @@ export default function SydneySuburbSelect({
     const controller = new AbortController();
     setLoading(true);
 
-    fetch(`${POSTCODE_API}?q=${encodeURIComponent(term)}&state=NSW`, {
-      signal: controller.signal,
-    })
-      .then((response) => (response.ok ? response.json() : Promise.reject(response)))
+    searchSydneySuburbs(term, { signal: controller.signal })
       .then((results) => {
         const rawResults = Array.isArray(results) ? results : results?.value || results?.suburbs;
         const nextOptions = Array.isArray(rawResults)

@@ -15,6 +15,11 @@ export async function loginWithGoogle(credential) {
   return data;
 }
 
+export async function logout() {
+  const { data } = await apiClient.post("/auth/logout");
+  return data;
+}
+
 export async function getCurrentUser() {
   const { data } = await apiClient.get("/users/me");
   return data;

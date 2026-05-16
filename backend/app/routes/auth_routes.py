@@ -1,13 +1,14 @@
 from datetime import datetime, timezone
 
 import httpx
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status
 from pymongo.errors import DuplicateKeyError
 
 from app.config import settings
-from app.auth import create_access_token, hash_password, verify_password
+from app.auth import create_access_token, get_current_user, hash_password, role_for_email, verify_password
 from app.database import get_database
 from app.models.user import AuthResponse, GoogleAuthRequest, UserLogin, UserRegister, user_document_to_public
+from app.services.activity_log import log_activity
 from app.services.suburb_validation import canonical_suburb
 
 router = APIRouter(prefix="/auth", tags=["auth"])
@@ -31,6 +32,20 @@ def require_jwt_secret():
         )
 
 
+@router.post("/logout")
+async def logout(current_user: dict = Depends(get_current_user)):
+    db = require_database()
+    await log_activity(
+        db,
+        action="logout",
+        entity_type="user",
+        actor=current_user,
+        entity_id=current_user["id"],
+        label=current_user["email"],
+    )
+    return {"message": "Logged out"}
+
+
 @router.post("/register", response_model=AuthResponse, status_code=status.HTTP_201_CREATED)
 async def register(payload: UserRegister):
     db = require_database()
@@ -47,6 +62,7 @@ async def register(payload: UserRegister):
         "companions": payload.companions.value,
         "travel_mode": payload.travel_mode.value,
         "auth_provider": "password",
+        "role": role_for_email(payload.email),
         "profile_complete": True,
         "created_at": now,
         "updated_at": now,
@@ -62,6 +78,15 @@ async def register(payload: UserRegister):
 
     created_user = await db.users.find_one({"_id": result.inserted_id})
     public_user = user_document_to_public(created_user)
+    public_user["role"] = role_for_email(public_user["email"], public_user.get("role"))
+    await log_activity(
+        db,
+        action="register",
+        entity_type="user",
+        actor=public_user,
+        entity_id=public_user["id"],
+        label=public_user["email"],
+    )
 
     return {
         "access_token": create_access_token(public_user["id"]),
@@ -83,6 +108,15 @@ async def login(payload: UserLogin):
         )
 
     public_user = user_document_to_public(user)
+    public_user["role"] = role_for_email(public_user["email"], public_user.get("role"))
+    await log_activity(
+        db,
+        action="login",
+        entity_type="user",
+        actor=public_user,
+        entity_id=public_user["id"],
+        label=public_user["email"],
+    )
 
     return {
         "access_token": create_access_token(public_user["id"]),
@@ -151,6 +185,7 @@ async def google_login(payload: GoogleAuthRequest):
                 "companions": "solo",
                 "travel_mode": "public_transport",
                 "auth_provider": "google",
+                "role": role_for_email(email),
                 "profile_complete": False,
                 "created_at": now,
                 "updated_at": now,
@@ -164,6 +199,7 @@ async def google_login(payload: GoogleAuthRequest):
                 "$set": {
                     "google_sub": existing_user.get("google_sub") or google_sub,
                     "auth_provider": existing_user.get("auth_provider", "password"),
+                    "role": role_for_email(email, existing_user.get("role")),
                     "updated_at": now,
                 }
             },
@@ -171,6 +207,15 @@ async def google_login(payload: GoogleAuthRequest):
         user = await db.users.find_one({"_id": existing_user["_id"]})
 
     public_user = user_document_to_public(user)
+    public_user["role"] = role_for_email(public_user["email"], public_user.get("role"))
+    await log_activity(
+        db,
+        action="google_login",
+        entity_type="user",
+        actor=public_user,
+        entity_id=public_user["id"],
+        label=public_user["email"],
+    )
 
     return {
         "access_token": create_access_token(public_user["id"]),

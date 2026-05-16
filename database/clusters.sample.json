@@ -1,0 +1,10 @@
+[
+  {
+    "user_id": "sample-user-id",
+    "name": "quiet harbour",
+    "description": "low-energy beaches for a calmer day",
+    "mood_phrase": "somewhere peaceful and not too exposed",
+    "color": "#ADD0EE",
+    "beach_slugs": ["balmoral-beach"]
+  }
+]
