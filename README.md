@@ -1,14 +1,14 @@
 # BeachPlease
 
-BeachPlease is a mood-aware Sydney beach recommendation app. It uses a 4-stage decision funnel, live coastal conditions, an interactive Mapbox map, and Gemini to generate a practical beach plan.
+BeachPlease is a canvas-first Sydney beach recommendation app. It uses a circular beach image canvas, live coastal conditions, Mapbox, and Gemini to generate a practical beach plan.
 
 ## Screens
 
 [Landing cloud intro screenshot]
 
-[Funnel + Mapbox map screenshot]
+[Canvas + Mapbox screenshot]
 
-[Ticket result screenshot]
+[Generated plan screenshot]
 
 [Saved shelf screenshot]
 
@@ -23,7 +23,7 @@ BeachPlease is a mood-aware Sydney beach recommendation app. It uses a 4-stage d
 - Axios
 - Tailwind CSS
 - shadcn/ui
-- Geist Mono
+- Instrument Sans
 - Mapbox GL JS
 
 ### Backend
@@ -40,13 +40,15 @@ BeachPlease is a mood-aware Sydney beach recommendation app. It uses a 4-stage d
 
 ## Core Features
 
-- Cinematic cloud-video landing
-- 4-stage beach decision funnel
+- Cloud opening experience
+- Circular beach image canvas
+- Hover/click beach tiles
+- Right-side beach info tile
+- Mood input
 - Interactive Mapbox map
-- Optional mood input as a vibe note
 - Live weather and marine conditions
 - Gemini beach plan generation
-- Ticket-style result card
+- Create Plan flow
 - Auth
 - Saved shelf
 - Plan notes
@@ -58,10 +60,10 @@ BeachPlease is a mood-aware Sydney beach recommendation app. It uses a 4-stage d
 
 | Operation | Endpoints |
 | --- | --- |
-| Create | `POST /auth/register`, `POST /plans` |
-| Read | `GET /plans`, `GET /plans/{id}`, `GET /users/me`, `GET /conditions` |
-| Update | `PATCH /plans/{id}`, `PATCH /plans/{id}/replay`, `PATCH /users/me` |
-| Delete | `DELETE /plans/{id}`, `DELETE /users/me` |
+| Create | `POST /auth/register`, `POST /plans`, `POST /plans/preview`, `POST /clusters` |
+| Read | `GET /plans`, `GET /plans/{id}`, `GET /users/me`, `GET /conditions`, `GET /clusters` |
+| Update | `PATCH /plans/{id}`, `PATCH /plans/{id}/replay`, `PATCH /users/me`, `PATCH /clusters/{id}` |
+| Delete | `DELETE /plans/{id}`, `DELETE /users/me`, `DELETE /clusters/{id}` |
 
 ## API Endpoints
 
@@ -81,11 +83,16 @@ BeachPlease is a mood-aware Sydney beach recommendation app. It uses a 4-stage d
 - `POST /rank/test`
 - `POST /ai/test-plan`
 - `POST /plans`
+- `POST /plans/preview`
 - `GET /plans`
 - `GET /plans/{id}`
 - `PATCH /plans/{id}`
 - `PATCH /plans/{id}/replay`
 - `DELETE /plans/{id}`
+- `GET /clusters`
+- `POST /clusters`
+- `PATCH /clusters/{id}`
+- `DELETE /clusters/{id}`
 
 ## Setup
 
@@ -122,7 +129,7 @@ npm run dev
 
 - `VITE_API_BASE_URL`
 - `VITE_MAPBOX_TOKEN`
-- `VITE_USE_MOCKS`
+- `VITE_GOOGLE_CLIENT_ID`
 
 ## Seed Beaches
 
@@ -136,9 +143,9 @@ python -m app.seed.seed_beaches
 
 BeachPlease uses a modern frontend library through React with Vite, React Router, Tailwind CSS, shadcn/ui, and Mapbox GL JS. The frontend behaves as a single-page application, with local state and routed views for the main experience, auth, shelf, profile, and plan detail pages.
 
-The backend is implemented with FastAPI and exposes REST endpoints for auth, users, beaches, conditions, ranking, AI generation, and saved plans. MongoDB Atlas is used as the database through Motor, with collections for users, beaches, and beach plans.
+The backend is implemented with FastAPI and exposes REST endpoints for auth, users, beaches, conditions, ranking, AI generation, saved plans, and mood clusters. MongoDB Atlas is used as the database through Motor, with collections for users, beaches, beach plans, and clusters.
 
-The app demonstrates full CRUD through user registration and plan creation, reading saved plans and profiles, updating notes or replaying plans, and deleting plans or accounts. The interface is designed as a streamlined flow: users move from a cinematic landing into a guided beach decision experience, then receive one clear ticket-style recommendation.
+The app demonstrates full CRUD through user registration and plan creation, reading saved plans and profiles, updating notes or replaying plans, and deleting plans or accounts. The interface is designed as a streamlined flow: users move from a cloud opening into the canvas-first beach experience, then receive one clear generated plan.
 
 ## Known Limitations
 

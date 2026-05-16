@@ -66,6 +66,7 @@ export default function BeachInfoTile({
   conditionLoading = false,
   isGenerating = false,
   clusterMembership = [],
+  variant = "drawer",
   onClose,
   onGenerate,
   onAddToCluster,
@@ -83,7 +84,7 @@ export default function BeachInfoTile({
   const clusterCount = Array.isArray(clusterMembership) ? clusterMembership.length : 0;
   const drawer = (
     <aside
-      className="beach-info-tile"
+      className={`beach-info-tile beach-info-tile--${variant}`}
       style={{ "--beach-info-accent": beach.accent || "#91C059" }}
       aria-label={`${beach.name} beach information`}
     >
@@ -158,29 +159,30 @@ export default function BeachInfoTile({
         </ul>
       </section>
 
-      <Button
-        className="beach-info-tile__cluster"
-        type="button"
-        variant="outline"
-        onClick={onAddToCluster}
-      >
-        {clusterCount > 0 ? `Saved in ${clusterCount} cluster${clusterCount > 1 ? "s" : ""}` : "Add to Cluster"}
-      </Button>
+      <div className="beach-info-tile__actions">
+        <Button
+          className="beach-info-tile__cluster"
+          type="button"
+          variant="outline"
+          onClick={onAddToCluster}
+        >
+          {clusterCount > 0 ? `Saved in ${clusterCount} cluster${clusterCount > 1 ? "s" : ""}` : "Add to Cluster"}
+        </Button>
+        <Button
+          className="beach-info-tile__generate"
+          type="button"
+          onClick={onGenerate}
+          disabled={isGenerating}
+        >
+          {isGenerating ? "Generating..." : "Generate Plan"}
+        </Button>
+      </div>
       {clusterCount > 0 && (
         <p className="beach-info-tile__cluster-note">
           {clusterMembership.slice(0, 2).map((cluster) => cluster.name).join(" / ")}
           {clusterCount > 2 ? ` +${clusterCount - 2}` : ""} · add to another cluster anytime
         </p>
       )}
-
-      <Button
-        className="beach-info-tile__generate"
-        type="button"
-        onClick={onGenerate}
-        disabled={isGenerating}
-      >
-        {isGenerating ? "Generating..." : "Generate Plan"}
-      </Button>
     </aside>
   );
 

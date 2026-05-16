@@ -11,15 +11,13 @@ export default {
     extend: {
       fontFamily: {
         mono: [
-          '"Geist Mono"',
-          "ui-monospace",
-          "SFMono-Regular",
-          "Menlo",
-          "Monaco",
-          "Consolas",
-          '"Liberation Mono"',
-          '"Courier New"',
-          "monospace",
+          '"Instrument Sans"',
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          '"Segoe UI"',
+          "sans-serif",
         ],
       },
       colors: {

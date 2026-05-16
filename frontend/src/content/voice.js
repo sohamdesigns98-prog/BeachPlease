@@ -1,11 +1,9 @@
 export const APP_COPY = {
   landing: {
     paragraphs: [
-      "G'day Mate.",
-      "You're here because you want to go to the beach and you don't know which one.",
-      "That's fine. That's literally what this is for. Tell us what kind of day you're after and we'll check the swell, the wind, the UV, how busy it is right now. We'll do the reading, make the call, give you one answer, and pick the right beach for you.",
-      "Hundred odd beaches. Live conditions. Updated every thirty minutes.",
-      "Go on then.",
+      "G’day mate!",
+      "Sydney has too many good beaches. Annoying problem, honestly. Sounds unreal until you’re standing there in thongs trying to decide between Manly, Coogee, Maroubra, Cronulla, Freshie, Shelly…then somehow ending up at Bondi with half the city and three backpacker volleyball comps.",
+      "We kinda sort the drama out. Tell us the vibe, quiet dip, big arvo with mates, sneaky date spot, or somewhere to vanish for a bit and we’ll check the swell, wind, UV, and general beach chaos to pick a Sydney beach that actually suits. Righto, let’s sort your beach.",
     ],
   },
   home: {

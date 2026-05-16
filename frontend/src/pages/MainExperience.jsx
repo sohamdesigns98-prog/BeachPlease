@@ -4,21 +4,19 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getBeaches, getCachedBeaches } from "@/api/beaches";
 import {
   createCluster,
-  deleteCluster,
   getCachedClusters,
   getClusters,
   updateCluster,
 } from "@/api/clusters";
 import { getCondition } from "@/api/conditions";
-import { generatePlanPreview } from "@/api/plans";
+import { createPlan, generatePlanPreview } from "@/api/plans";
 import BeachInfoTile from "@/components/BeachInfoTile";
+import CircularBeachCanvas from "@/components/CircularBeachCanvas";
 import ClusterPickerDialog from "@/components/ClusterPickerDialog";
-import ClusterTray from "@/components/ClusterTray";
+import ClusterStackGallery from "@/components/ClusterStackGallery";
 import CreateClusterDialog from "@/components/CreateClusterDialog";
-import GeneratingOverlay from "@/components/GeneratingOverlay";
 import MapboxBeachMap from "@/components/map/MapboxBeachMap";
 import ModeToggle from "@/components/ModeToggle";
-import MoodCanvasShell from "@/components/MoodCanvasShell";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { normalizeBeach, normalizeBeachesForCanvas } from "@/utils/beachAdapter";
@@ -52,6 +50,7 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
   const routeMode = mode === "mood" ? "canvas" : mode;
   const activeMode = modeOverride || (EXPERIENCE_MODES.has(routeMode) ? routeMode : "canvas");
   const [moodPhrase, setMoodPhrase] = useState("");
+  const [isMoodPanelOpen, setIsMoodPanelOpen] = useState(false);
   const [selectedBeachSlug, setSelectedBeachSlug] = useState("");
   const [selectedBeachName, setSelectedBeachName] = useState("");
   const [selectedBeachData, setSelectedBeachData] = useState(null);
@@ -106,11 +105,6 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
         .map((beach) => beach.slug);
     },
     [beaches, moodPhrase],
-  );
-
-  const beachesBySlug = useMemo(
-    () => Object.fromEntries(beaches.map((beach) => [beach.slug, beach])),
-    [beaches],
   );
 
   const selectedBeachClusters = useMemo(
@@ -260,6 +254,11 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
     });
   }
 
+  function revealGeneratedPlan(plan, payload) {
+    onPlanGenerated?.(plan, payload);
+    setIsGenerating(false);
+  }
+
   async function handleGeneratePostcard() {
     if (isGenerating) return;
 
@@ -280,22 +279,62 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
           fallbackBeach,
           requiresAuthToSave: !token,
         });
-        onPlanGenerated?.(mockPlan, payload);
-        setIsGenerating(false);
+        revealGeneratedPlan(mockPlan, payload);
       }, 800);
       return;
     }
 
     try {
       const previewPlan = await generatePlanPreview(payload);
-      setSelectedBeachSlug(previewPlan.selected_beach_slug || selectedBeachSlug);
-      setSelectedBeachName(previewPlan.selected_beach_name || selectedBeachName);
-      onPlanGenerated?.(previewPlan, payload);
+      revealGeneratedPlan(previewPlan, payload);
     } catch (caughtError) {
       setError(caughtError?.response?.data?.detail || "Couldn't generate a postcard right now.");
-    } finally {
       setIsGenerating(false);
     }
+  }
+
+  async function handleCreatePlanFromMenu(form) {
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    const notes = [
+      form.mood,
+      form.food ? `food/drink: ${form.food}` : "",
+      form.notes ? `notes: ${form.notes}` : "",
+    ].filter(Boolean).join(" · ");
+    const payload = {
+      mood_phrase: notes || form.mood,
+      region: form.locality,
+      activity: form.activity,
+      companion: form.companion,
+      selected_mood: form.mood,
+      companion_context: form.companion,
+      experience_tags: [form.food, form.notes].filter(Boolean),
+    };
+
+    setGenerationInput(payload);
+    setIsGenerating(true);
+    setError("");
+
+    try {
+      const savedPlan = await createPlan(payload);
+      revealGeneratedPlan(savedPlan, payload);
+    } catch (caughtError) {
+      setError(caughtError?.response?.data?.detail || "Couldn't create that plan right now.");
+      setIsGenerating(false);
+    }
+  }
+
+  function handleCreateRitualFromMenu(form) {
+    const existing = JSON.parse(window.localStorage.getItem("beachplease_rituals") || "[]");
+    const ritual = {
+      id: crypto.randomUUID?.() || `${Date.now()}`,
+      ...form,
+      createdAt: new Date().toISOString(),
+    };
+    window.localStorage.setItem("beachplease_rituals", JSON.stringify([ritual, ...existing]));
   }
 
   async function handleCreateCluster(payload, options = {}) {
@@ -391,26 +430,6 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
     }
   }
 
-  async function handleDeleteCluster(cluster) {
-    const clusterId = getClusterId(cluster);
-    if (!clusterId) return;
-    if (!token) {
-      navigate("/login");
-      return;
-    }
-
-    setClusterError("");
-
-    try {
-      await deleteCluster(clusterId);
-      setClusters((currentClusters) => currentClusters.filter((currentCluster) => (
-        getClusterId(currentCluster) !== clusterId
-      )));
-    } catch (caughtError) {
-      setClusterError(caughtError?.response?.data?.detail || "Couldn't delete that cluster.");
-    }
-  }
-
   function handleOpenClusterAdd() {
     if (!token) {
       navigate("/login");
@@ -465,7 +484,7 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
   }
 
   return (
-    <main className={`main-app-shell mood-app-shell ${visible ? "is-visible" : ""}`}>
+    <main className={`main-app-shell mood-app-shell ${visible ? "is-visible" : ""} ${selectedBeach && activeMode === "canvas" ? "has-canvas-selection" : ""} ${isGenerating ? "is-generating-plan" : ""}`}>
       {activeMode !== "cluster" && (
         <div className="explore-mode-pill">
           <ModeToggle
@@ -476,41 +495,34 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
       )}
 
       <section className={`mood-mode-layer ${activeMode === "canvas" ? "is-active" : ""}`} aria-hidden={activeMode !== "canvas"}>
-        <MoodCanvasShell
+        <CircularBeachCanvas
           beaches={beaches}
           moodPhrase={moodPhrase}
           activityHint={activityHint}
           companionHint={companionHint}
           selectedBeachSlug={selectedBeachSlug}
+          isFocused={Boolean(selectedBeach)}
+          isGenerating={isGenerating}
           clusters={clusters}
           focusedClusterId={focusedClusterId}
           onBeachSelect={handleBeachSelect}
           onBeachAddToCluster={handleQuickAddBeachToCluster}
-          onBeachDropToCluster={handleAddBeachToCluster}
           onClusterFocus={setFocusedClusterId}
         />
       </section>
 
       <section className={`mood-mode-layer ${activeMode === "cluster" ? "is-active" : ""}`} aria-hidden={activeMode !== "cluster"}>
-        <ClusterTray
-          clusters={clusters}
-          beachesBySlug={beachesBySlug}
-          selectedBeach={selectedBeach}
-          loading={clustersLoading}
-          error={clusterError}
-          requiresAuth={!token}
-          onLogin={() => navigate("/login")}
-          onCreate={() => {
+        <ClusterStackGallery
+          beaches={beaches}
+          onCreateCluster={() => {
             if (!token) {
               navigate("/login");
               return;
             }
             setIsClusterDialogOpen(true);
           }}
-          onDelete={handleDeleteCluster}
-          onEdit={setEditingCluster}
-          onAddBeach={handleAddBeachToCluster}
-          onRemoveBeach={handleRemoveBeachFromCluster}
+          onCreatePlan={handleCreatePlanFromMenu}
+          onCreateRitual={handleCreateRitualFromMenu}
         />
       </section>
 
@@ -532,6 +544,7 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
           conditionLoading={Boolean(loadingConditionSlugs[selectedBeach.slug])}
           isGenerating={isGenerating}
           clusterMembership={selectedBeachClusters}
+          variant={activeMode === "canvas" || activeMode === "cluster" ? "overlay" : "drawer"}
           onClose={() => {
             setSelectedBeachSlug("");
             setSelectedBeachName("");
@@ -544,53 +557,57 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
 
       {activeMode !== "cluster" && (
         <form
-          className={`mood-input-bar ${selectedBeach ? "has-info-tile" : ""}`}
+          className={`mood-input-bar ${selectedBeach ? "has-info-tile" : ""} ${isMoodPanelOpen ? "is-open" : ""}`}
           onSubmit={(event) => {
             event.preventDefault();
+            if (!isMoodPanelOpen) {
+              setIsMoodPanelOpen(true);
+              return;
+            }
             handleGeneratePostcard();
           }}
         >
-          <input
-            value={moodPhrase}
-            placeholder="what kind of beach day do you need?"
-            onChange={(event) => setMoodPhrase(event.target.value)}
-          />
-          <div className="mood-chip-line" aria-label="Mood filters">
-            {ACTIVITY_HINTS.map((hint) => (
-              <button
-                key={hint.id}
-                type="button"
-                className={`mood-chip ${activityHint === hint.id ? "is-active" : ""}`}
-                style={{ "--chip-color": hint.color }}
-                onClick={() => setActivityHint((current) => (current === hint.id ? "" : hint.id))}
-              >
-                {hint.id}
-              </button>
-            ))}
-            {COMPANION_HINTS.map((hint) => (
-              <button
-                key={hint.id}
-                type="button"
-                className={`mood-chip ${companionHint === hint.id ? "is-active" : ""}`}
-                style={{ "--chip-color": hint.color }}
-                onClick={() => setCompanionHint((current) => (current === hint.id ? "" : hint.id))}
-              >
-                {hint.id}
-              </button>
-            ))}
-          </div>
+          {isMoodPanelOpen && (
+            <>
+              <input
+                value={moodPhrase}
+                placeholder="what kind of beach day do you need?"
+                onChange={(event) => setMoodPhrase(event.target.value)}
+                autoFocus
+              />
+              <div className="mood-chip-line" aria-label="Mood filters">
+                {ACTIVITY_HINTS.map((hint) => (
+                  <button
+                    key={hint.id}
+                    type="button"
+                    className={`mood-chip ${activityHint === hint.id ? "is-active" : ""}`}
+                    style={{ "--chip-color": hint.color }}
+                    onClick={() => setActivityHint((current) => (current === hint.id ? "" : hint.id))}
+                  >
+                    {hint.id}
+                  </button>
+                ))}
+                {COMPANION_HINTS.map((hint) => (
+                  <button
+                    key={hint.id}
+                    type="button"
+                    className={`mood-chip ${companionHint === hint.id ? "is-active" : ""}`}
+                    style={{ "--chip-color": hint.color }}
+                    onClick={() => setCompanionHint((current) => (current === hint.id ? "" : hint.id))}
+                  >
+                    {hint.id}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
           <Button type="submit" disabled={isGenerating}>
-            {isGenerating ? "checking..." : "Find My Beach"}
+            {isGenerating ? "generating plan..." : "Find My Beach"}
           </Button>
         </form>
       )}
 
       {error && <p className="home-error" role="alert">{error}</p>}
-
-      <GeneratingOverlay
-        mood={generationInput?.mood_phrase || moodPhrase}
-        isVisible={isGenerating}
-      />
 
       <CreateClusterDialog
         isOpen={isClusterDialogOpen || Boolean(editingCluster)}

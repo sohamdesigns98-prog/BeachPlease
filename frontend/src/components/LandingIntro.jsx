@@ -11,16 +11,9 @@ const FIRST_PARAGRAPH_DELAY_MS = 600;
 const BETWEEN_PARAGRAPHS_DELAY_MS = 400;
 
 export default function LandingIntro({ isExiting = false, onEnter }) {
-  const paragraphs = useMemo(() => {
-    const copy = LANDING_COPY.paragraphs;
-
-    return [
-      `${copy[0]} ${copy[1]}`,
-      `${copy[2]} ${copy[3]} ${copy[4]}`,
-    ];
-  }, []);
+  const paragraphs = useMemo(() => LANDING_COPY.paragraphs, []);
   const [isContentVisible, setIsContentVisible] = useState(false);
-  const [typedCounts, setTypedCounts] = useState([0, 0]);
+  const [typedCounts, setTypedCounts] = useState(() => paragraphs.map(() => 0));
   const [activeParagraph, setActiveParagraph] = useState(-1);
   const [showButton, setShowButton] = useState(false);
   const timersRef = useRef([]);
@@ -64,9 +57,9 @@ export default function LandingIntro({ isExiting = false, onEnter }) {
           if (nextCount >= paragraphs[index].length) {
             window.clearInterval(interval);
 
-            if (index === 0) {
+            if (index < paragraphs.length - 1) {
               const nextTimer = window.setTimeout(() => {
-                typeParagraph(1);
+                typeParagraph(index + 1);
               }, BETWEEN_PARAGRAPHS_DELAY_MS);
               timersRef.current.push(nextTimer);
             } else {
@@ -128,17 +121,19 @@ export default function LandingIntro({ isExiting = false, onEnter }) {
           </p>
         ))}
 
-        <Button
-          type="button"
-          className={`landing-intro__button ${showButton ? "is-visible" : ""}`}
-          disabled={isExiting}
-          onClick={(event) => {
-            event.stopPropagation();
-            if (showButton) onEnter();
-          }}
-        >
-          {BUTTON_COPY.enterExperience}
-        </Button>
+        <div className="landing-intro__button-wrap">
+          <Button
+            type="button"
+            className={`landing-intro__button ${showButton ? "is-visible" : ""}`}
+            disabled={isExiting}
+            onClick={(event) => {
+              event.stopPropagation();
+              if (showButton) onEnter();
+            }}
+          >
+            {BUTTON_COPY.enterExperience}
+          </Button>
+        </div>
       </div>
     </section>
   );

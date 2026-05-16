@@ -114,7 +114,7 @@ The root shell is fixed to the full viewport.
 position: fixed;
 inset: 0;
 background-color: #F8F6EF;
-font-family: 'Geist Mono', monospace;
+font-family: 'Instrument Sans', sans-serif;
 overflow: hidden;
 ```
 
@@ -148,7 +148,7 @@ Header contents:
 The mode toggle is deliberately tiny. It should feel like a small map control, not a big navigation bar.
 
 ```css
-font-family: 'Geist Mono', monospace;
+font-family: 'Instrument Sans', sans-serif;
 font-size: 11px;
 letter-spacing: 0.05em;
 border-bottom: 1px solid transparent;
@@ -240,7 +240,7 @@ border-bottom: 1px solid #D8D4CA;
 outline: none;
 padding: 6px 0;
 font-size: 13px;
-font-family: 'Geist Mono', monospace;
+font-family: 'Instrument Sans', sans-serif;
 color: #1A1A1A;
 background-color: transparent;
 letter-spacing: 0.01em;
@@ -273,7 +273,7 @@ border: none;
 border-bottom: 1px solid #333;
 padding: 6px 0;
 font-size: 11px;
-font-family: 'Geist Mono', monospace;
+font-family: 'Instrument Sans', sans-serif;
 color: #333;
 letter-spacing: 0.07em;
 white-space: nowrap;
@@ -301,10 +301,10 @@ border: none;
 
 ### Font family
 
-Use Geist Mono everywhere.
+Use Instrument Sans everywhere.
 
 ```css
-font-family: 'Geist Mono', monospace;
+font-family: 'Instrument Sans', sans-serif;
 ```
 
 This is central to the visual identity. Do not mix with Inter, system sans, serif fonts, or decorative display fonts unless a very specific feature needs it.
@@ -692,7 +692,7 @@ width: 380px;
 background-color: #fff;
 border-left: 1px solid #F0F0F0;
 z-index: 60;
-font-family: 'Geist Mono', monospace;
+font-family: 'Instrument Sans', sans-serif;
 overflow-y: auto;
 padding: 48px 40px 48px;
 display: flex;
@@ -1259,7 +1259,7 @@ Do not introduce a heavy design library for the main canvas unless necessary. Th
 
 ### Preserve
 
-- Geist Mono across the full app.
+- Instrument Sans across the full app.
 - Warm off-white background `#F8F6EF`.
 - Three canvas states: mood, saved, map.
 - Tiny top-right mode toggle.
@@ -1411,7 +1411,7 @@ Integrate the current backend data into the Figma-inspired frontend without brea
 
 Core requirements:
 1. Preserve the full-screen warm off-white canvas experience.
-2. Preserve Geist Mono everywhere.
+2. Preserve Instrument Sans everywhere.
 3. Preserve the top-right mode toggle: mood, saved, map.
 4. Preserve the bottom mood input bar except in saved mode.
 5. Preserve the right-side 380px detail panel.
@@ -1426,7 +1426,7 @@ Do not:
 - Replace image tiles with normal pins.
 - Replace the postcard with a generic modal.
 - Add a large navbar.
-- Change the font away from Geist Mono.
+- Change the font away from Instrument Sans.
 - Use bright gradients or saturated backgrounds.
 - Overuse accent colors.
 
