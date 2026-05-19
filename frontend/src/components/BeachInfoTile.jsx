@@ -13,7 +13,7 @@ function formatNumber(value, suffix = "") {
 function prettyList(items = [], fallback = "not logged yet") {
   const list = Array.isArray(items) ? items.filter(Boolean) : [];
   if (!list.length) return fallback;
-  return list.map((item) => String(item).replaceAll("_", " ")).join(" · ");
+  return list.map((item) => String(item).replaceAll("_", " ")).join(" / ");
 }
 
 function getBestTime(beach) {
@@ -70,6 +70,7 @@ export default function BeachInfoTile({
   onClose,
   onGenerate,
   onAddToCluster,
+  onRemoveFromCluster,
 }) {
   const [imageSrc, setImageSrc] = useState(beach?.imageUrl || FALLBACK_IMAGE);
 
@@ -96,7 +97,7 @@ export default function BeachInfoTile({
         <span className="beach-info-tile__accent" aria-hidden="true" />
         <div>
           <h2>{beach.name}</h2>
-          <p>{beach.vibe || "coastal"} · {formatNumber(beach.distanceMin, " min away")}</p>
+          <p>{beach.vibe || "coastal"} / {formatNumber(beach.distanceMin, " min away")}</p>
         </div>
       </header>
 
@@ -112,7 +113,7 @@ export default function BeachInfoTile({
         <dl className="beach-info-tile__conditions">
           <div>
             <dt>TEMP</dt>
-            <ConditionValue loading={conditionLoading}>{formatNumber(beach.temp, "°C")}</ConditionValue>
+            <ConditionValue loading={conditionLoading}>{formatNumber(beach.temp, "C")}</ConditionValue>
           </div>
           <div>
             <dt>WAVES</dt>
@@ -177,11 +178,23 @@ export default function BeachInfoTile({
           {isGenerating ? "Generating..." : "Generate Plan"}
         </Button>
       </div>
+
       {clusterCount > 0 && (
-        <p className="beach-info-tile__cluster-note">
-          {clusterMembership.slice(0, 2).map((cluster) => cluster.name).join(" / ")}
-          {clusterCount > 2 ? ` +${clusterCount - 2}` : ""} · add to another cluster anytime
-        </p>
+        <div className="beach-info-tile__cluster-note">
+          <span>saved in your clusters</span>
+          <div>
+            {clusterMembership.map((cluster) => (
+              <button
+                key={cluster._id || cluster.id || cluster.name}
+                type="button"
+                onClick={() => onRemoveFromCluster?.(cluster, beach.slug)}
+              >
+                {cluster.name}
+                <small>remove</small>
+              </button>
+            ))}
+          </div>
+        </div>
       )}
     </aside>
   );

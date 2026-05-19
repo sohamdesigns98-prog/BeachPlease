@@ -95,6 +95,26 @@ function stackBeachesForPreset(beaches, preset, presetIndex) {
   return ordered.slice(0, Math.min(5, Math.max(3, ordered.length)));
 }
 
+function clusterId(cluster) {
+  return cluster?._id || cluster?.id || cluster?.name;
+}
+
+function beachesForCluster(cluster, beachesBySlug) {
+  return (cluster.beach_slugs || [])
+    .map((slug) => beachesBySlug[slug])
+    .filter(Boolean);
+}
+
+function placeholderBeachForCluster(cluster) {
+  return {
+    slug: `empty-${clusterId(cluster)}`,
+    name: cluster.name || "empty cluster",
+    region: "personal cluster",
+    imageUrl: FALLBACK_IMAGE,
+    isClusterPlaceholder: true,
+  };
+}
+
 function prettyList(items = [], fallback = "low fuss") {
   const list = Array.isArray(items) ? items.filter(Boolean) : [];
   if (!list.length) return fallback;
@@ -105,14 +125,18 @@ function bestTime(beach) {
   return beach.bestTime || beach.ideal_times?.[0] || "morning or late arvo";
 }
 
-function ClusterBeachInfoCard({ beach, isExpanded, isActive, onToggle }) {
+function ClusterBeachInfoCard({ beach, isExpanded, isActive, onToggle, onSelect }) {
   return (
     <article className={`cluster-carousel-card ${isExpanded ? "is-expanded" : ""}`}>
       <button
         type="button"
         className="cluster-carousel-card__button"
         aria-expanded={isExpanded}
-        onClick={onToggle}
+        onClick={() => {
+          if (beach.isClusterPlaceholder) return;
+          onToggle?.();
+          if (isActive) onSelect?.(beach);
+        }}
         tabIndex={isActive ? 0 : -1}
       >
         <span className="cluster-carousel-card__image">
@@ -135,6 +159,16 @@ function ClusterBeachInfoCard({ beach, isExpanded, isActive, onToggle }) {
           {isExpanded ? "⌃" : "⌄"}
         </span>
       </button>
+
+      {beach.isClusterPlaceholder && (
+        <p className="cluster-carousel-card__empty">add beaches from explore to fill this cluster</p>
+      )}
+
+      {isActive && !beach.isClusterPlaceholder && (
+        <button type="button" className="cluster-carousel-card__open-detail" onClick={() => onSelect?.(beach)}>
+          open beach detail
+        </button>
+      )}
 
       {isExpanded && (
         <div className="cluster-carousel-card__details">
@@ -387,10 +421,34 @@ function CreateChoiceMenu({ onCreateCluster, onCreatePlan, onCreateRitual }) {
 
 export default function ClusterStackGallery({
   beaches = [],
+  clusters = [],
   onCreateCluster,
   onCreatePlan,
   onCreateRitual,
+  onBeachSelect,
 }) {
+  const beachesBySlug = useMemo(
+    () => Object.fromEntries(beaches.map((beach) => [beach.slug, beach])),
+    [beaches],
+  );
+  const personalStacks = useMemo(
+    () => clusters.map((cluster) => {
+        const clusterBeaches = beachesForCluster(cluster, beachesBySlug);
+        const displayBeaches = clusterBeaches.length
+          ? clusterBeaches
+          : [placeholderBeachForCluster(cluster)];
+        return {
+          id: `cluster-${clusterId(cluster)}`,
+          label: cluster.name || "my cluster",
+          chips: [clusterBeaches.length ? `${clusterBeaches.length} beaches` : "empty", "personal"],
+          color: cluster.color || "#91C059",
+          isPersonal: true,
+          sourceCluster: cluster,
+          beaches: displayBeaches,
+        };
+      }),
+    [beachesBySlug, clusters],
+  );
   const stacks = useMemo(
     () => STACK_PRESETS.map((preset, presetIndex) => ({
       ...preset,
@@ -398,10 +456,14 @@ export default function ClusterStackGallery({
     })),
     [beaches],
   );
+  const galleryStacks = useMemo(
+    () => [...personalStacks, ...stacks],
+    [personalStacks, stacks],
+  );
   const [activePresetId, setActivePresetId] = useState("");
   const [activeBeachIndex, setActiveBeachIndex] = useState(0);
   const [expandedBeachSlug, setExpandedBeachSlug] = useState("");
-  const activePreset = stacks.find((preset) => preset.id === activePresetId);
+  const activePreset = galleryStacks.find((preset) => preset.id === activePresetId);
 
   function openPreset(presetId) {
     setActivePresetId(presetId);
@@ -431,8 +493,11 @@ export default function ClusterStackGallery({
             all stacks
           </button>
           <div>
-            <p>{activePreset.label}</p>
-            <h1>{activePreset.label} beaches</h1>
+            <p>{activePreset.isPersonal ? "personal cluster" : activePreset.label}</p>
+            <h1>{activePreset.isPersonal ? activePreset.label : `${activePreset.label} beaches`}</h1>
+            {activePreset.isPersonal && activePreset.sourceCluster?.description && (
+              <span>{activePreset.sourceCluster.description}</span>
+            )}
           </div>
         </div>
 
@@ -484,7 +549,9 @@ export default function ClusterStackGallery({
                     beach={beach}
                     isActive={isActive}
                     isExpanded={isActive && expandedBeachSlug === beach.slug}
+                    onSelect={beach.isClusterPlaceholder ? undefined : onBeachSelect}
                     onToggle={() => {
+                      if (beach.isClusterPlaceholder) return;
                       if (!isActive) {
                         setExpandedBeachSlug("");
                         setActiveBeachIndex(beachIndex);
@@ -530,7 +597,7 @@ export default function ClusterStackGallery({
     <section className="cluster-stack-gallery" aria-label="Beach mood stacks">
       <div className="cluster-stack-gallery__intro">
         <p>cluster</p>
-        <h1>pick the pile that feels right</h1>
+        <h1>your saved piles and mood stacks</h1>
         <CreateChoiceMenu
           onCreateCluster={onCreateCluster}
           onCreatePlan={onCreatePlan}
@@ -539,11 +606,13 @@ export default function ClusterStackGallery({
       </div>
 
       <div className="cluster-stack-grid">
-        {STACK_PRESETS.map((preset, presetIndex) => {
-          const stack = stackBeachesForPreset(beaches, preset, presetIndex);
+        {galleryStacks.map((preset, presetIndex) => {
+          const stack = preset.beaches?.length
+            ? preset.beaches
+            : stackBeachesForPreset(beaches, preset, presetIndex);
 
           return (
-            <article className="cluster-stack-card" key={preset.id}>
+            <article className={`cluster-stack-card ${preset.isPersonal ? "is-personal" : ""}`} key={preset.id} style={{ "--cluster-color": preset.color || "#111111" }}>
               <button
                 type="button"
                 className="cluster-stack-card__stack"

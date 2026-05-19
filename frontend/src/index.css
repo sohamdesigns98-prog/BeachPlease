@@ -2357,12 +2357,12 @@
   }
 
   .beach-info-tile {
-    @apply fixed bottom-0 right-0 top-0 z-[90] flex w-[390px] flex-col overflow-hidden border-l bg-[#FDFEFE] px-10 pb-8 pt-20 text-left shadow-[0_0_32px_rgba(0,0,0,0.04)];
+    @apply fixed bottom-0 right-0 top-0 z-[90] flex w-[390px] min-h-fit flex-col border-l bg-[#FDFEFE] px-10 pb-8 pt-20 text-left shadow-[0_0_32px_rgba(0,0,0,0.04)];
     border-color: #ecebe6;
   }
 
   .beach-info-tile.beach-info-tile--overlay {
-    @apply left-1/2 top-1/2 z-[130] h-[min(620px,calc(100vh-112px))] w-[min(430px,calc(100vw-48px))] overflow-hidden rounded-[14px] border border-foreground/10 bg-[#FDFEFE]/95 px-7 pb-6 pt-7 shadow-[0_28px_90px_rgb(17_17_17_/_0.18)] backdrop-blur-md;
+    @apply left-1/2 top-1/2 z-[130] h-[min(640px,calc(100vh-96px))] w-[min(430px,calc(100vw-48px))] overflow-y-auto rounded-[14px] border border-foreground/10 bg-[#FDFEFE]/95 px-7 pb-10 pt-7 shadow-[0_28px_90px_rgb(17_17_17_/_0.18)] backdrop-blur-md;
     animation: beach-info-overlay-rise 520ms cubic-bezier(0.19, 1, 0.22, 1);
     border-left-width: 1px;
     bottom: auto;
@@ -2527,7 +2527,7 @@
   }
 
   .beach-info-tile__actions {
-    @apply mt-auto grid grid-cols-2 gap-3;
+    @apply mt-auto grid grid-cols-2 gap-3 pb-1 pt-5;
   }
 
   .beach-info-tile__cluster,
@@ -2541,7 +2541,23 @@
   }
 
   .beach-info-tile__cluster-note {
-    @apply m-0 mt-2 text-[10px] lowercase leading-4 text-foreground/45;
+    @apply mt-3 grid gap-2 text-[10px] lowercase leading-4 text-foreground/45;
+  }
+
+  .beach-info-tile__cluster-note > span {
+    @apply uppercase tracking-[0.18em] text-foreground/35;
+  }
+
+  .beach-info-tile__cluster-note > div {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .beach-info-tile__cluster-note button {
+    @apply inline-flex items-center gap-2 rounded-full border border-foreground/10 bg-transparent px-3 py-1.5 text-[10px] lowercase text-foreground/60 transition-colors hover:border-red-500/40 hover:text-red-600;
+  }
+
+  .beach-info-tile__cluster-note small {
+    @apply text-[9px] text-red-500;
   }
 
   .beach-info-tile__generate {
@@ -2946,10 +2962,21 @@
     @apply rounded-[28px] bg-[#FDFEFE] p-4 shadow-[0_24px_70px_rgb(17_17_17_/_0.08)] transition-[height,transform,opacity] duration-300 ease-out;
     width: min(330px, calc(100vw - 72px));
     min-height: 238px;
+    max-height: min(620px, calc(100vh - 190px));
+    overflow-y: auto;
+    scrollbar-width: thin;
   }
 
   .cluster-carousel-card.is-expanded {
-    min-height: 560px;
+    min-height: min(560px, calc(100vh - 190px));
+  }
+
+  .cluster-carousel-card__open-detail {
+    @apply mt-3 h-9 w-full rounded-full border border-foreground/15 bg-transparent text-[10px] font-normal lowercase text-foreground/60 shadow-none transition-colors hover:border-foreground hover:bg-foreground hover:text-background;
+  }
+
+  .cluster-carousel-card__empty {
+    @apply m-0 mt-3 block rounded-[14px] border border-dashed border-foreground/15 px-4 py-3 text-center text-[11px] font-normal lowercase leading-5 text-foreground/45;
   }
 
   .cluster-carousel-card__button {
@@ -3029,7 +3056,7 @@
   }
 
   .cluster-coverflow__stage {
-    @apply relative mx-auto h-[620px] w-[min(860px,calc(100vw-160px))];
+    @apply relative mx-auto h-[min(660px,calc(100vh-230px))] min-h-[430px] w-[min(860px,calc(100vw-160px))];
     perspective: 1200px;
     transform-style: preserve-3d;
   }
@@ -3367,7 +3394,7 @@
     }
 
     .beach-info-tile {
-      @apply left-0 top-auto h-auto max-h-[62vh] w-auto overflow-hidden border-l-0 border-t px-6 py-7;
+      @apply left-0 top-auto h-auto max-h-[70vh] w-auto overflow-y-auto border-l-0 border-t px-6 pb-10 pt-7;
       bottom: 0;
     }
 
@@ -3425,6 +3452,37 @@
 
     .cluster-card__top {
       @apply grid-cols-1 gap-3;
+    }
+
+    .cluster-stack-gallery {
+      @apply px-4 pb-20 pt-32;
+    }
+
+    .cluster-stack-gallery--carousel {
+      @apply gap-5 overflow-y-auto px-0 pb-20 pt-32;
+    }
+
+    .cluster-carousel-heading {
+      @apply w-[calc(100vw-32px)] grid-cols-1 gap-4;
+    }
+
+    .cluster-coverflow {
+      @apply grid-cols-[40px_minmax(0,1fr)_40px] overflow-visible py-2;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+
+    .cluster-coverflow__stage {
+      @apply h-[min(590px,calc(100vh-230px))] min-h-[420px] w-[calc(100vw-96px)];
+    }
+
+    .cluster-carousel-card {
+      width: min(300px, calc(100vw - 96px));
+      max-height: min(560px, calc(100vh - 250px));
+    }
+
+    .cluster-coverflow__item {
+      margin-left: calc(min(300px, calc(100vw - 96px)) / -2);
     }
   }
 

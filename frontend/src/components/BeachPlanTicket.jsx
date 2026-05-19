@@ -128,6 +128,7 @@ export function normalisePlanForTicket(rawPlan, generationInput = {}) {
 export default function BeachPlanTicket({ plan, generationInput }) {
   const postcardRef = useRef(null);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [shareStatus, setShareStatus] = useState("");
   const ticket = {
     ...APP_COPY.result.mockPlan,
     ...normalisePlanForTicket(plan, generationInput),
@@ -159,6 +160,42 @@ export default function BeachPlanTicket({ plan, generationInput }) {
       link.click();
     } finally {
       setIsDownloading(false);
+    }
+  }
+
+  async function sharePostcard() {
+    if (shareStatus === "sharing...") return;
+
+    const shareTitle = `${ticket.beachName} beach plan`;
+    const shareText = [
+      ticket.moodPhrase ? `"${ticket.moodPhrase}"` : "",
+      ticket.where || ticket.why || postcardLine(ticket),
+    ].filter(Boolean).join("\n\n");
+    const shareUrl = window.location.href;
+
+    setShareStatus("sharing...");
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: shareTitle,
+          text: shareText,
+          url: shareUrl,
+        });
+        setShareStatus("shared");
+        window.setTimeout(() => setShareStatus(""), 1600);
+        return;
+      }
+
+      await navigator.clipboard.writeText(`${shareTitle}\n\n${shareText}\n\n${shareUrl}`);
+      setShareStatus("copied link");
+      window.setTimeout(() => setShareStatus(""), 1600);
+    } catch (error) {
+      if (error?.name === "AbortError") {
+        setShareStatus("");
+        return;
+      }
+      setShareStatus("copy failed");
+      window.setTimeout(() => setShareStatus(""), 1800);
     }
   }
 
@@ -220,7 +257,9 @@ export default function BeachPlanTicket({ plan, generationInput }) {
         <button type="button" onClick={downloadPostcard}>
           {isDownloading ? "making png..." : "download postcard"}
         </button>
-        <button type="button">share</button>
+        <button type="button" onClick={sharePostcard}>
+          {shareStatus || "share"}
+        </button>
       </footer>
     </article>
   );
