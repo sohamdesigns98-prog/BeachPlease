@@ -18,7 +18,7 @@ export default function AdminRoute({ children }) {
       <main className="auth-page">
         <section className="auth-panel">
           <div className="auth-heading">
-            <p>ADMIN //</p>
+            <p>Admin //</p>
             <h1>Access needed</h1>
             <span>This area is only available for admin accounts.</span>
           </div>

@@ -96,45 +96,45 @@ export default function Plan() {
                 <>
             <section className="plan-metadata" aria-label="Plan metadata">
               <div>
-                <span>REGION //</span>
+                <span>Region //</span>
                 <p>{formatField(plan.region)}</p>
               </div>
               <div>
-                <span>ACTIVITY //</span>
+                <span>Activity //</span>
                 <p>{formatField(plan.activity)}</p>
               </div>
               <div>
-                <span>COMPANION //</span>
+                <span>Companion //</span>
                 <p>{formatField(plan.companion)}</p>
               </div>
               <div>
-                <span>MOOD //</span>
+                <span>Mood //</span>
                 <p>{plan.mood_phrase || "n/a"}</p>
               </div>
             </section>
 
             <section className="plan-full-section">
-              <p>FULL PLAN //</p>
+              <p>Full plan //</p>
               <h2>{planText(planBody.where || plan.selected_beach_name, "No beach destination was included.")}</h2>
               <div>
-                <span>WHEN</span>
+                <span>When</span>
                 <p>{planText(planBody.when, "No timing was included.")}</p>
               </div>
               <div>
-                <span>WHY</span>
+                <span>Why</span>
                 <p>{planText(planBody.why, "No reasoning was included.")}</p>
               </div>
               <div>
-                <span>CONDITIONS</span>
+                <span>Conditions</span>
                 <p>{planText(planBody.conditions_summary, "No condition summary was included.")}</p>
               </div>
               <div>
-                <span>HEADS UP</span>
+                <span>Heads up</span>
                 <p>{planText(planBody.gentle_warning, "No warning was included.")}</p>
               </div>
               {bringItems.length > 0 && (
                 <div>
-                  <span>BRING</span>
+                  <span>Bring</span>
                   <ul>
                     {bringItems.map((item) => (
                       <li key={item}>{item}</li>
@@ -149,7 +149,7 @@ export default function Plan() {
 
             {Array.isArray(plan.candidate_snapshot) && plan.candidate_snapshot.length > 0 && (
               <section className="plan-full-section">
-                <p>CANDIDATES //</p>
+                <p>Candidates //</p>
                 <div className="plan-candidate-list">
                   {plan.candidate_snapshot.slice(0, 5).map((candidate) => (
                     <article key={candidate.slug || candidate.name}>
@@ -164,7 +164,7 @@ export default function Plan() {
 
             {Array.isArray(plan.rejected_beaches) && plan.rejected_beaches.length > 0 && (
               <section className="plan-full-section">
-                <p>WHY NOT THE OTHERS //</p>
+                <p>Why not the others //</p>
                 <div className="plan-rejected-list">
                   {plan.rejected_beaches.map((item) => (
                     <article key={item.name}>
@@ -177,7 +177,7 @@ export default function Plan() {
             )}
 
             <div className="auth-heading">
-              <p>NOTES //</p>
+              <p>Notes //</p>
               <h2>User notes</h2>
               <span>Autosaves after you stop typing.</span>
             </div>
@@ -191,11 +191,11 @@ export default function Plan() {
             />
             {status && <p className="auth-success">{status}</p>}
             <div className="profile-actions">
-              <Button type="button" onClick={handleSaveNotes}>SAVE NOTES</Button>
+              <Button type="button" onClick={handleSaveNotes}>Save notes</Button>
               <ConfirmDeleteDialog
                 title="Delete this saved plan?"
                 description="This removes the saved postcard and its notes. You can generate another plan later."
-                confirmLabel="DELETE PLAN"
+                confirmLabel="Delete plan"
                 onConfirm={handleDelete}
               >
                 <Button type="button" variant="outline" className="danger-button">

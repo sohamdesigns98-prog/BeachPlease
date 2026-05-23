@@ -272,13 +272,13 @@ export const EMPTY_STATES = {
 };
 
 export const BUTTON_COPY = {
-  enterExperience: "ENTER EXPERIENCE",
-  generatePlan: "FIND MY BEACH",
-  save: "SAVE",
-  delete: "DELETE",
-  replay: "REPLAY",
-  login: "LOG IN",
-  register: "SIGN UP",
+  enterExperience: "Enter experience",
+  generatePlan: "Find my beach",
+  save: "Save",
+  delete: "Delete",
+  replay: "Replay",
+  login: "Log in",
+  register: "Sign up",
 };
 
 export const LOADING_COPY = {

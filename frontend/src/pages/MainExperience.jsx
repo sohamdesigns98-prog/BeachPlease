@@ -15,7 +15,6 @@ import CircularBeachCanvas from "@/components/CircularBeachCanvas";
 import ClusterPickerDialog from "@/components/ClusterPickerDialog";
 import ClusterStackGallery from "@/components/ClusterStackGallery";
 import CreateClusterDialog from "@/components/CreateClusterDialog";
-import GeneratingOverlay from "@/components/GeneratingOverlay";
 import MapboxBeachMap from "@/components/map/MapboxBeachMap";
 import ModeToggle from "@/components/ModeToggle";
 import { Button } from "@/components/ui/button";
@@ -328,40 +327,14 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
     }
   }
 
-  async function handleCreateRitualFromMenu(form) {
-    if (!token) {
-      navigate("/login");
-      return;
-    }
-
-    const ritualNotes = [
-      form.mood,
-      form.preferredTime ? `preferred time: ${form.preferredTime}` : "",
-      form.food ? `food/drink: ${form.food}` : "",
-      form.linkedCluster ? `cluster: ${form.linkedCluster}` : "",
-      form.notes ? `notes: ${form.notes}` : "",
-    ].filter(Boolean).join(" · ");
-    const payload = {
-      mood_phrase: ritualNotes || form.mood,
-      region: form.locality,
-      activity: form.activity,
-      companion: form.companion,
-      selected_mood: form.name || form.mood,
-      companion_context: form.companion,
-      experience_tags: ["ritual", form.preferredTime, form.food, form.notes].filter(Boolean),
+  function handleCreateRitualFromMenu(form) {
+    const existing = JSON.parse(window.localStorage.getItem("beachplease_rituals") || "[]");
+    const ritual = {
+      id: crypto.randomUUID?.() || `${Date.now()}`,
+      ...form,
+      createdAt: new Date().toISOString(),
     };
-
-    setGenerationInput(payload);
-    setIsGenerating(true);
-    setError("");
-
-    try {
-      const savedPlan = await createPlan(payload);
-      revealGeneratedPlan(savedPlan, payload);
-    } catch (caughtError) {
-      setError(caughtError?.response?.data?.detail || "Couldn't create that ritual right now.");
-      setIsGenerating(false);
-    }
+    window.localStorage.setItem("beachplease_rituals", JSON.stringify([ritual, ...existing]));
   }
 
   async function handleCreateCluster(payload, options = {}) {
@@ -380,7 +353,7 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
       const createdCluster = await createCluster(payload);
       setClusters((currentClusters) => [{ ...payload, ...createdCluster }, ...currentClusters]);
       setIsClusterDialogOpen(false);
-      if (activate) navigate("/explore/canvas");
+      if (activate && activeMode !== "cluster") navigate("/explore/canvas");
     } catch (caughtError) {
       setClusterError(caughtError?.response?.data?.detail || "Couldn't create that cluster.");
     } finally {
@@ -542,7 +515,8 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
         <ClusterStackGallery
           beaches={beaches}
           clusters={clusters}
-          onBeachSelect={handleBeachSelect}
+          clustersLoading={clustersLoading}
+          clusterError={clusterError}
           onCreateCluster={() => {
             if (!token) {
               navigate("/login");
@@ -581,29 +555,8 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
           }}
           onGenerate={handleGeneratePostcard}
           onAddToCluster={handleOpenClusterAdd}
-          onRemoveFromCluster={handleRemoveBeachFromCluster}
         />
       )}
-
-      {selectedBeach && activeMode === "cluster" && (
-        <BeachInfoTile
-          beach={selectedBeach}
-          conditionLoading={Boolean(loadingConditionSlugs[selectedBeach.slug])}
-          isGenerating={isGenerating}
-          clusterMembership={selectedBeachClusters}
-          variant="overlay"
-          onClose={() => {
-            setSelectedBeachSlug("");
-            setSelectedBeachName("");
-            setSelectedBeachData(null);
-          }}
-          onGenerate={handleGeneratePostcard}
-          onAddToCluster={handleOpenClusterAdd}
-          onRemoveFromCluster={handleRemoveBeachFromCluster}
-        />
-      )}
-
-      <GeneratingOverlay mood={moodPhrase || generationInput?.mood_phrase || selectedBeach?.name || ""} isVisible={isGenerating} />
 
       {activeMode !== "cluster" && (
         <form
@@ -652,7 +605,7 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
             </>
           )}
           <Button type="submit" disabled={isGenerating}>
-            {isGenerating ? "generating plan..." : "Find My Beach"}
+            {isGenerating ? "Generating plan..." : "Find my beach"}
           </Button>
         </form>
       )}

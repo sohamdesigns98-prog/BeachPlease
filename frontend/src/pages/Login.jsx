@@ -57,7 +57,7 @@ export default function Login() {
       <Form {...form}>
         <form className="auth-panel" onSubmit={handleSubmit(onSubmit)} noValidate>
           <div className="auth-heading">
-            <p>BEACHPLEASE</p>
+            <p>BeachPlease</p>
             <h1>Log in</h1>
             <span>Come back to the beaches you kept, notes included.</span>
           </div>
@@ -85,7 +85,7 @@ export default function Login() {
         </label>
 
         <Button type="submit" className="auth-submit" disabled={isSubmitting}>
-          {isSubmitting ? "checking..." : "LOG IN"}
+          {isSubmitting ? "Checking..." : "Log in"}
         </Button>
 
         <GoogleOAuthButton onCredential={handleGoogleCredential} disabled={isSubmitting} />

@@ -57,20 +57,20 @@ function arrayFromConditions(conditions) {
 
 function metricFromPlan(ticket, label, fallback = "n/a") {
   const rawConditions = ticket.raw?.conditions;
-  if (label === "TEMP" && rawConditions?.temperature !== null && rawConditions?.temperature !== undefined) {
+  if (label.toUpperCase() === "TEMP" && rawConditions?.temperature !== null && rawConditions?.temperature !== undefined) {
     return `${rawConditions.temperature}°C`;
   }
-  if (label === "WAVES" && rawConditions?.wave_height_m !== null && rawConditions?.wave_height_m !== undefined) {
+  if (label.toUpperCase() === "WAVES" && rawConditions?.wave_height_m !== null && rawConditions?.wave_height_m !== undefined) {
     return `${rawConditions.wave_height_m}m`;
   }
-  if (label === "CROWD" && ticket.raw?.candidate_snapshot?.[0]?.crowd?.label) {
+  if (label.toUpperCase() === "CROWD" && ticket.raw?.candidate_snapshot?.[0]?.crowd?.label) {
     return ticket.raw.candidate_snapshot[0].crowd.label;
   }
 
   const conditions = arrayFromConditions(ticket.conditions);
-  if (label === "TEMP") return conditions.find((item) => item.includes("°")) || fallback;
-  if (label === "WAVES") return conditions.find((item) => item.toLowerCase().includes("m")) || fallback;
-  if (label === "CROWD") return ticket.raw?.crowd?.label || "moderate";
+  if (label.toUpperCase() === "TEMP") return conditions.find((item) => item.includes("°")) || fallback;
+  if (label.toUpperCase() === "WAVES") return conditions.find((item) => item.toLowerCase().includes("m")) || fallback;
+  if (label.toUpperCase() === "CROWD") return ticket.raw?.crowd?.label || "moderate";
   return fallback;
 }
 
@@ -136,9 +136,9 @@ export default function BeachPlanTicket({ plan, generationInput }) {
   const copy = APP_COPY.result.ticket;
   const postcardDate = formatPostcardDate(ticket.raw);
   const metrics = [
-    ["TEMP", metricFromPlan(ticket, "TEMP")],
-    ["WAVES", metricFromPlan(ticket, "WAVES")],
-    ["CROWD", metricFromPlan(ticket, "CROWD")],
+    ["Temp", metricFromPlan(ticket, "Temp")],
+    ["Waves", metricFromPlan(ticket, "Waves")],
+    ["Crowd", metricFromPlan(ticket, "Crowd")],
   ];
 
   async function downloadPostcard() {

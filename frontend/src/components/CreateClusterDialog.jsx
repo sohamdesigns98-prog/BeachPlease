@@ -68,7 +68,7 @@ export default function CreateClusterDialog({
         <DialogClose className="cluster-dialog__close" type="button" aria-label="Close cluster dialog">
           x
         </DialogClose>
-        <p>{isEditing ? "EDIT CLUSTER //" : "NEW CLUSTER //"}</p>
+        <p>{isEditing ? "Edit cluster //" : "New cluster //"}</p>
         <DialogHeader>
           <DialogTitle>{isEditing ? "tune this little mood" : "keep this little mood together"}</DialogTitle>
           <DialogDescription>
@@ -82,19 +82,19 @@ export default function CreateClusterDialog({
 
         <form className="cluster-dialog__form" onSubmit={handleSubmit}>
           <label>
-            <small>NAME</small>
+            <small>Name</small>
             <input value={name} onChange={(event) => setName(event.target.value)} required />
           </label>
           <label>
-            <small>DESCRIPTION</small>
+            <small>Description</small>
             <input value={description} onChange={(event) => setDescription(event.target.value)} />
           </label>
           <label>
-            <small>MOOD PHRASE</small>
+            <small>Mood phrase</small>
             <textarea value={clusterMood} onChange={(event) => setClusterMood(event.target.value)} />
           </label>
           <fieldset className="cluster-color-field">
-            <legend>COLOR</legend>
+            <legend>Color</legend>
             <div>
               {CLUSTER_COLORS.map((option) => (
                 <button

@@ -83,7 +83,7 @@ export default function Profile() {
       <Form {...form}>
         <form className="auth-panel profile-panel" onSubmit={handleSubmit(onSubmit)} noValidate>
           <div className="auth-heading">
-            <p>PROFILE</p>
+            <p>Profile</p>
             <h1>Your beach settings</h1>
             <span>Small details. Better recommendations.</span>
           </div>
@@ -136,7 +136,7 @@ export default function Profile() {
 
           <div className="profile-actions">
             <Button type="submit" className="auth-submit" disabled={isSubmitting}>
-              {isSubmitting ? "saving..." : "SAVE PROFILE"}
+              {isSubmitting ? "Saving..." : "Save profile"}
             </Button>
             <Button type="button" variant="outline" onClick={logout}>
               LOG OUT
@@ -144,7 +144,7 @@ export default function Profile() {
             <ConfirmDeleteDialog
               title="Delete your account?"
               description="This removes your profile, saved plans, and clusters. This cannot be undone."
-              confirmLabel="DELETE ACCOUNT"
+              confirmLabel="Delete account"
               onConfirm={handleDelete}
             >
               <Button type="button" variant="outline" className="danger-button">

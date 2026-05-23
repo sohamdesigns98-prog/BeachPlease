@@ -4,107 +4,63 @@
 
 BeachPlease is a canvas-first Sydney beach recommendation web app for choosing and planning a Sydney beach day.
 
-The app helps a user move from a mood or vague beach craving into a specific, practical beach plan using:
+The current product combines:
 
-- a visual beach canvas
-- existing Sydney beach data
-- live Open-Meteo coastal conditions
-- backend ranking logic
-- Gemini-generated plan content
-- saved plans with notes, replay, and delete flows
+- cloud opening experience
+- circular/scattered beach canvas
+- hover/click beach tiles
+- right-side beach information
+- mood-led plan creation
+- Mapbox coastal map
+- saved plans with notes/replay/delete
+- mood clusters and stack browsing
+- admin dashboard for data management
+- FastAPI, MongoDB, Gemini, Open-Meteo, and React/Vite
 
-BeachPlease should feel like a calm, local, slightly cheeky Sydney beach mate. It should not feel like a generic beach directory, travel booking product, chatbot, or old-style form funnel.
+BeachPlease should feel local, calm, visual, and slightly cheeky. It should not feel like a generic beach directory, chatbot, or old form funnel.
 
 ## 2. Current Product Flow
 
 1. User lands on the cloud opening animation.
 2. User clicks `ENTER EXPERIENCE`.
-3. The app opens into Mood mode by default.
-4. The top-right toggle shows `Saved | Mood | Map`.
-5. Mood mode shows a visual beach canvas.
-6. Beach image tiles appear in a scattered/circular 3D canvas formation.
-7. Hovering a beach tile reveals name/basic info with subtle 3D/parallax behaviour.
-8. Clicking a beach tile opens a right-side `BeachInfoTile`.
-9. The bottom mood input remains available.
-10. User can create a full Beach Plan through the Create Plan flow.
-11. Create Plan accepts mood, companion, locality/coastal area, activity, food/cafe/bar preference, and extra notes/preferences.
-12. Create Plan submits to backend `POST /plans`.
-13. Backend uses beach data, live Open-Meteo conditions, ranking logic, and Gemini to generate the plan.
-14. Loading/reveal can use the beach rolodex animation if implemented.
-15. Result shows the generated Beach Plan.
-16. Authenticated users can save the plan.
-17. Saved mode lets users view saved plans and use notes, replay, and delete flows.
-18. Map mode shows the Mapbox coastal map and live beach conditions.
+3. The app opens into the canvas-first explore experience.
+4. Users browse beach image tiles in a circular/scattered 3D canvas formation.
+5. Hovering a beach tile reveals name/basic info with subtle 3D/parallax behaviour.
+6. Clicking a beach tile opens a right-side `BeachInfoTile`.
+7. The bottom mood input remains available.
+8. User can create a full Beach Plan through the Create Plan flow.
+9. Create Plan can include mood, companion, locality/coastal area, activity, food/cafe/bar preference, extra notes, and selected beach context.
+10. Create Plan submits to backend `POST /plans` or uses preview/snapshot flows where appropriate.
+11. Backend uses beach data, live Open-Meteo conditions, ranking logic, and Gemini to generate the plan.
+12. Result shows a generated Beach Plan with selected beach, timing, activity, food/drink suggestion, fit rationale, live conditions, bring list, and gentle warning.
+13. Authenticated users can save the plan.
+14. Saved plans support notes, replay, and delete.
+15. Map mode shows the Mapbox coastal map and live beach conditions.
+16. Cluster mode shows curated beach stacks and beach browsing by mood/use case.
+17. Admin users can access `/admin` to manage users, plans, beaches, and activity data.
 
-## 3. Primary Modes
+## 3. Primary Frontend Surfaces
 
-### Mood
+### Landing
 
-Mood is the default experience after the cloud opening.
+- Cloud opening animation.
+- `ENTER EXPERIENCE` call to action.
+- Respect reduced motion.
+- Starts beach ambience after entry.
 
-Mood mode includes:
+### Explore / Canvas
 
-- circular/scattered beach image canvas
-- beach tile hover states
-- beach tile click selection
-- right-side `BeachInfoTile`
-- bottom mood input
-- Create Plan action
-- optional loading/reveal animation
+- Circular/scattered beach image canvas.
+- Existing beach data and `image_url` fields.
+- Subtle motion and depth.
+- Hover reveals beach name/basic metadata.
+- Click opens `BeachInfoTile`.
+- Mood input remains available.
+- Create Plan action remains the main create action.
 
-Mood mode is visual first. It should not become a traditional questionnaire.
+### BeachInfoTile
 
-### Saved
-
-Saved mode is the personal archive for authenticated users.
-
-Saved mode supports:
-
-- list saved beach plans
-- open a saved plan
-- update notes
-- replay a plan with fresh conditions
-- delete a saved plan
-
-Saved plan data comes from the backend `beach_plans` collection. Do not use `localStorage` as the primary saved plan system.
-
-### Map
-
-Map mode uses Mapbox GL JS.
-
-Map mode supports:
-
-- Sydney coastal map
-- live beach condition markers
-- beach marker selection
-- selected beach state shared with Mood mode where practical
-- right-side beach info context where supported
-
-Mapbox remains the spatial map technology. Do not replace it with Leaflet or a static image map.
-
-## 4. Beach Canvas Requirements
-
-The beach canvas is the main discovery surface.
-
-Requirements:
-
-- use existing beach records and `image_url` fields
-- render beach image tiles in a scattered/circular 3D canvas formation
-- keep the formation calm, clean, and premium
-- use subtle motion and parallax
-- respect `prefers-reduced-motion`
-- hover reveals beach name and basic info
-- click selects the beach and opens `BeachInfoTile`
-- mood input remains available while browsing
-- selecting a tile does not automatically generate a plan
-
-The canvas should feel like a coastal image archive, not a directory grid.
-
-## 5. BeachInfoTile
-
-`BeachInfoTile` opens when a user clicks a beach tile or selects a beach from the map.
-
-It should show:
+Shows selected beach context:
 
 - beach name
 - area/suburb/region
@@ -114,16 +70,53 @@ It should show:
 - facilities
 - best time
 - what to bring
-- safety or condition notes where available
-- Create Plan / Generate Plan action
+- warning/safety note where available
+- cluster membership where available
+- plan generation action
 
-The tile should be readable, minimal, and aligned with the visual language in `design.md`.
+### Map
 
-## 6. Create Plan
+- Uses Mapbox GL JS.
+- Shows Sydney beaches spatially.
+- Uses live condition markers and selected beach state.
+- Must not be replaced with Leaflet or a static-only map.
+
+### Clusters
+
+- Cluster surface uses stack/coverflow-inspired beach browsing.
+- Clusters group beaches by mood, occasion, or type of day.
+- Backend persists clusters in `mood_clusters`.
+
+### Saved Plans
+
+- Saved plan archive for authenticated users.
+- Supports list, detail, notes, replay, and delete.
+- Data comes from backend `beach_plans`.
+
+### Admin
+
+Admin is a protected operational surface at `/admin`.
+
+Admin users can:
+
+- view dashboard stats
+- inspect recent activity
+- list users
+- change user roles
+- delete users and related data
+- list plans
+- delete plans
+- create beaches
+- update beaches
+- delete beaches
+
+Admin access is controlled by backend role/email checks and frontend `AdminRoute`.
+
+## 4. Create Plan
 
 Create Plan is the main create action.
 
-It creates one beach day plan for today. The user acts like a director and can provide:
+It creates one beach day plan. The user can provide:
 
 - mood
 - companion
@@ -133,12 +126,17 @@ It creates one beach day plan for today. The user acts like a director and can p
 - extra notes/preferences
 - selected beach if one has been clicked
 
-The frontend must submit plan creation through the backend. It must not call Gemini directly.
-
 Primary endpoint:
 
 ```txt
 POST /plans
+```
+
+Related endpoints:
+
+```txt
+POST /plans/preview
+POST /plans/save-snapshot
 ```
 
 Supported backend payload fields include:
@@ -154,17 +152,17 @@ companion_context
 experience_tags
 ```
 
-The backend remains responsible for final ranking, validation, live condition fetching, and Gemini generation. The frontend can guide the request, but it must not pretend to choose the final beach when backend ranking/generation is responsible.
+The frontend must not call Gemini directly. The backend owns final ranking, validation, live condition fetching, and Gemini generation.
 
-## 7. Generated Beach Plan
+## 5. Generated Beach Plan
 
-The generated Beach Plan should show:
+The generated plan should show:
 
 - selected beach
 - when to go
 - what to do
 - food/drink suggestion
-- why it fits the user
+- why it fits
 - live conditions summary
 - what to bring
 - gentle warning or safety note
@@ -172,55 +170,7 @@ The generated Beach Plan should show:
 
 The result must be readable as a plan, not only a decorative postcard image.
 
-## 8. Saved Plans
-
-Authenticated users can save and manage generated plans.
-
-Saved plan features:
-
-- create/save generated plan
-- view saved plans
-- open plan detail
-- update user notes
-- replay plan with fresh live conditions
-- delete plan
-
-Saved plans are stored in MongoDB in `beach_plans`.
-
-## 9. Optional Clusters And Rituals
-
-### Create Cluster
-
-Mood clusters are implemented in the backend and can be treated as optional product surface.
-
-A cluster is a personal group of beaches around a mood, occasion, or type of day.
-
-Examples:
-
-- quiet reset
-- soft date beaches
-- proper swim spots
-- big arvo
-- when Bondi is doing too much
-
-Clusters are stored in `mood_clusters`.
-
-### Create Ritual
-
-Rituals are a future or prototype-level feature unless backed by persistent backend routes.
-
-A ritual means a repeatable beach routine that can be re-run with fresh live conditions.
-
-Examples:
-
-- Sunday reset swim
-- after-class decompression
-- Friday arvo with mates
-- solo morning dip
-
-If rituals remain frontend-only or `localStorage`-only, document them as prototype UI, not production CRUD.
-
-## 10. Backend Architecture
+## 6. Backend Architecture
 
 Keep the backend architecture based on:
 
@@ -228,8 +178,10 @@ Keep the backend architecture based on:
 - MongoDB / MongoDB Atlas
 - Motor
 - JWT auth
+- role-aware admin auth
 - Gemini
 - Open-Meteo
+- APScheduler condition refresh
 - Mapbox on the frontend
 - React/Vite frontend
 
@@ -237,14 +189,18 @@ The backend owns:
 
 - auth
 - user profile data
+- user roles/admin authorization
+- suburb lookup proxy
 - beach data
+- admin beach CRUD
 - live condition retrieval/cache
 - ranking/preselection
 - Gemini plan generation
 - saved beach plans
-- mood clusters if enabled
+- mood clusters
+- activity logging
 
-## 11. Current Backend Endpoints
+## 7. Current Backend Endpoints
 
 Health:
 
@@ -255,6 +211,7 @@ Auth:
 
 - `POST /auth/register`
 - `POST /auth/login`
+- `POST /auth/logout`
 - `POST /auth/google`
 
 Users:
@@ -301,25 +258,42 @@ Clusters:
 - `PATCH /clusters/{cluster_id}`
 - `DELETE /clusters/{cluster_id}`
 
-## 12. CRUD Mapping
+Admin:
+
+- `GET /admin/dashboard`
+- `GET /admin/activities`
+- `GET /admin/users`
+- `PATCH /admin/users/{user_id}`
+- `DELETE /admin/users/{user_id}`
+- `GET /admin/plans`
+- `DELETE /admin/plans/{plan_id}`
+- `POST /admin/beaches`
+- `PATCH /admin/beaches/{beach_id}`
+- `DELETE /admin/beaches/{beach_id}`
+
+Suburbs:
+
+- `GET /suburbs/search?q={query}&state=NSW`
+
+## 8. CRUD Mapping
 
 ### Users
 
 | Operation | Endpoint |
 | --- | --- |
 | Create | `POST /auth/register`, `POST /auth/google` |
-| Read | `GET /users/me` |
-| Update | `PATCH /users/me` |
-| Delete | `DELETE /users/me` |
+| Read | `GET /users/me`, `GET /admin/users` |
+| Update | `PATCH /users/me`, `PATCH /admin/users/{user_id}` |
+| Delete | `DELETE /users/me`, `DELETE /admin/users/{user_id}` |
 
 ### Beach Plans
 
 | Operation | Endpoint |
 | --- | --- |
 | Create | `POST /plans`, `POST /plans/save-snapshot` |
-| Read | `GET /plans`, `GET /plans/{plan_id}` |
+| Read | `GET /plans`, `GET /plans/{plan_id}`, `GET /admin/plans` |
 | Update | `PATCH /plans/{plan_id}`, `PATCH /plans/{plan_id}/replay` |
-| Delete | `DELETE /plans/{plan_id}` |
+| Delete | `DELETE /plans/{plan_id}`, `DELETE /admin/plans/{plan_id}` |
 
 ### Mood Clusters
 
@@ -330,15 +304,33 @@ Clusters:
 | Update | `PATCH /clusters/{cluster_id}` |
 | Delete | `DELETE /clusters/{cluster_id}` |
 
+### Beaches
+
+| Operation | Endpoint |
+| --- | --- |
+| Create | `POST /admin/beaches`, seed scripts |
+| Read | `GET /beaches`, `GET /beaches/slug/{slug}`, `GET /beaches/{beach_id}` |
+| Update | `PATCH /admin/beaches/{beach_id}` |
+| Delete | `DELETE /admin/beaches/{beach_id}` |
+
+### Activity Log
+
+| Operation | Endpoint |
+| --- | --- |
+| Create | backend `log_activity` service |
+| Read | `GET /admin/activities` |
+| Update | n/a |
+| Delete | n/a |
+
 ### Rituals
 
 No production backend ritual CRUD is currently required unless ritual routes/models are added. If rituals are frontend-only, they are prototype state and should not be documented as persistent backend CRUD.
 
-## 13. Current Data Model
+## 9. Current Data Model
 
 ### User
 
-Core user fields:
+Core fields:
 
 - `_id`
 - `email`
@@ -349,6 +341,7 @@ Core user fields:
 - `suburb_lng`
 - `companions`
 - `travel_mode`
+- `role`
 - `auth_provider`
 - `profile_complete`
 - `created_at`
@@ -356,21 +349,30 @@ Core user fields:
 
 ### Beach
 
-Beach records should include:
+Beach records include:
 
 - `_id`
 - `slug`
 - `name`
-- `suburb` / area / region fields
+- `suburb`
+- `region`
 - `lat`
 - `lng`
 - `image_url`
-- descriptive and practical beach metadata
-- vibe, facility, access, or best-for tags where available
+- `water_type`
+- `exposure`
+- `accessibility`
+- `crowd_level_default`
+- suitability fields
+- dog access
+- vibe tags
+- best-for tags
+- facilities
+- timestamps when admin-created/updated
 
 ### Beach Plan
 
-Saved/generated beach plans include:
+Saved/generated plans include:
 
 - `_id`
 - `user_id`
@@ -383,6 +385,7 @@ Saved/generated beach plans include:
 - generated plan text fields
 - live conditions summary
 - warning/safety note
+- candidate/rejected beach context where available
 - `input_context`
 - `user_notes`
 - `created_at`
@@ -403,27 +406,45 @@ Mood clusters include:
 - `created_at`
 - `updated_at`
 
-### Ritual
+### User Activity
 
-A production ritual model, if added later, should include:
+Admin/activity records include:
 
-- `user_id`
-- `name`
-- `mood_phrase`
-- `preferred_time`
-- `companion`
-- `locality`
-- `activity`
-- `food_drink_preference`
-- optional linked cluster
-- extra preferences
-- timestamps
+- `_id`
+- `action`
+- `entity_type`
+- `entity_id`
+- `label`
+- actor/user context
+- metadata
+- `created_at`
 
-Running a ritual should create a fresh Beach Plan using current live conditions.
+## 10. Latest Merge Summary
 
-## 14. Visual Language
+Added:
 
-The visual language follows `design.md`.
+- admin dashboard frontend
+- admin route guard
+- admin API client
+- admin backend routes
+- admin role/email authorization
+- beach write model
+- user activity logging
+- suburb search API/client integration
+- database sample JSON exports
+- `ADMIN_EMAILS` env support
+
+Removed earlier in the canvas cleanup:
+
+- old 4-stage funnel components
+- old funnel-first visible product flow
+- old mock candidate selector helper
+- old unused landing page component
+- accidental backend npm lockfile
+
+## 11. Visual Language
+
+Use `design.md` as the interaction and style guide.
 
 Summary:
 
@@ -437,17 +458,13 @@ Summary:
 - subtle shadows and depth
 - restrained colour
 - calm 3D/parallax motion
+- dense but readable admin tools
 - no generic travel-card grid
-- no dashboard-like interface
-- no heavy explanatory UI copy
+- no dashboard feel in the main user-facing experience
 
-Motion should be smooth, premium, and quiet. Respect `prefers-reduced-motion`.
-
-## 15. Security And Configuration
+## 12. Security And Configuration
 
 Do not commit real `.env` files.
-
-Keep `.env.example` files placeholder-only.
 
 Secrets and keys must remain local or in deployment secret storage:
 
@@ -455,32 +472,14 @@ Secrets and keys must remain local or in deployment secret storage:
 - `JWT_SECRET`
 - `GEMINI_API_KEY`
 - `VITE_MAPBOX_TOKEN`
-- Google OAuth client IDs/secrets where applicable
+- `GOOGLE_CLIENT_ID`
+- `ADMIN_EMAILS`
 
 Frontend must not call Gemini directly.
 
-Backend should validate authenticated access for:
+Admin routes must require authenticated admin users. Admin status is controlled by role/email configuration and should not be trusted from frontend state alone.
 
-- saved plans
-- notes
-- replay
-- delete
-- clusters
-- profile updates
-
-## 16. Deprecated Direction
-
-The following patterns should not guide new implementation:
-
-- visible multi-step questionnaire as the primary experience
-- generic beach directory UI
-- chatbot-style beach selection
-- static-only mock recommendation flow
-- purely decorative result cards with no readable plan detail
-
-The backend may still accept structured fields such as region, activity, and companion, but these are inputs to Create Plan rather than a required visible funnel.
-
-## 17. Implementation Guardrails
+## 13. Implementation Guardrails
 
 - Do not break `POST /plans`.
 - Do not break saved plan notes, replay, or delete.
@@ -489,5 +488,5 @@ The backend may still accept structured fields such as region, activity, and com
 - Do not break Gemini generation.
 - Do not replace backend ranking with frontend random selection.
 - Do not remove auth-protected saved plan behaviour.
-- Keep Mood, Saved, and Map as the product modes.
+- Do not expose admin routes to non-admin users.
 - Keep Create Plan as the main create action.

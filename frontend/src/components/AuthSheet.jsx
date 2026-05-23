@@ -82,7 +82,7 @@ export default function AuthSheet({
       </button>
 
       <div className="auth-sheet-copy">
-        <p>SAVE THIS ONE</p>
+        <p>Save this one</p>
         <h2>{mode === "login" ? "log in + save" : "make an account, keep the beach"}</h2>
         <span>Your saved beaches, notes, and regenerated plans stay attached to you.</span>
       </div>
@@ -133,10 +133,10 @@ export default function AuthSheet({
 
           <Button type="submit" className="auth-sheet-primary" disabled={isSubmitting}>
             {isSubmitting
-              ? "saving..."
+              ? "Saving..."
               : mode === "login"
-                ? "LOG IN + SAVE"
-                : "CREATE ACCOUNT + SAVE"}
+                ? "Log in + save"
+                : "Create account + save"}
           </Button>
         </form>
       </Form>

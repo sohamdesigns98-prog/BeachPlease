@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { getClusters } from "@/api/clusters";
+import { CLUSTERS_CHANGED_EVENT, getClusters } from "@/api/clusters";
 import { getCachedPlans, getPlans } from "@/api/plans";
 import AudioToggle from "@/components/audio/AudioToggle";
 import AccountPill from "@/components/AccountPill";
@@ -40,8 +40,7 @@ export default function AppNavbar() {
 
         setSavedCount(plans.status === "fulfilled" && Array.isArray(plans.value) ? plans.value.length : 0);
         if (clusters.status === "fulfilled" && Array.isArray(clusters.value)) {
-          const slugs = clusters.value.flatMap((cluster) => cluster.beach_slugs || []);
-          setClusterCount(new Set(slugs.filter(Boolean)).size);
+          setClusterCount(clusters.value.length);
         } else {
           setClusterCount(0);
         }
@@ -54,9 +53,11 @@ export default function AppNavbar() {
     }
 
     loadCounts();
+    window.addEventListener(CLUSTERS_CHANGED_EVENT, loadCounts);
 
     return () => {
       cancelled = true;
+      window.removeEventListener(CLUSTERS_CHANGED_EVENT, loadCounts);
     };
   }, [token]);
 
@@ -71,19 +72,19 @@ export default function AppNavbar() {
       <div className="app-navbar__right">
         <nav className="app-navbar__page-links" aria-label="Saved beach pages">
           <Link className={isExploreActive ? "is-active" : ""} to="/explore/canvas">
-            explore
+            Explore
           </Link>
           <Link className={location.pathname.startsWith("/clusters") ? "is-active" : ""} to="/clusters">
-            cluster
+            Cluster
             {clusterCount > 0 && <span>{clusterCount}</span>}
           </Link>
           <Link className={location.pathname.startsWith("/saved-plans") || location.pathname.startsWith("/plans/") ? "is-active" : ""} to="/saved-plans">
-            saved
+            Saved
             {savedCount > 0 && <span>{savedCount}</span>}
           </Link>
           {user?.role === "admin" && (
             <Link className={location.pathname.startsWith("/admin") ? "is-active" : ""} to="/admin">
-              admin
+              Admin
             </Link>
           )}
         </nav>

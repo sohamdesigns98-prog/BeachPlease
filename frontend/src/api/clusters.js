@@ -1,12 +1,20 @@
 import { apiClient } from "@/api/client";
 
+export const CLUSTERS_CHANGED_EVENT = "beachplease:clusters-changed";
+
 let clustersCache = null;
 let clustersRequest = null;
+
+function notifyClustersChanged() {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(new CustomEvent(CLUSTERS_CHANGED_EVENT, { detail: { clusters: clustersCache } }));
+}
 
 export async function createCluster(payload) {
   const { data } = await apiClient.post("/clusters", payload);
   const createdCluster = { ...payload, ...data, color: data.color || payload.color };
   clustersCache = Array.isArray(clustersCache) ? [createdCluster, ...clustersCache] : null;
+  notifyClustersChanged();
   return createdCluster;
 }
 
@@ -29,6 +37,7 @@ export async function getClusters() {
 export async function refreshClusters() {
   const { data } = await apiClient.get("/clusters");
   clustersCache = data;
+  notifyClustersChanged();
   return data;
 }
 
@@ -53,6 +62,7 @@ export async function updateCluster(id, payload) {
     clustersCache = clustersCache.map((cluster) => (
       (cluster._id || cluster.id) === id ? updatedCluster : cluster
     ));
+    notifyClustersChanged();
   }
   return updatedCluster;
 }
@@ -61,6 +71,7 @@ export async function deleteCluster(id) {
   const { data } = await apiClient.delete(`/clusters/${id}`);
   if (Array.isArray(clustersCache)) {
     clustersCache = clustersCache.filter((cluster) => (cluster._id || cluster.id) !== id);
+    notifyClustersChanged();
   }
   return data;
 }

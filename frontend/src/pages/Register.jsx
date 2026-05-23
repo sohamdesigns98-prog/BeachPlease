@@ -77,7 +77,7 @@ export default function Register() {
       <Form {...form}>
         <form className="auth-panel" onSubmit={handleSubmit(onSubmit)} noValidate>
           <div className="auth-heading">
-            <p>BEACHPLEASE</p>
+            <p>BeachPlease</p>
             <h1>Sign up</h1>
             <span>Save postcards, build a beach shelf, and let recommendations remember your side of Sydney.</span>
           </div>
@@ -146,7 +146,7 @@ export default function Register() {
         </label>
 
         <Button type="submit" className="auth-submit" disabled={isSubmitting}>
-          {isSubmitting ? "saving..." : "SIGN UP"}
+          {isSubmitting ? "Saving..." : "Sign up"}
         </Button>
 
         <GoogleOAuthButton onCredential={handleGoogleCredential} disabled={isSubmitting} />

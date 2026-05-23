@@ -504,7 +504,7 @@ export default function Admin() {
   return (
     <main className="admin-page">
       <section className="admin-hero">
-        <p>ADMIN //</p>
+        <p>Admin //</p>
         <h1>BeachPlease control room</h1>
         <span>Manage the data entities that support the explore, saved plan, and profile flows.</span>
       </section>
@@ -541,7 +541,7 @@ export default function Admin() {
           </div>
 
           <section className="admin-panel">
-            <p>RECENT ACTIVITY //</p>
+            <p>Recent activity //</p>
             <ActivityList activities={dashboard.recent_activities || []} />
           </section>
         </section>
@@ -550,7 +550,7 @@ export default function Admin() {
       {activeTab === "beaches" && (
         <section className="admin-grid">
           <form className="admin-panel admin-form" onSubmit={handleBeachSubmit}>
-            <p>{editingBeachId ? "EDIT BEACH //" : "CREATE BEACH //"}</p>
+            <p>{editingBeachId ? "Edit beach //" : "Create beach //"}</p>
             <span className="admin-form-help">
               Start with the beach name. Slug is generated automatically, suburb uses postcode data, and metadata fields use existing database values.
             </span>
@@ -607,7 +607,7 @@ export default function Admin() {
               <TagSuggestionField label="facilities" value={beachForm.facilities} suggestions={adminOptions.facilities} onChange={(value) => updateBeachForm("facilities", value)} />
             </div>
             <div className="admin-form-actions">
-              <Button type="submit" disabled={saving}>{saving ? "saving..." : editingBeachId ? "SAVE BEACH" : "CREATE BEACH"}</Button>
+              <Button type="submit" disabled={saving}>{saving ? "Saving..." : editingBeachId ? "Save beach" : "Create beach"}</Button>
               {editingBeachId && (
                 <Button type="button" variant="outline" onClick={() => {
                   setBeachForm(EMPTY_BEACH);
@@ -634,14 +634,14 @@ export default function Admin() {
                       setEditingBeachId(getId(beach));
                       setBeachForm(beachToForm(beach));
                       setBeachFormErrors({});
-                    }}>EDIT</button>
+                    }}>Edit</button>
                     <ConfirmDeleteDialog
                       title={`Delete ${beach.name}?`}
                       description="This removes the beach from explore and from saved cluster references."
-                      confirmLabel="DELETE BEACH"
+                      confirmLabel="Delete beach"
                       onConfirm={() => handleDeleteBeach(getId(beach))}
                     >
-                      <button type="button" className="danger-text-button">DELETE</button>
+                      <button type="button" className="danger-text-button">Delete</button>
                     </ConfirmDeleteDialog>
                   </div>
                 </article>
@@ -662,15 +662,15 @@ export default function Admin() {
                   <span>{user.suburb || "profile incomplete"} / {user.auth_provider} / {user.role}</span>
                 </div>
                 <div>
-                  <button type="button" disabled={user.role === "admin"} onClick={() => handleRoleChange(user, "admin")}>MAKE ADMIN</button>
-                  <button type="button" disabled={user.role === "user"} onClick={() => handleRoleChange(user, "user")}>MAKE USER</button>
+                  <button type="button" disabled={user.role === "admin"} onClick={() => handleRoleChange(user, "admin")}>Make admin</button>
+                  <button type="button" disabled={user.role === "user"} onClick={() => handleRoleChange(user, "user")}>Make user</button>
                   <ConfirmDeleteDialog
                     title={`Delete ${user.email}?`}
                     description="This deletes the user, saved plans, and clusters."
-                    confirmLabel="DELETE USER"
+                    confirmLabel="Delete user"
                     onConfirm={() => handleDeleteUser(getId(user))}
                   >
-                    <button type="button" className="danger-text-button">DELETE</button>
+                    <button type="button" className="danger-text-button">Delete</button>
                   </ConfirmDeleteDialog>
                 </div>
               </article>
@@ -693,10 +693,10 @@ export default function Admin() {
                   <ConfirmDeleteDialog
                     title="Delete this generated plan?"
                     description="This removes the saved plan from the database."
-                    confirmLabel="DELETE PLAN"
+                    confirmLabel="Delete plan"
                     onConfirm={() => handleDeletePlan(getId(plan))}
                   >
-                    <button type="button" className="danger-text-button">DELETE</button>
+                    <button type="button" className="danger-text-button">Delete</button>
                   </ConfirmDeleteDialog>
                 </div>
               </article>

@@ -196,13 +196,13 @@ export default function MapboxBeachMap({
         <p className="map-token-missing">
           {mapError ? (
             <>
-              MAPBOX UNAVAILABLE //
+              Mapbox unavailable //
               <br />
               {mapError}
             </>
           ) : (
             <>
-              MAPBOX TOKEN MISSING //
+              Mapbox token missing //
               <br />
               Add VITE_MAPBOX_TOKEN to frontend/.env and restart npm run dev.
             </>
@@ -216,7 +216,7 @@ export default function MapboxBeachMap({
     <section className="mapbox-beach-map" aria-label="Interactive Sydney beach map">
       <div ref={containerRef} className="mapbox-beach-map__canvas" />
       <MapTooltip beach={tooltip?.beach} point={tooltip?.point} />
-      {isFallback && <p className="map-token-missing">LIVE DATA UNAVAILABLE</p>}
+      {isFallback && <p className="map-token-missing">Live data unavailable</p>}
     </section>
   );
 }

@@ -68,7 +68,7 @@ export default function NotesEditor({
         onChange={(event) => setNotes(event.target.value)}
       />
       <p className={`notes-editor-status is-${status}`} aria-live="polite">
-        {status === "saving" && "SAVING..."}
+        {status === "saving" && "Saving..."}
         {status === "saved" && "SAVED ✓"}
         {status === "error" && "COULDN’T SAVE"}
       </p>

@@ -219,35 +219,9 @@ export default function CircularBeachCanvas({
 
   return (
     <section className={`circular-beach-canvas ${isFocused ? "is-focused" : ""} ${isGenerating ? "is-generating" : ""}`} aria-label="Circular beach mood canvas">
-      {clusters.length > 0 && (
-        <div className="cluster-focus-strip" aria-label="Cluster filters">
-          <button
-            type="button"
-            className={!focusedClusterId ? "is-active" : ""}
-            onClick={() => onClusterFocus?.("")}
-          >
-            all
-          </button>
-          {clusters.map((cluster) => {
-            const id = cluster._id || cluster.id || cluster.name;
-            return (
-              <button
-                key={id}
-                type="button"
-                className={focusedClusterId === id ? "is-active" : ""}
-                style={{ "--cluster-color": cluster.color || "#91C059" }}
-                onClick={() => onClusterFocus?.(focusedClusterId === id ? "" : id)}
-              >
-                {cluster.name}
-              </button>
-            );
-          })}
-        </div>
-      )}
-
       <div className="circular-beach-canvas__center" aria-hidden="true">
-        <span>{isGenerating ? "checking the coast" : isAssembled ? "choose your patch" : "assembling the coast"}</span>
-        <p>{isGenerating ? "sorting the swell" : hasInput ? "mood signal active" : "hover to read · click to inspect"}</p>
+        <span>{isGenerating ? "checking the coast" : isAssembled ? "Go touch sand, mate" : "assembling the coast"}</span>
+        <p>{isGenerating ? "sorting the swell" : hasInput ? "mood signal active" : "hover to explore"}</p>
       </div>
 
       <div className="circular-beach-canvas__orbit">
@@ -271,7 +245,6 @@ export default function CircularBeachCanvas({
                 imageUrl={tile.imageUrl || FALLBACK_IMAGE}
                 conditionLine={score > 0 && hasInput ? `${Math.min(98, 55 + score * 14)}% match` : formatConditionLine(tile)}
                 regionLabel={tile.region || "sydney"}
-                clusterBadges={clusterBadgesBySlug[tile.slug] || []}
                 onHover={setHoveredSlug}
                 onSelect={onBeachSelect}
                 onAddToCluster={onBeachAddToCluster}

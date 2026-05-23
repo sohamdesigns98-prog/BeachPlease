@@ -118,7 +118,7 @@ export default function ShoreMap({
         ))}
       </div>
       {(isFallback || !hasLiveBeaches) && (
-        <p className="map-fallback-label">LIVE DATA UNAVAILABLE</p>
+        <p className="map-fallback-label">Live data unavailable</p>
       )}
       {!selectedVisible && selectedBeachName && (
         <p className="map-selected-fallback-label">SELECTED // {selectedBeachName}</p>

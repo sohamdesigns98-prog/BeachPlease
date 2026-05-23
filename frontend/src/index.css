@@ -108,7 +108,7 @@
   }
 
   .landing-intro__button {
-    @apply inline-flex h-9 min-w-[148px] items-center justify-center rounded-full border border-foreground bg-foreground px-5 text-center text-[12px] font-medium uppercase tracking-[0.08em] text-[#FDFEFE] shadow-none hover:bg-foreground hover:text-[#FDFEFE];
+    @apply inline-flex h-9 min-w-[148px] items-center justify-center rounded-full border border-foreground bg-foreground px-5 text-center text-[12px] font-medium tracking-[0.08em] text-[#FDFEFE] shadow-none hover:bg-foreground hover:text-[#FDFEFE];
     opacity: 0;
     pointer-events: none;
     transform: translateY(8px);
@@ -321,7 +321,7 @@
   }
 
   .map-tooltip strong {
-    @apply text-[10px] font-medium uppercase leading-none;
+    @apply text-[10px] font-medium leading-none;
     letter-spacing: 0.09em;
   }
 
@@ -391,7 +391,7 @@
   }
 
   .funnel-option {
-    @apply h-9 rounded-full border border-foreground/20 bg-transparent px-4 text-[10px] font-medium uppercase tracking-[0.08em] text-foreground/65 shadow-none transition-colors hover:border-foreground hover:bg-foreground hover:text-background;
+    @apply h-9 rounded-full border border-foreground/20 bg-transparent px-4 text-[10px] font-medium tracking-[0.08em] text-foreground/65 shadow-none transition-colors hover:border-foreground hover:bg-foreground hover:text-background;
   }
 
   .funnel-option.is-selected {
@@ -435,7 +435,7 @@
   }
 
   .funnel-generate-button {
-    @apply h-9 rounded-full border border-foreground bg-foreground px-4 text-[10px] font-medium uppercase tracking-[0.08em] text-background shadow-none hover:bg-foreground/90 hover:text-background;
+    @apply h-9 rounded-full border border-foreground bg-foreground px-4 text-[10px] font-medium tracking-[0.08em] text-background shadow-none hover:bg-foreground/90 hover:text-background;
   }
 
   .funnel-back-button {
@@ -574,7 +574,7 @@
   }
 
   .home-action-row button {
-    @apply h-9 rounded-full border border-foreground bg-foreground px-4 text-center font-mono text-[10px] font-medium uppercase leading-none tracking-[0.08em] text-background transition-colors hover:bg-foreground/90;
+    @apply h-9 rounded-full border border-foreground bg-foreground px-4 text-center font-mono text-[10px] font-medium leading-none tracking-[0.08em] text-background transition-colors hover:bg-foreground/90;
   }
 
   .home-error {
@@ -623,7 +623,7 @@
   }
 
   .back-to-experience {
-    @apply fixed left-6 top-6 z-50 rounded-full border border-foreground/15 bg-background/80 px-3 py-2 text-[10px] lowercase leading-none text-foreground/55 no-underline backdrop-blur transition-colors hover:border-foreground/35 hover:text-foreground;
+    @apply fixed left-6 top-6 z-50 rounded-full border border-foreground/15 bg-background/80 px-3 py-2 text-[10px] leading-none text-foreground/55 no-underline backdrop-blur transition-colors hover:border-foreground/35 hover:text-foreground;
     letter-spacing: 0.05em;
   }
 
@@ -654,7 +654,7 @@
   }
 
   .auth-panel label {
-    @apply mb-4 block text-[11px] uppercase text-foreground/55;
+    @apply mb-4 block text-[11px] text-foreground/55;
     letter-spacing: 0.08em;
   }
 
@@ -676,11 +676,11 @@
 
   .auth-submit,
   .auth-link-button {
-    @apply mt-2 h-9 w-full rounded-full bg-foreground text-[10px] font-medium uppercase tracking-[0.08em] text-background hover:bg-foreground/90;
+    @apply mt-2 h-9 w-full rounded-full bg-foreground text-[10px] font-medium tracking-[0.08em] text-background hover:bg-foreground/90;
   }
 
   .oauth-button {
-    @apply mt-3 h-9 w-full rounded-full border border-foreground/20 bg-transparent text-[10px] font-medium uppercase text-foreground/65 transition-colors hover:border-foreground/45 hover:text-foreground;
+    @apply mt-3 h-9 w-full rounded-full border border-foreground/20 bg-transparent text-[10px] font-medium text-foreground/65 transition-colors hover:border-foreground/45 hover:text-foreground;
     letter-spacing: 0.08em;
   }
 
@@ -693,7 +693,7 @@
   }
 
   .google-oauth-slot span {
-    @apply absolute text-[10px] uppercase text-foreground/40;
+    @apply absolute text-[10px] text-foreground/40;
     letter-spacing: 0.08em;
   }
 
@@ -847,7 +847,7 @@
   }
 
   .plan-log-meta dd {
-    @apply mt-1 truncate text-[10px] lowercase text-foreground/60;
+    @apply mt-1 truncate text-[10px] text-foreground/60;
   }
 
   .plan-log-actions {
@@ -932,7 +932,7 @@
   }
 
   .plan-metadata p {
-    @apply m-0 text-[11px] lowercase leading-5 text-foreground/70;
+    @apply m-0 text-[11px] leading-5 text-foreground/70;
   }
 
   .plan-full-section {
@@ -945,7 +945,7 @@
   }
 
   .plan-full-section h2 {
-    @apply m-0 mb-4 text-[20px] font-medium lowercase leading-tight text-foreground;
+    @apply m-0 mb-4 text-[20px] font-medium leading-tight text-foreground;
     letter-spacing: -0.03em;
   }
 
@@ -983,7 +983,7 @@
 
   .plan-candidate-list strong,
   .plan-rejected-list strong {
-    @apply text-[12px] font-medium lowercase text-foreground;
+    @apply text-[12px] font-medium text-foreground;
   }
 
   .plan-candidate-list span {
@@ -1002,7 +1002,9 @@
 
   .result-experience {
     @apply flex min-h-screen flex-col items-center justify-center overflow-y-auto px-6 pb-28 pt-24 text-left text-foreground;
-    background: rgb(176 214 223 / 0.70);
+    background:
+      radial-gradient(circle at 18% 18%, rgb(255 255 255 / 0.62), transparent 34%),
+      linear-gradient(135deg, rgb(205 229 234 / 0.92), rgb(221 218 209 / 0.92));
     backdrop-filter: blur(12px);
     opacity: 0;
     transform: translateY(0);
@@ -1013,54 +1015,177 @@
   }
 
   .result-experience__layout {
-    @apply mx-auto grid w-full max-w-[1180px] items-center gap-8 lg:grid-cols-[minmax(390px,453px)_minmax(420px,1fr)];
+    @apply mx-auto grid w-full max-w-[1320px] items-center gap-8 lg:grid-cols-[minmax(390px,453px)_minmax(560px,1fr)];
   }
 
   .generated-plan-panel {
-    @apply max-h-[calc(100vh-180px)] overflow-y-auto rounded-[18px] border border-background/70 bg-background/70 p-7 font-mono shadow-[0_18px_48px_rgb(17_17_17_/_0.08)] backdrop-blur-lg;
+    @apply max-h-[calc(100vh-172px)] overflow-y-auto rounded-[22px] border border-background/75 bg-[rgb(248_246_239_/_0.9)] p-6 shadow-[0_22px_60px_rgb(17_17_17_/_0.10)] backdrop-blur-xl;
+    font-family: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .generated-plan-panel__header {
+    @apply flex items-start justify-between gap-5;
   }
 
   .generated-plan-panel__eyebrow {
-    @apply m-0 text-[9px] font-medium uppercase text-foreground/35;
-    letter-spacing: 0.12em;
+    @apply m-0 text-[10px] font-normal text-foreground/35;
+    letter-spacing: 0.16em;
   }
 
   .generated-plan-panel h1 {
-    @apply m-0 mt-3 text-[34px] font-medium lowercase leading-none text-foreground;
+    @apply m-0 mt-3 text-[42px] font-normal leading-none text-foreground;
     letter-spacing: 0;
   }
 
+  .generated-plan-panel__stamp {
+    @apply grid h-16 w-16 shrink-0 place-items-center border border-foreground/10 bg-background/35 text-[10px] font-normal text-foreground/35;
+    letter-spacing: 0.12em;
+  }
+
   .generated-plan-panel__summary {
-    @apply m-0 mt-4 text-[13px] leading-6 text-foreground/60;
+    @apply m-0 mt-4 max-w-[760px] text-[15px] font-normal leading-7 text-foreground/60;
   }
 
-  .generated-plan-panel__grid {
-    @apply mt-6 grid gap-3 md:grid-cols-2;
+  .generated-plan-panel__board {
+    @apply mt-6 grid gap-5 xl:grid-cols-[minmax(240px,0.9fr)_minmax(320px,1.1fr)];
   }
 
-  .generated-plan-panel__grid article {
-    @apply rounded-[12px] border border-foreground/10 bg-background/45 p-4;
+  .journal-collage {
+    @apply relative min-h-[520px] overflow-hidden rounded-[18px] border border-foreground/10 bg-[rgb(253_254_254_/_0.48)] p-5 shadow-[inset_0_1px_0_rgb(255_255_255_/_0.7)];
   }
 
-  .generated-plan-panel__grid article.is-wide {
-    @apply md:col-span-2;
+  .journal-photo,
+  .journal-map-card,
+  .journal-scribble,
+  .journal-note-card,
+  .generated-plan-panel__chips span {
+    transform-origin: center;
+    will-change: transform;
   }
 
-  .generated-plan-panel__grid span {
-    @apply block text-[9px] font-medium uppercase text-foreground/35;
+  .journal-photo {
+    @apply absolute m-0 overflow-hidden rounded-[12px] border border-background bg-background shadow-[0_18px_38px_rgb(17_17_17_/_0.14)];
+  }
+
+  .journal-photo img {
+    @apply block h-full w-full object-cover;
+  }
+
+  .journal-photo figcaption,
+  .journal-map-card span,
+  .journal-scribble span {
+    @apply absolute left-3 top-3 rounded-full bg-background/80 px-3 py-1 text-[9px] text-foreground/55 backdrop-blur;
     letter-spacing: 0.1em;
   }
 
-  .generated-plan-panel__grid p {
-    @apply m-0 mt-2 text-[12px] lowercase leading-6 text-foreground/70;
+  .journal-photo--hero {
+    @apply left-5 top-8 z-20 h-[235px] w-[72%];
+    transform: rotate(-2deg);
+  }
+
+  .journal-photo--local {
+    @apply bottom-8 left-10 z-30 h-[190px] w-[56%];
+    transform: rotate(3deg);
+  }
+
+  .journal-map-card {
+    @apply absolute bottom-16 right-4 z-10 h-[210px] w-[52%] overflow-hidden rounded-[14px] border border-background bg-background shadow-[0_18px_38px_rgb(17_17_17_/_0.12)];
+    transform: rotate(-1deg);
+  }
+
+  .journal-map-card iframe {
+    @apply h-full w-full border-0 grayscale;
+    filter: saturate(0.72) contrast(0.96);
+  }
+
+  .journal-scribble {
+    @apply absolute right-4 top-24 z-40 max-w-[190px] rounded-[14px] border border-foreground/10 bg-[rgb(255_255_255_/_0.82)] p-4 shadow-[0_16px_34px_rgb(17_17_17_/_0.10)] backdrop-blur;
+    transform: rotate(2deg);
+  }
+
+  .journal-scribble p {
+    @apply m-0 mt-9 text-[13px] font-normal leading-5 text-foreground/70;
+  }
+
+  .journal-notes {
+    @apply grid content-start gap-3 md:grid-cols-2;
+  }
+
+  .journal-note-card {
+    @apply rounded-[15px] border border-foreground/10 bg-[rgb(253_254_254_/_0.58)] p-5 shadow-[0_12px_30px_rgb(17_17_17_/_0.06)] backdrop-blur-sm;
+  }
+
+  .journal-note-card.is-wide {
+    @apply md:col-span-2;
+  }
+
+  .journal-note-card span {
+    @apply block text-[9px] font-normal text-foreground/35;
+    letter-spacing: 0.14em;
+  }
+
+  .journal-note-card h2 {
+    @apply m-0 mt-2 text-[18px] font-normal leading-tight text-foreground/80;
+  }
+
+  .journal-note-card p {
+    @apply m-0 mt-3 text-[13px] font-normal leading-6 text-foreground/65;
   }
 
   .generated-plan-panel__chips {
-    @apply mt-5 flex flex-wrap gap-2;
+    @apply mt-5 flex flex-wrap justify-center gap-2;
   }
 
   .generated-plan-panel__chips span {
-    @apply rounded-full border border-foreground/15 bg-background/55 px-3 py-1.5 text-[10px] lowercase text-foreground/60;
+    @apply rounded-full border border-foreground/15 bg-background/65 px-4 py-2 text-[11px] text-foreground/60 shadow-[0_8px_18px_rgb(17_17_17_/_0.04)];
+  }
+
+  @media (max-width: 1180px) {
+    .result-experience__layout {
+      @apply max-w-[760px] grid-cols-1 justify-items-center;
+    }
+
+    .generated-plan-panel {
+      @apply w-full max-h-none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .result-experience {
+      @apply px-3 pt-20;
+    }
+
+    .generated-plan-panel {
+      @apply p-4;
+    }
+
+    .generated-plan-panel h1 {
+      @apply text-[32px];
+    }
+
+    .generated-plan-panel__stamp {
+      @apply h-12 w-12;
+    }
+
+    .journal-collage {
+      @apply min-h-[430px];
+    }
+
+    .journal-photo--hero {
+      @apply h-[190px] w-[78%];
+    }
+
+    .journal-photo--local {
+      @apply bottom-6 h-[155px] w-[62%];
+    }
+
+    .journal-map-card {
+      @apply bottom-12 h-[175px] w-[56%];
+    }
+
+    .journal-scribble {
+      @apply right-3 top-20 max-w-[165px] p-3;
+    }
   }
 
   .result-auth-nudge {
@@ -1076,7 +1201,7 @@
   }
 
   .result-auth-nudge a {
-    @apply rounded-full bg-foreground px-3 py-1.5 text-[10px] uppercase tracking-[0.08em] text-background no-underline transition-opacity hover:opacity-80;
+    @apply rounded-full bg-foreground px-3 py-1.5 text-[10px] tracking-[0.08em] text-background no-underline transition-opacity hover:opacity-80;
   }
 
   .save-bar {
@@ -1096,7 +1221,7 @@
   }
 
   .save-bar-button {
-    @apply h-9 rounded-full border border-foreground bg-foreground px-4 text-[10px] font-normal lowercase text-background shadow-none hover:bg-foreground/90 hover:text-background;
+    @apply h-9 rounded-full border border-foreground bg-foreground px-4 text-[10px] font-normal text-background shadow-none hover:bg-foreground/90 hover:text-background;
   }
 
   .save-bar-button.is-muted {
@@ -1129,7 +1254,7 @@
   }
 
   .auth-sheet-copy h2 {
-    @apply m-0 mt-2 text-[22px] font-medium lowercase leading-tight text-foreground;
+    @apply m-0 mt-2 text-[22px] font-medium leading-tight text-foreground;
   }
 
   .auth-sheet-copy span {
@@ -1150,7 +1275,7 @@
   }
 
   .auth-sheet-mode {
-    @apply justify-self-center border-0 bg-transparent p-0 text-[10px] lowercase text-foreground/55 transition-colors hover:text-foreground;
+    @apply justify-self-center border-0 bg-transparent p-0 text-[10px] text-foreground/55 transition-colors hover:text-foreground;
   }
 
   .auth-sheet-error {
@@ -1158,7 +1283,7 @@
   }
 
   .beach-plan-ticket {
-    @apply relative grid w-[min(500px,calc(100vw-32px))] overflow-visible rounded-[14px] p-6 text-left font-mono uppercase;
+    @apply relative grid w-[min(500px,calc(100vw-32px))] overflow-visible rounded-[14px] p-6 text-left font-mono;
     --ticket-fill: #FDFEFE;
     --ticket-ink: #262626;
     --ticket-muted: #575757;
@@ -1358,7 +1483,7 @@
   }
 
   .ticket-actions button {
-    @apply h-9 rounded-full border border-foreground bg-foreground px-3 text-[8.5px] font-medium uppercase text-background transition-colors hover:bg-foreground/90;
+    @apply h-9 rounded-full border border-foreground bg-foreground px-3 text-[8.5px] font-medium text-background transition-colors hover:bg-foreground/90;
     letter-spacing: 0.08em;
   }
 
@@ -1418,17 +1543,17 @@
   }
 
   .postcard-card__eyebrow {
-    @apply m-0 text-[9px] font-medium uppercase leading-none text-foreground/25;
+    @apply m-0 text-[9px] font-medium leading-none text-foreground/25;
     letter-spacing: 0.08em;
   }
 
   .postcard-card__title-row h1 {
-    @apply m-0 mt-3 line-clamp-2 text-[22px] font-medium lowercase leading-none text-foreground;
+    @apply m-0 mt-3 line-clamp-2 text-[22px] font-medium leading-none text-foreground;
     letter-spacing: 0;
   }
 
   .postcard-card__meta {
-    @apply m-0 mt-2 text-[11px] font-medium lowercase leading-none text-foreground/40;
+    @apply m-0 mt-2 text-[11px] font-medium leading-none text-foreground/40;
     letter-spacing: 0.04em;
   }
 
@@ -1443,7 +1568,7 @@
   }
 
   .postcard-card__stamp small {
-    @apply -mt-3 text-[7px] font-medium uppercase leading-none text-foreground/20;
+    @apply -mt-3 text-[7px] font-medium leading-none text-foreground/20;
     letter-spacing: 0.05em;
   }
 
@@ -1452,11 +1577,11 @@
   }
 
   .postcard-card__quote {
-    @apply m-0 mt-4 line-clamp-3 text-[10px] lowercase leading-5 text-foreground/45;
+    @apply m-0 mt-4 line-clamp-3 text-[10px] leading-5 text-foreground/45;
   }
 
   .postcard-card__poem {
-    @apply m-0 mt-3 line-clamp-3 text-[13px] font-medium lowercase leading-7 text-foreground/80;
+    @apply m-0 mt-3 line-clamp-3 text-[13px] font-medium leading-7 text-foreground/80;
     letter-spacing: 0;
   }
 
@@ -1471,12 +1596,12 @@
   }
 
   .postcard-card__conditions dt {
-    @apply text-[8px] font-medium uppercase leading-none text-foreground/25;
+    @apply text-[8px] font-medium leading-none text-foreground/25;
     letter-spacing: 0.08em;
   }
 
   .postcard-card__conditions dd {
-    @apply mt-2 text-[12px] font-medium lowercase leading-none text-foreground/75;
+    @apply mt-2 text-[12px] font-medium leading-none text-foreground/75;
   }
 
   .postcard-card__footer {
@@ -1484,12 +1609,12 @@
   }
 
   .postcard-card__footer span {
-    @apply block text-[8px] font-medium lowercase leading-none text-foreground/20;
+    @apply block text-[8px] font-medium leading-none text-foreground/20;
     letter-spacing: 0.08em;
   }
 
   .postcard-card__footer p {
-    @apply m-0 mt-2 max-w-[230px] truncate text-[10px] font-medium lowercase leading-none text-foreground/45;
+    @apply m-0 mt-2 max-w-[230px] truncate text-[10px] font-medium leading-none text-foreground/45;
   }
 
   .postcard-card .ticket-actions {
@@ -1497,7 +1622,7 @@
   }
 
   .postcard-card .ticket-actions button {
-    @apply h-[30px] min-w-max whitespace-nowrap rounded-full border-0 bg-foreground px-6 text-[11px] font-medium lowercase text-background shadow-none transition-transform hover:-translate-y-0.5 hover:scale-105 hover:bg-foreground;
+    @apply h-[30px] min-w-max whitespace-nowrap rounded-full border-0 bg-foreground px-6 text-[11px] font-medium text-background shadow-none transition-transform hover:-translate-y-0.5 hover:scale-105 hover:bg-foreground;
     letter-spacing: 0.04em;
   }
 
@@ -1834,7 +1959,7 @@
   }
 
   .app-navbar__mark {
-    @apply border-0 bg-transparent p-0 text-[13px] font-normal lowercase leading-none text-foreground/55 shadow-none transition-colors hover:bg-transparent hover:text-foreground;
+    @apply border-0 bg-transparent p-0 text-[13px] font-normal leading-none text-foreground/55 shadow-none transition-colors hover:bg-transparent hover:text-foreground;
     letter-spacing: 0.04em;
   }
 
@@ -1851,7 +1976,7 @@
   }
 
   .app-navbar__page-links a {
-    @apply relative border-0 bg-transparent p-0 text-[13px] font-normal lowercase leading-none text-foreground/45 no-underline transition-colors hover:text-foreground/75;
+    @apply relative border-0 bg-transparent p-0 text-[13px] font-normal leading-none text-foreground/45 no-underline transition-colors hover:text-foreground/75;
     letter-spacing: 0.05em;
     text-shadow: 0 1px 12px rgb(248 246 239 / 0.95);
   }
@@ -1885,7 +2010,7 @@
   }
 
   .mode-toggle button {
-    @apply relative border-0 bg-transparent p-0 text-[13px] font-normal lowercase leading-none text-foreground/25 shadow-none transition-colors hover:text-foreground/70;
+    @apply relative border-0 bg-transparent p-0 text-[13px] font-normal leading-none text-foreground/25 shadow-none transition-colors hover:text-foreground/70;
     letter-spacing: 0.05em;
   }
 
@@ -1898,7 +2023,7 @@
   }
 
   .account-pill {
-    @apply inline-flex h-8 items-center rounded-full border border-foreground/15 px-3 text-[12px] font-normal lowercase leading-none text-foreground/50 no-underline transition-colors hover:border-foreground/35 hover:text-foreground;
+    @apply inline-flex h-8 items-center rounded-full border border-foreground/15 px-3 text-[12px] font-normal leading-none text-foreground/50 no-underline transition-colors hover:border-foreground/35 hover:text-foreground;
     letter-spacing: 0.05em;
   }
 
@@ -1919,7 +2044,7 @@
   }
 
   .account-pill--user button {
-    @apply border-0 bg-transparent p-0 text-[9px] lowercase text-foreground/35 transition-colors hover:text-foreground;
+    @apply border-0 bg-transparent p-0 text-[9px] text-foreground/35 transition-colors hover:text-foreground;
   }
 
   .mood-mode-layer {
@@ -1962,7 +2087,7 @@
   }
 
   .cluster-focus-strip button {
-    @apply h-8 rounded-full border border-foreground/10 bg-background/60 px-3 text-[10px] lowercase text-foreground/45 shadow-[0_8px_24px_rgb(17_17_17_/_0.05)] transition-[border-color,background-color,color,transform] hover:-translate-y-px hover:text-foreground;
+    @apply h-8 rounded-full border border-foreground/10 bg-background/60 px-3 text-[10px] text-foreground/45 shadow-[0_8px_24px_rgb(17_17_17_/_0.05)] transition-[border-color,background-color,color,transform] hover:-translate-y-px hover:text-foreground;
     border-color: color-mix(in srgb, var(--cluster-color, #111) 18%, transparent);
   }
 
@@ -1978,7 +2103,7 @@
   }
 
   .cluster-drop-shelf p {
-    @apply m-0 mb-3 text-[10px] lowercase text-foreground/45;
+    @apply m-0 mb-3 text-[10px] text-foreground/45;
     letter-spacing: 0.05em;
   }
 
@@ -2002,11 +2127,11 @@
   }
 
   .cluster-drop-shelf strong {
-    @apply text-[12px] font-medium lowercase text-foreground;
+    @apply text-[12px] font-medium text-foreground;
   }
 
   .cluster-drop-shelf span {
-    @apply mt-1 text-[10px] lowercase text-foreground/45;
+    @apply mt-1 text-[10px] text-foreground/45;
   }
 
   .spread-beach-canvas {
@@ -2024,12 +2149,12 @@
   }
 
   .spread-beach-canvas__center span {
-    @apply text-[11px] font-normal lowercase leading-none text-foreground/60;
+    @apply text-[11px] font-normal leading-none text-foreground/60;
     letter-spacing: 0.12em;
   }
 
   .spread-beach-canvas__center p {
-    @apply m-0 text-[9px] lowercase leading-none text-foreground/30;
+    @apply m-0 text-[9px] leading-none text-foreground/30;
     letter-spacing: 0.08em;
   }
 
@@ -2071,11 +2196,11 @@
   }
 
   .spread-beach-tile strong {
-    @apply max-w-full truncate text-[10px] font-normal lowercase leading-none text-foreground;
+    @apply max-w-full truncate text-[10px] font-normal leading-none text-foreground;
   }
 
   .spread-beach-tile small {
-    @apply max-w-full truncate text-[9px] font-normal lowercase leading-none text-foreground/45;
+    @apply max-w-full truncate text-[9px] font-normal leading-none text-foreground/45;
   }
 
   .circular-beach-canvas {
@@ -2118,12 +2243,12 @@
   }
 
   .circular-beach-canvas__center span {
-    @apply text-[11px] font-medium lowercase leading-none text-foreground/60;
+    @apply text-[11px] font-medium leading-none text-foreground/60;
     letter-spacing: 0.12em;
   }
 
   .circular-beach-canvas__center p {
-    @apply m-0 text-[9px] lowercase leading-none text-foreground/30;
+    @apply m-0 text-[9px] leading-none text-foreground/30;
     letter-spacing: 0.08em;
   }
 
@@ -2166,12 +2291,12 @@
   }
 
   .circular-beach-tile__meta strong {
-    @apply max-w-full truncate text-center text-[10px] font-bold lowercase leading-none text-foreground;
+    @apply max-w-full truncate text-center text-[10px] font-bold leading-none text-foreground;
   }
 
   .circular-beach-tile__meta span,
   .circular-beach-tile__meta small {
-    @apply max-w-full truncate text-center text-[9px] font-normal lowercase leading-none text-foreground/45;
+    @apply max-w-full truncate text-center text-[9px] font-normal leading-none text-foreground/45;
   }
 
   .circular-beach-tile__clusters {
@@ -2179,7 +2304,7 @@
   }
 
   .circular-beach-tile__clusters span {
-    @apply max-w-[112px] truncate rounded-full px-2 py-1 text-[8px] font-medium lowercase leading-none text-foreground shadow-[0_5px_12px_rgb(17_17_17_/_0.12)];
+    @apply max-w-[112px] truncate rounded-full px-2 py-1 text-[8px] font-medium leading-none text-foreground shadow-[0_5px_12px_rgb(17_17_17_/_0.12)];
     background: color-mix(in srgb, var(--cluster-color) 72%, #F8F6EF 28%);
   }
 
@@ -2198,16 +2323,16 @@
   }
 
   .circular-beach-canvas__postcard-loader span {
-    @apply text-[9px] font-normal uppercase leading-none text-foreground/35;
+    @apply text-[9px] font-normal leading-none text-foreground/35;
     letter-spacing: 0.1em;
   }
 
   .circular-beach-canvas__postcard-loader strong {
-    @apply truncate text-[22px] font-normal lowercase leading-tight text-foreground;
+    @apply truncate text-[22px] font-normal leading-tight text-foreground;
   }
 
   .circular-beach-canvas__postcard-loader p {
-    @apply m-0 text-[11px] font-normal lowercase leading-none text-foreground/45;
+    @apply m-0 text-[11px] font-normal leading-none text-foreground/45;
   }
 
   .mood-app-shell.is-generating-plan .mood-input-bar {
@@ -2239,7 +2364,7 @@
   }
 
   .beach-image-tile__clusters span {
-    @apply max-w-[112px] truncate rounded-full px-2 py-1 text-[8px] font-medium lowercase leading-none text-foreground shadow-[0_5px_12px_rgb(17_17_17_/_0.12)];
+    @apply max-w-[112px] truncate rounded-full px-2 py-1 text-[8px] font-medium leading-none text-foreground shadow-[0_5px_12px_rgb(17_17_17_/_0.12)];
     background: color-mix(in srgb, var(--cluster-color) 72%, #F8F6EF 28%);
   }
 
@@ -2349,7 +2474,7 @@
   }
 
   .beach-image-tile__bubble strong {
-    @apply text-[10px] font-medium lowercase leading-none text-foreground;
+    @apply text-[10px] font-medium leading-none text-foreground;
   }
 
   .beach-image-tile__bubble small {
@@ -2357,17 +2482,26 @@
   }
 
   .beach-info-tile {
-    @apply fixed bottom-0 right-0 top-0 z-[90] flex w-[390px] min-h-fit flex-col border-l bg-[#FDFEFE] px-10 pb-8 pt-20 text-left shadow-[0_0_32px_rgba(0,0,0,0.04)];
+    @apply fixed bottom-0 right-0 top-0 z-[90] flex w-[390px] flex-col overflow-hidden border-l bg-[#FDFEFE] px-10 pb-8 pt-20 text-left shadow-[0_0_32px_rgba(0,0,0,0.04)];
     border-color: #ecebe6;
   }
 
+  .beach-info-tile__backdrop {
+    @apply fixed inset-0 z-[125];
+  }
+
   .beach-info-tile.beach-info-tile--overlay {
-    @apply left-1/2 top-1/2 z-[130] h-[min(640px,calc(100vh-96px))] w-[min(430px,calc(100vw-48px))] overflow-y-auto rounded-[14px] border border-foreground/10 bg-[#FDFEFE]/95 px-7 pb-10 pt-7 shadow-[0_28px_90px_rgb(17_17_17_/_0.18)] backdrop-blur-md;
+    @apply left-1/2 top-1/2 z-[130] h-auto max-h-[min(760px,calc(100vh-80px))] w-[min(460px,calc(100vw-48px))] overflow-y-auto rounded-[14px] border border-foreground/10 bg-[#FDFEFE]/95 px-7 pb-5 pt-7 shadow-[0_28px_90px_rgb(17_17_17_/_0.18)] backdrop-blur-md;
     animation: beach-info-overlay-rise 520ms cubic-bezier(0.19, 1, 0.22, 1);
     border-left-width: 1px;
     bottom: auto;
     right: auto;
     transform: translate(-50%, -50%);
+    scrollbar-width: none;
+  }
+
+  .beach-info-tile.beach-info-tile--overlay::-webkit-scrollbar {
+    display: none;
   }
 
   .beach-info-tile--overlay .beach-info-tile__hero {
@@ -2387,7 +2521,8 @@
   }
 
   .beach-info-tile--overlay .beach-info-tile__image {
-    @apply mt-5 h-[112px];
+    @apply mt-5 h-auto;
+    aspect-ratio: 7 / 5;
   }
 
   .beach-info-tile--overlay .beach-info-tile__section {
@@ -2426,7 +2561,9 @@
   }
 
   .beach-info-tile__close {
-    @apply absolute right-5 top-5 h-7 w-7 border-0 bg-transparent p-0 text-[22px] font-normal leading-none text-foreground/35 shadow-none transition-colors hover:bg-transparent hover:text-foreground;
+    @apply absolute right-5 top-5 flex h-7 w-7 items-center justify-center border-0 bg-transparent p-0 text-[26px] font-light leading-none text-foreground/35 shadow-none transition-colors hover:bg-transparent hover:text-foreground;
+    font-family: Arial, sans-serif;
+    transform: none;
   }
 
   .beach-info-tile__hero {
@@ -2440,12 +2577,12 @@
   }
 
   .beach-info-tile__hero h2 {
-    @apply m-0 text-[24px] font-medium lowercase leading-none text-foreground;
+    @apply m-0 text-[24px] font-medium leading-none text-foreground;
     letter-spacing: -0.05em;
   }
 
   .beach-info-tile__hero p {
-    @apply mt-2 text-[11px] font-medium lowercase leading-none text-foreground/40;
+    @apply mt-2 text-[11px] font-medium leading-none text-foreground/40;
     letter-spacing: 0.08em;
   }
 
@@ -2459,18 +2596,32 @@
   }
 
   .beach-info-tile__section h3 {
-    @apply m-0 text-[11px] font-medium uppercase leading-none text-foreground/30;
+    @apply m-0 text-[11px] font-medium leading-none text-foreground/30;
     letter-spacing: 0.08em;
   }
 
   .beach-info-tile__section p,
   .beach-info-tile__section li {
-    @apply m-0 text-[13px] font-medium lowercase leading-6 text-foreground/70;
+    @apply m-0 text-[13px] font-medium leading-6 text-foreground/70;
     letter-spacing: -0.03em;
   }
 
   .beach-info-tile__section p {
     @apply mt-3;
+    overflow-wrap: anywhere;
+  }
+
+  .beach-info-tile__side-by-side {
+    @apply grid grid-cols-2 gap-4 border-b;
+    border-color: #ecebe6;
+  }
+
+  .beach-info-tile__side-by-side .beach-info-tile__section {
+    @apply border-b-0;
+  }
+
+  .beach-info-tile__side-by-side .beach-info-tile__section p {
+    @apply leading-5;
   }
 
   .beach-info-tile__conditions {
@@ -2484,12 +2635,12 @@
   }
 
   .beach-info-tile__conditions dt {
-    @apply text-[10px] font-medium uppercase leading-none text-foreground/25;
+    @apply text-[10px] font-medium leading-none text-foreground/25;
     letter-spacing: 0.08em;
   }
 
   .beach-info-tile__conditions dd {
-    @apply mt-3 text-[17px] font-medium lowercase leading-none text-foreground;
+    @apply mt-3 text-[17px] font-medium leading-none text-foreground;
     letter-spacing: -0.05em;
   }
 
@@ -2527,12 +2678,12 @@
   }
 
   .beach-info-tile__actions {
-    @apply mt-auto grid grid-cols-2 gap-3 pb-1 pt-5;
+    @apply mt-auto grid grid-cols-2 gap-3;
   }
 
   .beach-info-tile__cluster,
   .beach-info-tile__generate {
-    @apply h-12 w-full rounded-full border border-foreground px-4 text-center text-[10px] font-medium uppercase shadow-none transition-opacity hover:opacity-100;
+    @apply h-12 w-full rounded-full border border-foreground px-4 text-center text-[10px] font-medium shadow-none transition-opacity hover:opacity-100;
     letter-spacing: 0.08em;
   }
 
@@ -2541,23 +2692,7 @@
   }
 
   .beach-info-tile__cluster-note {
-    @apply mt-3 grid gap-2 text-[10px] lowercase leading-4 text-foreground/45;
-  }
-
-  .beach-info-tile__cluster-note > span {
-    @apply uppercase tracking-[0.18em] text-foreground/35;
-  }
-
-  .beach-info-tile__cluster-note > div {
-    @apply flex flex-wrap gap-2;
-  }
-
-  .beach-info-tile__cluster-note button {
-    @apply inline-flex items-center gap-2 rounded-full border border-foreground/10 bg-transparent px-3 py-1.5 text-[10px] lowercase text-foreground/60 transition-colors hover:border-red-500/40 hover:text-red-600;
-  }
-
-  .beach-info-tile__cluster-note small {
-    @apply text-[9px] text-red-500;
+    @apply m-0 mt-2 text-[10px] leading-4 text-foreground/45;
   }
 
   .beach-info-tile__generate {
@@ -2582,7 +2717,7 @@
   }
 
   .mood-input-bar > button {
-    @apply col-start-1 h-10 w-fit min-w-[156px] rounded-full border border-foreground bg-foreground px-6 text-[10px] font-medium uppercase text-background shadow-none transition-opacity hover:bg-foreground/90 hover:text-background hover:opacity-100;
+    @apply col-start-1 h-10 w-fit min-w-[156px] rounded-full border border-foreground bg-foreground px-6 text-[10px] font-medium text-background shadow-none transition-opacity hover:bg-foreground/90 hover:text-background hover:opacity-100;
     letter-spacing: 0.08em;
   }
 
@@ -2595,7 +2730,7 @@
   }
 
   .mood-chip {
-    @apply h-6 rounded-full border-0 px-2.5 text-[8.5px] font-medium lowercase leading-none text-foreground shadow-none transition-[opacity,transform,background-color,color] duration-200 hover:-translate-y-px hover:opacity-100;
+    @apply h-6 rounded-full border-0 px-2.5 text-[8.5px] font-medium leading-none text-foreground shadow-none transition-[opacity,transform,background-color,color] duration-200 hover:-translate-y-px hover:opacity-100;
     background: color-mix(in srgb, var(--chip-color) 60%, transparent);
     opacity: 0.62;
     letter-spacing: 0.02em;
@@ -2625,7 +2760,7 @@
   }
 
   .saved-mode-shell__heading h1 {
-    @apply m-0 mt-3 text-[clamp(28px,4vw,52px)] font-medium lowercase leading-none text-foreground;
+    @apply m-0 mt-3 text-[clamp(28px,4vw,52px)] font-medium leading-none text-foreground;
     letter-spacing: 0;
   }
 
@@ -2679,7 +2814,7 @@
   }
 
   .saved-postcard-row h2 {
-    @apply m-0 mt-1 text-[15px] font-medium lowercase text-foreground;
+    @apply m-0 mt-1 text-[15px] font-medium text-foreground;
   }
 
   .saved-postcard-row p {
@@ -2702,7 +2837,7 @@
   }
 
   .saved-postcard-meta dd {
-    @apply mt-1 truncate text-[10px] lowercase text-foreground/50;
+    @apply mt-1 truncate text-[10px] text-foreground/50;
   }
 
   .saved-postcard-row > div:last-child {
@@ -2736,7 +2871,7 @@
   }
 
   .cluster-tray__heading h1 {
-    @apply m-0 mt-3 text-[clamp(30px,4vw,54px)] font-medium lowercase leading-none text-foreground;
+    @apply m-0 mt-3 text-[clamp(30px,4vw,54px)] font-medium leading-none text-foreground;
     letter-spacing: -0.04em;
   }
 
@@ -2750,7 +2885,7 @@
   }
 
   .cluster-tray__toolbar span {
-    @apply text-[10px] lowercase text-foreground/40;
+    @apply text-[10px] text-foreground/40;
     letter-spacing: 0.06em;
   }
 
@@ -2788,16 +2923,16 @@
   }
 
   .cluster-card__top h2 {
-    @apply m-0 mt-1 text-[19px] font-medium lowercase leading-tight text-foreground;
+    @apply m-0 mt-1 text-[19px] font-medium leading-tight text-foreground;
     letter-spacing: -0.04em;
   }
 
   .cluster-card__top p {
-    @apply m-0 mt-2 text-[11px] lowercase leading-5 text-foreground/55;
+    @apply m-0 mt-2 text-[11px] leading-5 text-foreground/55;
   }
 
   .cluster-card__top small {
-    @apply mt-2 block text-[10px] lowercase leading-4 text-foreground/35;
+    @apply mt-2 block text-[10px] leading-4 text-foreground/35;
   }
 
   .cluster-card__actions {
@@ -2806,7 +2941,7 @@
 
   .cluster-card__actions button,
   .cluster-card__add {
-    @apply border-0 bg-transparent p-0 text-[10px] font-medium uppercase text-foreground/40 shadow-none transition-colors hover:text-foreground disabled:pointer-events-none disabled:text-foreground/20;
+    @apply border-0 bg-transparent p-0 text-[10px] font-medium text-foreground/40 shadow-none transition-colors hover:text-foreground disabled:pointer-events-none disabled:text-foreground/20;
     letter-spacing: 0.08em;
   }
 
@@ -2819,11 +2954,11 @@
   }
 
   .cluster-beach-list em {
-    @apply text-[11px] lowercase not-italic text-foreground/35;
+    @apply text-[11px] not-italic text-foreground/35;
   }
 
   .cluster-beach-list span {
-    @apply inline-flex items-center gap-2 rounded-full border border-foreground/10 px-3 py-1 text-[10px] lowercase text-foreground/60;
+    @apply inline-flex items-center gap-2 rounded-full border border-foreground/10 px-3 py-1 text-[10px] text-foreground/60;
   }
 
   .cluster-beach-list button {
@@ -2843,12 +2978,12 @@
   }
 
   .cluster-stack-gallery__intro p {
-    @apply m-0 text-[10px] font-normal lowercase leading-none text-foreground/35;
+    @apply m-0 text-[10px] font-normal leading-none text-foreground/35;
     letter-spacing: 0.12em;
   }
 
   .cluster-stack-gallery__intro h1 {
-    @apply m-0 mt-3 text-[clamp(24px,3vw,40px)] font-normal lowercase leading-none text-foreground/75;
+    @apply m-0 mt-3 text-[clamp(24px,3vw,40px)] font-normal leading-none text-foreground/75;
     letter-spacing: 0.02em;
   }
 
@@ -2857,7 +2992,7 @@
   }
 
   .cluster-create-menu__button {
-    @apply h-11 min-w-[148px] rounded-full border border-foreground bg-foreground px-7 text-[11px] font-normal lowercase leading-none text-background shadow-[0_18px_42px_rgb(17_17_17_/_0.14)] transition-colors hover:bg-foreground/90 hover:text-background;
+    @apply h-11 min-w-[148px] rounded-full border border-foreground bg-foreground px-7 text-[11px] font-normal leading-none text-background shadow-[0_18px_42px_rgb(17_17_17_/_0.14)] transition-colors hover:bg-foreground/90 hover:text-background;
     letter-spacing: 0.08em;
   }
 
@@ -2870,11 +3005,35 @@
   }
 
   .cluster-create-menu__panel strong {
-    @apply text-[13px] font-normal lowercase leading-none text-foreground;
+    @apply text-[13px] font-normal leading-none text-foreground;
   }
 
   .cluster-create-menu__panel span {
-    @apply text-[10px] font-normal lowercase leading-4 text-foreground/45;
+    @apply text-[10px] font-normal leading-4 text-foreground/45;
+  }
+
+  .cluster-stack-gallery__status {
+    @apply mx-auto mb-8 max-w-[1180px] text-center text-[12px] text-foreground/45;
+  }
+
+  .cluster-stack-gallery__status.is-error {
+    @apply text-destructive;
+  }
+
+  .cluster-stack-gallery__section-heading {
+    @apply mx-auto mb-8 mt-12 flex max-w-[1180px] items-end justify-between gap-6 border-t border-foreground/10 pt-8;
+  }
+
+  .cluster-stack-gallery__section-heading p {
+    @apply m-0 text-[18px] font-normal leading-none text-foreground/75;
+  }
+
+  .cluster-stack-gallery__section-heading span {
+    @apply max-w-[360px] text-right text-[11px] leading-5 text-foreground/40;
+  }
+
+  .cluster-stack-grid--personal {
+    @apply mb-10;
   }
 
   .cluster-stack-grid {
@@ -2893,6 +3052,10 @@
   .cluster-stack-card__stack:hover,
   .cluster-stack-card__stack:focus-visible {
     @apply bg-transparent;
+  }
+
+  .cluster-stack-card.is-empty .cluster-stack-card__stack {
+    @apply cursor-default opacity-55;
   }
 
   .cluster-stack-card__tile {
@@ -2924,7 +3087,7 @@
   }
 
   .cluster-stack-card__copy h2 {
-    @apply m-0 text-[21px] font-normal lowercase leading-none text-foreground;
+    @apply m-0 text-[21px] font-normal leading-none text-foreground;
     letter-spacing: 0.01em;
   }
 
@@ -2933,7 +3096,7 @@
   }
 
   .cluster-stack-card__copy span {
-    @apply inline-flex h-8 items-center rounded-full border border-foreground px-4 text-[12px] font-normal lowercase leading-none text-foreground;
+    @apply inline-flex h-8 items-center rounded-full border border-foreground px-4 text-[12px] font-normal leading-none text-foreground;
   }
 
   .cluster-stack-gallery--carousel {
@@ -2945,16 +3108,16 @@
   }
 
   .cluster-carousel-heading button {
-    @apply h-9 rounded-full border border-foreground px-4 text-[11px] font-normal lowercase leading-none text-foreground shadow-none transition-colors hover:bg-foreground hover:text-background;
+    @apply h-9 rounded-full border border-foreground px-4 text-[11px] font-normal leading-none text-foreground shadow-none transition-colors hover:bg-foreground hover:text-background;
   }
 
   .cluster-carousel-heading p {
-    @apply m-0 text-[10px] font-normal lowercase leading-none text-foreground/35;
+    @apply m-0 text-[10px] font-normal leading-none text-foreground/35;
     letter-spacing: 0.12em;
   }
 
   .cluster-carousel-heading h1 {
-    @apply m-0 mt-2 text-[clamp(26px,3.4vw,44px)] font-normal lowercase leading-none text-foreground/75;
+    @apply m-0 mt-2 text-[clamp(26px,3.4vw,44px)] font-normal leading-none text-foreground/75;
     letter-spacing: 0.01em;
   }
 
@@ -2962,21 +3125,10 @@
     @apply rounded-[28px] bg-[#FDFEFE] p-4 shadow-[0_24px_70px_rgb(17_17_17_/_0.08)] transition-[height,transform,opacity] duration-300 ease-out;
     width: min(330px, calc(100vw - 72px));
     min-height: 238px;
-    max-height: min(620px, calc(100vh - 190px));
-    overflow-y: auto;
-    scrollbar-width: thin;
   }
 
   .cluster-carousel-card.is-expanded {
-    min-height: min(560px, calc(100vh - 190px));
-  }
-
-  .cluster-carousel-card__open-detail {
-    @apply mt-3 h-9 w-full rounded-full border border-foreground/15 bg-transparent text-[10px] font-normal lowercase text-foreground/60 shadow-none transition-colors hover:border-foreground hover:bg-foreground hover:text-background;
-  }
-
-  .cluster-carousel-card__empty {
-    @apply m-0 mt-3 block rounded-[14px] border border-dashed border-foreground/15 px-4 py-3 text-center text-[11px] font-normal lowercase leading-5 text-foreground/45;
+    min-height: 560px;
   }
 
   .cluster-carousel-card__button {
@@ -3002,11 +3154,11 @@
   }
 
   .cluster-carousel-card__image strong {
-    @apply truncate text-[14px] font-normal lowercase leading-none;
+    @apply truncate text-[14px] font-normal leading-none;
   }
 
   .cluster-carousel-card__image small {
-    @apply truncate text-[10px] font-normal lowercase leading-none text-background/65;
+    @apply truncate text-[10px] font-normal leading-none text-background/65;
   }
 
   .cluster-carousel-card__chevron {
@@ -3029,12 +3181,12 @@
 
   .cluster-carousel-card__details dt,
   .cluster-carousel-card__details h3 {
-    @apply text-[9px] font-normal uppercase leading-none text-foreground/35;
+    @apply text-[9px] font-normal leading-none text-foreground/35;
     letter-spacing: 0.08em;
   }
 
   .cluster-carousel-card__details dd {
-    @apply mt-3 text-[18px] font-normal lowercase leading-none text-foreground;
+    @apply mt-3 text-[18px] font-normal leading-none text-foreground;
   }
 
   .cluster-carousel-card__details section {
@@ -3046,7 +3198,7 @@
   }
 
   .cluster-carousel-card__details p {
-    @apply m-0 mt-3 text-[13px] font-normal lowercase leading-6 text-foreground/65;
+    @apply m-0 mt-3 text-[13px] font-normal leading-6 text-foreground/65;
   }
 
   .cluster-coverflow {
@@ -3056,7 +3208,7 @@
   }
 
   .cluster-coverflow__stage {
-    @apply relative mx-auto h-[min(660px,calc(100vh-230px))] min-h-[430px] w-[min(860px,calc(100vw-160px))];
+    @apply relative mx-auto h-[620px] w-[min(860px,calc(100vw-160px))];
     perspective: 1200px;
     transform-style: preserve-3d;
   }
@@ -3109,7 +3261,7 @@
   }
 
   .cluster-dialog h2 {
-    @apply m-0 pr-8 text-[24px] font-medium lowercase leading-tight text-foreground;
+    @apply m-0 pr-8 text-[24px] font-medium leading-tight text-foreground;
     letter-spacing: -0.04em;
   }
 
@@ -3130,14 +3282,14 @@
   }
 
   .cluster-create-form small {
-    @apply text-[9px] font-normal uppercase leading-none text-foreground/35;
+    @apply text-[9px] font-normal leading-none text-foreground/35;
     letter-spacing: 0.08em;
   }
 
   .cluster-create-form input,
   .cluster-create-form select,
   .cluster-create-form textarea {
-    @apply min-h-10 rounded-[10px] border border-foreground/[0.12] bg-background px-3 text-[12px] font-normal lowercase text-foreground outline-none transition-colors focus:border-foreground/45;
+    @apply min-h-10 rounded-[10px] border border-foreground/[0.12] bg-background px-3 text-[12px] font-normal text-foreground outline-none transition-colors focus:border-foreground/45;
   }
 
   .cluster-create-form textarea {
@@ -3145,7 +3297,7 @@
   }
 
   .cluster-dialog strong {
-    @apply text-[11px] font-normal lowercase leading-5 text-foreground/55;
+    @apply text-[11px] font-normal leading-5 text-foreground/55;
   }
 
   .cluster-dialog strong {
@@ -3206,11 +3358,11 @@
   }
 
   .cluster-picker-list strong {
-    @apply text-[12px] font-medium lowercase text-foreground;
+    @apply text-[12px] font-medium text-foreground;
   }
 
   .cluster-picker-list span {
-    @apply text-[10px] lowercase text-foreground/45;
+    @apply text-[10px] text-foreground/45;
   }
 
   .saved-plan-detail {
@@ -3248,7 +3400,7 @@
   }
 
   .saved-plan-detail__meta p {
-    @apply m-0 mt-1 truncate text-[11px] lowercase text-foreground/65;
+    @apply m-0 mt-1 truncate text-[11px] text-foreground/65;
   }
 
   .saved-plan-detail__notes {
@@ -3265,7 +3417,7 @@
   }
 
   .saved-plan-detail__summary strong {
-    @apply mt-2 block text-[14px] font-medium lowercase leading-5 text-foreground;
+    @apply mt-2 block text-[14px] font-medium leading-5 text-foreground;
   }
 
   .saved-plan-detail__summary div {
@@ -3291,7 +3443,7 @@
   }
 
   .saved-success {
-    @apply m-0 mt-3 text-[10px] lowercase text-foreground/45;
+    @apply m-0 mt-3 text-[10px] text-foreground/45;
   }
 
   .saved-plan-detail__actions {
@@ -3394,7 +3546,7 @@
     }
 
     .beach-info-tile {
-      @apply left-0 top-auto h-auto max-h-[70vh] w-auto overflow-y-auto border-l-0 border-t px-6 pb-10 pt-7;
+      @apply left-0 top-auto h-auto max-h-[62vh] w-auto overflow-hidden border-l-0 border-t px-6 py-7;
       bottom: 0;
     }
 
@@ -3452,37 +3604,6 @@
 
     .cluster-card__top {
       @apply grid-cols-1 gap-3;
-    }
-
-    .cluster-stack-gallery {
-      @apply px-4 pb-20 pt-32;
-    }
-
-    .cluster-stack-gallery--carousel {
-      @apply gap-5 overflow-y-auto px-0 pb-20 pt-32;
-    }
-
-    .cluster-carousel-heading {
-      @apply w-[calc(100vw-32px)] grid-cols-1 gap-4;
-    }
-
-    .cluster-coverflow {
-      @apply grid-cols-[40px_minmax(0,1fr)_40px] overflow-visible py-2;
-      -webkit-mask-image: none;
-      mask-image: none;
-    }
-
-    .cluster-coverflow__stage {
-      @apply h-[min(590px,calc(100vh-230px))] min-h-[420px] w-[calc(100vw-96px)];
-    }
-
-    .cluster-carousel-card {
-      width: min(300px, calc(100vw - 96px));
-      max-height: min(560px, calc(100vh - 250px));
-    }
-
-    .cluster-coverflow__item {
-      margin-left: calc(min(300px, calc(100vw - 96px)) / -2);
     }
   }
 
@@ -3657,7 +3778,7 @@
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
+  text-transform: none;
   color: hsl(var(--foreground) / 0.42);
 }
 
@@ -3666,7 +3787,7 @@
   font-size: clamp(32px, 4vw, 56px);
   font-weight: 500;
   line-height: 0.95;
-  text-transform: lowercase;
+  text-transform: none;
 }
 
 .admin-hero span,
@@ -3705,7 +3826,7 @@
   background: transparent;
   padding: 0 14px;
   font-size: 10px;
-  text-transform: lowercase;
+  text-transform: none;
   color: hsl(var(--foreground) / 0.45);
 }
 
@@ -3767,7 +3888,7 @@
   font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
+  text-transform: none;
   color: hsl(var(--foreground) / 0.36);
 }
 
@@ -3881,7 +4002,7 @@
   padding: 8px 12px;
   text-align: left;
   font-size: 11px;
-  text-transform: lowercase;
+  text-transform: none;
   color: hsl(var(--foreground) / 0.6);
 }
 
@@ -3898,7 +4019,7 @@
   border-radius: 999px;
   padding: 4px 10px;
   font-size: 9px;
-  text-transform: lowercase;
+  text-transform: none;
   color: hsl(var(--foreground) / 0.45);
 }
 
@@ -3938,7 +4059,7 @@
   display: block;
   font-size: 13px;
   font-weight: 500;
-  text-transform: lowercase;
+  text-transform: none;
 }
 
 .admin-table-list article > div:last-child {
@@ -3952,7 +4073,7 @@
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
+  text-transform: none;
   color: hsl(var(--foreground) / 0.45);
 }
 

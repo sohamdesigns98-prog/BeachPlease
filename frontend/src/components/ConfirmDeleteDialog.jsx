@@ -14,7 +14,7 @@ export default function ConfirmDeleteDialog({
   children,
   title = "Delete this?",
   description = "This action cannot be undone.",
-  confirmLabel = "DELETE",
+  confirmLabel = "Delete",
   onConfirm,
   disabled = false,
 }) {
@@ -29,7 +29,7 @@ export default function ConfirmDeleteDialog({
           <AlertDialogDescription>{description}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>CANCEL</AlertDialogCancel>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction className="danger-confirm-button" onClick={onConfirm}>
             {confirmLabel}
           </AlertDialogAction>

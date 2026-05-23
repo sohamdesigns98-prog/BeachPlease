@@ -105,16 +105,16 @@ export default function SavedModeShell({ onCountChange }) {
   return (
     <section className="saved-mode-shell" aria-label="Saved plans">
       <div className="saved-mode-shell__heading">
-        <p>SAVED</p>
+        <p>Saved</p>
         <h1>saved generated plans</h1>
         <span>Postcards you chose to keep, with notes and a stable detail page.</span>
       </div>
 
       {!token && (
         <div className="saved-empty-state">
-          <p>LOG IN TO SEE SAVED PLANS //</p>
+          <p>Log in to see saved plans //</p>
           <span>Generated plans are only stored when you choose save.</span>
-          <Link to="/login">LOG IN</Link>
+          <Link to="/login">Log in</Link>
         </div>
       )}
 
@@ -123,7 +123,7 @@ export default function SavedModeShell({ onCountChange }) {
 
       {token && !loading && plans.length === 0 && (
         <div className="saved-empty-state">
-          <p>NO SAVED PLANS YET //</p>
+          <p>No saved plans yet //</p>
           <span>Generate a plan, then save it when it feels worth keeping.</span>
         </div>
       )}
@@ -152,29 +152,29 @@ export default function SavedModeShell({ onCountChange }) {
                   <p>{rowPlanBody.why || plan.mood_phrase || "mood not logged"}</p>
                   <dl className="saved-postcard-meta">
                     <div>
-                      <dt>REGION</dt>
+                      <dt>Region</dt>
                       <dd>{formatField(plan.region)}</dd>
                     </div>
                     <div>
-                      <dt>ACTIVITY</dt>
+                      <dt>Activity</dt>
                       <dd>{formatField(plan.activity)}</dd>
                     </div>
                     <div>
-                      <dt>COMPANION</dt>
+                      <dt>Companion</dt>
                       <dd>{formatField(plan.companion)}</dd>
                     </div>
                   </dl>
                 </button>
                 <div>
-                  <button type="button" onClick={() => handleOpen(id)}>PREVIEW</button>
-                  <Link to={`/plans/${id}`}>DETAILS</Link>
+                  <button type="button" onClick={() => handleOpen(id)}>Preview</button>
+                  <Link to={`/plans/${id}`}>Details</Link>
                   <ConfirmDeleteDialog
                     title="Delete this saved plan?"
                     description="This removes the saved postcard and its notes. You can generate another plan later."
-                    confirmLabel="DELETE PLAN"
+                    confirmLabel="Delete plan"
                     onConfirm={() => handleDelete(id)}
                   >
-                    <button type="button" className="danger-text-button">DELETE</button>
+                    <button type="button" className="danger-text-button">Delete</button>
                   </ConfirmDeleteDialog>
                 </div>
               </article>
@@ -206,56 +206,56 @@ export default function SavedModeShell({ onCountChange }) {
                     <>
                 <section className="saved-plan-detail__meta">
                   <div>
-                    <span>REGION //</span>
+                    <span>Region //</span>
                     <p>{formatField(selectedPlan.region)}</p>
                   </div>
                   <div>
-                    <span>ACTIVITY //</span>
+                    <span>Activity //</span>
                     <p>{formatField(selectedPlan.activity)}</p>
                   </div>
                   <div>
-                    <span>COMPANION //</span>
+                    <span>Companion //</span>
                     <p>{formatField(selectedPlan.companion)}</p>
                   </div>
                   <div>
-                    <span>MOOD //</span>
+                    <span>Mood //</span>
                     <p>{selectedPlan.mood_phrase || "n/a"}</p>
                   </div>
                 </section>
 
                 <section className="saved-plan-detail__summary">
-                  <p>PLAN //</p>
+                  <p>Plan //</p>
                   <strong>{planText(planBody.where, "No beach destination was included.")}</strong>
                   <div>
-                    <span>WHEN</span>
+                    <span>When</span>
                     <p>{planText(planBody.when, "No timing was included.")}</p>
                   </div>
                   <div>
-                    <span>WHY</span>
+                    <span>Why</span>
                     <p>{planText(planBody.why, "No reasoning was included.")}</p>
                   </div>
                   <div>
-                    <span>CONDITIONS</span>
+                    <span>Conditions</span>
                     <p>{planText(planBody.conditions_summary, "No condition summary was included.")}</p>
                   </div>
                   <div>
-                    <span>HEADS UP</span>
+                    <span>Heads up</span>
                     <p>{planText(planBody.gentle_warning, "No warning was included.")}</p>
                   </div>
                   {bringItems.length > 0 && (
                     <div>
-                      <span>BRING</span>
+                      <span>Bring</span>
                       <p>{bringItems.join(" / ")}</p>
                     </div>
                   )}
-                  <Link to={`/plans/${getPlanId(selectedPlan)}`}>OPEN FULL DETAIL</Link>
+                  <Link to={`/plans/${getPlanId(selectedPlan)}`}>Open full detail</Link>
                 </section>
                     </>
                   );
                 })()}
 
                 <section className="saved-plan-detail__notes">
-                  <p>NOTES //</p>
+                  <p>Notes //</p>
                   <NotesEditor
                     planId={getPlanId(selectedPlan)}
                     initialNotes={selectedPlan.user_notes || ""}
@@ -274,7 +274,7 @@ export default function SavedModeShell({ onCountChange }) {
                   <ConfirmDeleteDialog
                     title="Delete this saved plan?"
                     description="This removes the saved postcard and its notes. You can generate another plan later."
-                    confirmLabel="DELETE PLAN"
+                    confirmLabel="Delete plan"
                     onConfirm={() => handleDelete(getPlanId(selectedPlan))}
                   >
                     <Button type="button" variant="outline" className="danger-button">

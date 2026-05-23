@@ -57,20 +57,34 @@ const COMPANION_OPTIONS = ["solo", "partner", "family", "dog", "mates"];
 const CREATE_OPTIONS = [
   {
     id: "plan",
-    label: "create plan",
-    description: "one beach day for today",
+    label: "Create plan",
+    description: "One beach day for today",
   },
   {
     id: "cluster",
-    label: "create cluster",
-    description: "save a group of beaches",
+    label: "Create cluster",
+    description: "Save a group of beaches",
   },
   {
     id: "ritual",
-    label: "create ritual",
-    description: "repeatable beach routine",
+    label: "Create ritual",
+    description: "Repeatable beach routine",
   },
 ];
+
+function clusterId(cluster) {
+  return cluster?._id || cluster?.id || cluster?.name;
+}
+
+function sentenceTitle(value = "") {
+  const text = String(value).trim();
+  if (!text) return "";
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+function beachCountLabel(count) {
+  return `${count} beach${count === 1 ? "" : "es"}`;
+}
 
 function beachMatchesPreset(beach, preset) {
   const haystack = [
@@ -95,24 +109,11 @@ function stackBeachesForPreset(beaches, preset, presetIndex) {
   return ordered.slice(0, Math.min(5, Math.max(3, ordered.length)));
 }
 
-function clusterId(cluster) {
-  return cluster?._id || cluster?.id || cluster?.name;
-}
-
-function beachesForCluster(cluster, beachesBySlug) {
+function stackBeachesForCluster(cluster, beachesBySlug) {
   return (cluster.beach_slugs || [])
     .map((slug) => beachesBySlug[slug])
-    .filter(Boolean);
-}
-
-function placeholderBeachForCluster(cluster) {
-  return {
-    slug: `empty-${clusterId(cluster)}`,
-    name: cluster.name || "empty cluster",
-    region: "personal cluster",
-    imageUrl: FALLBACK_IMAGE,
-    isClusterPlaceholder: true,
-  };
+    .filter(Boolean)
+    .slice(0, 5);
 }
 
 function prettyList(items = [], fallback = "low fuss") {
@@ -125,18 +126,14 @@ function bestTime(beach) {
   return beach.bestTime || beach.ideal_times?.[0] || "morning or late arvo";
 }
 
-function ClusterBeachInfoCard({ beach, isExpanded, isActive, onToggle, onSelect }) {
+function ClusterBeachInfoCard({ beach, isExpanded, isActive, onToggle }) {
   return (
     <article className={`cluster-carousel-card ${isExpanded ? "is-expanded" : ""}`}>
       <button
         type="button"
         className="cluster-carousel-card__button"
         aria-expanded={isExpanded}
-        onClick={() => {
-          if (beach.isClusterPlaceholder) return;
-          onToggle?.();
-          if (isActive) onSelect?.(beach);
-        }}
+        onClick={onToggle}
         tabIndex={isActive ? 0 : -1}
       >
         <span className="cluster-carousel-card__image">
@@ -159,16 +156,6 @@ function ClusterBeachInfoCard({ beach, isExpanded, isActive, onToggle, onSelect 
           {isExpanded ? "⌃" : "⌄"}
         </span>
       </button>
-
-      {beach.isClusterPlaceholder && (
-        <p className="cluster-carousel-card__empty">add beaches from explore to fill this cluster</p>
-      )}
-
-      {isActive && !beach.isClusterPlaceholder && (
-        <button type="button" className="cluster-carousel-card__open-detail" onClick={() => onSelect?.(beach)}>
-          open beach detail
-        </button>
-      )}
 
       {isExpanded && (
         <div className="cluster-carousel-card__details">
@@ -250,7 +237,7 @@ function CreateChoiceMenu({ onCreateCluster, onCreatePlan, onCreateRitual }) {
           onClick={() => setIsOpen((current) => !current)}
           aria-expanded={isOpen}
         >
-          create
+          Create
         </motion.button>
 
         {isOpen && (
@@ -289,9 +276,9 @@ function CreateChoiceMenu({ onCreateCluster, onCreatePlan, onCreateRitual }) {
           <DialogClose className="cluster-dialog__close" type="button" aria-label="Close create plan">
             x
           </DialogClose>
-          <p>CREATE PLAN //</p>
+          <p>Create plan //</p>
           <DialogHeader>
-            <DialogTitle>one beach day for today</DialogTitle>
+            <DialogTitle>One beach day for today</DialogTitle>
             <DialogDescription>
               Direct the mood, company, coast, activity, food stops, and extra notes.
             </DialogDescription>
@@ -305,18 +292,18 @@ function CreateChoiceMenu({ onCreateCluster, onCreatePlan, onCreateRitual }) {
             }}
           >
             <label>
-              <small>MOOD</small>
+              <small>Mood</small>
               <input value={planForm.mood} onChange={(event) => updatePlan("mood", event.target.value)} required />
             </label>
             <div className="cluster-create-form__grid">
               <label>
-                <small>COMPANION</small>
+                <small>Companion</small>
                 <select value={planForm.companion} onChange={(event) => updatePlan("companion", event.target.value)}>
                   {COMPANION_OPTIONS.map((option) => <option key={option}>{option}</option>)}
                 </select>
               </label>
               <label>
-                <small>LOCALITY</small>
+                <small>Locality</small>
                 <select value={planForm.locality} onChange={(event) => updatePlan("locality", event.target.value)}>
                   {REGION_OPTIONS.map((option) => <option key={option}>{option}</option>)}
                 </select>
@@ -324,21 +311,21 @@ function CreateChoiceMenu({ onCreateCluster, onCreatePlan, onCreateRitual }) {
             </div>
             <div className="cluster-create-form__grid">
               <label>
-                <small>ACTIVITY</small>
+                <small>Activity</small>
                 <select value={planForm.activity} onChange={(event) => updatePlan("activity", event.target.value)}>
                   {ACTIVITY_OPTIONS.map((option) => <option key={option}>{option}</option>)}
                 </select>
               </label>
               <label>
-                <small>FOOD / CAFE / BAR</small>
+                <small>Food / cafe / bar</small>
                 <input value={planForm.food} onChange={(event) => updatePlan("food", event.target.value)} />
               </label>
             </div>
             <label>
-              <small>EXTRA NOTES</small>
+              <small>Extra notes</small>
               <textarea value={planForm.notes} onChange={(event) => updatePlan("notes", event.target.value)} />
             </label>
-            <Button type="submit">create plan</Button>
+            <Button type="submit">Create plan</Button>
           </form>
         </DialogContent>
       </Dialog>
@@ -350,9 +337,9 @@ function CreateChoiceMenu({ onCreateCluster, onCreatePlan, onCreateRitual }) {
           <DialogClose className="cluster-dialog__close" type="button" aria-label="Close create ritual">
             x
           </DialogClose>
-          <p>CREATE RITUAL //</p>
+          <p>Create ritual //</p>
           <DialogHeader>
-            <DialogTitle>repeatable beach routine</DialogTitle>
+            <DialogTitle>Repeatable beach routine</DialogTitle>
             <DialogDescription>
               Save the routine once, then rerun it later with fresh conditions.
             </DialogDescription>
@@ -366,20 +353,20 @@ function CreateChoiceMenu({ onCreateCluster, onCreatePlan, onCreateRitual }) {
             }}
           >
             <label>
-              <small>NAME</small>
+              <small>Name</small>
               <input value={ritualForm.name} onChange={(event) => updateRitual("name", event.target.value)} required />
             </label>
             <label>
-              <small>MOOD PHRASE</small>
+              <small>Mood phrase</small>
               <input value={ritualForm.mood} onChange={(event) => updateRitual("mood", event.target.value)} required />
             </label>
             <div className="cluster-create-form__grid">
               <label>
-                <small>PREFERRED TIME</small>
+                <small>Preferred time</small>
                 <input value={ritualForm.preferredTime} onChange={(event) => updateRitual("preferredTime", event.target.value)} placeholder="sunday morning" />
               </label>
               <label>
-                <small>COMPANION</small>
+                <small>Companion</small>
                 <select value={ritualForm.companion} onChange={(event) => updateRitual("companion", event.target.value)}>
                   {COMPANION_OPTIONS.map((option) => <option key={option}>{option}</option>)}
                 </select>
@@ -387,31 +374,31 @@ function CreateChoiceMenu({ onCreateCluster, onCreatePlan, onCreateRitual }) {
             </div>
             <div className="cluster-create-form__grid">
               <label>
-                <small>LOCALITY</small>
+                <small>Locality</small>
                 <select value={ritualForm.locality} onChange={(event) => updateRitual("locality", event.target.value)}>
                   {REGION_OPTIONS.map((option) => <option key={option}>{option}</option>)}
                 </select>
               </label>
               <label>
-                <small>ACTIVITY</small>
+                <small>Activity</small>
                 <select value={ritualForm.activity} onChange={(event) => updateRitual("activity", event.target.value)}>
                   {ACTIVITY_OPTIONS.map((option) => <option key={option}>{option}</option>)}
                 </select>
               </label>
             </div>
             <label>
-              <small>FOOD / DRINK</small>
+              <small>Food / drink</small>
               <input value={ritualForm.food} onChange={(event) => updateRitual("food", event.target.value)} />
             </label>
             <label>
-              <small>LINKED CLUSTER</small>
+              <small>Linked cluster</small>
               <input value={ritualForm.linkedCluster} onChange={(event) => updateRitual("linkedCluster", event.target.value)} placeholder="optional" />
             </label>
             <label>
-              <small>EXTRA PREFERENCES</small>
+              <small>Extra preferences</small>
               <textarea value={ritualForm.notes} onChange={(event) => updateRitual("notes", event.target.value)} />
             </label>
-            <Button type="submit">create ritual</Button>
+            <Button type="submit">Create ritual</Button>
           </form>
         </DialogContent>
       </Dialog>
@@ -419,89 +406,138 @@ function CreateChoiceMenu({ onCreateCluster, onCreatePlan, onCreateRitual }) {
   );
 }
 
+function StackCard({ stack, onOpen }) {
+  const tiles = stack.beaches.length ? stack.beaches : [{ slug: `${stack.id}-empty`, imageUrl: FALLBACK_IMAGE, name: stack.title }];
+  const canOpen = stack.beaches.length > 0;
+
+  return (
+    <article className={`cluster-stack-card ${!canOpen ? "is-empty" : ""}`}>
+      <button
+        type="button"
+        className="cluster-stack-card__stack"
+        aria-label={`Open ${stack.title} stack`}
+        disabled={!canOpen}
+        onClick={() => {
+          if (canOpen) onOpen(stack.id);
+        }}
+      >
+        {tiles.map((beach, beachIndex) => (
+          <span
+            className="cluster-stack-card__tile"
+            key={`${stack.id}-${beach.slug || beach.name}-${beachIndex}`}
+            style={{
+              "--stack-index": beachIndex,
+              "--stack-rotate": `${[-7, 5, -2, 8, -4][beachIndex] || 0}deg`,
+              "--stack-x": `${[-18, 12, 0, 22, -8][beachIndex] || 0}px`,
+              "--stack-y": `${[-6, -16, 0, 12, 18][beachIndex] || 0}px`,
+            }}
+          >
+            <img
+              src={beach.imageUrl || FALLBACK_IMAGE}
+              alt=""
+              draggable="false"
+              onError={(event) => {
+                if (!event.currentTarget.src.endsWith(FALLBACK_IMAGE)) {
+                  event.currentTarget.src = FALLBACK_IMAGE;
+                }
+              }}
+            />
+          </span>
+        ))}
+      </button>
+
+      <div className="cluster-stack-card__copy">
+        <h2>{sentenceTitle(stack.title)}</h2>
+        <div>
+          {(stack.chips || []).map((chip) => (
+            <span key={chip}>{chip}</span>
+          ))}
+          {!canOpen && <span>No beaches yet</span>}
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export default function ClusterStackGallery({
   beaches = [],
   clusters = [],
+  clustersLoading = false,
+  clusterError = "",
   onCreateCluster,
   onCreatePlan,
   onCreateRitual,
-  onBeachSelect,
 }) {
   const beachesBySlug = useMemo(
     () => Object.fromEntries(beaches.map((beach) => [beach.slug, beach])),
     [beaches],
   );
-  const personalStacks = useMemo(
-    () => clusters.map((cluster) => {
-        const clusterBeaches = beachesForCluster(cluster, beachesBySlug);
-        const displayBeaches = clusterBeaches.length
-          ? clusterBeaches
-          : [placeholderBeachForCluster(cluster)];
-        return {
-          id: `cluster-${clusterId(cluster)}`,
-          label: cluster.name || "my cluster",
-          chips: [clusterBeaches.length ? `${clusterBeaches.length} beaches` : "empty", "personal"],
-          color: cluster.color || "#91C059",
-          isPersonal: true,
-          sourceCluster: cluster,
-          beaches: displayBeaches,
-        };
-      }),
-    [beachesBySlug, clusters],
-  );
-  const stacks = useMemo(
+  const presetStacks = useMemo(
     () => STACK_PRESETS.map((preset, presetIndex) => ({
       ...preset,
+      kind: "preset",
+      title: `${sentenceTitle(preset.label)} beaches`,
       beaches: stackBeachesForPreset(beaches, preset, presetIndex),
     })),
     [beaches],
   );
-  const galleryStacks = useMemo(
-    () => [...personalStacks, ...stacks],
-    [personalStacks, stacks],
+  const personalStacks = useMemo(
+    () => clusters.map((cluster) => {
+      const id = clusterId(cluster);
+      const clusterBeaches = stackBeachesForCluster(cluster, beachesBySlug);
+      const slugs = Array.isArray(cluster.beach_slugs) ? cluster.beach_slugs : [];
+      return {
+        id: `cluster-${id}`,
+        kind: "personal",
+        label: cluster.name || "Untitled cluster",
+        title: cluster.name || "Untitled cluster",
+        description: cluster.description || cluster.mood_phrase || "Saved beach group",
+        chips: [beachCountLabel(slugs.length), cluster.mood_phrase || cluster.description].filter(Boolean).slice(0, 2),
+        beaches: clusterBeaches,
+      };
+    }),
+    [beachesBySlug, clusters],
   );
-  const [activePresetId, setActivePresetId] = useState("");
+  const allStacks = useMemo(() => [...personalStacks, ...presetStacks], [personalStacks, presetStacks]);
+  const [activeStackId, setActiveStackId] = useState("");
   const [activeBeachIndex, setActiveBeachIndex] = useState(0);
   const [expandedBeachSlug, setExpandedBeachSlug] = useState("");
-  const activePreset = galleryStacks.find((preset) => preset.id === activePresetId);
+  const activeStack = allStacks.find((stack) => stack.id === activeStackId);
 
-  function openPreset(presetId) {
-    setActivePresetId(presetId);
+  function openStack(stackId) {
+    setActiveStackId(stackId);
     setActiveBeachIndex(0);
     setExpandedBeachSlug("");
   }
 
   function moveBeach(direction) {
-    if (!activePreset?.beaches.length) return;
+    if (!activeStack?.beaches.length) return;
     setExpandedBeachSlug("");
     setActiveBeachIndex((currentIndex) => (
-      (currentIndex + direction + activePreset.beaches.length) % activePreset.beaches.length
+      (currentIndex + direction + activeStack.beaches.length) % activeStack.beaches.length
     ));
   }
 
-  if (activePreset) {
+  if (activeStack) {
     return (
-      <section className="cluster-stack-gallery cluster-stack-gallery--carousel" aria-label={`${activePreset.label} beach carousel`}>
+      <section className="cluster-stack-gallery cluster-stack-gallery--carousel" aria-label={`${activeStack.label} beach carousel`}>
         <div className="cluster-carousel-heading">
           <button
             type="button"
             onClick={() => {
-              setActivePresetId("");
+              setActiveStackId("");
               setExpandedBeachSlug("");
             }}
           >
-            all stacks
+            All stacks
           </button>
           <div>
-            <p>{activePreset.isPersonal ? "personal cluster" : activePreset.label}</p>
-            <h1>{activePreset.isPersonal ? activePreset.label : `${activePreset.label} beaches`}</h1>
-            {activePreset.isPersonal && activePreset.sourceCluster?.description && (
-              <span>{activePreset.sourceCluster.description}</span>
-            )}
+            <p>{activeStack.kind === "personal" ? "Saved cluster" : sentenceTitle(activeStack.label)}</p>
+            <h1>{sentenceTitle(activeStack.title)}</h1>
           </div>
         </div>
 
-        <div className="cluster-coverflow" aria-label={`${activePreset.label} beach coverflow`}>
+        <div className="cluster-coverflow" aria-label={`${activeStack.label} beach coverflow`}>
           <button
             type="button"
             className="cluster-coverflow__control cluster-coverflow__control--prev"
@@ -512,12 +548,12 @@ export default function ClusterStackGallery({
           </button>
 
           <div className="cluster-coverflow__stage">
-            {activePreset.beaches.map((beach, beachIndex) => {
+            {activeStack.beaches.map((beach, beachIndex) => {
               const offset = beachIndex - activeBeachIndex;
-              const wrappedOffset = offset > activePreset.beaches.length / 2
-                ? offset - activePreset.beaches.length
-                : offset < -activePreset.beaches.length / 2
-                  ? offset + activePreset.beaches.length
+              const wrappedOffset = offset > activeStack.beaches.length / 2
+                ? offset - activeStack.beaches.length
+                : offset < -activeStack.beaches.length / 2
+                  ? offset + activeStack.beaches.length
                   : offset;
               const isActive = wrappedOffset === 0;
               const isVisible = Math.abs(wrappedOffset) <= 2;
@@ -549,9 +585,7 @@ export default function ClusterStackGallery({
                     beach={beach}
                     isActive={isActive}
                     isExpanded={isActive && expandedBeachSlug === beach.slug}
-                    onSelect={beach.isClusterPlaceholder ? undefined : onBeachSelect}
                     onToggle={() => {
-                      if (beach.isClusterPlaceholder) return;
                       if (!isActive) {
                         setExpandedBeachSlug("");
                         setActiveBeachIndex(beachIndex);
@@ -576,7 +610,7 @@ export default function ClusterStackGallery({
         </div>
 
         <div className="cluster-coverflow__dots" aria-label="Choose beach">
-          {activePreset.beaches.map((beach, beachIndex) => (
+          {activeStack.beaches.map((beach, beachIndex) => (
             <button
               key={beach.slug || beach.name}
               type="button"
@@ -596,8 +630,8 @@ export default function ClusterStackGallery({
   return (
     <section className="cluster-stack-gallery" aria-label="Beach mood stacks">
       <div className="cluster-stack-gallery__intro">
-        <p>cluster</p>
-        <h1>your saved piles and mood stacks</h1>
+        <p>Cluster</p>
+        <h1>Pick the pile that feels right</h1>
         <CreateChoiceMenu
           onCreateCluster={onCreateCluster}
           onCreatePlan={onCreatePlan}
@@ -605,58 +639,31 @@ export default function ClusterStackGallery({
         />
       </div>
 
+      {clustersLoading && <p className="cluster-stack-gallery__status">Loading clusters...</p>}
+      {clusterError && <p className="cluster-stack-gallery__status is-error">{clusterError}</p>}
+
+      {personalStacks.length > 0 && (
+        <>
+          <div className="cluster-stack-gallery__section-heading">
+            <p>Your clusters</p>
+            <span>Saved groups update here as soon as you create them.</span>
+          </div>
+          <div className="cluster-stack-grid cluster-stack-grid--personal">
+            {personalStacks.map((stack) => (
+              <StackCard key={stack.id} stack={stack} onOpen={openStack} />
+            ))}
+          </div>
+        </>
+      )}
+
+      <div className="cluster-stack-gallery__section-heading">
+        <p>Suggested stacks</p>
+        <span>Prebuilt starting points for common Sydney beach days.</span>
+      </div>
       <div className="cluster-stack-grid">
-        {galleryStacks.map((preset, presetIndex) => {
-          const stack = preset.beaches?.length
-            ? preset.beaches
-            : stackBeachesForPreset(beaches, preset, presetIndex);
-
-          return (
-            <article className={`cluster-stack-card ${preset.isPersonal ? "is-personal" : ""}`} key={preset.id} style={{ "--cluster-color": preset.color || "#111111" }}>
-              <button
-                type="button"
-                className="cluster-stack-card__stack"
-                aria-label={`Open ${preset.label} beach stack`}
-                onClick={() => {
-                  openPreset(preset.id);
-                }}
-              >
-                {stack.map((beach, beachIndex) => (
-                  <span
-                    className="cluster-stack-card__tile"
-                    key={`${preset.id}-${beach.slug || beach.name}-${beachIndex}`}
-                    style={{
-                      "--stack-index": beachIndex,
-                      "--stack-rotate": `${[-7, 5, -2, 8, -4][beachIndex] || 0}deg`,
-                      "--stack-x": `${[-18, 12, 0, 22, -8][beachIndex] || 0}px`,
-                      "--stack-y": `${[-6, -16, 0, 12, 18][beachIndex] || 0}px`,
-                    }}
-                  >
-                    <img
-                      src={beach.imageUrl || FALLBACK_IMAGE}
-                      alt=""
-                      draggable="false"
-                      onError={(event) => {
-                        if (!event.currentTarget.src.endsWith(FALLBACK_IMAGE)) {
-                          event.currentTarget.src = FALLBACK_IMAGE;
-                        }
-                      }}
-                    />
-                  </span>
-                ))}
-              </button>
-
-              <div className="cluster-stack-card__copy">
-                <h2>{preset.label}</h2>
-                <div>
-                  {preset.chips.map((chip) => (
-                    <span key={chip}>{chip}</span>
-                  ))}
-                </div>
-              </div>
-            </article>
-          );
-        })}
+        {presetStacks.map((stack) => (
+          <StackCard key={stack.id} stack={stack} onOpen={openStack} />
+        ))}
       </div>
     </section>
   );

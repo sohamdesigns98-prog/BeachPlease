@@ -28,7 +28,7 @@ export default function ClusterPickerDialog({
         <DialogClose className="cluster-dialog__close" type="button" aria-label="Close cluster picker">
           x
         </DialogClose>
-        <p>ADD TO CLUSTER //</p>
+        <p>Add to cluster //</p>
         <DialogHeader>
           <DialogTitle>where should this beach go?</DialogTitle>
           <DialogDescription>
