@@ -1,0 +1,350 @@
+@layer components {
+.plan-detail-grid .beach-plan-ticket {
+    @apply mx-auto;
+    opacity: 1;
+    transform: none;
+  }
+
+.plan-detail-grid .beach-plan-ticket.postcard-card {
+    justify-self: center;
+  }
+
+.beach-plan-ticket {
+    @apply relative grid w-[min(500px,calc(100vw-32px))] overflow-visible rounded-[14px] p-6 text-left font-mono;
+    --ticket-fill: #FDFEFE;
+    --ticket-ink: #262626;
+    --ticket-muted: #575757;
+    --ticket-divider-y: 306px;
+    grid-template-rows: auto auto auto auto 1fr auto;
+    height: min(820px, calc(100vh - 32px));
+    max-height: calc(100vh - 32px);
+    background: var(--ticket-fill);
+    box-shadow:
+      0 22px 50px rgb(0 0 0 / 0.22),
+      0 4px 12px rgb(0 0 0 / 0.16);
+    color: var(--ticket-ink);
+    mask:
+      radial-gradient(circle 16px at left var(--ticket-divider-y), transparent 15.5px, #000 16px),
+      radial-gradient(circle 16px at right var(--ticket-divider-y), transparent 15.5px, #000 16px),
+      linear-gradient(#000, #000);
+    mask-composite: intersect;
+    -webkit-mask:
+      radial-gradient(circle 16px at left var(--ticket-divider-y), transparent 15.5px, #000 16px),
+      radial-gradient(circle 16px at right var(--ticket-divider-y), transparent 15.5px, #000 16px),
+      linear-gradient(#000, #000);
+    -webkit-mask-composite: source-in;
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+    transition:
+      opacity 250ms cubic-bezier(0.19, 1, 0.22, 1),
+      transform 250ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+.ticket-notch {
+    @apply hidden;
+    top: var(--ticket-divider-y);
+    transform: translateY(-50%);
+  }
+
+.ticket-notch-left {
+    left: -16px;
+  }
+
+.ticket-notch-right {
+    right: -16px;
+  }
+
+.ticket-header {
+    @apply grid grid-cols-[1fr_auto] gap-6;
+  }
+
+.ticket-rich-header {
+    @apply space-y-1.5;
+  }
+
+.ticket-eyebrow {
+    @apply m-0 text-[8px] font-medium leading-none text-foreground/55;
+    letter-spacing: 0.12em;
+  }
+
+.ticket-rich-header h1 {
+    @apply m-0 text-[25px] font-medium leading-none;
+    letter-spacing: 0.08em;
+  }
+
+.ticket-mood-quote {
+    @apply m-0 max-w-[420px] text-[9.5px] leading-4 text-foreground/70;
+    letter-spacing: 0.04em;
+    text-transform: none;
+  }
+
+.ticket-label {
+    @apply m-0 text-[10px] font-medium leading-[1.35];
+    letter-spacing: 0.08em;
+  }
+
+.ticket-header h1 {
+    @apply m-0 mt-2 text-[20px] font-normal leading-none;
+    letter-spacing: 0.16em;
+  }
+
+.ticket-tags {
+    @apply m-0 mt-2 text-[9px] leading-none;
+    color: var(--ticket-muted);
+    letter-spacing: 0.16em;
+  }
+
+.ticket-time {
+    @apply pt-0.5 text-left;
+    min-width: 100px;
+  }
+
+.ticket-time p:last-child {
+    @apply m-0 mt-1 text-[11px] leading-[1.45];
+    letter-spacing: 0.16em;
+  }
+
+.ticket-image {
+    @apply mt-5 h-[130px] w-full rounded-[12px] object-cover;
+  }
+
+.ticket-condition-grid {
+    @apply mt-3 grid grid-cols-4 gap-x-3 gap-y-1 text-[8.5px] leading-4 text-foreground/80;
+    letter-spacing: 0.05em;
+    text-transform: none;
+  }
+
+.ticket-divider {
+    @apply absolute left-0 right-0 h-px;
+    top: var(--ticket-divider-y);
+    background-image: repeating-linear-gradient(
+      to right,
+      rgb(38 38 38 / 0.72) 0,
+      rgb(38 38 38 / 0.72) 10px,
+      transparent 10px,
+      transparent 22px
+    );
+  }
+
+.ticket-body {
+    @apply grid gap-x-5 gap-y-3 overflow-hidden text-[8.8px] leading-[1.35];
+    grid-template-areas:
+      "where where"
+      "when bring"
+      "why why"
+      "verdict verdict";
+    grid-template-columns: 1.1fr 0.9fr;
+    letter-spacing: 0.07em;
+    padding-top: 44px;
+  }
+
+.ticket-body h2,
+  .ticket-body p {
+    @apply m-0;
+  }
+
+.ticket-body h2 {
+    @apply mb-1 text-[9px] font-medium;
+    letter-spacing: 0.14em;
+  }
+
+.ticket-body p {
+    color: var(--ticket-ink);
+  }
+
+.ticket-body-section {
+    @apply min-w-0 overflow-hidden;
+  }
+
+.ticket-section-where {
+    grid-area: where;
+  }
+
+.ticket-section-when {
+    grid-area: when;
+  }
+
+.ticket-section-bring {
+    grid-area: bring;
+  }
+
+.ticket-section-why {
+    grid-area: why;
+  }
+
+.ticket-section-verdict {
+    grid-area: verdict;
+  }
+
+.ticket-section-where p,
+  .ticket-section-why p {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+  }
+
+.ticket-section-where p {
+    -webkit-line-clamp: 4;
+  }
+
+.ticket-section-why p {
+    -webkit-line-clamp: 4;
+  }
+
+.ticket-bring-list {
+    @apply m-0 list-none space-y-0.5 p-0;
+    color: var(--ticket-ink);
+  }
+
+.ticket-bring-list li::before {
+    content: "- ";
+  }
+
+.ticket-actions {
+    @apply mt-4 grid grid-cols-2 gap-2;
+  }
+
+.ticket-actions button {
+    @apply h-9 rounded-full border border-foreground bg-foreground px-3 text-[8.5px] font-medium text-background transition-colors hover:bg-foreground/90;
+    letter-spacing: 0.08em;
+  }
+
+.beach-plan-ticket.postcard-card {
+    @apply relative block overflow-visible rounded-[14px] bg-background p-0 text-left font-mono normal-case text-foreground;
+    --postcard-w: min(453px, calc(100vw - 36px));
+    aspect-ratio: 453.839 / 530;
+    height: auto;
+    max-height: min(72vh, 530px);
+    min-height: 0;
+    width: var(--postcard-w);
+    mask: none;
+    -webkit-mask: none;
+    filter: drop-shadow(1px 4px 8px rgba(0,0,0,0.18));
+    box-shadow: none;
+    letter-spacing: 0;
+  }
+
+.beach-plan-ticket.postcard-card::before,
+  .beach-plan-ticket.postcard-card::after {
+    content: "";
+    @apply absolute z-10 h-8 w-8 rounded-full;
+    background: rgb(176 214 223 / 0.70);
+    top: 45.4%;
+    transform: translateY(-50%);
+  }
+
+.beach-plan-ticket.postcard-card::before {
+    left: -16px;
+  }
+
+.beach-plan-ticket.postcard-card::after {
+    right: -16px;
+  }
+
+.postcard-card__image {
+    @apply absolute left-[7.7%] top-[4.9%] h-[34%] w-[84.6%] rounded-[12px] object-cover;
+  }
+
+.postcard-card__tear {
+    @apply absolute left-[3.7%] right-[3.7%] top-[45.4%] h-px;
+    background-image: repeating-linear-gradient(
+      to right,
+      rgb(42 42 42 / 0.68) 0,
+      rgb(42 42 42 / 0.68) 9px,
+      transparent 9px,
+      transparent 20px
+    );
+  }
+
+.postcard-card__content {
+    @apply absolute bottom-4 left-8 right-8 top-[48%] flex flex-col;
+  }
+
+.postcard-card__title-row {
+    @apply grid grid-cols-[minmax(0,1fr)_66px] gap-5;
+  }
+
+.postcard-card__eyebrow {
+    @apply m-0 text-[9px] font-medium leading-none text-foreground/25;
+    letter-spacing: 0.08em;
+  }
+
+.postcard-card__title-row h1 {
+    @apply m-0 mt-3 line-clamp-2 text-[22px] font-medium leading-none text-foreground;
+    letter-spacing: 0;
+  }
+
+.postcard-card__meta {
+    @apply m-0 mt-2 text-[11px] font-medium leading-none text-foreground/40;
+    letter-spacing: 0.04em;
+  }
+
+.postcard-card__stamp {
+    @apply grid h-[58px] w-[58px] place-items-center border border-foreground/5 bg-transparent;
+  }
+
+.postcard-card__stamp span {
+    @apply block h-5 w-5 rounded-full;
+    background: var(--stamp-accent, #91C059);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--stamp-accent, #91C059) 40%, transparent);
+  }
+
+.postcard-card__stamp small {
+    @apply -mt-3 text-[7px] font-medium leading-none text-foreground/20;
+    letter-spacing: 0.05em;
+  }
+
+.postcard-card__rule {
+    @apply mt-4 h-px w-full bg-foreground/[0.06];
+  }
+
+.postcard-card__quote {
+    @apply m-0 mt-4 line-clamp-3 text-[10px] leading-5 text-foreground/45;
+  }
+
+.postcard-card__poem {
+    @apply m-0 mt-3 line-clamp-3 text-[13px] font-medium leading-7 text-foreground/80;
+    letter-spacing: 0;
+  }
+
+.postcard-card__conditions {
+    @apply mt-auto grid grid-cols-3 gap-5 bg-[#F8F8F6] px-3 py-2.5;
+  }
+
+.postcard-card__conditions div,
+  .postcard-card__conditions dt,
+  .postcard-card__conditions dd {
+    @apply m-0;
+  }
+
+.postcard-card__conditions dt {
+    @apply text-[8px] font-medium leading-none text-foreground/25;
+    letter-spacing: 0.08em;
+  }
+
+.postcard-card__conditions dd {
+    @apply mt-2 text-[12px] font-medium leading-none text-foreground/75;
+  }
+
+.postcard-card__footer {
+    @apply mt-3 grid grid-cols-[minmax(0,1fr)_auto] gap-4;
+  }
+
+.postcard-card__footer span {
+    @apply block text-[8px] font-medium leading-none text-foreground/20;
+    letter-spacing: 0.08em;
+  }
+
+.postcard-card__footer p {
+    @apply m-0 mt-2 max-w-[230px] truncate text-[10px] font-medium leading-none text-foreground/45;
+  }
+
+.postcard-card .ticket-actions {
+    @apply absolute -bottom-[64px] left-1/2 mt-0 flex -translate-x-1/2 grid-cols-none flex-nowrap items-center justify-center gap-3;
+  }
+
+.postcard-card .ticket-actions button {
+    @apply h-[30px] min-w-max whitespace-nowrap rounded-full border-0 bg-foreground px-6 text-[11px] font-medium text-background shadow-none transition-transform hover:-translate-y-0.5 hover:scale-105 hover:bg-foreground;
+    letter-spacing: 0.04em;
+  }
+}

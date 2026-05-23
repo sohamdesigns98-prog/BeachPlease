@@ -116,25 +116,15 @@ function stackBeachesForCluster(cluster, beachesBySlug) {
     .slice(0, 5);
 }
 
-function prettyList(items = [], fallback = "low fuss") {
-  const list = Array.isArray(items) ? items.filter(Boolean) : [];
-  if (!list.length) return fallback;
-  return list.slice(0, 3).map((item) => String(item).replaceAll("_", " ")).join(" · ");
-}
-
-function bestTime(beach) {
-  return beach.bestTime || beach.ideal_times?.[0] || "morning or late arvo";
-}
-
-function ClusterBeachInfoCard({ beach, isExpanded, isActive, onToggle }) {
+function ClusterBeachInfoCard({ beach, isActive, onOpen }) {
   return (
-    <article className={`cluster-carousel-card ${isExpanded ? "is-expanded" : ""}`}>
+    <article className="cluster-carousel-card">
       <button
         type="button"
         className="cluster-carousel-card__button"
-        aria-expanded={isExpanded}
-        onClick={onToggle}
+        onClick={onOpen}
         tabIndex={isActive ? 0 : -1}
+        aria-label={`Open ${beach.name} beach details`}
       >
         <span className="cluster-carousel-card__image">
           <img
@@ -152,42 +142,7 @@ function ClusterBeachInfoCard({ beach, isExpanded, isActive, onToggle }) {
             <small>{beach.region?.toLowerCase() || "sydney"}</small>
           </span>
         </span>
-        <span className="cluster-carousel-card__chevron" aria-hidden="true">
-          {isExpanded ? "⌃" : "⌄"}
-        </span>
       </button>
-
-      {isExpanded && (
-        <div className="cluster-carousel-card__details">
-          <dl>
-            <div>
-              <dt>temp</dt>
-              <dd>{beach.temp ? `${beach.temp}°C` : "n/a"}</dd>
-            </div>
-            <div>
-              <dt>waves</dt>
-              <dd>{beach.waves ? `${beach.waves}m` : "n/a"}</dd>
-            </div>
-            <div>
-              <dt>wind</dt>
-              <dd>{beach.windKmh ? `${beach.windKmh}km/h` : "n/a"}</dd>
-            </div>
-          </dl>
-
-          <section>
-            <h3>best time</h3>
-            <p>{bestTime(beach)}</p>
-          </section>
-          <section>
-            <h3>facilities</h3>
-            <p>{prettyList(beach.facilities, "bring your own everything")}</p>
-          </section>
-          <section>
-            <h3>good for</h3>
-            <p>{prettyList(beach.best_for || beach.vibe_tags, beach.vibe || "beach day")}</p>
-          </section>
-        </div>
-      )}
     </article>
   );
 }
@@ -467,6 +422,7 @@ export default function ClusterStackGallery({
   onCreateCluster,
   onCreatePlan,
   onCreateRitual,
+  onBeachSelect,
 }) {
   const beachesBySlug = useMemo(
     () => Object.fromEntries(beaches.map((beach) => [beach.slug, beach])),
@@ -501,18 +457,15 @@ export default function ClusterStackGallery({
   const allStacks = useMemo(() => [...personalStacks, ...presetStacks], [personalStacks, presetStacks]);
   const [activeStackId, setActiveStackId] = useState("");
   const [activeBeachIndex, setActiveBeachIndex] = useState(0);
-  const [expandedBeachSlug, setExpandedBeachSlug] = useState("");
   const activeStack = allStacks.find((stack) => stack.id === activeStackId);
 
   function openStack(stackId) {
     setActiveStackId(stackId);
     setActiveBeachIndex(0);
-    setExpandedBeachSlug("");
   }
 
   function moveBeach(direction) {
     if (!activeStack?.beaches.length) return;
-    setExpandedBeachSlug("");
     setActiveBeachIndex((currentIndex) => (
       (currentIndex + direction + activeStack.beaches.length) % activeStack.beaches.length
     ));
@@ -526,7 +479,6 @@ export default function ClusterStackGallery({
             type="button"
             onClick={() => {
               setActiveStackId("");
-              setExpandedBeachSlug("");
             }}
           >
             All stacks
@@ -574,24 +526,13 @@ export default function ClusterStackGallery({
                     zIndex: 20 - Math.abs(wrappedOffset),
                     pointerEvents: isVisible ? "auto" : "none",
                   }}
-                  onClick={() => {
-                    if (!isActive) {
-                      setExpandedBeachSlug("");
-                      setActiveBeachIndex(beachIndex);
-                    }
-                  }}
                 >
                   <ClusterBeachInfoCard
                     beach={beach}
                     isActive={isActive}
-                    isExpanded={isActive && expandedBeachSlug === beach.slug}
-                    onToggle={() => {
-                      if (!isActive) {
-                        setExpandedBeachSlug("");
-                        setActiveBeachIndex(beachIndex);
-                        return;
-                      }
-                      setExpandedBeachSlug((current) => (current === beach.slug ? "" : beach.slug));
+                    onOpen={() => {
+                      setActiveBeachIndex(beachIndex);
+                      onBeachSelect?.(beach);
                     }}
                   />
                 </motion.div>
@@ -617,7 +558,6 @@ export default function ClusterStackGallery({
               className={beachIndex === activeBeachIndex ? "is-active" : ""}
               aria-label={`Show ${beach.name}`}
               onClick={() => {
-                setExpandedBeachSlug("");
                 setActiveBeachIndex(beachIndex);
               }}
             />

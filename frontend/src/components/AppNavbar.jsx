@@ -18,6 +18,7 @@ export default function AppNavbar() {
     () => location.pathname.startsWith("/explore") || location.pathname.startsWith("/experience"),
     [location.pathname],
   );
+  const hasContrastNav = location.pathname.startsWith("/generated-plan") || location.pathname.startsWith("/plans/");
 
   useEffect(() => {
     let cancelled = false;
@@ -62,7 +63,7 @@ export default function AppNavbar() {
   }, [token]);
 
   return (
-    <header className="app-navbar">
+    <header className={`app-navbar ${hasContrastNav ? "app-navbar--contrast" : ""}`.trim()}>
       <div className="app-navbar__left">
         <button type="button" className="app-navbar__mark" onClick={() => navigate("/explore/canvas")} aria-label="Go to explore">
           BeachPlease

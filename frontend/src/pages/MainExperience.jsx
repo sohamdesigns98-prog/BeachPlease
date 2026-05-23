@@ -526,6 +526,7 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
           }}
           onCreatePlan={handleCreatePlanFromMenu}
           onCreateRitual={handleCreateRitualFromMenu}
+          onBeachSelect={handleBeachSelect}
         />
       </section>
 
@@ -541,7 +542,7 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
         />
       </section>
 
-      {selectedBeach && activeMode !== "cluster" && (
+      {selectedBeach && (
         <BeachInfoTile
           beach={selectedBeach}
           conditionLoading={Boolean(loadingConditionSlugs[selectedBeach.slug])}
@@ -605,7 +606,7 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
             </>
           )}
           <Button type="submit" disabled={isGenerating}>
-            {isGenerating ? "Generating plan..." : "Find my beach"}
+            {isGenerating ? "Generating beach" : "Find my beach"}
           </Button>
         </form>
       )}

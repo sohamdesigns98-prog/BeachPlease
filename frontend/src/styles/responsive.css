@@ -1,0 +1,425 @@
+@layer components {
+@media (max-width: 1180px) {
+    .generated-bento {
+      @apply max-w-[1040px];
+    }
+  }
+
+@media (max-width: 900px) {
+    .generated-bento {
+      @apply max-w-[720px];
+    }
+  }
+
+@media (max-width: 720px) {
+    .result-experience,
+    .plan-detail-page {
+      @apply overflow-y-auto px-3 pt-20;
+    }
+
+    .generated-plan-journal {
+      @apply h-auto min-h-screen items-start px-3 py-4;
+    }
+
+    .generated-bento-card {
+      @apply rounded-[22px] p-4;
+    }
+
+    .generated-bento-card h1 {
+      @apply text-[38px];
+    }
+
+    .generated-bento-card--hero img {
+      @apply min-h-[190px];
+    }
+  }
+
+@media (min-width: 900px) {
+    .minimal-headline h1 {
+      font-size: 38px;
+    }
+  }
+
+@media (max-width: 1100px) {
+    .main-experience-split {
+      @apply grid-cols-[minmax(320px,44vw)_minmax(0,1fr)];
+    }
+
+    .stage-funnel {
+      @apply px-8;
+    }
+
+    .stage-funnel__intro {
+      @apply left-8 right-8;
+    }
+
+    .stage-funnel__progress {
+      @apply left-8;
+    }
+
+    .funnel-stage h2 {
+      font-size: clamp(28px, 4.6vw, 44px);
+    }
+
+    .funnel-option-grid {
+      @apply gap-2;
+    }
+
+    .utility-button-rail {
+      right: 32px;
+    }
+  }
+
+@media (max-width: 760px) {
+    html,
+    body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    .landing-intro__content {
+      top: 24vh;
+      width: min(330px, calc(100vw - 40px));
+      font-size: 11.5px;
+    }
+
+    .utility-button-rail {
+      right: 24px;
+      top: 24px;
+    }
+
+    .utility-popover {
+      right: 24px;
+      top: 76px;
+      width: calc(100vw - 48px);
+    }
+
+    .utility-popover.is-plans {
+      left: 24px;
+      right: auto;
+      top: calc(67% - 230px);
+      transform: none;
+    }
+
+    .main-experience-split {
+      @apply grid-cols-1 overflow-y-auto overflow-x-hidden;
+      height: auto;
+      min-height: 100vh;
+    }
+
+    .stage-funnel {
+      @apply h-auto min-h-0 border-r-0 border-b border-foreground/10 px-6 pb-10 pt-28;
+    }
+
+    .stage-funnel__intro {
+      @apply left-6 right-6 top-8;
+    }
+
+    .stage-funnel__progress {
+      @apply bottom-8 left-6;
+    }
+
+    .funnel-back-button {
+      @apply relative bottom-auto right-auto mt-8 w-fit;
+    }
+
+    .funnel-stage {
+      @apply max-w-none;
+    }
+
+    .funnel-stage h2 {
+      font-size: clamp(29px, 9vw, 40px);
+      line-height: 1.04;
+    }
+
+    .funnel-option-grid {
+      @apply mt-7 grid-cols-1;
+    }
+
+    .candidate-beach-list {
+      @apply mt-6;
+    }
+
+    .funnel-mood-form input {
+      @apply text-[16px];
+    }
+
+    .mapbox-beach-map,
+    .mapbox-fallback-shell {
+      height: 45vh;
+      min-height: 330px;
+      width: 100%;
+    }
+
+    .mapbox-fallback-shell .minimal-map-area {
+      height: min(38vh, 320px);
+      width: min(72vw, 320px);
+    }
+
+    .map-token-missing {
+      @apply bottom-4 max-w-[calc(100vw-32px)] whitespace-normal text-center;
+    }
+
+    .map-tooltip {
+      max-width: calc(100vw - 40px);
+    }
+
+    .result-experience {
+      @apply min-h-screen items-center overflow-y-auto px-4 pb-32 pt-24;
+      height: auto;
+    }
+
+    .save-bar {
+      @apply bottom-3 w-[calc(100vw-24px)] flex-col items-stretch rounded-[16px] px-4 text-center;
+    }
+
+    .save-bar div {
+      @apply justify-center;
+    }
+
+    .auth-sheet {
+      @apply bottom-3 max-h-[calc(100vh-24px)] w-[calc(100vw-24px)] overflow-y-auto p-4;
+    }
+
+    .auth-sheet-copy h2 {
+      font-size: 20px;
+    }
+
+    .minimal-headline {
+      left: 24px;
+      top: 20%;
+      transform: none;
+    }
+
+    .minimal-headline h1 {
+      font-size: 34px;
+    }
+
+    .minimal-headline p {
+      max-width: 260px;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .minimal-map-area {
+      height: min(42vh, 360px);
+      left: 50%;
+      top: 42%;
+      transform: translate(-50%, -50%);
+      width: min(58vw, 250px);
+    }
+
+    .mood-search-bar {
+      height: 42px;
+    }
+
+    .mood-search-wrap {
+      bottom: auto;
+      top: 70%;
+      width: calc(100vw - 104px);
+    }
+
+    .search-grid-button {
+      height: 36px;
+      left: auto;
+      right: 24px;
+      top: 70%;
+      width: 36px;
+    }
+
+    .home-action-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      top: calc(70% + 76px);
+      width: calc(100vw - 48px);
+    }
+
+    .home-action-row button {
+      height: 36px;
+      font-size: 10px;
+    }
+
+    .home-error {
+      top: calc(70% + 162px);
+      width: calc(100vw - 48px);
+    }
+
+    .minimal-plan {
+      bottom: 18px;
+      left: 24px;
+      right: auto;
+    }
+  }
+
+@media (max-width: 760px) {
+    .app-navbar {
+      @apply h-auto flex-wrap gap-3 px-4 py-3;
+    }
+
+    .app-navbar__left,
+    .app-navbar__right {
+      @apply w-full justify-between gap-3;
+    }
+
+    .app-navbar__right {
+      @apply items-start;
+    }
+
+    .app-navbar__page-links {
+      @apply gap-4;
+    }
+
+    .account-pill--user small {
+      @apply max-w-[74px];
+    }
+
+    .mode-toggle {
+      @apply min-w-0 flex-1 justify-between gap-2 overflow-x-auto pb-1;
+      scrollbar-width: none;
+    }
+
+    .explore-mode-pill {
+      @apply top-[106px] max-w-[calc(100vw-32px)] px-3;
+    }
+
+    .mode-toggle::-webkit-scrollbar {
+      display: none;
+    }
+
+    .mode-toggle button {
+      @apply shrink-0 text-[10px];
+    }
+
+    .auth-page {
+      @apply items-start px-4 pb-8 pt-32;
+    }
+
+    .auth-panel {
+      @apply max-w-none p-5;
+    }
+
+    .profile-actions {
+      @apply gap-2;
+    }
+
+    .profile-actions .inline-flex,
+    .profile-actions button,
+    .profile-actions [role="button"] {
+      @apply w-full;
+    }
+
+    .plan-detail-page {
+      @apply px-4 pb-8 pt-32;
+    }
+
+    .mood-canvas-world {
+      height: 150vh;
+      width: 260vw;
+    }
+
+    .cluster-focus-strip {
+      @apply left-4 right-4 top-[154px] max-w-none overflow-x-auto flex-nowrap pb-1;
+    }
+
+    .cluster-drop-shelf {
+      @apply bottom-4 w-[calc(100vw-24px)] rounded-[18px] p-3;
+    }
+
+    .cluster-drop-shelf > div {
+      @apply grid-cols-1;
+    }
+
+    .beach-image-tile {
+      height: 96px;
+      width: 128px;
+    }
+
+    .beach-info-tile {
+      @apply left-0 top-auto h-auto max-h-[62vh] w-auto overflow-hidden border-l-0 border-t px-6 py-7;
+      bottom: 0;
+    }
+
+    .mood-input-bar,
+    .mood-input-bar.has-info-tile {
+      @apply left-0 right-0 h-auto min-h-20 w-auto grid-cols-1 gap-3 rounded-none border-x-0 border-b-0 px-5 py-3;
+      bottom: 0;
+    }
+
+    .mood-input-bar.has-info-tile {
+      transform: translateY(-62vh);
+    }
+
+    .mood-input-bar input,
+    .mood-input-bar > button,
+    .mood-chip-line {
+      @apply col-start-1;
+    }
+
+    .mood-chip-line {
+      @apply row-start-2 max-w-none justify-start;
+    }
+
+    .mood-input-bar > button {
+      @apply row-start-3 w-fit;
+    }
+
+    .saved-mode-shell {
+      @apply px-4 pt-32;
+    }
+
+    .saved-plan-stage {
+      @apply min-h-[calc(100vh-360px)] pb-32;
+    }
+
+    .saved-postcard-grid {
+      @apply bottom-4 max-w-[calc(100vw-24px)] gap-2 px-4;
+    }
+
+    .saved-plan-detail {
+      @apply max-h-[calc(100vh-250px)] w-[calc(100vw-32px)] overflow-y-auto;
+    }
+
+    .cluster-tray {
+      @apply px-4 pt-32;
+    }
+
+    .cluster-card__top {
+      @apply grid-cols-1 gap-3;
+    }
+  }
+
+@media (prefers-reduced-motion: reduce) {
+    .landing-intro,
+    .landing-intro__video,
+    .landing-intro__veil,
+    .landing-intro__content,
+    .landing-intro__button,
+    .main-app-shell {
+      transition-duration: 250ms;
+      transition-delay: 0ms;
+    }
+
+    .landing-intro.landing-exiting .landing-intro__video {
+      transform: translateY(-4vh) scale(1);
+    }
+
+    .beach-image-tile,
+    .beach-image-tile__parallax {
+      transition-duration: 0ms;
+    }
+
+    .beach-image-tile__parallax {
+      transform: none !important;
+    }
+
+    .circular-beach-tile,
+    .circular-beach-tile__image,
+    .circular-beach-canvas__orbit-track,
+    .circular-beach-canvas__postcard-loader,
+    .spread-beach-tile,
+    .circular-beach-tile__meta {
+      animation-duration: 0ms;
+      transition-duration: 0ms;
+    }
+  }
+}

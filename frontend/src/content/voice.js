@@ -282,7 +282,7 @@ export const BUTTON_COPY = {
 };
 
 export const LOADING_COPY = {
-  moodSearch: "checking the coast...",
+  moodSearch: "Generating beach",
 };
 
 export const LANDING_COPY = APP_COPY.landing;

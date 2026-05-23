@@ -10,6 +10,7 @@ import {
 } from "@/utils/beachAdapter";
 
 const FALLBACK_IMAGE = "/landing-scroll.jpg";
+const LOADING_IMAGE = "/loading.png";
 const VISIBLE_TILE_COUNT = 28;
 
 const ACTIVITY_TO_VIBES = {
@@ -165,12 +166,6 @@ export default function CircularBeachCanvas({
   }, [activityHint, companionHint, focusedCluster, moodPhrase, rotationPhase, tiles]);
 
   const hasInput = Boolean(moodPhrase.trim() || activityHint || companionHint || focusedCluster);
-  const loadingBeach = useMemo(() => {
-    const matchedTiles = scoredTiles
-      .filter(({ matched }) => matched)
-      .sort((a, b) => b.score - a.score);
-    return matchedTiles[0]?.tile || scoredTiles[0]?.tile || null;
-  }, [scoredTiles]);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -220,8 +215,8 @@ export default function CircularBeachCanvas({
   return (
     <section className={`circular-beach-canvas ${isFocused ? "is-focused" : ""} ${isGenerating ? "is-generating" : ""}`} aria-label="Circular beach mood canvas">
       <div className="circular-beach-canvas__center" aria-hidden="true">
-        <span>{isGenerating ? "checking the coast" : isAssembled ? "Go touch sand, mate" : "assembling the coast"}</span>
-        <p>{isGenerating ? "sorting the swell" : hasInput ? "mood signal active" : "hover to explore"}</p>
+        <span>{isGenerating ? "Generating beach" : isAssembled ? "Go touch sand, mate" : "assembling the coast"}</span>
+        <p>{isGenerating ? "" : hasInput ? "mood signal active" : "hover to explore"}</p>
       </div>
 
       <div className="circular-beach-canvas__orbit">
@@ -254,13 +249,11 @@ export default function CircularBeachCanvas({
         </div>
       </div>
 
-      {isGenerating && loadingBeach && (
+      {isGenerating && (
         <div className="circular-beach-canvas__postcard-loader" role="status" aria-live="polite">
-          <img src={loadingBeach.imageUrl || FALLBACK_IMAGE} alt="" />
+          <img src={LOADING_IMAGE} alt="" />
           <div>
-            <span>generating plan</span>
-            <strong>{loadingBeach.name?.toLowerCase() || "sydney beach"}</strong>
-            <p>reading the wind · checking the coast</p>
+            <strong>Generating beach</strong>
           </div>
         </div>
       )}

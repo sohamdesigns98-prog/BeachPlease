@@ -152,7 +152,7 @@ export default function BeachInfoTile({
           onClick={onGenerate}
           disabled={isGenerating}
         >
-          {isGenerating ? "Generating..." : "Generate plan"}
+          {isGenerating ? "Generating beach" : "Generate plan"}
         </Button>
       </div>
       {clusterCount > 0 && (

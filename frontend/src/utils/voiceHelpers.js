@@ -1,6 +1,5 @@
 import {
   ARC_MESSAGES,
-  GENERATING_COPY,
   MOOD_RINGS,
   PLACEHOLDERS,
   RESULT_COPY,
@@ -34,13 +33,11 @@ export function getArcMessage(wordCount = 0) {
   }, ARC_MESSAGES[0]?.[1] || "");
 }
 
-export function getGeneratingCopy(text = "") {
-  return (
-    GENERATING_COPY.find((copy) => textMatchesKeywords(text, copy.keywords)) || {
-      title: "checking the coast…",
-      subtitle: "swell, wind, UV, crowds. the whole little circus.",
-    }
-  );
+export function getGeneratingCopy() {
+  return {
+    title: "Generating beach",
+    subtitle: "",
+  };
 }
 
 export function getRandomPlaceholder() {

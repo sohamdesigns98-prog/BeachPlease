@@ -1,0 +1,284 @@
+@layer components {
+.auth-page {
+    @apply flex min-h-screen items-center justify-center bg-background px-6 py-12 text-foreground;
+  }
+
+.back-to-experience {
+    @apply fixed left-6 top-6 z-50 rounded-full border border-foreground/15 bg-background/80 px-3 py-2 text-[10px] leading-none text-foreground/55 no-underline backdrop-blur transition-colors hover:border-foreground/35 hover:text-foreground;
+    letter-spacing: 0.05em;
+  }
+
+.auth-panel {
+    @apply w-full max-w-[440px] border border-foreground/20 bg-background/70 p-6;
+  }
+
+.profile-panel {
+    @apply max-w-[520px];
+  }
+
+.auth-heading {
+    @apply mb-6;
+  }
+
+.auth-heading p {
+    @apply m-0 mb-2 text-[10px] text-foreground/45;
+    letter-spacing: 0.14em;
+  }
+
+.auth-heading h1 {
+    @apply m-0 text-[28px] font-medium leading-tight;
+  }
+
+.auth-heading span,
+  .auth-muted {
+    @apply text-[12px] leading-6 text-foreground/55;
+  }
+
+.auth-panel label {
+    @apply mb-4 block text-[11px] text-foreground/55;
+    letter-spacing: 0.08em;
+  }
+
+.auth-panel input,
+  .auth-panel select {
+    @apply mt-2 h-10 w-full rounded-none border border-foreground/25 bg-transparent px-3 text-[13px] text-foreground outline-none transition-colors focus:border-foreground;
+  }
+
+.auth-panel input[aria-invalid="true"],
+  .auth-panel select[aria-invalid="true"],
+  .auth-sheet input[aria-invalid="true"] {
+    @apply border-destructive;
+  }
+
+.auth-field-error {
+    @apply mt-1 block text-[10px] normal-case leading-4 text-destructive;
+    letter-spacing: 0;
+  }
+
+.auth-submit,
+  .auth-link-button {
+    @apply mt-2 h-9 w-full rounded-full bg-foreground text-[10px] font-medium tracking-[0.08em] text-background hover:bg-foreground/90;
+  }
+
+.oauth-button {
+    @apply mt-3 h-9 w-full rounded-full border border-foreground/20 bg-transparent text-[10px] font-medium text-foreground/65 transition-colors hover:border-foreground/45 hover:text-foreground;
+    letter-spacing: 0.08em;
+  }
+
+.google-oauth-slot {
+    @apply relative mt-3 flex min-h-10 w-full items-center justify-center overflow-hidden rounded-full border border-foreground/15 bg-background/35;
+  }
+
+.google-oauth-slot > div {
+    @apply flex w-full justify-center;
+  }
+
+.google-oauth-slot span {
+    @apply absolute text-[10px] text-foreground/40;
+    letter-spacing: 0.08em;
+  }
+
+.google-oauth-slot.is-ready {
+    @apply border-transparent bg-transparent;
+  }
+
+.google-oauth-slot.is-disabled {
+    @apply pointer-events-none opacity-50;
+  }
+
+.auth-link-button {
+    @apply inline-flex items-center justify-center no-underline;
+  }
+
+.auth-muted {
+    @apply mt-5 mb-0 text-center;
+  }
+
+.auth-muted a {
+    @apply text-foreground underline underline-offset-4;
+  }
+
+.auth-error,
+  .auth-success {
+    @apply mt-0 text-[12px] leading-5;
+  }
+
+.auth-error {
+    @apply text-destructive;
+  }
+
+.auth-success {
+    @apply text-foreground/65;
+  }
+
+.suburb-select {
+    @apply relative mt-2;
+  }
+
+.suburb-select input {
+    @apply mt-0;
+  }
+
+.suburb-select__hint,
+  .suburb-select__fallback {
+    @apply mt-1 block text-[10px] normal-case leading-4 text-foreground/40;
+    letter-spacing: 0;
+  }
+
+.suburb-select__menu {
+    @apply absolute left-0 right-0 top-[44px] z-50 max-h-52 overflow-auto border border-foreground/20 bg-background shadow-sm;
+  }
+
+.suburb-select__menu button {
+    @apply flex w-full items-center justify-between border-0 border-b border-foreground/10 bg-background px-3 py-2 text-left text-[12px] text-foreground transition-colors hover:bg-foreground/5;
+  }
+
+.suburb-select__menu small {
+    @apply text-[10px] text-foreground/45;
+  }
+
+.profile-actions {
+    @apply grid gap-2;
+  }
+
+.danger-button {
+    @apply border-destructive/50 text-destructive hover:bg-destructive hover:text-destructive-foreground;
+  }
+
+.danger-text-button {
+    @apply text-destructive hover:text-destructive;
+  }
+
+.danger-confirm-button {
+    @apply border-destructive bg-destructive text-destructive-foreground hover:border-destructive hover:bg-destructive/90;
+  }
+
+.shelf-page {
+    @apply items-start;
+  }
+
+.shelf-panel {
+    @apply max-w-[860px];
+  }
+
+.plan-log-list {
+    @apply mt-6 space-y-3;
+  }
+
+.plan-log-row {
+    @apply grid gap-4 border border-foreground/15 p-4 md:grid-cols-[1fr_auto] md:items-center;
+  }
+
+.plan-log-row p,
+  .plan-log-row h2,
+  .plan-log-row span {
+    @apply m-0;
+  }
+
+.plan-log-row p {
+    @apply text-[11px] leading-5 text-foreground/55;
+  }
+
+.plan-log-row h2 {
+    @apply mt-1 text-[18px] font-medium;
+  }
+
+.plan-log-row span {
+    @apply mt-2 block text-[10px] text-foreground/40;
+  }
+
+.plan-log-meta {
+    @apply mt-3 grid gap-2 sm:grid-cols-4;
+  }
+
+.plan-log-meta div {
+    @apply min-w-0;
+  }
+
+.plan-log-meta dt,
+  .plan-log-meta dd {
+    @apply m-0;
+  }
+
+.plan-log-meta dt {
+    @apply text-[8px] font-medium text-foreground/35;
+    letter-spacing: 0.12em;
+  }
+
+.plan-log-meta dd {
+    @apply mt-1 truncate text-[10px] text-foreground/60;
+  }
+
+.plan-log-actions {
+    @apply flex flex-wrap gap-2;
+  }
+
+.plan-log-actions a,
+  .plan-log-actions button {
+    @apply rounded-full border border-foreground/25 bg-transparent px-3 py-1.5 text-[10px] text-foreground/65 no-underline transition-colors hover:border-foreground hover:text-foreground;
+  }
+
+.result-auth-nudge {
+    @apply fixed bottom-6 left-1/2 z-30 w-[min(430px,calc(100vw-32px))] -translate-x-1/2 rounded-full border border-background/60 bg-background/90 px-4 py-3 text-center text-[11px] leading-snug text-foreground shadow-[0_12px_28px_rgb(0_0_0_/_0.16)] backdrop-blur-sm;
+  }
+
+.result-auth-nudge p {
+    @apply m-0 mb-2;
+  }
+
+.result-auth-nudge div {
+    @apply flex items-center justify-center gap-2;
+  }
+
+.result-auth-nudge a {
+    @apply rounded-full bg-foreground px-3 py-1.5 text-[10px] tracking-[0.08em] text-background no-underline transition-opacity hover:opacity-80;
+  }
+
+
+  .auth-sheet {
+    @apply fixed bottom-5 left-1/2 z-40 grid w-[min(460px,calc(100vw-28px))] -translate-x-1/2 gap-4 rounded-[14px] border border-foreground/20 bg-background/95 p-5 text-left font-mono text-foreground shadow-[0_18px_44px_rgb(0_0_0_/_0.2)] backdrop-blur-md;
+  }
+
+.auth-sheet-close {
+    @apply absolute right-3 top-3 h-8 w-8 rounded-full border border-foreground/15 bg-transparent text-[18px] leading-none text-foreground/45 transition-colors hover:border-foreground hover:text-foreground;
+  }
+
+.auth-sheet-copy {
+    @apply pr-10;
+  }
+
+.auth-sheet-copy p {
+    @apply m-0 text-[10px] font-medium text-foreground/45;
+    letter-spacing: 0.12em;
+  }
+
+.auth-sheet-copy h2 {
+    @apply m-0 mt-2 text-[22px] font-medium leading-tight text-foreground;
+  }
+
+.auth-sheet-copy span {
+    @apply mt-2 block text-[11px] leading-5 text-foreground/55;
+  }
+
+.auth-sheet-form {
+    @apply grid gap-3;
+  }
+
+.auth-sheet-form input {
+    @apply h-11 rounded-full border-foreground/25 bg-transparent px-4 font-mono text-[12px] text-foreground placeholder:text-foreground/35 focus-visible:ring-0;
+  }
+
+.auth-sheet-primary {
+    @apply h-9 rounded-full border border-foreground bg-foreground text-[10px] font-medium text-background shadow-none hover:bg-foreground/90 hover:text-background;
+    letter-spacing: 0.06em;
+  }
+
+.auth-sheet-mode {
+    @apply justify-self-center border-0 bg-transparent p-0 text-[10px] text-foreground/55 transition-colors hover:text-foreground;
+  }
+
+.auth-sheet-error {
+    @apply m-0 text-[10px] leading-4 text-foreground/65;
+  }
+
+}

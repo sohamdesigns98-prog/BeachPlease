@@ -1,0 +1,132 @@
+@layer components {
+.app-navbar {
+    @apply fixed left-0 right-0 top-0 z-[70] flex h-16 items-center justify-between gap-6 px-11;
+    background: linear-gradient(to bottom, rgb(248 246 239 / 0.78), rgb(248 246 239 / 0));
+    border-bottom: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+.app-navbar__mark {
+    @apply border-0 bg-transparent p-0 text-[13px] font-normal leading-none text-foreground/55 shadow-none transition-colors hover:bg-transparent hover:text-foreground;
+    letter-spacing: 0.04em;
+  }
+
+.app-navbar__left {
+    @apply flex shrink-0 items-center gap-4;
+  }
+
+.app-navbar__right {
+    @apply flex shrink-0 items-center gap-7;
+  }
+
+.app-navbar__page-links {
+    @apply flex items-center gap-5 whitespace-nowrap;
+  }
+
+.app-navbar__page-links a {
+    @apply relative border-0 bg-transparent p-0 text-[13px] font-normal leading-none text-foreground/45 no-underline transition-colors hover:text-foreground/75;
+    letter-spacing: 0.05em;
+    text-shadow: 0 1px 12px rgb(248 246 239 / 0.95);
+  }
+
+.app-navbar__page-links a.is-active {
+    @apply text-foreground;
+  }
+
+.app-navbar__page-links span {
+    @apply absolute -right-4 -top-2 rounded-full bg-foreground px-1.5 py-0.5 text-[8px] leading-none text-background;
+  }
+
+.app-navbar--contrast {
+    background: linear-gradient(to bottom, rgb(17 17 17 / 0.10), rgb(17 17 17 / 0));
+  }
+
+.app-navbar--contrast .app-navbar__mark,
+  .app-navbar--contrast .app-navbar__page-links a,
+  .app-navbar--contrast .account-pill,
+  .app-navbar--contrast .account-pill--user a,
+  .app-navbar--contrast .account-pill--user small,
+  .app-navbar--contrast .account-pill--user button {
+    @apply text-white/80;
+    text-shadow: 0 1px 16px rgb(17 17 17 / 0.28);
+  }
+
+.app-navbar--contrast .app-navbar__mark:hover,
+  .app-navbar--contrast .app-navbar__page-links a:hover,
+  .app-navbar--contrast .app-navbar__page-links a.is-active,
+  .app-navbar--contrast .account-pill:hover,
+  .app-navbar--contrast .account-pill--user a:hover,
+  .app-navbar--contrast .account-pill--user button:hover {
+    @apply text-white;
+  }
+
+.app-navbar--contrast .app-navbar__page-links span,
+  .app-navbar--contrast .account-pill--user span {
+    @apply bg-white text-foreground;
+  }
+
+.app-navbar--contrast .audio-toggle,
+  .app-navbar--contrast .account-pill {
+    @apply border-white/30 bg-white/10 text-white/80 hover:border-white/50 hover:bg-white/15 hover:text-white;
+  }
+
+.audio-toggle {
+    @apply grid h-9 w-9 place-items-center rounded-full border border-foreground/15 bg-background/35 p-0 text-foreground shadow-none transition-colors hover:border-foreground/45 hover:bg-background/45 hover:text-foreground;
+  }
+
+.audio-toggle[aria-pressed="true"] {
+    @apply border-foreground/25 text-foreground;
+  }
+
+.mode-toggle {
+    @apply flex items-center gap-5 whitespace-nowrap;
+  }
+
+.explore-mode-pill {
+    @apply fixed left-1/2 top-[14px] z-[80] -translate-x-1/2 rounded-full border border-background/55 bg-background/55 px-4 py-2 shadow-[0_12px_32px_rgb(17_17_17_/_0.08)] backdrop-blur-xl;
+  }
+
+.mode-toggle button {
+    @apply relative border-0 bg-transparent p-0 text-[13px] font-normal leading-none text-foreground/25 shadow-none transition-colors hover:text-foreground/70;
+    letter-spacing: 0.05em;
+  }
+
+.mode-toggle button.is-active {
+    @apply text-foreground;
+  }
+
+.mode-toggle__badge {
+    @apply absolute -right-4 -top-2 rounded-full bg-foreground px-1.5 py-0.5 text-[8px] leading-none text-background;
+  }
+
+.account-pill {
+    @apply inline-flex h-8 items-center rounded-full border border-foreground/15 px-3 text-[12px] font-normal leading-none text-foreground/50 no-underline transition-colors hover:border-foreground/35 hover:text-foreground;
+    letter-spacing: 0.05em;
+  }
+
+.account-pill--user {
+    @apply gap-2 px-2;
+  }
+
+.account-pill--user a {
+    @apply flex items-center gap-2 text-foreground/70 no-underline;
+  }
+
+.account-pill--user span {
+    @apply flex h-5 w-5 items-center justify-center rounded-full bg-foreground text-[9px] text-background;
+  }
+
+.account-pill--user small {
+    @apply max-w-[120px] truncate text-[9px] text-foreground/45;
+  }
+
+.account-pill--user button {
+    @apply border-0 bg-transparent p-0 text-[9px] text-foreground/35 transition-colors hover:text-foreground;
+  }
+
+.mood-app-shell.has-canvas-selection .explore-mode-pill {
+    opacity: 0.18;
+  }
+}

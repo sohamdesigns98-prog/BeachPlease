@@ -1,0 +1,604 @@
+@layer components {
+.app-transition-frame {
+    @apply relative min-h-screen overflow-hidden bg-background text-foreground;
+  }
+
+.pre-entry-app-shell {
+    @apply min-h-screen bg-background;
+  }
+
+.landing-intro {
+    @apply fixed inset-0 z-[100] overflow-hidden bg-transparent text-background;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+.landing-intro__video {
+    @apply absolute inset-0 h-full w-full object-cover;
+    object-position: center top;
+    transform: translateY(0) scale(1);
+    transform-origin: center 42%;
+    transition: transform 1400ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+.landing-intro__veil {
+    @apply absolute inset-0;
+    background: #FDFEFE;
+    opacity: 0;
+    transition: opacity 500ms ease-out;
+  }
+
+.landing-intro__content {
+    @apply absolute left-1/2 top-[29%] z-10 w-[min(430px,calc(100vw-48px))] -translate-x-1/2 -translate-y-1/2 text-left font-mono text-[12px] font-normal leading-[1.45] text-[#FDFEFE];
+    letter-spacing: 0.055em;
+    opacity: 0;
+    text-shadow: 0 1px 10px rgb(0 0 0 / 0.12);
+    transform: translate(-50%, calc(-50% + 12px));
+    transition:
+      opacity 800ms ease-out 200ms,
+      transform 800ms ease-out 200ms;
+  }
+
+.landing-intro__content.is-visible {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+.landing-intro__content p {
+    @apply m-0;
+  }
+
+.landing-intro__content p + p {
+    @apply mt-2.5;
+  }
+
+.landing-intro__button-wrap {
+    @apply mt-[70px] flex w-full justify-center;
+  }
+
+.landing-intro__button {
+    @apply inline-flex h-9 min-w-[148px] items-center justify-center rounded-full border border-foreground bg-foreground px-5 text-center text-[12px] font-medium tracking-[0.08em] text-[#FDFEFE] shadow-none hover:bg-foreground hover:text-[#FDFEFE];
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition:
+      opacity 400ms ease-out,
+      transform 400ms ease-out,
+      background 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+.landing-intro__button.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+.landing-intro__button:hover {
+    transform: translateY(0);
+  }
+
+.landing-intro__button:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+.landing-intro.landing-exiting {
+    pointer-events: none;
+  }
+
+.landing-intro.landing-exiting .landing-intro__content {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% - 10px));
+    transition-delay: 0ms;
+    transition-duration: 250ms;
+  }
+
+.landing-intro.landing-exiting .landing-intro__video {
+    transform: translateY(-75vh) scale(1.08);
+  }
+
+.landing-intro.landing-exiting .landing-intro__veil {
+    opacity: 1;
+  }
+
+.typewriter-cursor {
+    animation: typewriter-blink 530ms steps(1, end) infinite;
+  }
+
+.landing-screen {
+    @apply flex items-center justify-center px-6 py-16;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+.landing-screen.is-leaving {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+.landing-copy {
+    @apply w-full max-w-[560px] text-left text-[17px] font-medium leading-8;
+  }
+
+.landing-copy p {
+    @apply m-0;
+  }
+
+.landing-copy p + p {
+    @apply mt-8;
+  }
+
+.landing-action {
+    @apply mt-12 flex justify-center;
+  }
+
+.main-app-shell {
+    @apply relative min-h-screen overflow-x-hidden px-6 py-0 tracking-normal;
+    opacity: 0;
+    transition-duration: 600ms;
+  }
+
+.main-app-shell.is-visible {
+    opacity: 1;
+  }
+
+.app-flow-shell {
+    @apply w-full max-w-none overflow-hidden;
+  }
+
+.main-experience-split {
+    @apply grid h-screen min-h-screen grid-cols-[minmax(340px,40vw)_minmax(0,1fr)] gap-0 bg-background p-0;
+  }
+
+.utility-button-rail {
+    @apply absolute z-30 flex items-center gap-2;
+    right: 60px;
+    top: 54px;
+  }
+
+.round-utility-button {
+    @apply flex h-9 w-9 items-center justify-center rounded-full border border-foreground bg-foreground p-0 text-background shadow-none transition-colors hover:bg-foreground/90 hover:text-background;
+  }
+
+.round-utility-button svg {
+    @apply h-4 w-4;
+  }
+
+.utility-popover {
+    @apply absolute right-[60px] top-[106px] z-30 w-[min(360px,calc(100vw-48px))] border border-foreground/20 bg-background/95 p-5 text-left text-foreground shadow-[0_18px_45px_rgb(0_0_0_/_0.12)] backdrop-blur-sm;
+    border-radius: 10px;
+  }
+
+.utility-popover.is-plans {
+    left: 50%;
+    right: auto;
+    top: calc(73% - 250px);
+    transform: translateX(-50%);
+  }
+
+.utility-popover-close {
+    @apply absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full border border-foreground/15 bg-transparent p-0 text-foreground/55 transition-colors hover:border-foreground/35 hover:text-foreground;
+  }
+
+.utility-popover-close svg {
+    @apply h-3.5 w-3.5;
+  }
+
+.utility-popover-kicker {
+    @apply m-0 mb-4 text-[10px] font-medium leading-none text-foreground/45;
+    letter-spacing: 0.12em;
+  }
+
+.utility-help-copy ol {
+    @apply m-0 list-decimal space-y-3 pl-4 pr-7 text-[12px] leading-5 text-foreground/70;
+  }
+
+.premade-plan-list {
+    @apply flex flex-col gap-2;
+  }
+
+.premade-plan-list button {
+    @apply grid grid-cols-[auto_1fr] gap-x-2 gap-y-1 rounded-[8px] border border-foreground/15 bg-transparent px-3 py-3 text-left text-foreground transition-colors hover:border-foreground/35 hover:bg-foreground/[0.04];
+  }
+
+.premade-plan-list span {
+    @apply row-span-2 text-[14px] leading-none;
+  }
+
+.premade-plan-list strong {
+    @apply text-[11px] font-medium leading-none text-foreground;
+  }
+
+.premade-plan-list small {
+    @apply text-[10px] font-normal leading-4 text-foreground/55;
+  }
+
+.minimal-headline {
+    @apply absolute z-10;
+    left: clamp(32px, 9.4vw, 122px);
+    top: 44%;
+    transform: translateY(-54%);
+  }
+
+.minimal-headline h1 {
+    @apply m-0 text-left font-mono font-medium leading-[1.08] text-foreground;
+    font-size: clamp(30px, 3vw, 38px);
+  }
+
+.minimal-headline p {
+    @apply m-0 mt-5 max-w-[310px] text-left text-[12px] leading-6 text-foreground/55;
+  }
+
+.minimal-map-area {
+    @apply absolute z-0;
+    height: min(54vh, 430px);
+    left: 50%;
+    top: 43%;
+    transform: translate(-24%, -50%);
+    width: min(26vw, 280px);
+  }
+
+.mapbox-beach-map,
+  .mapbox-fallback-shell {
+    @apply relative inset-auto z-0 h-screen w-full overflow-hidden;
+  }
+
+.mapbox-beach-map__canvas {
+    @apply h-full w-full;
+  }
+
+.mapbox-beach-map .mapboxgl-canvas {
+    @apply outline-none;
+  }
+
+.mapbox-beach-map .mapboxgl-ctrl-bottom-right {
+    opacity: 0.35;
+  }
+
+.map-tooltip {
+    @apply pointer-events-none absolute left-0 top-0 z-30 grid min-w-[174px] gap-1 rounded-[6px] border border-[rgb(31_31_31_/_0.18)] bg-background/95 px-3 py-2 font-mono text-foreground backdrop-blur-sm;
+  }
+
+.map-tooltip strong {
+    @apply text-[10px] font-medium leading-none;
+    letter-spacing: 0.09em;
+  }
+
+.map-tooltip span,
+  .map-tooltip small {
+    @apply text-[9px] font-normal leading-4 text-foreground/60;
+  }
+
+.map-tooltip small {
+    @apply text-foreground/50;
+  }
+
+.mapbox-fallback-shell .minimal-map-area {
+    height: min(58vh, 560px);
+    left: 50%;
+    top: 44%;
+    transform: translate(-50%, -50%);
+    width: min(36vw, 380px);
+  }
+
+.map-token-missing {
+    @apply absolute bottom-8 left-1/2 z-20 m-0 -translate-x-1/2 whitespace-nowrap rounded-full bg-background/75 px-3 py-1.5 text-[9px] text-foreground/40 backdrop-blur-sm;
+    letter-spacing: 0.1em;
+  }
+
+.stage-funnel {
+    @apply relative z-10 flex h-screen flex-col justify-center border-r border-foreground/10 bg-background px-[clamp(32px,5vw,78px)] py-10 text-left;
+  }
+
+.stage-funnel__intro {
+    @apply absolute left-[clamp(32px,5vw,78px)] right-10 top-10;
+  }
+
+.stage-funnel__intro span,
+  .funnel-kicker {
+    @apply text-[10px] font-medium leading-none text-foreground/45;
+    letter-spacing: 0.12em;
+  }
+
+.stage-funnel__intro p {
+    @apply m-0 mt-3 max-w-[360px] text-[11px] leading-5 text-foreground/55;
+  }
+
+.stage-funnel__progress {
+    @apply absolute bottom-10 left-[clamp(32px,5vw,78px)] flex gap-2;
+  }
+
+.stage-funnel__progress span {
+    @apply block h-1.5 w-8 rounded-full bg-foreground/15 transition-colors;
+  }
+
+.stage-funnel__progress span.is-active {
+    @apply bg-foreground;
+  }
+
+.funnel-stage {
+    @apply max-w-[460px];
+  }
+
+.funnel-stage h2 {
+    @apply m-0 mt-4 max-w-[520px] text-[clamp(30px,4.2vw,56px)] font-medium leading-[1.02] text-foreground;
+    letter-spacing: 0;
+  }
+
+.funnel-option-grid {
+    @apply mt-9 grid grid-cols-2 gap-3;
+  }
+
+.funnel-option {
+    @apply h-9 rounded-full border border-foreground/20 bg-transparent px-4 text-[10px] font-medium tracking-[0.08em] text-foreground/65 shadow-none transition-colors hover:border-foreground hover:bg-foreground hover:text-background;
+  }
+
+.funnel-option.is-selected {
+    @apply border-foreground bg-foreground text-background;
+  }
+
+.candidate-beach-list {
+    @apply mt-7 grid gap-2;
+  }
+
+.candidate-beach-list.is-empty {
+    @apply rounded-[8px] border border-foreground/15 px-4 py-3;
+  }
+
+.candidate-beach-list.is-empty p {
+    @apply m-0 text-[11px] leading-5 text-foreground/50;
+  }
+
+.candidate-beach {
+    @apply grid gap-1 rounded-[10px] border border-foreground/15 bg-transparent px-4 py-3 text-left text-foreground/65 transition-colors hover:border-foreground hover:text-foreground;
+  }
+
+.candidate-beach.is-selected {
+    @apply border-foreground bg-foreground text-background;
+  }
+
+.candidate-beach span {
+    @apply text-[12px] font-medium;
+  }
+
+.candidate-beach small {
+    @apply text-[9px] font-normal leading-4 text-current opacity-65;
+  }
+
+.funnel-generate-button {
+    @apply h-9 rounded-full border border-foreground bg-foreground px-4 text-[10px] font-medium tracking-[0.08em] text-background shadow-none hover:bg-foreground/90 hover:text-background;
+  }
+
+.funnel-back-button {
+    @apply absolute bottom-10 right-[clamp(32px,5vw,78px)] rounded-full border border-foreground/20 bg-transparent px-4 py-2 text-[10px] text-foreground/50 transition-colors hover:border-foreground hover:text-foreground;
+  }
+
+.sydney-coast-map {
+    @apply h-full w-full object-contain;
+    filter: grayscale(1);
+    opacity: 0.86;
+  }
+
+.beach-dot-layer {
+    @apply absolute inset-0 z-10;
+  }
+
+.beach-dot {
+    @apply absolute h-2 w-2 rounded-full border-0 p-0 outline-none transition-all duration-150;
+    background: rgb(31 31 31 / 0.32);
+    box-shadow: none;
+    left: var(--dot-x);
+    top: var(--dot-y);
+    transform: translate(-50%, -50%);
+  }
+
+.beach-dot:hover,
+  .beach-dot:focus-visible,
+  .beach-dot.is-selected {
+    @apply z-20;
+    height: 16px;
+    transform: translate(-50%, -50%);
+    width: 16px;
+  }
+
+.beach-dot.is-selected {
+    background: #f04a18;
+    box-shadow: 0 0 0 3px hsl(var(--background)), 0 0 0 5px #f04a18;
+  }
+
+.beach-dot-tooltip {
+    @apply pointer-events-none absolute left-1/2 top-0 flex min-w-36 flex-col gap-0.5 whitespace-nowrap rounded-[7px] bg-foreground px-2.5 py-2 text-left text-[8px] font-normal leading-tight text-background opacity-0 shadow-sm transition-all;
+    transform: translate(-50%, -92%);
+  }
+
+.beach-dot-tooltip strong {
+    @apply text-[9px] font-medium;
+  }
+
+.beach-dot:hover .beach-dot-tooltip,
+  .beach-dot:focus-visible .beach-dot-tooltip {
+    opacity: 1;
+    transform: translate(-50%, -112%) scale(0.86);
+  }
+
+.map-fallback-label {
+    @apply absolute bottom-1 left-1/2 z-20 m-0 -translate-x-1/2 whitespace-nowrap bg-background/65 px-1.5 py-0.5 text-[9px] text-foreground/35;
+    letter-spacing: 0.1em;
+  }
+
+.map-selected-fallback-label {
+    @apply absolute left-1/2 top-full mt-3 -translate-x-1/2 whitespace-nowrap rounded-full bg-background/80 px-2 py-1 text-[9px] text-foreground/55;
+    letter-spacing: 0.1em;
+  }
+
+.vibe-pill-row {
+    @apply absolute left-1/2 z-10 flex w-[min(560px,calc(100vw-48px))] -translate-x-1/2 flex-wrap justify-center gap-2;
+    bottom: auto;
+    top: calc(70% + 136px);
+  }
+
+.vibe-pill {
+    @apply flex items-center gap-1.5 rounded-full border border-foreground/20 bg-background/45 px-3 py-1.5 text-[10px] leading-none text-foreground/55 transition-colors hover:border-foreground/45 hover:text-foreground;
+  }
+
+.vibe-pill span {
+    @apply text-[11px] leading-none;
+  }
+
+.search-grid-button {
+    @apply absolute z-20 flex h-9 w-9 items-center justify-center rounded-full border border-foreground bg-foreground p-0 text-background shadow-none transition-colors hover:bg-foreground/90 hover:text-background;
+    left: calc(50% + min(334px, calc(50vw - 56px)));
+    top: 73%;
+  }
+
+.search-grid-button svg {
+    @apply h-4 w-4;
+  }
+
+.home-error {
+    @apply absolute left-1/2 z-10 m-0 w-[min(620px,calc(100vw-56px))] -translate-x-1/2 text-center text-[11px] leading-5 text-destructive;
+    top: calc(73% + 126px);
+  }
+
+.generating-overlay {
+    @apply pointer-events-none fixed inset-0 z-[120] flex flex-col items-center justify-center bg-background/90 px-6 text-center opacity-0 transition-opacity;
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+.generating-overlay.is-visible {
+    @apply pointer-events-auto opacity-100;
+  }
+
+.generating-overlay h2 {
+    @apply m-0 text-[18px] font-medium leading-7;
+  }
+
+.generating-overlay p {
+    @apply m-0 mt-2 max-w-[320px] text-[11px] leading-6 text-foreground/55;
+  }
+
+.generating-step-list {
+    @apply mt-7 flex flex-col gap-2 text-[10px] text-foreground/45;
+  }
+
+.generating-step-list span {
+    @apply block;
+  }
+
+.voice-toast {
+    @apply pointer-events-none fixed left-1/2 top-6 z-[70] -translate-x-1/2 rounded-full border border-foreground/20 bg-background/90 px-4 py-2 text-center text-[11px] text-foreground/70 opacity-0 shadow-sm backdrop-blur transition-opacity;
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+.voice-toast.is-visible {
+    @apply opacity-100;
+  }
+
+.app-toast {
+    border-radius: 999px !important;
+    border: 1px solid rgb(17 17 17 / 0.18) !important;
+    background: rgb(248 246 239 / 0.96) !important;
+    color: #111111 !important;
+    font-family: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+    font-size: 11px !important;
+  }
+
+.plan-empty-state {
+    @apply mt-6 border border-foreground/15 px-4 py-5;
+  }
+
+.plan-empty-state p {
+    @apply m-0 text-[11px] font-medium text-foreground/70;
+    letter-spacing: 0.1em;
+  }
+
+.plan-empty-state span {
+    @apply mt-2 block text-[12px] leading-5 text-foreground/55;
+  }
+
+.plan-candidate-list,
+  .plan-rejected-list {
+    @apply grid gap-2;
+  }
+
+.plan-candidate-list article,
+  .plan-rejected-list article {
+    @apply rounded-[10px] border border-foreground/10 px-4 py-3;
+  }
+
+.plan-candidate-list article {
+    @apply grid grid-cols-[1fr_auto] gap-x-3;
+  }
+
+.plan-candidate-list strong,
+  .plan-rejected-list strong {
+    @apply text-[12px] font-medium text-foreground;
+  }
+
+.plan-candidate-list span {
+    @apply text-[10px] text-foreground/35;
+  }
+
+.plan-candidate-list p,
+  .plan-rejected-list p {
+    @apply col-span-2 m-0 mt-1 text-[11px] leading-5 text-foreground/55;
+  }
+
+.minimal-bring-row {
+    @apply flex flex-wrap gap-2;
+  }
+
+.minimal-bring-row span {
+    @apply border border-foreground/25 px-2 py-1 text-[10px] text-foreground/65;
+  }
+
+.minimal-generating {
+    @apply fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 bg-background/95 opacity-0 pointer-events-none transition-opacity duration-300;
+  }
+
+.minimal-generating.is-visible {
+    @apply pointer-events-auto opacity-100;
+  }
+
+.minimal-generating h2 {
+    @apply text-center text-xl font-semibold;
+  }
+
+.minimal-generating p {
+    @apply max-w-xs text-center text-[11px] leading-7 text-foreground/55;
+  }
+
+.minimal-gen-steps {
+    @apply mt-2 flex flex-col gap-2;
+  }
+
+.minimal-gen-step {
+    @apply flex items-center gap-3 text-[10.5px] tracking-[0.04em] text-foreground/45;
+  }
+
+.minimal-gen-step span {
+    @apply h-1.5 w-1.5 rounded-full border border-foreground/35;
+  }
+
+.minimal-gen-step.is-active span,
+  .minimal-gen-step.is-done span {
+    @apply bg-foreground;
+  }
+
+.minimal-gen-step.is-done {
+    @apply text-foreground;
+  }
+
+.beach-tile-add-button {
+    @apply absolute -right-3 -top-3 z-40 grid h-7 w-7 place-items-center rounded-full border-0 bg-foreground p-0 text-[18px] font-normal leading-none text-background opacity-0 shadow-[0_5px_18px_rgba(0,0,0,0.16)] transition-[opacity,transform] duration-150 hover:bg-foreground hover:text-background focus-visible:opacity-100 focus-visible:outline-none;
+    transform: scale(0.88);
+  }
+
+.plan-back-link {
+    @apply inline-flex h-9 items-center rounded-full bg-transparent px-4 text-[10px] font-normal text-foreground/55 transition-colors hover:text-foreground;
+    letter-spacing: 0.06em;
+  }
+}
