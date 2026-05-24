@@ -1,6 +1,6 @@
 # BeachPlease
 
-BeachPlease is a canvas-first Sydney beach recommendation app. It helps users choose and plan a Sydney beach day through a visual beach canvas, live conditions, Mapbox, Gemini-generated plans, saved plan management, and an admin dashboard for managing the underlying data.
+BeachPlease is a canvas-first Sydney beach recommendation app. It helps users choose and plan a Sydney beach day through a visual beach canvas, live conditions, an interactive coastal map, Gemini-generated plans, saved plan management, and an admin dashboard for managing the underlying data.
 
 ## Current Product Flow
 
@@ -13,7 +13,7 @@ BeachPlease is a canvas-first Sydney beach recommendation app. It helps users ch
 7. Users can enter a mood and generate a beach plan.
 8. The backend ranks beaches using stored beach data, live Open-Meteo conditions, and Gemini.
 9. Authenticated users can save, replay, annotate, and delete plans.
-10. Map mode shows the Mapbox coastal view and live beach conditions.
+10. Map mode shows an interactive coastal view with search, filters, and live beach conditions.
 11. Cluster mode shows curated beach stacks.
 12. Admin users can access `/admin` to manage users, plans, beaches, and activity data.
 
@@ -28,7 +28,7 @@ BeachPlease is a canvas-first Sydney beach recommendation app. It helps users ch
 - shadcn/ui-style local components
 - Framer Motion
 - Instrument Sans
-- Mapbox GL JS
+- Leaflet
 - Sonner toasts
 
 ### Backend
@@ -50,7 +50,7 @@ BeachPlease is a canvas-first Sydney beach recommendation app. It helps users ch
 - Hover/click beach tiles
 - Right-side beach info tile
 - Mood input and Create Plan flow
-- Interactive Mapbox map
+- Interactive coastal map with search and filters
 - Live weather and marine conditions
 - Gemini beach plan generation
 - Auth and Google OAuth
@@ -65,32 +65,149 @@ BeachPlease is a canvas-first Sydney beach recommendation app. It helps users ch
 - NSW suburb search
 - Sample database JSON exports under `database/`
 
-## Setup
+## Assignment Requirement Coverage
 
-### Backend
+| Requirement | How BeachPlease satisfies it |
+| --- | --- |
+| Modern frontend library | React 19, Vite, React Router, Tailwind CSS, shadcn-style local UI components, Framer Motion |
+| Backend with database | FastAPI backend with Motor and MongoDB Atlas |
+| SPA behaviour | `frontend/index.html` is the single HTML entry point; React Router swaps views without full page reloads |
+| Authentication | Email/password registration and login use bcrypt password hashing and JWT access tokens; Google OAuth is also supported |
+| At least three CRUD entities | Users, beach plans, mood clusters, and beaches all support database-backed CRUD operations |
+| Live search / dynamic filtering | Beach explore/map surfaces filter and inspect beach data dynamically; suburb selection uses the backend suburb search proxy |
+| Admin/user profile | Admin dashboard manages users, plans, beaches, roles, and activity history; profile page lets users update/delete their own account |
+| Error handling | Frontend forms use Zod + React Hook Form and toast/error states; backend returns structured FastAPI errors |
+| Database export | `database/` contains JSON export samples for users, beaches, plans, clusters, and user activities |
+
+## Setup From A Fresh Clone
+
+### Prerequisites
+
+- Python 3.11 or newer
+- Node.js 20 or newer
+- MongoDB Atlas connection string, or another reachable MongoDB instance
+- Gemini API key for generated beach plans
+- Google OAuth client ID only if testing Google sign-in
+
+### 1. Clone
+
+```bash
+git clone https://github.com/sohamdesigns98-prog/BeachPlease.git
+cd BeachPlease
+```
+
+### 2. Backend Environment
 
 ```bash
 cd backend
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
 cp .env.example .env
-uvicorn main:app --port 8000
 ```
 
-Use `--reload` only if local file watching works on your machine:
+On Windows PowerShell, use this instead of `cp` if needed:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Fill `backend/.env`:
+
+```env
+MONGODB_URI=your_mongodb_connection_string
+DATABASE_NAME=beachplease
+JWT_SECRET=use_a_long_random_secret
+GEMINI_API_KEY=your_gemini_api_key
+CLIENT_URL=http://localhost:5173
+GOOGLE_CLIENT_ID=your_google_oauth_client_id_optional
+ADMIN_EMAILS=admin@example.com
+```
+
+`ADMIN_EMAILS` is comma-separated. To test the admin dashboard, register or log in with one of these emails, then open `/admin`.
+
+### 3. Backend Install And Run
+
+macOS/Linux:
 
 ```bash
-uvicorn main:app --reload --port 8000
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn main:app --host 127.0.0.1 --port 8000
 ```
 
-### Frontend
+Windows PowerShell:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+uvicorn main:app --host 127.0.0.1 --port 8000
+```
+
+Backend health check:
+
+```txt
+http://127.0.0.1:8000/health
+```
+
+### 4. Seed Beach Data
+
+Run this once after MongoDB is configured:
+
+```bash
+python -m app.seed.seed_beaches
+```
+
+Optional image metadata refresh:
+
+```bash
+python -m app.seed.seed_beach_images
+```
+
+### 5. Frontend Environment
+
+Open a second terminal:
 
 ```bash
 cd frontend
+cp .env.example .env
+```
+
+Windows PowerShell:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Fill `frontend/.env`:
+
+```env
+VITE_API_BASE_URL=http://localhost:8000
+VITE_USE_MOCKS=false
+VITE_GOOGLE_CLIENT_ID=your_google_oauth_client_id_optional
+```
+
+For Google OAuth, `VITE_GOOGLE_CLIENT_ID` must match `GOOGLE_CLIENT_ID` in `backend/.env`.
+
+### 6. Frontend Install And Run
+
+```bash
 npm install
 npm run dev
 ```
+
+Frontend URL:
+
+```txt
+http://127.0.0.1:5173/
+```
+
+### 7. Common Setup Checks
+
+- If login/register fails, check `JWT_SECRET` and `MONGODB_URI`.
+- If generated plans fail, check `GEMINI_API_KEY`.
+- If admin is blocked, check that the logged-in email is listed in `ADMIN_EMAILS`.
+- If CORS fails, check `CLIENT_URL=http://localhost:5173` and use the frontend URL above.
+- If the database starts empty, run `python -m app.seed.seed_beaches`.
 
 ## CRUD Mapping
 
@@ -102,6 +219,40 @@ npm run dev
 | Beaches | Seed scripts / `POST /admin/beaches` | `GET /beaches`, `GET /beaches/{id}`, `GET /beaches/slug/{slug}` | `PATCH /admin/beaches/{beach_id}` | `DELETE /admin/beaches/{beach_id}` |
 | Conditions | n/a | `GET /conditions`, `GET /conditions/{slug}`, `GET /conditions/map` | refresh/cache update internally | n/a |
 | Activity log | backend service writes | `GET /admin/activities` | n/a | n/a |
+
+## Folder Structure
+
+```txt
+BeachPlease/
+  backend/
+    main.py                 FastAPI app entrypoint and router registration
+    requirements.txt        Python dependencies
+    .env.example            Backend environment variable template
+    app/
+      auth.py               JWT, password hashing, current-user/admin dependencies
+      config.py             Environment configuration
+      database.py           MongoDB connection helpers
+      models/               Pydantic request/response models
+      routes/               Auth, users, beaches, conditions, plans, clusters, admin APIs
+      services/             Gemini, ranking, weather, activity log, suburb validation
+      seed/                 Beach seed data and image metadata scripts
+  frontend/
+    index.html              Single HTML entrypoint for the SPA
+    package.json            React/Vite dependencies and scripts
+    .env.example            Frontend environment variable template
+    src/
+      App.jsx               React Router route tree
+      api/                  Axios API wrappers
+      components/           Reusable UI, explore, map, plan, cluster, auth components
+      components/map/       Leaflet map implementation and map helpers
+      context/              Auth context and token/profile state
+      pages/                Login, register, explore, saved plans, profile, admin
+      styles/               Feature-level CSS files imported by `index.css`
+      utils/                Display, payload, adapter, and error helpers
+  database/                 JSON database export/sample files for submission
+  README.md                 Setup, feature, CRUD, and workload documentation
+  PRD.md                    Product requirements and design rationale
+```
 
 ## API Endpoints
 
@@ -189,12 +340,11 @@ Ranking / AI support:
 - `CLIENT_URL`
 - `GOOGLE_CLIENT_ID`
 - `ADMIN_EMAILS`
-- `VITE_GOOGLE_CLIENT_ID`
 
 ### Frontend
 
 - `VITE_API_BASE_URL`
-- `VITE_MAPBOX_TOKEN`
+- `VITE_USE_MOCKS`
 - `VITE_GOOGLE_CLIENT_ID`
 
 Never commit real `.env` files.
@@ -210,6 +360,29 @@ python -m app.seed.seed_beaches
 ## Database Samples
 
 The `database/` folder contains sample JSON structures for beaches, users, plans, clusters, and user activities. These are reference/export samples, not secrets.
+
+## Workload Allocation
+
+This allocation is based on the repository history and current file ownership.
+
+| Member | Main responsibilities | Representative files |
+| --- | --- | --- |
+| Nguyen Quang Tu (`125725836+tuwang2301@users.noreply.github.com`) | Authentication, JWT/profile flow, admin authorization, admin dashboard, activity logging, saved plans, clusters, data exports, validation/error handling | `backend/app/auth.py`, `backend/app/routes/auth_routes.py`, `backend/app/routes/user_routes.py`, `backend/app/routes/admin_routes.py`, `backend/app/routes/plan_routes.py`, `backend/app/routes/cluster_routes.py`, `backend/app/services/activity_log.py`, `frontend/src/pages/Admin.jsx`, `frontend/src/pages/Login.jsx`, `frontend/src/pages/Register.jsx`, `frontend/src/pages/Profile.jsx`, `frontend/src/components/SavedModeShell.jsx`, `database/*.json` |
+| Soham (`sohamdesigns98@gmail.com`) | Visual product direction, landing/canvas experience, cluster and generated-plan UI, saved-plan UI, walkthrough/help, audio, map integration polish, documentation updates | `frontend/src/components/LandingIntro.jsx`, `frontend/src/components/CircularBeachCanvas.jsx`, `frontend/src/components/CircularBeachTile.jsx`, `frontend/src/components/ClusterStackGallery.jsx`, `frontend/src/components/GeneratedPlanJournal.jsx`, `frontend/src/components/help/HowToUseOverlay.jsx`, `frontend/src/pages/MainExperience.jsx`, `frontend/src/pages/ResultExperience.jsx`, `frontend/src/styles/*.css`, `README.md`, `PRD.md` |
+| Mrinaluts (`Mrinal.Parashar@student.uts.edu.au`) | Map exploration contribution and geospatial interaction support | `frontend/src/components/map/leaflet/LeafletBeachMap.jsx`, `frontend/src/components/map/leaflet/LeafletMapMode.jsx`, `frontend/src/components/map/leaflet/LeafletMapSidebar.jsx`, `frontend/src/components/map/leaflet/leafletMapUtils.js`, map-related commits |
+
+The workload is intentionally split across backend/security, frontend/product experience, and mapping/interaction areas so the assignment does not rely on a single member.
+
+## Demo Video Checklist
+
+For the required video, keep it under 3 minutes and show the browser UI:
+
+1. Register or log in, then show the profile/account state.
+2. Explore beaches on canvas/map and use live/dynamic beach details.
+3. Generate a beach plan, then save it.
+4. Open saved plans, edit notes/replay/delete a plan.
+5. Create/update a cluster and add/remove a beach.
+6. Log in as an admin and briefly show dashboard, users, beaches, plans, and activities.
 
 ## Verification
 
@@ -227,7 +400,6 @@ python -m compileall .
 ## Known Limitations
 
 - No real crowd API; crowd is estimated.
-- Mapbox requires a token.
 - Gemini and Open-Meteo require API/network availability.
 - Admin routes require authenticated admin role/email configuration.
 - Some images may use fallback assets.

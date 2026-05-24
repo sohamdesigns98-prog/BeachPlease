@@ -239,54 +239,6 @@
     width: min(26vw, 280px);
   }
 
-.mapbox-beach-map,
-  .mapbox-fallback-shell {
-    @apply relative inset-auto z-0 h-screen w-full overflow-hidden;
-  }
-
-.mapbox-beach-map__canvas {
-    @apply h-full w-full;
-  }
-
-.mapbox-beach-map .mapboxgl-canvas {
-    @apply outline-none;
-  }
-
-.mapbox-beach-map .mapboxgl-ctrl-bottom-right {
-    opacity: 0.35;
-  }
-
-.map-tooltip {
-    @apply pointer-events-none absolute left-0 top-0 z-30 grid min-w-[174px] gap-1 rounded-[6px] border border-[rgb(31_31_31_/_0.18)] bg-background/95 px-3 py-2 font-mono text-foreground backdrop-blur-sm;
-  }
-
-.map-tooltip strong {
-    @apply text-[10px] font-medium leading-none;
-    letter-spacing: 0.09em;
-  }
-
-.map-tooltip span,
-  .map-tooltip small {
-    @apply text-[9px] font-normal leading-4 text-foreground/60;
-  }
-
-.map-tooltip small {
-    @apply text-foreground/50;
-  }
-
-.mapbox-fallback-shell .minimal-map-area {
-    height: min(58vh, 560px);
-    left: 50%;
-    top: 44%;
-    transform: translate(-50%, -50%);
-    width: min(36vw, 380px);
-  }
-
-.map-token-missing {
-    @apply absolute bottom-8 left-1/2 z-20 m-0 -translate-x-1/2 whitespace-nowrap rounded-full bg-background/75 px-3 py-1.5 text-[9px] text-foreground/40 backdrop-blur-sm;
-    letter-spacing: 0.1em;
-  }
-
 .stage-funnel {
     @apply relative z-10 flex h-screen flex-col justify-center border-r border-foreground/10 bg-background px-[clamp(32px,5vw,78px)] py-10 text-left;
   }

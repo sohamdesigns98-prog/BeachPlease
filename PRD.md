@@ -11,7 +11,7 @@ The current product combines:
 - hover/click beach tiles
 - right-side beach information
 - mood-led plan creation
-- Mapbox coastal map
+- interactive coastal map
 - saved plans with notes/replay/delete
 - mood clusters and stack browsing
 - admin dashboard for data management
@@ -35,7 +35,7 @@ BeachPlease should feel local, calm, visual, and slightly cheeky. It should not 
 12. Result shows a generated Beach Plan with selected beach, timing, activity, food/drink suggestion, fit rationale, live conditions, bring list, and gentle warning.
 13. Authenticated users can save the plan.
 14. Saved plans support notes, replay, and delete.
-15. Map mode shows the Mapbox coastal map and live beach conditions.
+15. Map mode shows the coastal map and live beach conditions.
 16. Cluster mode shows curated beach stacks and beach browsing by mood/use case.
 17. Admin users can access `/admin` to manage users, plans, beaches, and activity data.
 
@@ -76,10 +76,10 @@ Shows selected beach context:
 
 ### Map
 
-- Uses Mapbox GL JS.
 - Shows Sydney beaches spatially.
 - Uses live condition markers and selected beach state.
-- Must not be replaced with Leaflet or a static-only map.
+- Supports a Leaflet-based map mode with live search/filtering.
+- Must not fall back to a static-only map for the primary map experience.
 
 ### Clusters
 
@@ -182,7 +182,7 @@ Keep the backend architecture based on:
 - Gemini
 - Open-Meteo
 - APScheduler condition refresh
-- Mapbox on the frontend
+- Leaflet on the frontend
 - React/Vite frontend
 
 The backend owns:
@@ -471,7 +471,6 @@ Secrets and keys must remain local or in deployment secret storage:
 - `MONGODB_URI`
 - `JWT_SECRET`
 - `GEMINI_API_KEY`
-- `VITE_MAPBOX_TOKEN`
 - `GOOGLE_CLIENT_ID`
 - `ADMIN_EMAILS`
 
@@ -483,7 +482,7 @@ Admin routes must require authenticated admin users. Admin status is controlled 
 
 - Do not break `POST /plans`.
 - Do not break saved plan notes, replay, or delete.
-- Do not break Mapbox.
+- Do not break the interactive map experience.
 - Do not break Open-Meteo condition flows.
 - Do not break Gemini generation.
 - Do not replace backend ranking with frontend random selection.

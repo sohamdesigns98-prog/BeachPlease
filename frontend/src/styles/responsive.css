@@ -213,26 +213,6 @@
       @apply text-[16px];
     }
 
-    .mapbox-beach-map,
-    .mapbox-fallback-shell {
-      height: 45vh;
-      min-height: 330px;
-      width: 100%;
-    }
-
-    .mapbox-fallback-shell .minimal-map-area {
-      height: min(38vh, 320px);
-      width: min(72vw, 320px);
-    }
-
-    .map-token-missing {
-      @apply bottom-4 max-w-[calc(100vw-32px)] whitespace-normal text-center;
-    }
-
-    .map-tooltip {
-      max-width: calc(100vw - 40px);
-    }
-
     .result-experience {
       @apply min-h-screen items-center overflow-y-auto px-4 pb-32 pt-24;
       height: auto;
