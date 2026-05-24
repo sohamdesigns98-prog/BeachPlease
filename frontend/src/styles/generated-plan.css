@@ -1,7 +1,9 @@
 @layer components {
   .result-experience,
   .plan-detail-page {
-    @apply fixed inset-0 overflow-hidden px-6 pb-8 pt-24 text-foreground;
+    @apply min-h-screen overflow-x-hidden overflow-y-auto text-foreground;
+    height: auto;
+    padding: 96px 24px 140px;
     background: #74bdeb;
   }
 
@@ -15,7 +17,9 @@
   }
 
   .generated-plan-journal {
-    @apply relative mx-auto flex h-[calc(100vh-128px)] w-full max-w-[1180px] items-center justify-center overflow-hidden px-5 py-4;
+    @apply relative mx-auto flex w-full items-start justify-center overflow-visible;
+    max-width: 1180px;
+    min-height: calc(100vh - 236px);
     isolation: isolate;
   }
 
@@ -26,22 +30,31 @@
   .generated-plan-journal::before {
     content: "";
     @apply fixed inset-0 -z-10;
-    background: linear-gradient(180deg, rgb(116 189 235 / 0.10), rgb(248 246 239 / 0.28));
+    background: linear-gradient(180deg, rgb(116 189 235 / 0.02), rgb(248 246 239 / 0.10));
   }
 
   .generated-bento {
-    @apply relative z-10 mx-auto w-full max-w-[1120px];
+    @apply relative z-10 mx-auto grid w-full items-start;
+    max-width: 1180px;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) minmax(0, 0.85fr);
+    gap: 16px;
+  }
+
+  .generated-bento-column {
+    @apply flex min-w-0 flex-col items-stretch;
+    gap: 16px;
   }
 
   .generated-bento-card {
-    @apply min-h-0 overflow-hidden rounded-[18px] bg-[rgb(253_254_254_/_0.92)] p-7 text-left shadow-none backdrop-blur-xl;
+    @apply flex flex-col items-start justify-start overflow-hidden rounded-[24px] bg-background/90 p-6 text-left shadow-none backdrop-blur-xl;
+    gap: 12px;
     border: 0;
     transform-origin: center;
     will-change: transform;
   }
 
   .generated-bento-card span {
-    @apply block text-[10px] font-normal leading-none text-foreground/40;
+    @apply block text-[10px] font-normal uppercase leading-none text-foreground/60;
     letter-spacing: 0.14em;
   }
 
@@ -52,145 +65,141 @@
   }
 
   .generated-bento-card h1 {
-    @apply mt-5 text-[clamp(46px,5.4vw,86px)] font-normal leading-[0.9] text-foreground;
+    @apply text-[clamp(34px,3.2vw,50px)] font-normal leading-[1.02] text-foreground;
     letter-spacing: 0;
     overflow-wrap: anywhere;
   }
 
   .generated-bento-card h2 {
-    @apply mt-3 text-[clamp(24px,2.1vw,34px)] font-normal leading-none text-foreground/80;
+    @apply text-[clamp(22px,1.8vw,28px)] font-normal leading-tight text-foreground/80;
     letter-spacing: 0;
   }
 
   .generated-bento-card p {
-    @apply mt-5 max-w-[58ch] text-[14px] font-normal leading-7 text-foreground/60;
-  }
-
-  .generated-bento-card--title {
-    @apply flex flex-col justify-center;
-  }
-
-  .generated-bento-card--title p {
-    @apply max-w-[52ch];
+    @apply max-w-[60ch] text-[14px] font-normal leading-6 text-foreground/75;
   }
 
   .generated-bento-card--hero {
-    @apply flex flex-col justify-between p-4;
+    min-height: 460px;
+    padding: 20px;
   }
 
   .generated-bento-card--hero img {
-    @apply h-[68%] min-h-0 w-full rounded-[14px] object-cover;
+    @apply w-full rounded-[18px] object-cover object-center;
+    height: 252px;
+    flex: 0 0 auto;
   }
 
   .generated-bento-card--hero div {
-    @apply px-1 pb-2 pt-4;
+    @apply flex flex-col items-start;
+    gap: 12px;
   }
 
   .generated-bento-card--hero h2 {
-    @apply text-[26px] leading-tight;
+    @apply text-[clamp(27px,2.5vw,34px)] leading-tight text-foreground/80;
   }
 
-  .generated-bento-card--hero p,
-  .generated-bento-card--hero span {
-    @apply text-foreground/50;
+  .generated-bento-card--hero p {
+    @apply max-w-[34ch] text-foreground/60;
+  }
+
+  .generated-bento-card--title {
+    min-height: 300px;
+  }
+
+  .generated-bento-card--conditions {
+    min-height: 244px;
+  }
+
+  .generated-bento-card--description {
+    min-height: 260px;
   }
 
   .generated-bento-card--where,
+  .generated-bento-card--cafe,
+  .generated-bento-card--warning {
+    min-height: 160px;
+  }
+
   .generated-bento-card--when {
-    @apply flex flex-col justify-center;
+    min-height: 220px;
   }
 
+  .generated-bento-card--bring {
+    min-height: 140px;
+  }
+
+  .generated-bento-card--description p,
   .generated-bento-card--where p,
-  .generated-bento-card--when p {
-    @apply text-[15px] leading-8;
+  .generated-bento-card--when p,
+  .generated-bento-card--cafe p,
+  .generated-bento-card--warning p {
+    @apply text-[13px] leading-6 text-foreground/75;
   }
 
-  .generated-bento-card--swatches {
-    @apply flex flex-col items-center justify-center gap-7;
+  .generated-condition-grid {
+    @apply grid w-full grid-cols-2 gap-3;
   }
 
-  .generated-bento-card--swatches div {
-    @apply grid gap-5;
+  .generated-condition-grid div {
+    @apply rounded-[14px] bg-foreground/5 px-3 py-2.5;
   }
 
-  .generated-bento-card--swatches i {
-    @apply block h-12 w-12 rounded-full;
+  .generated-condition-grid small {
+    @apply block text-[9px] font-normal leading-none text-foreground/60;
+    letter-spacing: 0.08em;
   }
 
-  .generated-bento-card--swatches i:nth-child(1) {
-    @apply bg-foreground/80;
-  }
-
-  .generated-bento-card--swatches i:nth-child(2) {
-    @apply bg-foreground/30;
-  }
-
-  .generated-bento-card--swatches i:nth-child(3) {
-    @apply bg-foreground/10;
-  }
-
-  .generated-bento-card--stat,
-  .generated-bento-card--type {
-    @apply flex flex-col justify-center;
-  }
-
-  .generated-bento-card--stat strong,
-  .generated-bento-card--type strong {
-    @apply mt-3 block truncate text-[clamp(42px,5vw,72px)] font-normal leading-none text-foreground;
-    letter-spacing: 0;
-  }
-
-  .generated-bento-card--type strong {
-    @apply text-[clamp(28px,3.6vw,58px)];
+  .generated-condition-grid strong {
+    @apply mt-2 block truncate text-[18px] font-normal leading-none text-foreground/80;
   }
 
   .generated-bento-card--map {
     @apply relative p-0;
+    height: 280px;
+    min-height: 280px;
   }
 
   .generated-bento-card--map iframe {
-    @apply h-full min-h-0 w-full border-0 grayscale;
+    @apply h-full w-full border-0 grayscale;
+    min-height: 280px;
     filter: saturate(0.7) contrast(0.95);
   }
 
   .generated-bento-card--map span {
-    @apply absolute left-4 top-4 rounded-full bg-background/90 px-3 py-1 text-foreground/50;
-  }
-
-  .generated-bento-card--cafe,
-  .generated-bento-card--conditions,
-  .generated-bento-card--warning,
-  .generated-bento-card--bring {
-    @apply flex flex-col justify-center;
-  }
-
-  .generated-bento-card--cafe p,
-  .generated-bento-card--conditions p,
-  .generated-bento-card--warning p {
-    @apply mt-4 text-[13px] leading-6;
+    @apply absolute left-4 top-4 rounded-full bg-background/90 px-3 py-1 text-foreground/70;
   }
 
   .generated-bento-card--bring div {
-    @apply mt-4 flex flex-wrap gap-2;
+    @apply flex flex-wrap gap-2;
   }
 
   .generated-bento-card--bring small {
-    @apply rounded-full bg-foreground/5 px-3 py-1.5 text-[11px] font-normal leading-none text-foreground/60;
+    @apply rounded-full bg-foreground/5 px-3 py-1.5 text-[11px] font-normal leading-none text-foreground/75;
   }
 
   .save-bar {
-    @apply fixed bottom-5 left-1/2 z-30 flex w-[min(620px,calc(100vw-32px))] -translate-x-1/2 items-center justify-between gap-4 rounded-full border border-background/60 bg-[rgb(253_254_254_/_0.92)] px-4 py-3 text-left font-mono text-foreground shadow-[0_12px_28px_rgb(0_0_0_/_0.16)] backdrop-blur-sm;
+    @apply fixed bottom-6 left-1/2 z-[90] flex w-[min(680px,calc(100vw-32px))] -translate-x-1/2 items-center justify-between gap-5 rounded-full border border-background/70 bg-background/95 px-5 py-3 text-left font-mono text-foreground shadow-[0_12px_28px_rgb(0_0_0_/_0.16)] backdrop-blur-sm;
+  }
+
+  .save-bar__copy {
+    @apply grid min-w-0 gap-1;
+  }
+
+  .save-bar__copy strong {
+    @apply text-[13px] font-normal leading-none text-foreground;
+    letter-spacing: 0.01em;
   }
 
   .save-bar p {
-    @apply m-0 text-[11px] leading-4 text-foreground/70;
+    @apply m-0 text-[11px] leading-4 text-foreground/65;
   }
 
   .save-bar span {
-    @apply text-[10px] leading-4 text-foreground/50;
+    @apply text-[10px] leading-4 text-destructive/80;
   }
 
-  .save-bar div {
+  .save-bar > div:not(.save-bar__copy) {
     @apply flex shrink-0 items-center gap-2;
   }
 

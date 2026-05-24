@@ -1,11 +1,8 @@
-import { useEffect, useRef } from "react";
-import BentoGrid from "@bentogrid/core";
 import { motion, useReducedMotion } from "framer-motion";
 
 import { getPlanBody, listItems, planText } from "@/utils/planDisplay";
 
 const LOCAL_JOURNAL_IMAGES = ["/landing-scroll.jpg", "/sydney-coast.svg", "/loading.png"];
-
 
 function validImageUrl(value) {
   return typeof value === "string" && value.trim().length > 0;
@@ -17,6 +14,39 @@ function firstValidImage(...values) {
 
 function getBeachName(plan, planBody) {
   return plan?.selected_beach_name || plan?.beach_name || plan?.beachName || planBody.where || "your beach day";
+}
+
+function getPlanTitle(plan, generationInput) {
+  const companion = String(plan?.companion || generationInput?.companion || "").toLowerCase();
+  const activity = String(plan?.activity || generationInput?.activity || "").toLowerCase();
+  const mood = String(plan?.mood_phrase || generationInput?.mood_phrase || "").toLowerCase();
+
+  if (/date|partner|romantic/.test(companion + " " + mood)) return "A low-pressure date by the water.";
+  if (/solo|alone|reset/.test(companion + " " + mood)) return "A quiet reset without making a production of it.";
+  if (/family|kids/.test(companion + " " + mood)) return "An easy beach day with room to breathe.";
+  if (/surf/.test(activity + " " + mood)) return "A proper water-first plan, conditions permitting.";
+  if (/walk/.test(activity + " " + mood)) return "A relaxed coastal wander with a swim nearby.";
+  return "A calm Sydney beach plan that actually fits today.";
+}
+
+function getHeroSubtitle(plan, generationInput) {
+  const companion = String(plan?.companion || generationInput?.companion || "").toLowerCase();
+  const activity = String(plan?.activity || generationInput?.activity || "").toLowerCase();
+  const mood = String(plan?.mood_phrase || generationInput?.mood_phrase || "").toLowerCase();
+
+  if (/date|partner|romantic/.test(companion + " " + mood)) {
+    return "A cruisy date spot with calm water, history nearby, and enough space to actually hear each other.";
+  }
+  if (/solo|alone|reset/.test(companion + " " + mood)) {
+    return "A gentle solo reset with enough quiet to properly switch off.";
+  }
+  if (/family|kids/.test(companion + " " + mood)) {
+    return "An easy family beach day with simple logistics and room to settle in.";
+  }
+  if (/surf/.test(activity + " " + mood)) {
+    return "A water-first beach plan with swell, wind, and timing doing the heavy lifting.";
+  }
+  return "A relaxed Sydney beach pick with the conditions, timing, and vibe doing the sorting.";
 }
 
 function getPlanImage(plan) {
@@ -40,8 +70,8 @@ function getFoodNote(plan, generationInput) {
     .filter(Boolean);
   const foodTag = sourceTags.find((item) => /food|cafe|coffee|bar|drink|breakfast|lunch|snack|fish|chips/i.test(item)) || sourceTags[0];
 
-  if (foodTag) return "after the water, keep the stop simple: " + foodTag + ".";
-  return "after the water, find coffee, something salty, and a shady bit of pavement to debrief.";
+  if (foodTag) return `Keep it simple: ${foodTag}. Easy, nearby, and not trying too hard.`;
+  return "Keep it simple: coffee, lunch, or something easy nearby. This is not a white-tablecloth kind of beach plan.";
 }
 
 function getMapQuery(plan, planBody, beachName) {
@@ -59,14 +89,18 @@ function interactiveProps(prefersReducedMotion, rotate = 0) {
   };
 }
 
-function shortText(value, fallback, limit = 150) {
-  const text = planText(value, fallback).replace(/\s+/g, " ").trim();
-  if (text.length <= limit) return text;
-  return text.slice(0, limit).trimEnd() + ".";
+function cleanText(value, fallback) {
+  return planText(value, fallback).replace(/\s+/g, " ").trim();
+}
+
+function conditionValue(conditions, keys, suffix = "") {
+  const key = keys.find((candidate) => conditions?.[candidate] !== null && conditions?.[candidate] !== undefined);
+  if (!key) return "n/a";
+  const value = conditions[key];
+  return `${value}${suffix}`;
 }
 
 export default function GeneratedPlanJournal({ plan, generationInput, className = "" }) {
-  const bentoRef = useRef(null);
   const planBody = getPlanBody(plan);
   const bringItems = listItems(planBody.bring);
   const prefersReducedMotion = useReducedMotion();
@@ -75,127 +109,125 @@ export default function GeneratedPlanJournal({ plan, generationInput, className 
   const cafeNote = getFoodNote(plan, generationInput);
   const mapQuery = getMapQuery(plan, planBody, beachName);
   const pop = (rotate = 0) => interactiveProps(prefersReducedMotion, rotate);
-  const summary = plan?.mood_reading?.summary || planText(planBody.why, "A clean little beach day, built around the conditions and your mood.");
-  const conditionCopy = planText(planBody.conditions_summary, "Live conditions were included in the recommendation.");
-  const warningCopy = planText(planBody.gentle_warning, "Keep an eye on the water and make the sensible call.");
-  const conditionMetric = plan?.conditions_snapshot?.temperature_c ?? plan?.conditions?.temperature_c ?? plan?.conditions?.temp_c;
-  const score = Number.isFinite(Number(plan?.score)) ? Math.round(Number(plan.score)) : null;
-  const statValue = score || (conditionMetric !== undefined && conditionMetric !== null ? Math.round(Number(conditionMetric)) : 99);
-  const statLabel = score ? "fit" : "temp";
-
-  useEffect(() => {
-    if (!bentoRef.current) return undefined;
-
-    const grid = new BentoGrid({
-      target: bentoRef.current,
-      columns: 6,
-      cellGap: 18,
-      aspectRatio: 1,
-      balanceFillers: false,
-      breakpoints: {
-        0: { columns: 1, cellGap: 12, aspectRatio: 1.45 },
-        720: { columns: 3, cellGap: 14, aspectRatio: 1.05 },
-        1120: { columns: 6, cellGap: 18, aspectRatio: 1 },
-      },
-    });
-
-    return () => {
-      grid.resizeObserver?.unobserve?.(grid.gridContainer);
-      grid.removeClonedFillers?.();
-    };
-  }, [beachName, heroImage, summary, conditionCopy, warningCopy, cafeNote, bringItems.length]);
+  const planTitle = getPlanTitle(plan, generationInput);
+  const heroSubtitle = getHeroSubtitle(plan, generationInput);
+  const summary = cleanText(
+    plan?.mood_reading?.summary || planBody.why,
+    "You’re after something gentle, relaxed, and not too chaotic. This pick gives you calm water, a decent bit of scenery, and a beach day that does not need to become a whole production.",
+  );
+  const whyCopy = cleanText(
+    planBody.why,
+    "It gives you the sweet spot: calm enough for a proper chat, scenic enough to feel like you made an effort, and relaxed enough that it does not become a big date performance.",
+  );
+  const timingCopy = cleanText(
+    planBody.when,
+    "Late afternoon is your best bet. You’ll get softer light, calmer energy, and less of the midday glare situation.",
+  );
+  const locationCopy = cleanText(
+    planBody.where,
+    `${beachName} is the call. Check your route before you leave, then keep the plan simple once you arrive.`,
+  );
+  const warningCopy = cleanText(
+    planBody.gentle_warning,
+    "Keep an eye on local conditions and respect the area around the beach. Also, UV does not care that the plan is romantic.",
+  );
+  const conditions = plan?.conditions || plan?.conditions_snapshot || {};
+  const crowdLabel = plan?.candidate_snapshot?.[0]?.crowd?.label || plan?.crowd?.label || conditions?.crowd?.label || "moderate";
+  const conditionItems = [
+    ["Temp", conditionValue(conditions, ["temperature", "temperature_c", "temp_c"], "°C")],
+    ["Waves", conditionValue(conditions, ["wave_height_m", "waves"], "m")],
+    ["Wind", conditionValue(conditions, ["wind_kmh", "windKmh"], "km/h")],
+    ["UV", conditionValue(conditions, ["uv_index", "uv"])],
+    ["Crowd", crowdLabel],
+  ];
 
   return (
     <div className={`generated-plan-journal ${className}`.trim()}>
-      <video className="generated-plan-journal__clouds" autoPlay muted loop playsInline aria-hidden="true">
-        <source src="/CloudAsset.mp4" type="video/mp4" />
-      </video>
+      <img className="generated-plan-journal__clouds" src="/Cloud2.png" alt="" aria-hidden="true" />
 
-      <section ref={bentoRef} className="generated-bento" aria-label="Generated plan details">
-        <motion.article className="generated-bento-card generated-bento-card--title" data-bento="3x2" data-bento-no-swap {...pop(0.1)}>
-          <span>digital beach journal</span>
-          <h1>{beachName}</h1>
-          <p>{shortText(summary, "A clean little beach day, built around the conditions and your mood.", 210)}</p>
-        </motion.article>
-
-        <motion.article className="generated-bento-card generated-bento-card--hero" data-bento="1x2" data-bento-no-swap {...pop(-0.2)}>
-          <img
-            src={heroImage}
-            alt={beachName + " beach"}
-            onError={(event) => {
-              event.currentTarget.src = LOCAL_JOURNAL_IMAGES[0];
-            }}
-          />
-          <div>
-            <span>main patch</span>
-            <h2>{beachName}</h2>
-          </div>
-        </motion.article>
-
-        <motion.article className="generated-bento-card generated-bento-card--where" data-bento="1x2" {...pop(0.2)}>
-          <span>where</span>
-          <h2>Patch</h2>
-          <p>{shortText(planBody.where, "No destination was included.", 125)}</p>
-        </motion.article>
-
-        <motion.article className="generated-bento-card generated-bento-card--swatches" data-bento="1x2" {...pop(-0.1)}>
-          <span>read</span>
-          <div aria-hidden="true">
-            <i />
-            <i />
-            <i />
-          </div>
-        </motion.article>
-
-        <motion.article className="generated-bento-card generated-bento-card--stat" data-bento="1x1" {...pop(0.1)}>
-          <span>{statLabel}</span>
-          <strong>{statValue}</strong>
-        </motion.article>
-
-        <motion.article className="generated-bento-card generated-bento-card--type" data-bento="1x1" {...pop(-0.1)}>
-          <span>mood</span>
-          <strong>{plan?.activity || plan?.mood_phrase || "Aa"}</strong>
-        </motion.article>
-
-        <motion.article className="generated-bento-card generated-bento-card--when" data-bento="2x2" {...pop(-0.2)}>
-          <span>when</span>
-          <h2>Timing</h2>
-          <p>{shortText(planBody.when, "No timing was included.", 150)}</p>
-        </motion.article>
-
-        <motion.article className="generated-bento-card generated-bento-card--map" data-bento="2x2" {...pop(-0.3)}>
-          <iframe
-            title={beachName + " map"}
-            src={"https://www.google.com/maps?q=" + encodeURIComponent(mapQuery) + "&output=embed"}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-          <span>map it</span>
-        </motion.article>
-
-        <motion.article className="generated-bento-card generated-bento-card--cafe" data-bento="2x1" {...pop(0.3)}>
-          <span>cafe / after</span>
-          <p>{shortText(cafeNote, "Keep the stop simple after the water.", 120)}</p>
-        </motion.article>
-
-        <motion.article className="generated-bento-card generated-bento-card--conditions" data-bento="2x1" {...pop(-0.2)}>
-          <span>conditions</span>
-          <p>{shortText(conditionCopy, "Live conditions were included.", 125)}</p>
-        </motion.article>
-
-        <motion.article className="generated-bento-card generated-bento-card--warning" data-bento="2x1" {...pop(0.2)}>
-          <span>heads up</span>
-          <p>{shortText(warningCopy, "Keep an eye on the water.", 120)}</p>
-        </motion.article>
-
-        {bringItems.length > 0 && (
-          <motion.article className="generated-bento-card generated-bento-card--bring" data-bento="2x1" {...pop(-0.2)}>
-            <span>bring</span>
+      <section className="generated-bento" aria-label="Generated plan details">
+        <div className="generated-bento-column generated-bento-column--primary">
+          <motion.article className="generated-bento-card generated-bento-card--hero" {...pop(-0.1)}>
+            <img
+              src={heroImage}
+              alt={beachName + " beach"}
+              onError={(event) => {
+                event.currentTarget.src = LOCAL_JOURNAL_IMAGES[0];
+              }}
+            />
             <div>
-              {bringItems.slice(0, 4).map((item) => <small key={item}>{item}</small>)}
+              <span>YOUR BEACH TODAY</span>
+              <h2>{beachName}</h2>
+              <p>{heroSubtitle}</p>
             </div>
           </motion.article>
-        )}
+
+          <motion.article className="generated-bento-card generated-bento-card--map" {...pop(-0.15)}>
+            <iframe
+              title={beachName + " map"}
+              src={"https://www.google.com/maps?q=" + encodeURIComponent(mapQuery) + "&output=embed"}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+            <span>OPEN MAP</span>
+          </motion.article>
+
+          <motion.article className="generated-bento-card generated-bento-card--warning" {...pop(-0.1)}>
+            <span>QUICK HEADS UP</span>
+            <p>{warningCopy}</p>
+          </motion.article>
+        </div>
+
+        <div className="generated-bento-column generated-bento-column--middle">
+          <motion.article className="generated-bento-card generated-bento-card--title" {...pop(0.1)}>
+            <span>THE PLAN</span>
+            <h1>{planTitle}</h1>
+            <p>{summary}</p>
+          </motion.article>
+
+          <motion.article className="generated-bento-card generated-bento-card--description" {...pop(0.15)}>
+            <span>WHY IT FITS</span>
+            <h2>Why this works</h2>
+            <p>{whyCopy}</p>
+          </motion.article>
+
+          <motion.article className="generated-bento-card generated-bento-card--cafe" {...pop(0.1)}>
+            <span>FOOD / AFTER</span>
+            <p>{cafeNote}</p>
+          </motion.article>
+
+          <motion.article className="generated-bento-card generated-bento-card--bring" {...pop(0.1)}>
+            <span>PACK THIS</span>
+            <div>
+              {(bringItems.length ? bringItems : ["water", "towel", "SPF"]).slice(0, 4).map((item) => <small key={item}>{item}</small>)}
+            </div>
+          </motion.article>
+        </div>
+
+        <div className="generated-bento-column generated-bento-column--secondary">
+          <motion.article className="generated-bento-card generated-bento-card--conditions" {...pop(-0.1)}>
+            <span>TODAY’S CONDITIONS</span>
+            <div className="generated-condition-grid">
+              {conditionItems.map(([label, value]) => (
+                <div key={label}>
+                  <small>{label}</small>
+                  <strong>{value}</strong>
+                </div>
+              ))}
+            </div>
+          </motion.article>
+
+          <motion.article className="generated-bento-card generated-bento-card--where" {...pop(0.1)}>
+            <span>GETTING THERE</span>
+            <p>{locationCopy}</p>
+          </motion.article>
+
+          <motion.article className="generated-bento-card generated-bento-card--when" {...pop(-0.1)}>
+            <span>BEST TIME</span>
+            <h2>Best time</h2>
+            <p>{timingCopy}</p>
+          </motion.article>
+        </div>
       </section>
     </div>
   );

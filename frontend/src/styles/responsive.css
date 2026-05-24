@@ -1,28 +1,90 @@
 @layer components {
 @media (max-width: 1180px) {
     .generated-bento {
-      @apply max-w-[1040px];
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 0.9fr);
     }
   }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
     .generated-bento {
-      @apply max-w-[720px];
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .generated-bento-column--secondary {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .generated-bento-card--conditions {
+      grid-column: 1 / -1;
     }
   }
 
 @media (max-width: 720px) {
     .result-experience,
     .plan-detail-page {
-      @apply overflow-y-auto px-3 pt-20;
+      @apply overflow-y-auto px-3 pb-40 pt-20;
     }
 
     .generated-plan-journal {
-      @apply h-auto min-h-screen items-start px-3 py-4;
+      @apply h-auto min-h-screen items-start overflow-visible px-0 py-4;
+    }
+
+    .generated-bento {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .generated-bento-column,
+    .generated-bento-column--secondary {
+      display: contents;
     }
 
     .generated-bento-card {
       @apply rounded-[22px] p-4;
+      min-height: 0;
+    }
+
+    .generated-bento-card--hero {
+      min-height: 420px;
+      order: 1;
+    }
+
+    .generated-bento-card--title {
+      order: 2;
+    }
+
+    .generated-bento-card--conditions {
+      order: 3;
+      grid-column: auto;
+    }
+
+    .generated-bento-card--description {
+      order: 4;
+    }
+
+    .generated-bento-card--where {
+      order: 5;
+    }
+
+    .generated-bento-card--when {
+      order: 6;
+    }
+
+    .generated-bento-card--map {
+      order: 7;
+    }
+
+    .generated-bento-card--cafe {
+      order: 8;
+    }
+
+    .generated-bento-card--bring {
+      order: 9;
+    }
+
+    .generated-bento-card--warning {
+      order: 10;
     }
 
     .generated-bento-card h1 {
@@ -30,7 +92,14 @@
     }
 
     .generated-bento-card--hero img {
-      @apply min-h-[190px];
+      @apply min-h-0;
+      height: 220px;
+    }
+
+    .generated-bento-card--map,
+    .generated-bento-card--map iframe {
+      height: 240px;
+      min-height: 240px;
     }
   }
 
@@ -173,7 +242,11 @@
       @apply bottom-3 w-[calc(100vw-24px)] flex-col items-stretch rounded-[16px] px-4 text-center;
     }
 
-    .save-bar div {
+    .save-bar__copy {
+      @apply text-center;
+    }
+
+    .save-bar > div:not(.save-bar__copy) {
       @apply justify-center;
     }
 
@@ -309,7 +382,7 @@
     }
 
     .plan-detail-page {
-      @apply px-4 pb-8 pt-32;
+      @apply px-4 pb-40 pt-24;
     }
 
     .mood-canvas-world {

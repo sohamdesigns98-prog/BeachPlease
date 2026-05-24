@@ -64,7 +64,8 @@
 
 .app-navbar--contrast .app-navbar__page-links span,
   .app-navbar--contrast .account-pill--user span {
-    @apply bg-white text-foreground;
+    @apply bg-foreground text-background;
+    text-shadow: none;
   }
 
 .app-navbar--contrast .audio-toggle,

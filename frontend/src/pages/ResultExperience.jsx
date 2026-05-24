@@ -18,8 +18,8 @@ export default function ResultExperience({ plan, generationInput, visible = fals
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState("");
   const [savedPlan, setSavedPlan] = useState(null);
-  const isSaved = Boolean(savedPlan || getPlanId(plan));
-  const savedPlanId = getPlanId(savedPlan || (token ? plan : null));
+  const isSaved = Boolean(savedPlan);
+  const savedPlanId = getPlanId(savedPlan);
   const showSaveBar = visible && !isSaved && !isSaveDismissed;
   const activePlan = savedPlan || plan;
 

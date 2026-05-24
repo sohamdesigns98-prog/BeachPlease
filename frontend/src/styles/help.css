@@ -1,0 +1,44 @@
+@layer components {
+  .app-navbar__control-pair {
+    @apply flex items-center gap-2;
+  }
+
+  .help-toggle {
+    @apply text-[13px] font-normal leading-none;
+  }
+
+  .how-to-use-overlay {
+    @apply fixed inset-0 z-[160] flex items-center justify-center bg-background px-6 py-16 text-foreground;
+  }
+
+  .how-to-use-overlay__content {
+    @apply w-full max-w-[620px] text-left font-mono font-normal;
+    letter-spacing: 0.045em;
+  }
+
+  .how-to-use-overlay__content h1 {
+    @apply m-0 text-[clamp(28px,4vw,46px)] font-normal leading-none text-foreground;
+    letter-spacing: 0.02em;
+  }
+
+  .how-to-use-overlay__body {
+    @apply mt-8 grid gap-4 text-[13px] leading-7 text-foreground/70;
+  }
+
+  .how-to-use-overlay__body p {
+    @apply m-0;
+  }
+
+  .how-to-use-overlay__steps {
+    @apply mt-8 grid gap-2 pl-5 text-[12px] leading-6 text-foreground/65;
+  }
+
+  .how-to-use-overlay__steps li {
+    @apply pl-1;
+  }
+
+  .how-to-use-overlay__button {
+    @apply mt-10 inline-flex h-9 min-w-[132px] items-center justify-center rounded-full border border-foreground bg-foreground px-5 text-center text-[11px] font-normal leading-none text-background shadow-none transition-transform hover:bg-foreground hover:text-background active:scale-[0.98];
+    letter-spacing: 0.08em;
+  }
+}

@@ -1,29 +1,30 @@
 @layer components {
 .saved-mode-shell {
-    @apply fixed inset-0 overflow-hidden bg-background px-11 pb-48 pt-24 text-center text-foreground;
+    @apply fixed inset-0 overflow-hidden px-11 pb-48 pt-24 text-center text-foreground;
+    background: url("/Cloud2.png") center / cover no-repeat #74bdeb;
     contain: layout paint;
   }
 
 .saved-mode-shell__heading {
-    @apply pointer-events-none mx-auto mb-4 max-w-[640px];
+    @apply pointer-events-none mx-auto mb-4 max-w-[640px] text-white;
   }
 
 .saved-mode-shell__heading p,
   .saved-muted,
   .saved-error,
   .saved-empty-state p {
-    @apply m-0 text-[10px] font-normal leading-none text-foreground/35;
+    @apply m-0 text-[10px] font-normal leading-none text-white/70;
     letter-spacing: 0.12em;
   }
 
 .saved-mode-shell__heading h1 {
-    @apply m-0 mt-2 text-[clamp(30px,3.8vw,56px)] font-normal leading-none text-foreground/75;
+    @apply m-0 mt-2 text-[clamp(30px,3.8vw,56px)] font-normal leading-none text-white;
     letter-spacing: 0.01em;
   }
 
 .saved-mode-shell__heading span,
   .saved-empty-state span {
-    @apply mx-auto mt-4 block max-w-[480px] text-[12px] font-normal leading-5 text-foreground/45;
+    @apply mx-auto mt-4 block max-w-[480px] text-[12px] font-normal leading-5 text-white/80;
   }
 
 .saved-empty-state {

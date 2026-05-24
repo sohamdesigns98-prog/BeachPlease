@@ -12,8 +12,11 @@ export default function SaveBar({
 }) {
   return (
     <aside className={`save-bar ${isSaved ? "is-saved" : ""}`} aria-live="polite">
-      <p>{isSaved ? "saved ✓" : "want to keep this? save your plan - free, takes 20 seconds."}</p>
-      {error && <span>{error}</span>}
+      <div className="save-bar__copy">
+        <strong>{isSaved ? "Plan saved" : "Keep this plan?"}</strong>
+        <p>{isSaved ? "You can open it from your saved plans." : "Save it, add notes, and replay it later with fresh conditions."}</p>
+        {error && <span>{error}</span>}
+      </div>
       {isSaved && (
         <div>
           {savedPlanId && (
@@ -35,7 +38,7 @@ export default function SaveBar({
             onClick={onDismiss}
             disabled={isSaving}
           >
-            not now
+            Not now
           </Button>
           <Button
             type="button"
@@ -43,7 +46,7 @@ export default function SaveBar({
             onClick={onSave}
             disabled={isSaving}
           >
-            {isSaving ? "saving..." : "save plan"}
+            {isSaving ? "Saving..." : "Save plan"}
           </Button>
         </div>
       )}

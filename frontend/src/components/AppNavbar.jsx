@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 
 import { CLUSTERS_CHANGED_EVENT, getClusters } from "@/api/clusters";
 import { getCachedPlans, getPlans } from "@/api/plans";
 import AudioToggle from "@/components/audio/AudioToggle";
+import HowToUseOverlay from "@/components/help/HowToUseOverlay";
 import AccountPill from "@/components/AccountPill";
 import { useAuth } from "@/context/AuthContext";
 
@@ -13,12 +15,13 @@ export default function AppNavbar() {
   const navigate = useNavigate();
   const [savedCount, setSavedCount] = useState(0);
   const [clusterCount, setClusterCount] = useState(0);
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
 
   const isExploreActive = useMemo(
     () => location.pathname.startsWith("/explore") || location.pathname.startsWith("/experience"),
     [location.pathname],
   );
-  const hasContrastNav = location.pathname.startsWith("/generated-plan") || location.pathname.startsWith("/plans/");
+  const hasContrastNav = location.pathname.startsWith("/generated-plan") || location.pathname.startsWith("/plans/") || location.pathname.startsWith("/saved-plans");
 
   useEffect(() => {
     let cancelled = false;
@@ -68,7 +71,18 @@ export default function AppNavbar() {
         <button type="button" className="app-navbar__mark" onClick={() => navigate("/explore/canvas")} aria-label="Go to explore">
           BeachPlease
         </button>
-        <AudioToggle />
+        <div className="app-navbar__control-pair">
+          <AudioToggle />
+          <button
+            type="button"
+            className="audio-toggle help-toggle"
+            aria-label="How to use BeachPlease"
+            title="How to use BeachPlease"
+            onClick={() => setIsHelpOpen(true)}
+          >
+            ?
+          </button>
+        </div>
       </div>
       <div className="app-navbar__right">
         <nav className="app-navbar__page-links" aria-label="Saved beach pages">
@@ -91,6 +105,9 @@ export default function AppNavbar() {
         </nav>
         <AccountPill />
       </div>
+      <AnimatePresence>
+        {isHelpOpen && <HowToUseOverlay onClose={() => setIsHelpOpen(false)} />}
+      </AnimatePresence>
     </header>
   );
 }
