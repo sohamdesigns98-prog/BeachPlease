@@ -1,8 +1,8 @@
 # BeachPlease Internet Programming Assesment
 
-Soham Mundhe | 25966209
-Nguyen Quang Tu | 26139333
-Mrinal Parashar | 26048254
+Soham Mundhe 25966209 |
+Nguyen Quang Tu 26139333 |
+Mrinal Parashar 26048254
 
 BeachPlease is a canvas-first Sydney beach recommendation app. It helps users choose and plan a Sydney beach day through a visual beach canvas, live conditions, an interactive coastal map, Gemini-generated plans, saved plan management, and an admin dashboard for managing the underlying data.
 
