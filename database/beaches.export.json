@@ -1,0 +1,2547 @@
+[
+  {
+    "_id": "69fc84844b6e6047f9fb493c",
+    "slug": "bondi-beach",
+    "access_tags": [
+      "bus",
+      "paid_parking",
+      "coastal_walk"
+    ],
+    "accessibility": "easy",
+    "attribution": "Bondi Beach photo by Dietmar Rabich, CC BY-SA 4.0, via Wikimedia Commons",
+    "avoid_when": [
+      "big crowds",
+      "rough surf"
+    ],
+    "best_for": [
+      "surfing",
+      "people watching",
+      "cafes"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "high",
+    "dog_access": "restricted",
+    "exposure": "exposed",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards",
+      "cafes"
+    ],
+    "ideal_times": [
+      "early_morning",
+      "sunset"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Sydney_%28AU%29%2C_Bondi_Beach_--_2019_--_2349.jpg/960px-Sydney_%28AU%29%2C_Bondi_Beach_--_2019_--_2349.jpg",
+    "lat": -33.8915,
+    "lng": 151.2767,
+    "map_x": 73,
+    "map_y": 55,
+    "name": "Bondi Beach",
+    "region": "Eastern Suburbs",
+    "suburb": "Bondi Beach",
+    "surf_suitability": "high",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "iconic",
+      "busy",
+      "surf"
+    ],
+    "walk_suitability": "high",
+    "water_type": "ocean",
+    "image_license": "CC BY-SA 4.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Sydney_(AU),_Bondi_Beach_--_2019_--_2349.jpg"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb493d",
+    "slug": "tamarama-beach",
+    "access_tags": [
+      "bus",
+      "coastal_walk"
+    ],
+    "accessibility": "moderate",
+    "attribution": "Tamarama Beach photo by MDRX, CC BY-SA 4.0, via Wikimedia Commons",
+    "avoid_when": [
+      "dangerous surf",
+      "crowded weekends"
+    ],
+    "best_for": [
+      "sunbathing",
+      "coastal walk",
+      "quick swims"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "high",
+    "dog_access": "restricted",
+    "exposure": "exposed",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards"
+    ],
+    "ideal_times": [
+      "morning",
+      "late_afternoon"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Tamarama_Beach_Sydney_2019_01.jpg/960px-Tamarama_Beach_Sydney_2019_01.jpg",
+    "lat": -33.8983,
+    "lng": 151.2719,
+    "map_x": 72,
+    "map_y": 57,
+    "name": "Tamarama Beach",
+    "region": "Eastern Suburbs",
+    "suburb": "Tamarama",
+    "surf_suitability": "medium",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "compact",
+      "dramatic",
+      "local"
+    ],
+    "walk_suitability": "high",
+    "water_type": "ocean",
+    "image_license": "CC BY-SA 4.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Tamarama_Beach_Sydney_2019_01.jpg"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb493e",
+    "slug": "bronte-beach",
+    "access_tags": [
+      "bus",
+      "paid_parking",
+      "coastal_walk"
+    ],
+    "accessibility": "easy",
+    "attribution": "Bronte Beach photo by DXR, CC BY-SA 4.0, via Wikimedia Commons",
+    "avoid_when": [
+      "large swell",
+      "parking pressure"
+    ],
+    "best_for": [
+      "families",
+      "ocean pool",
+      "picnics"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "high",
+    "dog_access": "restricted",
+    "exposure": "semi_protected",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards",
+      "bbq",
+      "park"
+    ],
+    "ideal_times": [
+      "morning",
+      "weekday"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Bronte_Beach%2C_north_view_20230224_2.jpg/960px-Bronte_Beach%2C_north_view_20230224_2.jpg",
+    "lat": -33.9019,
+    "lng": 151.2682,
+    "map_x": 71,
+    "map_y": 58,
+    "name": "Bronte Beach",
+    "region": "Eastern Suburbs",
+    "suburb": "Bronte",
+    "surf_suitability": "medium",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "family",
+      "picnic",
+      "ocean pool"
+    ],
+    "walk_suitability": "high",
+    "water_type": "ocean",
+    "image_license": "CC BY-SA 4.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Bronte_Beach,_north_view_20230224_2.jpg"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb493f",
+    "slug": "clovelly-beach",
+    "access_tags": [
+      "bus",
+      "parking",
+      "coastal_walk"
+    ],
+    "accessibility": "easy",
+    "attribution": "Clovelly Beach photo by J Bar, CC BY 3.0, via Wikimedia Commons",
+    "avoid_when": [
+      "after heavy rain"
+    ],
+    "best_for": [
+      "snorkelling",
+      "calm swims",
+      "kids"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards",
+      "kiosk"
+    ],
+    "ideal_times": [
+      "morning",
+      "midday"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Clovelly_1.JPG/960px-Clovelly_1.JPG",
+    "lat": -33.9123,
+    "lng": 151.2665,
+    "map_x": 70,
+    "map_y": 61,
+    "name": "Clovelly Beach",
+    "region": "Eastern Suburbs",
+    "suburb": "Clovelly",
+    "surf_suitability": "low",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "protected",
+      "snorkel",
+      "family"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "bay",
+    "image_license": "CC BY 3.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Clovelly_1.JPG"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb4940",
+    "slug": "gordons-bay",
+    "access_tags": [
+      "bus",
+      "coastal_walk"
+    ],
+    "accessibility": "moderate",
+    "attribution": "Gordons Bay photo by Tea and Toast, CC BY-SA 3.0, via Wikimedia Commons",
+    "avoid_when": [
+      "large swell",
+      "mobility needs"
+    ],
+    "best_for": [
+      "snorkelling",
+      "floating",
+      "romantic swims"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "nearby_toilets"
+    ],
+    "ideal_times": [
+      "morning"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gordons_Bay%2C_Sydney_panorama.JPG/960px-Gordons_Bay%2C_Sydney_panorama.JPG",
+    "lat": -33.9169,
+    "lng": 151.2662,
+    "map_x": 70,
+    "map_y": 62,
+    "name": "Gordons Bay",
+    "region": "Eastern Suburbs",
+    "suburb": "Coogee",
+    "surf_suitability": "low",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "snorkel",
+      "rocky",
+      "quiet"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "bay",
+    "image_license": "CC BY-SA 3.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Gordons_Bay,_Sydney_panorama.JPG"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb4941",
+    "slug": "coogee-beach",
+    "access_tags": [
+      "bus",
+      "paid_parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Coogee Beach photo by Simposydney, CC BY-SA 4.0, via Wikimedia Commons",
+    "avoid_when": [
+      "crowded summer days"
+    ],
+    "best_for": [
+      "families",
+      "cafes",
+      "safe swimming"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "high",
+    "dog_access": "restricted",
+    "exposure": "semi_protected",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards",
+      "cafes",
+      "park"
+    ],
+    "ideal_times": [
+      "morning",
+      "evening"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Coogee_Beach_NSW.jpg/960px-Coogee_Beach_NSW.jpg",
+    "lat": -33.9205,
+    "lng": 151.2588,
+    "map_x": 69,
+    "map_y": 63,
+    "name": "Coogee Beach",
+    "region": "Eastern Suburbs",
+    "suburb": "Coogee",
+    "surf_suitability": "medium",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "family",
+      "social",
+      "cafes"
+    ],
+    "walk_suitability": "high",
+    "water_type": "ocean",
+    "image_license": "CC BY-SA 4.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Coogee_Beach_NSW.jpg"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb4942",
+    "slug": "maroubra-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Maroubra Beach photo by Nick-D, CC BY-SA 4.0, via Wikimedia Commons",
+    "avoid_when": [
+      "strong rips"
+    ],
+    "best_for": [
+      "surfing",
+      "long walks",
+      "space"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "exposed",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards",
+      "cafes"
+    ],
+    "ideal_times": [
+      "early_morning",
+      "late_afternoon"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Maroubra_Beach_May_2023.jpg/960px-Maroubra_Beach_May_2023.jpg",
+    "lat": -33.9502,
+    "lng": 151.2593,
+    "map_x": 69,
+    "map_y": 69,
+    "name": "Maroubra Beach",
+    "region": "Eastern Suburbs",
+    "suburb": "Maroubra",
+    "surf_suitability": "high",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "wide",
+      "surf",
+      "local"
+    ],
+    "walk_suitability": "high",
+    "water_type": "ocean",
+    "image_license": "CC BY-SA 4.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Maroubra_Beach_May_2023.jpg"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb4943",
+    "slug": "malabar-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "after heavy rain"
+    ],
+    "best_for": [
+      "calm swims",
+      "kids",
+      "low key days"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "low",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "toilets",
+      "showers",
+      "park"
+    ],
+    "ideal_times": [
+      "mid_morning",
+      "afternoon"
+    ],
+    "image_url": "",
+    "lat": -33.9637,
+    "lng": 151.2503,
+    "map_x": 67,
+    "map_y": 72,
+    "name": "Malabar Beach",
+    "region": "Eastern Suburbs",
+    "suburb": "Malabar",
+    "surf_suitability": "low",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "calm",
+      "local",
+      "family"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "bay"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb4944",
+    "slug": "little-bay-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "moderate",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "limited parking"
+    ],
+    "best_for": [
+      "calm swims",
+      "snorkelling",
+      "quiet dates"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "toilets",
+      "showers"
+    ],
+    "ideal_times": [
+      "morning",
+      "weekday"
+    ],
+    "image_url": "",
+    "lat": -33.9797,
+    "lng": 151.2516,
+    "map_x": 68,
+    "map_y": 75,
+    "name": "Little Bay Beach",
+    "region": "Eastern Suburbs",
+    "suburb": "Little Bay",
+    "surf_suitability": "low",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "scenic",
+      "protected",
+      "hidden"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "bay"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb4945",
+    "slug": "la-perouse-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "strong wind"
+    ],
+    "best_for": [
+      "history walks",
+      "calm water",
+      "families"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "toilets",
+      "cafes",
+      "parking"
+    ],
+    "ideal_times": [
+      "morning",
+      "sunset"
+    ],
+    "image_url": "",
+    "lat": -33.9891,
+    "lng": 151.2312,
+    "map_x": 63,
+    "map_y": 77,
+    "name": "La Perouse Beach",
+    "region": "Eastern Suburbs",
+    "suburb": "La Perouse",
+    "surf_suitability": "low",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "heritage",
+      "calm",
+      "walks"
+    ],
+    "walk_suitability": "high",
+    "water_type": "bay"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb4946",
+    "slug": "milk-beach",
+    "access_tags": [
+      "bus",
+      "walking_track"
+    ],
+    "accessibility": "moderate",
+    "attribution": "Milk Beach photo by -wuppertaler, CC BY 4.0, via Wikimedia Commons",
+    "avoid_when": [
+      "high tide",
+      "limited shade"
+    ],
+    "best_for": [
+      "harbour views",
+      "dates",
+      "picnics"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "nearby_toilets"
+    ],
+    "ideal_times": [
+      "sunrise",
+      "weekday"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/AUS_Sydney%2C_Woollahra%2C_Milk_Beach_001.jpg/960px-AUS_Sydney%2C_Woollahra%2C_Milk_Beach_001.jpg",
+    "lat": -33.8537,
+    "lng": 151.2711,
+    "map_x": 72,
+    "map_y": 47,
+    "name": "Milk Beach",
+    "region": "Harbour",
+    "suburb": "Vaucluse",
+    "surf_suitability": "low",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "harbour",
+      "views",
+      "boutique"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "harbour",
+    "image_license": "CC BY 4.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:AUS_Sydney,_Woollahra,_Milk_Beach_001.jpg"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb4947",
+    "slug": "shark-beach",
+    "access_tags": [
+      "bus",
+      "paid_parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Shark Beach area photo by Poyt448, CC0, via Wikimedia Commons",
+    "avoid_when": [
+      "crowded weekends"
+    ],
+    "best_for": [
+      "families",
+      "calm swimming",
+      "picnics"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "high",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "toilets",
+      "showers",
+      "kiosk",
+      "netted_swim_area"
+    ],
+    "ideal_times": [
+      "morning",
+      "weekday"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Nielsen_Park_Port_Jackson.JPG/960px-Nielsen_Park_Port_Jackson.JPG",
+    "lat": -33.8522,
+    "lng": 151.2677,
+    "map_x": 71,
+    "map_y": 47,
+    "name": "Shark Beach",
+    "region": "Harbour",
+    "suburb": "Vaucluse",
+    "surf_suitability": "low",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "harbour",
+      "family",
+      "netted"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "harbour",
+    "image_license": "CC0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Nielsen_Park_Port_Jackson.JPG"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb4948",
+    "slug": "camp-cove",
+    "access_tags": [
+      "ferry",
+      "bus",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Camp Cove photo by Martinvl, CC BY-SA 4.0, via Wikimedia Commons",
+    "avoid_when": [
+      "parking pressure"
+    ],
+    "best_for": [
+      "sunset",
+      "calm swims",
+      "families"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "high",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "toilets",
+      "showers",
+      "kiosk"
+    ],
+    "ideal_times": [
+      "morning",
+      "sunset"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Camp_Cove%2C_Sydney.jpg/960px-Camp_Cove%2C_Sydney.jpg",
+    "lat": -33.8414,
+    "lng": 151.2816,
+    "map_x": 75,
+    "map_y": 45,
+    "name": "Camp Cove",
+    "region": "Harbour",
+    "suburb": "Watsons Bay",
+    "surf_suitability": "low",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "harbour",
+      "sunset",
+      "calm"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "harbour",
+    "image_license": "CC BY-SA 4.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Camp_Cove,_Sydney.jpg"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb4949",
+    "slug": "lady-bay-beach",
+    "access_tags": [
+      "ferry",
+      "walking_track"
+    ],
+    "accessibility": "moderate",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "limited access",
+      "family facilities needed"
+    ],
+    "best_for": [
+      "quiet swims",
+      "views"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "nearby_toilets"
+    ],
+    "ideal_times": [
+      "midday",
+      "weekday"
+    ],
+    "image_url": "",
+    "lat": -33.8338,
+    "lng": 151.2808,
+    "map_x": 75,
+    "map_y": 43,
+    "name": "Lady Bay Beach",
+    "region": "Harbour",
+    "suburb": "Watsons Bay",
+    "surf_suitability": "low",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "secluded",
+      "harbour",
+      "clothing_optional"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "harbour"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb494a",
+    "slug": "nielsen-park-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Nielsen Park photo by Sardaka, CC BY-SA 4.0, via Wikimedia Commons",
+    "avoid_when": [
+      "peak weekend crowds"
+    ],
+    "best_for": [
+      "picnics",
+      "families",
+      "calm swims"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "high",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "toilets",
+      "showers",
+      "kiosk",
+      "park"
+    ],
+    "ideal_times": [
+      "early_morning",
+      "weekday"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/%281%29Nielsen_Park_Sydney.jpg/960px-%281%29Nielsen_Park_Sydney.jpg",
+    "lat": -33.8512,
+    "lng": 151.2686,
+    "map_x": 71,
+    "map_y": 47,
+    "name": "Nielsen Park Beach",
+    "region": "Harbour",
+    "suburb": "Vaucluse",
+    "surf_suitability": "low",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "classic",
+      "harbour",
+      "family"
+    ],
+    "walk_suitability": "high",
+    "water_type": "harbour",
+    "image_license": "CC BY-SA 4.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:(1)Nielsen_Park_Sydney.jpg"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb494b",
+    "slug": "balmoral-beach",
+    "access_tags": [
+      "bus",
+      "paid_parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Balmoral Beach photo by Kate Branch, CC BY-SA 4.0, via Wikimedia Commons",
+    "avoid_when": [
+      "parking pressure"
+    ],
+    "best_for": [
+      "families",
+      "stand up paddle",
+      "long lunches"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "high",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "toilets",
+      "showers",
+      "cafes",
+      "playground"
+    ],
+    "ideal_times": [
+      "morning",
+      "weekday"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Balmoral_Beach_by_Kate_Branch.jpg/960px-Balmoral_Beach_by_Kate_Branch.jpg",
+    "lat": -33.8252,
+    "lng": 151.2524,
+    "map_x": 68,
+    "map_y": 40,
+    "name": "Balmoral Beach",
+    "region": "Lower North Shore",
+    "suburb": "Mosman",
+    "surf_suitability": "low",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "calm",
+      "family",
+      "cafes"
+    ],
+    "walk_suitability": "high",
+    "water_type": "harbour",
+    "image_license": "CC BY-SA 4.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Balmoral_Beach_by_Kate_Branch.jpg"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb494c",
+    "slug": "chinamans-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "limited cafes"
+    ],
+    "best_for": [
+      "picnics",
+      "calm swims",
+      "kids"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "toilets",
+      "park"
+    ],
+    "ideal_times": [
+      "morning",
+      "afternoon"
+    ],
+    "image_url": "",
+    "lat": -33.8172,
+    "lng": 151.2485,
+    "map_x": 67,
+    "map_y": 39,
+    "name": "Chinamans Beach",
+    "region": "Lower North Shore",
+    "suburb": "Mosman",
+    "surf_suitability": "low",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "quiet",
+      "harbour",
+      "family"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "harbour"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb494d",
+    "slug": "clifton-gardens",
+    "access_tags": [
+      "bus",
+      "paid_parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "parking pressure"
+    ],
+    "best_for": [
+      "families",
+      "jetty walks",
+      "calm swims"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "high",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "toilets",
+      "bbq",
+      "playground",
+      "netted_swim_area"
+    ],
+    "ideal_times": [
+      "morning"
+    ],
+    "image_url": "",
+    "lat": -33.8408,
+    "lng": 151.2568,
+    "map_x": 69,
+    "map_y": 44,
+    "name": "Clifton Gardens",
+    "region": "Lower North Shore",
+    "suburb": "Mosman",
+    "surf_suitability": "low",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "netted",
+      "family",
+      "picnic"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "harbour"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb494e",
+    "slug": "obelisk-beach",
+    "access_tags": [
+      "walking_track"
+    ],
+    "accessibility": "moderate",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "limited facilities"
+    ],
+    "best_for": [
+      "quiet swims",
+      "views"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "low",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "nearby_toilets"
+    ],
+    "ideal_times": [
+      "midday",
+      "weekday"
+    ],
+    "image_url": "",
+    "lat": -33.8327,
+    "lng": 151.2676,
+    "map_x": 72,
+    "map_y": 42,
+    "name": "Obelisk Beach",
+    "region": "Lower North Shore",
+    "suburb": "Mosman",
+    "surf_suitability": "low",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "secluded",
+      "harbour",
+      "clothing_optional"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "harbour"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb494f",
+    "slug": "cobblers-beach",
+    "access_tags": [
+      "walking_track"
+    ],
+    "accessibility": "moderate",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "limited facilities"
+    ],
+    "best_for": [
+      "quiet swims",
+      "bush walks",
+      "views"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "low",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "nearby_toilets"
+    ],
+    "ideal_times": [
+      "morning",
+      "weekday"
+    ],
+    "image_url": "",
+    "lat": -33.8268,
+    "lng": 151.2707,
+    "map_x": 73,
+    "map_y": 41,
+    "name": "Cobblers Beach",
+    "region": "Lower North Shore",
+    "suburb": "Mosman",
+    "surf_suitability": "low",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "secluded",
+      "bushland",
+      "harbour"
+    ],
+    "walk_suitability": "high",
+    "water_type": "harbour"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb4950",
+    "slug": "manly-beach",
+    "access_tags": [
+      "ferry",
+      "bus",
+      "paid_parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Manly Beach photo by Maksym Kozlenko, CC BY-SA 4.0, via Wikimedia Commons",
+    "avoid_when": [
+      "big crowds",
+      "strong rips"
+    ],
+    "best_for": [
+      "surfing",
+      "cafes",
+      "day trips"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "high",
+    "dog_access": "restricted",
+    "exposure": "exposed",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards",
+      "cafes"
+    ],
+    "ideal_times": [
+      "early_morning",
+      "evening"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/2020-10-24_Manly_Beach_3.jpg/960px-2020-10-24_Manly_Beach_3.jpg",
+    "lat": -33.7969,
+    "lng": 151.2873,
+    "map_x": 76,
+    "map_y": 34,
+    "name": "Manly Beach",
+    "region": "Northern Beaches",
+    "suburb": "Manly",
+    "surf_suitability": "high",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "iconic",
+      "surf",
+      "social"
+    ],
+    "walk_suitability": "high",
+    "water_type": "ocean",
+    "image_license": "CC BY-SA 4.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:2020-10-24_Manly_Beach_3.jpg"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb4951",
+    "slug": "shelly-beach-manly",
+    "access_tags": [
+      "ferry",
+      "walking_track"
+    ],
+    "accessibility": "easy",
+    "attribution": "Shelly Beach photo by Hardlinerr, CC BY-SA 4.0, via Wikimedia Commons",
+    "avoid_when": [
+      "crowded weekends"
+    ],
+    "best_for": [
+      "snorkelling",
+      "calm swims",
+      "walks"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "high",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "toilets",
+      "showers",
+      "kiosk"
+    ],
+    "ideal_times": [
+      "morning",
+      "weekday"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Looking_over_Shelly_Beach_and_Cabbage_Tree_Bay_in_Sydney.jpg/960px-Looking_over_Shelly_Beach_and_Cabbage_Tree_Bay_in_Sydney.jpg",
+    "lat": -33.8008,
+    "lng": 151.2988,
+    "map_x": 79,
+    "map_y": 35,
+    "name": "Shelly Beach",
+    "region": "Northern Beaches",
+    "suburb": "Manly",
+    "surf_suitability": "low",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "snorkel",
+      "protected",
+      "scenic"
+    ],
+    "walk_suitability": "high",
+    "water_type": "cove",
+    "image_license": "CC BY-SA 4.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Looking_over_Shelly_Beach_and_Cabbage_Tree_Bay_in_Sydney.jpg"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb4952",
+    "slug": "freshwater-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Freshwater Beach photo by Mhsb, Public domain, via Wikimedia Commons",
+    "avoid_when": [
+      "large swell"
+    ],
+    "best_for": [
+      "surfing",
+      "families",
+      "ocean pool"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "semi_protected",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards",
+      "kiosk"
+    ],
+    "ideal_times": [
+      "morning"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Freshwater_beach_NSW.jpg/960px-Freshwater_beach_NSW.jpg",
+    "lat": -33.7799,
+    "lng": 151.2907,
+    "map_x": 77,
+    "map_y": 31,
+    "name": "Freshwater Beach",
+    "region": "Northern Beaches",
+    "suburb": "Freshwater",
+    "surf_suitability": "high",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "surf",
+      "family",
+      "local"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "ocean",
+    "image_license": "Public domain",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Freshwater_beach_NSW.jpg"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb4953",
+    "slug": "curl-curl-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "strong rips"
+    ],
+    "best_for": [
+      "surfing",
+      "long walks",
+      "space"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "exposed",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards"
+    ],
+    "ideal_times": [
+      "early_morning",
+      "late_afternoon"
+    ],
+    "image_url": "",
+    "lat": -33.7683,
+    "lng": 151.2964,
+    "map_x": 78,
+    "map_y": 29,
+    "name": "Curl Curl Beach",
+    "region": "Northern Beaches",
+    "suburb": "Curl Curl",
+    "surf_suitability": "high",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "wide",
+      "surf",
+      "space"
+    ],
+    "walk_suitability": "high",
+    "water_type": "ocean"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb4954",
+    "slug": "dee-why-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Dee Why Beach photo by AvaPine123, CC BY-SA 4.0, via Wikimedia Commons",
+    "avoid_when": [
+      "busy weekends"
+    ],
+    "best_for": [
+      "families",
+      "cafes",
+      "ocean pool"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "high",
+    "dog_access": "restricted",
+    "exposure": "semi_protected",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards",
+      "cafes",
+      "ocean_pool"
+    ],
+    "ideal_times": [
+      "morning",
+      "weekday"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Dee_Why_Beach%2C_Sydney_2019.jpg/960px-Dee_Why_Beach%2C_Sydney_2019.jpg",
+    "lat": -33.7524,
+    "lng": 151.2966,
+    "map_x": 78,
+    "map_y": 26,
+    "name": "Dee Why Beach",
+    "region": "Northern Beaches",
+    "suburb": "Dee Why",
+    "surf_suitability": "medium",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "family",
+      "cafes",
+      "surf"
+    ],
+    "walk_suitability": "high",
+    "water_type": "ocean",
+    "image_license": "CC BY-SA 4.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Dee_Why_Beach,_Sydney_2019.jpg"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb4955",
+    "slug": "long-reef-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "moderate",
+    "attribution": "Long Reef Beach photo by Dietmar Rabich, CC BY-SA 4.0, via Wikimedia Commons",
+    "avoid_when": [
+      "strong wind",
+      "large swell"
+    ],
+    "best_for": [
+      "headland walks",
+      "surfing",
+      "space"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "exposed",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards"
+    ],
+    "ideal_times": [
+      "morning",
+      "sunset"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Sydney_%28AU%29%2C_Long_Reef_Beach_--_2019_--_2616.jpg/960px-Sydney_%28AU%29%2C_Long_Reef_Beach_--_2019_--_2616.jpg",
+    "lat": -33.7398,
+    "lng": 151.3106,
+    "map_x": 81,
+    "map_y": 24,
+    "name": "Long Reef Beach",
+    "region": "Northern Beaches",
+    "suburb": "Collaroy",
+    "surf_suitability": "high",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "wild",
+      "walks",
+      "surf"
+    ],
+    "walk_suitability": "high",
+    "water_type": "ocean",
+    "image_license": "CC BY-SA 4.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Sydney_(AU),_Long_Reef_Beach_--_2019_--_2616.jpg"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb4956",
+    "slug": "collaroy-beach",
+    "access_tags": [
+      "bus",
+      "parking",
+      "accessible"
+    ],
+    "accessibility": "easy",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "erosion events",
+      "big swell"
+    ],
+    "best_for": [
+      "families",
+      "accessible visits",
+      "swimming"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "semi_protected",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards",
+      "cafes"
+    ],
+    "ideal_times": [
+      "morning",
+      "afternoon"
+    ],
+    "image_url": "",
+    "lat": -33.7315,
+    "lng": 151.3028,
+    "map_x": 79,
+    "map_y": 23,
+    "name": "Collaroy Beach",
+    "region": "Northern Beaches",
+    "suburb": "Collaroy",
+    "surf_suitability": "medium",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "family",
+      "accessible",
+      "calmer"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "ocean"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb4957",
+    "slug": "narrabeen-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "North Narrabeen photo by Poyt448, Public domain, via Wikimedia Commons",
+    "avoid_when": [
+      "strong rips"
+    ],
+    "best_for": [
+      "surfing",
+      "long walks",
+      "space"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "exposed",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards"
+    ],
+    "ideal_times": [
+      "early_morning"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/North_Narrabeen_sand.JPG/960px-North_Narrabeen_sand.JPG",
+    "lat": -33.7139,
+    "lng": 151.3034,
+    "map_x": 79,
+    "map_y": 20,
+    "name": "Narrabeen Beach",
+    "region": "Northern Beaches",
+    "suburb": "Narrabeen",
+    "surf_suitability": "high",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "long",
+      "surf",
+      "local"
+    ],
+    "walk_suitability": "high",
+    "water_type": "ocean",
+    "image_license": "Public domain",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:North_Narrabeen_sand.JPG"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb4958",
+    "slug": "warriewood-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "moderate",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "large swell"
+    ],
+    "best_for": [
+      "surfing",
+      "quiet swims",
+      "families"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "semi_protected",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards"
+    ],
+    "ideal_times": [
+      "morning"
+    ],
+    "image_url": "",
+    "lat": -33.6958,
+    "lng": 151.3095,
+    "map_x": 80,
+    "map_y": 17,
+    "name": "Warriewood Beach",
+    "region": "Northern Beaches",
+    "suburb": "Warriewood",
+    "surf_suitability": "high",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "compact",
+      "local",
+      "surf"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "ocean"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb4959",
+    "slug": "mona-vale-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Mona Vale Beach photo from Panoramio archive, CC BY 3.0, via Wikimedia Commons",
+    "avoid_when": [
+      "strong rips"
+    ],
+    "best_for": [
+      "ocean pool",
+      "surfing",
+      "families"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "exposed",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards",
+      "ocean_pool"
+    ],
+    "ideal_times": [
+      "morning",
+      "weekday"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Mona_Vale_Beach_-_panoramio_%281%29.jpg/960px-Mona_Vale_Beach_-_panoramio_%281%29.jpg",
+    "lat": -33.6771,
+    "lng": 151.3144,
+    "map_x": 81,
+    "map_y": 14,
+    "name": "Mona Vale Beach",
+    "region": "Northern Beaches",
+    "suburb": "Mona Vale",
+    "surf_suitability": "high",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "ocean pool",
+      "surf",
+      "family"
+    ],
+    "walk_suitability": "high",
+    "water_type": "ocean",
+    "image_license": "CC BY 3.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Mona_Vale_Beach_-_panoramio_(1).jpg"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb495a",
+    "slug": "bungan-beach",
+    "access_tags": [
+      "street_parking",
+      "stairs"
+    ],
+    "accessibility": "difficult",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "difficult access",
+      "large swell"
+    ],
+    "best_for": [
+      "quiet walks",
+      "surfing",
+      "space"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "low",
+    "dog_access": "restricted",
+    "exposure": "exposed",
+    "facilities": [
+      "limited_facilities"
+    ],
+    "ideal_times": [
+      "morning"
+    ],
+    "image_url": "",
+    "lat": -33.6674,
+    "lng": 151.3214,
+    "map_x": 82,
+    "map_y": 12,
+    "name": "Bungan Beach",
+    "region": "Northern Beaches",
+    "suburb": "Newport",
+    "surf_suitability": "high",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "secluded",
+      "surf",
+      "dramatic"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "ocean"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb495b",
+    "slug": "newport-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Newport Beach photo by Winston M. Yang, CC BY-SA 3.0, via Wikimedia Commons",
+    "avoid_when": [
+      "strong rips"
+    ],
+    "best_for": [
+      "surfing",
+      "cafes",
+      "families"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "exposed",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards",
+      "cafes"
+    ],
+    "ideal_times": [
+      "morning",
+      "late_afternoon"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/NewportBeachNSW.jpg/960px-NewportBeachNSW.jpg",
+    "lat": -33.6569,
+    "lng": 151.3217,
+    "map_x": 82,
+    "map_y": 10,
+    "name": "Newport Beach",
+    "region": "Northern Beaches",
+    "suburb": "Newport",
+    "surf_suitability": "high",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "surf",
+      "village",
+      "family"
+    ],
+    "walk_suitability": "high",
+    "water_type": "ocean",
+    "image_license": "CC BY-SA 3.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:NewportBeachNSW.jpg"
+  },
+  {
+    "_id": "69fc84844b6e6047f9fb495c",
+    "slug": "bilgola-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "moderate",
+    "attribution": "Bilgola Beach photo from Panoramio archive, CC BY 3.0, via Wikimedia Commons",
+    "avoid_when": [
+      "limited parking"
+    ],
+    "best_for": [
+      "ocean pool",
+      "surfing",
+      "quiet mornings"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "semi_protected",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards",
+      "ocean_pool"
+    ],
+    "ideal_times": [
+      "morning"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Bilgola_Beach_-_panoramio.jpg/960px-Bilgola_Beach_-_panoramio.jpg",
+    "lat": -33.6456,
+    "lng": 151.328,
+    "map_x": 83,
+    "map_y": 8,
+    "name": "Bilgola Beach",
+    "region": "Northern Beaches",
+    "suburb": "Bilgola Beach",
+    "surf_suitability": "high",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "village",
+      "ocean pool",
+      "surf"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "ocean",
+    "image_license": "CC BY 3.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Bilgola_Beach_-_panoramio.jpg"
+  },
+  {
+    "_id": "69fc84854b6e6047f9fb495d",
+    "slug": "avalon-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Avalon Beach photo by Adam.J.W.C., CC BY 3.0, via Wikimedia Commons",
+    "avoid_when": [
+      "large swell"
+    ],
+    "best_for": [
+      "surfing",
+      "cafes",
+      "local days"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "exposed",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards",
+      "cafes"
+    ],
+    "ideal_times": [
+      "morning",
+      "sunset"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Avalon%2Cnew_south_wales.jpg/960px-Avalon%2Cnew_south_wales.jpg",
+    "lat": -33.6374,
+    "lng": 151.3317,
+    "map_x": 84,
+    "map_y": 7,
+    "name": "Avalon Beach",
+    "region": "Northern Beaches",
+    "suburb": "Avalon Beach",
+    "surf_suitability": "high",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "village",
+      "surf",
+      "relaxed"
+    ],
+    "walk_suitability": "high",
+    "water_type": "ocean",
+    "image_license": "CC BY 3.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Avalon,new_south_wales.jpg"
+  },
+  {
+    "_id": "69fc84854b6e6047f9fb495e",
+    "slug": "whale-beach",
+    "access_tags": [
+      "parking"
+    ],
+    "accessibility": "moderate",
+    "attribution": "Whale Beach photo by Sardaka, CC BY-SA 4.0, via Wikimedia Commons",
+    "avoid_when": [
+      "strong rips",
+      "limited public transport"
+    ],
+    "best_for": [
+      "surfing",
+      "romantic walks",
+      "space"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "exposed",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards"
+    ],
+    "ideal_times": [
+      "morning"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/%281%29Whale_Beach_from_Rayner_Road.jpg/960px-%281%29Whale_Beach_from_Rayner_Road.jpg",
+    "lat": -33.6125,
+    "lng": 151.3318,
+    "map_x": 84,
+    "map_y": 4,
+    "name": "Whale Beach",
+    "region": "Northern Beaches",
+    "suburb": "Whale Beach",
+    "surf_suitability": "high",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "scenic",
+      "surf",
+      "quiet"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "ocean",
+    "image_license": "CC BY-SA 4.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:(1)Whale_Beach_from_Rayner_Road.jpg"
+  },
+  {
+    "_id": "69fc84854b6e6047f9fb495f",
+    "slug": "palm-beach",
+    "access_tags": [
+      "bus",
+      "parking",
+      "walking_track"
+    ],
+    "accessibility": "moderate",
+    "attribution": "Palm Beach photo by KSpilling, Public domain, via Wikimedia Commons",
+    "avoid_when": [
+      "holiday crowds",
+      "strong wind"
+    ],
+    "best_for": [
+      "day trips",
+      "surfing",
+      "lighthouse walks"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "high",
+    "dog_access": "restricted",
+    "exposure": "exposed",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards",
+      "cafes"
+    ],
+    "ideal_times": [
+      "early_morning",
+      "sunset"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Palm_Beach_NSW.jpg/960px-Palm_Beach_NSW.jpg",
+    "lat": -33.5967,
+    "lng": 151.3239,
+    "map_x": 82,
+    "map_y": 2,
+    "name": "Palm Beach",
+    "region": "Northern Beaches",
+    "suburb": "Palm Beach",
+    "surf_suitability": "high",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "destination",
+      "scenic",
+      "surf"
+    ],
+    "walk_suitability": "high",
+    "water_type": "ocean",
+    "image_license": "Public domain",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Palm_Beach_NSW.jpg"
+  },
+  {
+    "_id": "69fc84854b6e6047f9fb4960",
+    "slug": "cronulla-beach",
+    "access_tags": [
+      "train",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Cronulla Beach photo by WatsonKat, CC BY-SA 4.0, via Wikimedia Commons",
+    "avoid_when": [
+      "busy weekends"
+    ],
+    "best_for": [
+      "surfing",
+      "cafes",
+      "easy transport"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "high",
+    "dog_access": "restricted",
+    "exposure": "semi_protected",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards",
+      "cafes"
+    ],
+    "ideal_times": [
+      "morning",
+      "weekday"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Cronulla_Beach_Sydney_September_2023.jpg/960px-Cronulla_Beach_Sydney_September_2023.jpg",
+    "lat": -34.0577,
+    "lng": 151.1547,
+    "map_x": 47,
+    "map_y": 91,
+    "name": "Cronulla Beach",
+    "region": "Sutherland Shire",
+    "suburb": "Cronulla",
+    "surf_suitability": "high",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "classic",
+      "surf",
+      "train_access"
+    ],
+    "walk_suitability": "high",
+    "water_type": "ocean",
+    "image_license": "CC BY-SA 4.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Cronulla_Beach_Sydney_September_2023.jpg"
+  },
+  {
+    "_id": "69fc84854b6e6047f9fb4961",
+    "slug": "north-cronulla-beach",
+    "access_tags": [
+      "train",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "North Cronulla Beach photo by J Bar, CC BY-SA 3.0, via Wikimedia Commons",
+    "avoid_when": [
+      "crowded days"
+    ],
+    "best_for": [
+      "surfing",
+      "groups",
+      "cafes"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "high",
+    "dog_access": "restricted",
+    "exposure": "semi_protected",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards",
+      "cafes"
+    ],
+    "ideal_times": [
+      "morning",
+      "evening"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/North_Cronulla_Beach_1.JPG/960px-North_Cronulla_Beach_1.JPG",
+    "lat": -34.0535,
+    "lng": 151.1563,
+    "map_x": 47,
+    "map_y": 90,
+    "name": "North Cronulla Beach",
+    "region": "Sutherland Shire",
+    "suburb": "Cronulla",
+    "surf_suitability": "high",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "social",
+      "surf",
+      "cafes"
+    ],
+    "walk_suitability": "high",
+    "water_type": "ocean",
+    "image_license": "CC BY-SA 3.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:North_Cronulla_Beach_1.JPG"
+  },
+  {
+    "_id": "69fc84854b6e6047f9fb4962",
+    "slug": "elouera-beach",
+    "access_tags": [
+      "train",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "strong rips"
+    ],
+    "best_for": [
+      "surfing",
+      "long walks",
+      "space"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "exposed",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards"
+    ],
+    "ideal_times": [
+      "morning"
+    ],
+    "image_url": "",
+    "lat": -34.0458,
+    "lng": 151.1586,
+    "map_x": 48,
+    "map_y": 88,
+    "name": "Elouera Beach",
+    "region": "Sutherland Shire",
+    "suburb": "Cronulla",
+    "surf_suitability": "high",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "surf",
+      "local",
+      "wide"
+    ],
+    "walk_suitability": "high",
+    "water_type": "ocean"
+  },
+  {
+    "_id": "69fc84854b6e6047f9fb4963",
+    "slug": "wanda-beach",
+    "access_tags": [
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Wanda Beach photo by J Bar, CC BY-SA 3.0, via Wikimedia Commons",
+    "avoid_when": [
+      "strong rips",
+      "wind"
+    ],
+    "best_for": [
+      "surfing",
+      "long walks",
+      "quiet"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "exposed",
+    "facilities": [
+      "toilets",
+      "showers",
+      "lifeguards"
+    ],
+    "ideal_times": [
+      "early_morning"
+    ],
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Wanda_Beach_1.JPG/960px-Wanda_Beach_1.JPG",
+    "lat": -34.0388,
+    "lng": 151.1609,
+    "map_x": 48,
+    "map_y": 86,
+    "name": "Wanda Beach",
+    "region": "Sutherland Shire",
+    "suburb": "Cronulla",
+    "surf_suitability": "high",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-10T08:07:19.367000",
+    "vibe_tags": [
+      "wild",
+      "surf",
+      "space"
+    ],
+    "walk_suitability": "high",
+    "water_type": "ocean",
+    "image_license": "CC BY-SA 3.0",
+    "image_source": "Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Wanda_Beach_1.JPG"
+  },
+  {
+    "_id": "69fc84854b6e6047f9fb4964",
+    "slug": "shelly-beach-cronulla",
+    "access_tags": [
+      "train",
+      "parking",
+      "walking_track"
+    ],
+    "accessibility": "easy",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "limited sand at high tide"
+    ],
+    "best_for": [
+      "kids",
+      "rock pool",
+      "picnics"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "toilets",
+      "showers",
+      "park",
+      "rock_pool"
+    ],
+    "ideal_times": [
+      "morning",
+      "afternoon"
+    ],
+    "image_url": "",
+    "lat": -34.0673,
+    "lng": 151.1571,
+    "map_x": 48,
+    "map_y": 93,
+    "name": "Shelly Beach Cronulla",
+    "region": "Sutherland Shire",
+    "suburb": "Cronulla",
+    "surf_suitability": "low",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "family",
+      "rock_pool",
+      "calm"
+    ],
+    "walk_suitability": "high",
+    "water_type": "ocean"
+  },
+  {
+    "_id": "69fc84854b6e6047f9fb4965",
+    "slug": "gunnamatta-bay-beach",
+    "access_tags": [
+      "train",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "after heavy rain"
+    ],
+    "best_for": [
+      "calm swims",
+      "kids",
+      "picnics"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "toilets",
+      "park",
+      "playground"
+    ],
+    "ideal_times": [
+      "mid_morning"
+    ],
+    "image_url": "",
+    "lat": -34.0561,
+    "lng": 151.1485,
+    "map_x": 45,
+    "map_y": 90,
+    "name": "Gunnamatta Bay Beach",
+    "region": "Sutherland Shire",
+    "suburb": "Cronulla",
+    "surf_suitability": "low",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "bay",
+      "calm",
+      "family"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "bay"
+  },
+  {
+    "_id": "69fc84854b6e6047f9fb4966",
+    "slug": "congwong-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "holiday crowds"
+    ],
+    "best_for": [
+      "calm swims",
+      "picnics",
+      "low key days"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "toilets",
+      "showers",
+      "parking"
+    ],
+    "ideal_times": [
+      "morning"
+    ],
+    "image_url": "",
+    "lat": -33.9899,
+    "lng": 151.2339,
+    "map_x": 64,
+    "map_y": 78,
+    "name": "Congwong Beach",
+    "region": "Eastern Suburbs",
+    "suburb": "La Perouse",
+    "surf_suitability": "low",
+    "swim_suitability": "high",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "calm",
+      "national_park",
+      "family"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "bay"
+  },
+  {
+    "_id": "69fc84854b6e6047f9fb4967",
+    "slug": "little-congwong-beach",
+    "access_tags": [
+      "bus",
+      "walking_track"
+    ],
+    "accessibility": "moderate",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "limited facilities"
+    ],
+    "best_for": [
+      "quiet swims",
+      "short walks"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "low",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "nearby_toilets"
+    ],
+    "ideal_times": [
+      "weekday",
+      "morning"
+    ],
+    "image_url": "",
+    "lat": -33.9918,
+    "lng": 151.237,
+    "map_x": 65,
+    "map_y": 79,
+    "name": "Little Congwong Beach",
+    "region": "Eastern Suburbs",
+    "suburb": "La Perouse",
+    "surf_suitability": "low",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "secluded",
+      "calm",
+      "walk"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "bay"
+  },
+  {
+    "_id": "69fc84854b6e6047f9fb4968",
+    "slug": "frenchmans-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "strong wind"
+    ],
+    "best_for": [
+      "families",
+      "picnics",
+      "calm water"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "toilets",
+      "parking",
+      "cafes"
+    ],
+    "ideal_times": [
+      "morning",
+      "afternoon"
+    ],
+    "image_url": "",
+    "lat": -33.987,
+    "lng": 151.2322,
+    "map_x": 63,
+    "map_y": 77,
+    "name": "Frenchmans Beach",
+    "region": "Eastern Suburbs",
+    "suburb": "La Perouse",
+    "surf_suitability": "low",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "calm",
+      "family",
+      "heritage"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "bay"
+  },
+  {
+    "_id": "69fc84854b6e6047f9fb4969",
+    "slug": "yarra-bay-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "after heavy rain"
+    ],
+    "best_for": [
+      "calm walks",
+      "low key swims",
+      "families"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "low",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "toilets",
+      "parking",
+      "park"
+    ],
+    "ideal_times": [
+      "morning",
+      "sunset"
+    ],
+    "image_url": "",
+    "lat": -33.9781,
+    "lng": 151.2191,
+    "map_x": 60,
+    "map_y": 75,
+    "name": "Yarra Bay Beach",
+    "region": "Eastern Suburbs",
+    "suburb": "Phillip Bay",
+    "surf_suitability": "low",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "calm",
+      "local",
+      "bay"
+    ],
+    "walk_suitability": "medium",
+    "water_type": "bay"
+  },
+  {
+    "_id": "69fc84854b6e6047f9fb496a",
+    "slug": "silver-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "strong wind",
+      "after heavy rain"
+    ],
+    "best_for": [
+      "dogs",
+      "calm walks",
+      "families"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "low",
+    "dog_access": "off_leash_zones",
+    "exposure": "protected",
+    "facilities": [
+      "toilets",
+      "parking",
+      "park"
+    ],
+    "ideal_times": [
+      "morning",
+      "late_afternoon"
+    ],
+    "image_url": "",
+    "lat": -34.0102,
+    "lng": 151.2053,
+    "map_x": 57,
+    "map_y": 81,
+    "name": "Silver Beach",
+    "region": "Sutherland Shire",
+    "suburb": "Kurnell",
+    "surf_suitability": "low",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "bay",
+      "dog_friendly",
+      "calm"
+    ],
+    "walk_suitability": "high",
+    "water_type": "bay"
+  },
+  {
+    "_id": "69fc84854b6e6047f9fb496b",
+    "slug": "lady-robinsons-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "after heavy rain"
+    ],
+    "best_for": [
+      "walking",
+      "families",
+      "planespotting"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "toilets",
+      "showers",
+      "cafes",
+      "park"
+    ],
+    "ideal_times": [
+      "morning",
+      "sunset"
+    ],
+    "image_url": "",
+    "lat": -33.9611,
+    "lng": 151.1566,
+    "map_x": 47,
+    "map_y": 72,
+    "name": "Lady Robinsons Beach",
+    "region": "St George",
+    "suburb": "Brighton-Le-Sands",
+    "surf_suitability": "low",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "bay",
+      "long_walk",
+      "urban"
+    ],
+    "walk_suitability": "high",
+    "water_type": "bay"
+  },
+  {
+    "_id": "69fc84854b6e6047f9fb496c",
+    "slug": "brighton-le-sands-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "after heavy rain",
+      "peak traffic"
+    ],
+    "best_for": [
+      "cafes",
+      "group hangs",
+      "walks"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "high",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "toilets",
+      "showers",
+      "cafes",
+      "park"
+    ],
+    "ideal_times": [
+      "evening",
+      "weekday"
+    ],
+    "image_url": "",
+    "lat": -33.96,
+    "lng": 151.1545,
+    "map_x": 46,
+    "map_y": 72,
+    "name": "Brighton-Le-Sands Beach",
+    "region": "St George",
+    "suburb": "Brighton-Le-Sands",
+    "surf_suitability": "low",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "urban",
+      "cafes",
+      "bay"
+    ],
+    "walk_suitability": "high",
+    "water_type": "bay"
+  },
+  {
+    "_id": "69fc84854b6e6047f9fb496d",
+    "slug": "dolls-point-beach",
+    "access_tags": [
+      "bus",
+      "parking"
+    ],
+    "accessibility": "easy",
+    "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+    "avoid_when": [
+      "after heavy rain"
+    ],
+    "best_for": [
+      "families",
+      "walks",
+      "picnics"
+    ],
+    "created_at": "2026-05-07T12:46:27.114000",
+    "crowd_level_default": "medium",
+    "dog_access": "restricted",
+    "exposure": "protected",
+    "facilities": [
+      "toilets",
+      "park",
+      "parking"
+    ],
+    "ideal_times": [
+      "morning",
+      "sunset"
+    ],
+    "image_url": "",
+    "lat": -33.9976,
+    "lng": 151.1452,
+    "map_x": 44,
+    "map_y": 80,
+    "name": "Dolls Point Beach",
+    "region": "St George",
+    "suburb": "Dolls Point",
+    "surf_suitability": "low",
+    "swim_suitability": "medium",
+    "updated_at": "2026-05-07T12:46:27.114000",
+    "vibe_tags": [
+      "bay",
+      "calm",
+      "walks"
+    ],
+    "walk_suitability": "high",
+    "water_type": "bay"
+  }
+]

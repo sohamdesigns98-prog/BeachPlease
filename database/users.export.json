@@ -1,0 +1,88 @@
+[
+  {
+    "_id": "69fc88c2ca88dd354ac64df3",
+    "email": "user-4ac64df3@example.com",
+    "password_hash": "[REDACTED]",
+    "suburb": "Ultimo",
+    "companions": "solo",
+    "travel_mode": "public_transport",
+    "created_at": "2026-05-07T12:42:41.996000",
+    "updated_at": "2026-05-07T12:42:41.996000"
+  },
+  {
+    "_id": "69fc895f66a9155260f61ad5",
+    "email": "user-60f61ad5@example.com",
+    "password_hash": "[REDACTED]",
+    "suburb": "Ultimo",
+    "companions": "solo",
+    "travel_mode": "public_transport",
+    "created_at": "2026-05-07T12:45:19.158000",
+    "updated_at": "2026-05-07T12:45:19.158000"
+  },
+  {
+    "_id": "69ffde007306703789c8f86a",
+    "email": "user-89c8f86a@example.com",
+    "password_hash": "[REDACTED]",
+    "suburb": "Avalon Beach",
+    "companions": "solo",
+    "travel_mode": "public_transport",
+    "created_at": "2026-05-10T01:23:12.206000",
+    "updated_at": "2026-05-10T10:41:54.090000",
+    "auth_provider": "password",
+    "google_sub": "[REDACTED]"
+  },
+  {
+    "_id": "69ffe3017306703789c8f86b",
+    "email": "user-89c8f86b@example.com",
+    "password_hash": "[REDACTED]",
+    "suburb": "bondi nsw 2026",
+    "companions": "solo",
+    "travel_mode": "public_transport",
+    "created_at": "2026-05-10T01:44:33.713000",
+    "updated_at": "2026-05-10T01:44:33.713000"
+  },
+  {
+    "_id": "69ffea898558ccc43595808a",
+    "email": "user-3595808a@example.com",
+    "password_hash": "[REDACTED]",
+    "suburb": "Newtown",
+    "postcode": "2042",
+    "suburb_lat": -33.9012,
+    "suburb_lng": 151.1768,
+    "companions": "solo",
+    "travel_mode": "public_transport",
+    "created_at": "2026-05-10T02:16:41.477000",
+    "updated_at": "2026-05-10T02:16:41.477000"
+  },
+  {
+    "_id": "6a0043aff5ef98bcbb93d289",
+    "email": "user-bb93d289@example.com",
+    "google_sub": "[REDACTED]",
+    "suburb": "Avalon Beach",
+    "postcode": "",
+    "suburb_lat": null,
+    "suburb_lng": null,
+    "companions": "solo",
+    "travel_mode": "public_transport",
+    "auth_provider": "google",
+    "profile_complete": true,
+    "created_at": "2026-05-10T08:37:03.561000",
+    "updated_at": "2026-05-10T08:47:19.778000"
+  },
+  {
+    "_id": "6a0176f4ae60c174f8c7d16a",
+    "email": "user-f8c7d16a@example.com",
+    "password_hash": "[REDACTED]",
+    "suburb": "Arncliffe",
+    "postcode": "2205",
+    "suburb_lat": -33.9376,
+    "suburb_lng": 151.1446,
+    "companions": "solo",
+    "travel_mode": "public_transport",
+    "auth_provider": "password",
+    "role": "admin",
+    "profile_complete": true,
+    "created_at": "2026-05-11T06:28:04.599000",
+    "updated_at": "2026-05-17T03:31:08.950000"
+  }
+]

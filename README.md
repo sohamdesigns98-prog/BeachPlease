@@ -63,7 +63,7 @@ BeachPlease is a canvas-first Sydney beach recommendation app. It helps users ch
 - Admin plan deletion
 - User activity tracking
 - NSW suburb search
-- Sample database JSON exports under `database/`
+- Sanitized MongoDB JSON exports under `database/`
 
 ## Assignment Requirement Coverage
 
@@ -77,7 +77,7 @@ BeachPlease is a canvas-first Sydney beach recommendation app. It helps users ch
 | Live search / dynamic filtering | Beach explore/map surfaces filter and inspect beach data dynamically; suburb selection uses the backend suburb search proxy |
 | Admin/user profile | Admin dashboard manages users, plans, beaches, roles, and activity history; profile page lets users update/delete their own account |
 | Error handling | Frontend forms use Zod + React Hook Form and toast/error states; backend returns structured FastAPI errors |
-| Database export | `database/` contains JSON export samples for users, beaches, plans, clusters, and user activities |
+| Database export | `database/` contains sanitized MongoDB JSON exports for users, beaches, plans, clusters, and user activities |
 
 ## Setup From A Fresh Clone
 
@@ -249,7 +249,7 @@ BeachPlease/
       pages/                Login, register, explore, saved plans, profile, admin
       styles/               Feature-level CSS files imported by `index.css`
       utils/                Display, payload, adapter, and error helpers
-  database/                 JSON database export/sample files for submission
+  database/                 Sanitized MongoDB JSON export files for submission
   README.md                 Setup, feature, CRUD, and workload documentation
   PRD.md                    Product requirements and design rationale
 ```
@@ -357,9 +357,16 @@ source venv/bin/activate
 python -m app.seed.seed_beaches
 ```
 
-## Database Samples
+## Database Export
 
-The `database/` folder contains sample JSON structures for beaches, users, plans, clusters, and user activities. These are reference/export samples, not secrets.
+The `database/` folder contains sanitized MongoDB JSON exports for beaches, users, plans, clusters, and user activities. User emails, password hashes, OAuth subjects, and token-like fields are redacted or anonymized before export.
+
+To regenerate the export after configuring `backend/.env`:
+
+```bash
+cd backend
+python -m app.seed.export_database
+```
 
 ## Workload Allocation
 

@@ -1,0 +1,5284 @@
+[
+  {
+    "_id": "69ffea9a8558ccc43595808b",
+    "user_id": "69ffea898558ccc43595808a",
+    "mood_phrase": "quiet swim near me",
+    "region": null,
+    "activity": null,
+    "companion": null,
+    "preferred_beach_slug": null,
+    "selected_beach_name": "Malabar Beach",
+    "selected_beach_slug": "malabar-beach",
+    "image_url": "",
+    "mood_reading": {
+      "energy": "low",
+      "social_level": "low",
+      "desired_feeling": "peaceful",
+      "pace": "slow",
+      "summary": "You're after a proper chill-out, a bit of peace and quiet away from the hustle. Just you, the water, and maybe a gentle breeze. No crowds, no fuss, just a good old calm dip."
+    },
+    "plan": {
+      "where": "Head on over to Malabar Beach, down in the Eastern Suburbs. It's a bit of a local secret, so it keeps things nice and relaxed.",
+      "when": "Any time outside of peak school holiday madness or a scorching weekend arvo is usually pretty good for a quiet swim here. Mid-morning or afternoon is ideal for a proper squiz.",
+      "why": "This spot is perfect for a solo, calm swim. The bay keeps the water nice and flat, so you can just float about and forget the world. It’s got a real community feel without being overrun.",
+      "bring": [
+        "Towel",
+        "Sunscreen",
+        "Water bottle",
+        "Book",
+        "Snacks"
+      ],
+      "conditions_summary": "The water's sitting at a comfy 20.6 degrees, so it's not too chilly. There's a light breeze, but being a protected bay, it won't kick up too much fuss on the water itself. UV is moderate, so chuck on some sunscreen.",
+      "gentle_warning": "Just a heads-up, like with any bay beach, it's best to avoid swimming after heavy rain. The water quality can drop a bit then, so keep an eye on local alerts if it's been bucketing down."
+    },
+    "conditions": {
+      "temperature": 20.6,
+      "wind_kmh": 12.3,
+      "wind_direction": 157,
+      "uv_index": 4.4,
+      "wave_height_m": 1.36,
+      "wave_period": 9.0,
+      "fetched_at": "2026-05-10T02:16:43.534072+00:00"
+    },
+    "candidate_snapshot": [
+      {
+        "_id": "69fc84844b6e6047f9fb4943",
+        "slug": "malabar-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "after heavy rain"
+        ],
+        "best_for": [
+          "calm swims",
+          "kids",
+          "low key days"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "toilets",
+          "showers",
+          "park"
+        ],
+        "ideal_times": [
+          "mid_morning",
+          "afternoon"
+        ],
+        "image_url": "",
+        "lat": -33.9637,
+        "lng": 151.2503,
+        "map_x": 67,
+        "map_y": 72,
+        "name": "Malabar Beach",
+        "region": "Eastern Suburbs",
+        "suburb": "Malabar",
+        "surf_suitability": "low",
+        "swim_suitability": "high",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "calm",
+          "local",
+          "family"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "bay",
+        "id": "69fc84844b6e6047f9fb4943",
+        "score": 72.39,
+        "score_breakdown": {
+          "mood_score": 90.62,
+          "condition_score": 70.0,
+          "profile_score": 86.0,
+          "time_score": 90.0,
+          "region_score": 50.0,
+          "activity_score": 50.0,
+          "companion_score": 50.0,
+          "profile_distance_km": 9.7
+        },
+        "matched_reasons": [
+          "Matches mood: calm",
+          "Matches mood: calm_water",
+          "Matches mood: low_social",
+          "Matches mood: private",
+          "Matches mood: protected",
+          "Matches mood: quiet",
+          "Matches mood: slow",
+          "Close to profile suburb: about 10km away"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": 20.6,
+          "wind_kmh": 12.3,
+          "wind_direction": 157,
+          "uv_index": 4.4,
+          "wave_height_m": 1.36,
+          "wave_period": 9.0,
+          "fetched_at": "2026-05-10T02:16:43.534072+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb4967",
+        "slug": "little-congwong-beach",
+        "access_tags": [
+          "bus",
+          "walking_track"
+        ],
+        "accessibility": "moderate",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "limited facilities"
+        ],
+        "best_for": [
+          "quiet swims",
+          "short walks"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "nearby_toilets"
+        ],
+        "ideal_times": [
+          "weekday",
+          "morning"
+        ],
+        "image_url": "",
+        "lat": -33.9918,
+        "lng": 151.237,
+        "map_x": 65,
+        "map_y": 79,
+        "name": "Little Congwong Beach",
+        "region": "Eastern Suburbs",
+        "suburb": "La Perouse",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "secluded",
+          "calm",
+          "walk"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "bay",
+        "id": "69fc84854b6e6047f9fb4967",
+        "score": 69.99,
+        "score_breakdown": {
+          "mood_score": 90.62,
+          "condition_score": 70.0,
+          "profile_score": 86.0,
+          "time_score": 60.0,
+          "region_score": 50.0,
+          "activity_score": 50.0,
+          "companion_score": 50.0,
+          "profile_distance_km": 11.5
+        },
+        "matched_reasons": [
+          "Matches mood: calm",
+          "Matches mood: calm_water",
+          "Matches mood: low_social",
+          "Matches mood: private",
+          "Matches mood: protected",
+          "Matches mood: quiet",
+          "Matches mood: slow",
+          "Close to profile suburb: about 12km away"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": 20.7,
+          "wind_kmh": 12.3,
+          "wind_direction": 157,
+          "uv_index": 4.4,
+          "wave_height_m": 1.36,
+          "wave_period": 9.0,
+          "fetched_at": "2026-05-10T02:16:43.375942+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb4969",
+        "slug": "yarra-bay-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "after heavy rain"
+        ],
+        "best_for": [
+          "calm walks",
+          "low key swims",
+          "families"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "toilets",
+          "parking",
+          "park"
+        ],
+        "ideal_times": [
+          "morning",
+          "sunset"
+        ],
+        "image_url": "",
+        "lat": -33.9781,
+        "lng": 151.2191,
+        "map_x": 60,
+        "map_y": 75,
+        "name": "Yarra Bay Beach",
+        "region": "Eastern Suburbs",
+        "suburb": "Phillip Bay",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "calm",
+          "local",
+          "bay"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "bay",
+        "id": "69fc84854b6e6047f9fb4969",
+        "score": 69.99,
+        "score_breakdown": {
+          "mood_score": 90.62,
+          "condition_score": 70.0,
+          "profile_score": 86.0,
+          "time_score": 60.0,
+          "region_score": 50.0,
+          "activity_score": 50.0,
+          "companion_score": 50.0,
+          "profile_distance_km": 9.4
+        },
+        "matched_reasons": [
+          "Matches mood: calm",
+          "Matches mood: calm_water",
+          "Matches mood: low_social",
+          "Matches mood: private",
+          "Matches mood: protected",
+          "Matches mood: quiet",
+          "Matches mood: slow",
+          "Close to profile suburb: about 9km away"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": 20.7,
+          "wind_kmh": 12.3,
+          "wind_direction": 157,
+          "uv_index": 4.4,
+          "wave_height_m": 1.36,
+          "wave_period": 9.0,
+          "fetched_at": "2026-05-10T02:16:43.371929+00:00"
+        }
+      },
+      {
+        "_id": "69fc84844b6e6047f9fb494e",
+        "slug": "obelisk-beach",
+        "access_tags": [
+          "walking_track"
+        ],
+        "accessibility": "moderate",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "limited facilities"
+        ],
+        "best_for": [
+          "quiet swims",
+          "views"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "nearby_toilets"
+        ],
+        "ideal_times": [
+          "midday",
+          "weekday"
+        ],
+        "image_url": "",
+        "lat": -33.8327,
+        "lng": 151.2676,
+        "map_x": 72,
+        "map_y": 42,
+        "name": "Obelisk Beach",
+        "region": "Lower North Shore",
+        "suburb": "Mosman",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "secluded",
+          "harbour",
+          "clothing_optional"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "harbour",
+        "id": "69fc84844b6e6047f9fb494e",
+        "score": 68.19,
+        "score_breakdown": {
+          "mood_score": 90.62,
+          "condition_score": 70.0,
+          "profile_score": 56.0,
+          "time_score": 90.0,
+          "region_score": 50.0,
+          "activity_score": 50.0,
+          "companion_score": 50.0,
+          "profile_distance_km": 11.3
+        },
+        "matched_reasons": [
+          "Matches mood: calm",
+          "Matches mood: calm_water",
+          "Matches mood: low_social",
+          "Matches mood: private",
+          "Matches mood: protected",
+          "Matches mood: quiet",
+          "Matches mood: slow",
+          "Close to profile suburb: about 11km away"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": 20.7,
+          "wind_kmh": 11.9,
+          "wind_direction": 162,
+          "uv_index": 4.4,
+          "wave_height_m": 0.96,
+          "wave_period": 9.2,
+          "fetched_at": "2026-05-10T02:16:43.548779+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb496a",
+        "slug": "silver-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "strong wind",
+          "after heavy rain"
+        ],
+        "best_for": [
+          "dogs",
+          "calm walks",
+          "families"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "off_leash_zones",
+        "exposure": "protected",
+        "facilities": [
+          "toilets",
+          "parking",
+          "park"
+        ],
+        "ideal_times": [
+          "morning",
+          "late_afternoon"
+        ],
+        "image_url": "",
+        "lat": -34.0102,
+        "lng": 151.2053,
+        "map_x": 57,
+        "map_y": 81,
+        "name": "Silver Beach",
+        "region": "Sutherland Shire",
+        "suburb": "Kurnell",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "bay",
+          "dog_friendly",
+          "calm"
+        ],
+        "walk_suitability": "high",
+        "water_type": "bay",
+        "id": "69fc84854b6e6047f9fb496a",
+        "score": 67.79,
+        "score_breakdown": {
+          "mood_score": 90.62,
+          "condition_score": 60.0,
+          "profile_score": 86.0,
+          "time_score": 60.0,
+          "region_score": 50.0,
+          "activity_score": 50.0,
+          "companion_score": 50.0,
+          "profile_distance_km": 12.4
+        },
+        "matched_reasons": [
+          "Matches mood: calm",
+          "Matches mood: calm_water",
+          "Matches mood: low_social",
+          "Matches mood: private",
+          "Matches mood: protected",
+          "Matches mood: quiet",
+          "Matches mood: slow",
+          "Reachable by public transport"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability"
+        ],
+        "conditions": {
+          "temperature": 20.7,
+          "wind_kmh": 13.4,
+          "wind_direction": 156,
+          "uv_index": 4.4,
+          "wave_height_m": 1.6,
+          "wave_period": 9.2,
+          "fetched_at": "2026-05-10T02:16:43.549793+00:00"
+        }
+      }
+    ],
+    "rejected_beaches": [
+      {
+        "name": "Yarra Bay Beach",
+        "reason": "Yarra Bay is a good option for calm water and it's super close, but Malabar just pips it for swim suitability. You want a proper swim, right? Malabar's got that covered a bit better."
+      },
+      {
+        "name": "Little Congwong Beach",
+        "reason": "Little Congwong is definitely secluded, but it's a bit more of a trek to get to, with a walk involved after the bus. For a straightforward quiet swim, Malabar is easier to access and just as peaceful."
+      },
+      {
+        "name": "Obelisk Beach",
+        "reason": "Obelisk is a cracker for seclusion and views, but it's a bit of a mission from Newtown on public transport, and it's clothing optional, which might not be what you're after for a simple quiet swim."
+      },
+      {
+        "name": "Silver Beach",
+        "reason": "Silver Beach is pretty calm, but the conditions today show higher waves for a bay, which isn't ideal for that proper quiet, flat water swim you're after. Plus, it's a fair way out in Kurnell."
+      }
+    ],
+    "confidence": 95,
+    "recommendation_type": "beach_plan",
+    "input_context": {
+      "selected_mood": null,
+      "companion_context": null,
+      "experience_tags": [],
+      "region": null,
+      "activity": null,
+      "companion": null,
+      "preferred_beach_slug": null
+    },
+    "user_notes": "",
+    "created_at": "2026-05-10T02:16:58.064000",
+    "updated_at": "2026-05-10T02:16:58.064000",
+    "replayed_at": null
+  },
+  {
+    "_id": "69ffef668558ccc435958092",
+    "user_id": "69ffde007306703789c8f86a",
+    "mood_phrase": "I want a beach day near Little Congwong Beach.",
+    "region": "eastern",
+    "activity": "relax",
+    "companion": "solo",
+    "preferred_beach_slug": "little-congwong-beach",
+    "selected_beach_name": "Little Congwong Beach",
+    "selected_beach_slug": "little-congwong-beach",
+    "image_url": "",
+    "mood_reading": {
+      "energy": "low",
+      "social_level": "low",
+      "desired_feeling": "calm, peaceful",
+      "pace": "slow",
+      "summary": "You're after a proper chill-out day, just you and the ocean. Sounds like you want to escape the hustle and just soak up some calm, maybe with a good book or just your thoughts. A bit of quiet solitude is on the cards, yeah?"
+    },
+    "plan": {
+      "where": "Little Congwong Beach, down in La Perouse. It's a bit of a mission from Avalon, but totally worth the trip for the peace and quiet.",
+      "when": "Best to head out early to beat any potential arvo crowds, especially since you're coming from Avalon. Give yourself plenty of travel time, it's a bit of a trek but worth it for the proper solitude.",
+      "why": "This spot is proper serene. It's protected, so the water's usually calm, perfect for a quiet dip or just sitting by the bay. You can really switch off here and just enjoy the moment.",
+      "bring": [
+        "towel",
+        "book",
+        "water bottle",
+        "sunscreen",
+        "hat",
+        "snacks"
+      ],
+      "conditions_summary": "The water's a pleasant 20.5°C, with a light breeze at 13.8 km/h from the south-southeast. UV is moderate at 4.35, so slap on some sunscreen. Waves are pretty mellow, as you'd expect in a protected bay.",
+      "gentle_warning": "It's a bit of a walk to get down there from the main road, so wear comfy shoes. And remember, facilities are pretty basic, so come prepared with everything you need for your chill-out session."
+    },
+    "conditions": {
+      "temperature": 20.5,
+      "wind_kmh": 13.8,
+      "wind_direction": 159,
+      "uv_index": 4.35,
+      "wave_height_m": 1.38,
+      "wave_period": 9.0,
+      "fetched_at": "2026-05-10T02:53:11.401877+00:00"
+    },
+    "candidate_snapshot": [
+      {
+        "_id": "69fc84854b6e6047f9fb4967",
+        "slug": "little-congwong-beach",
+        "access_tags": [
+          "bus",
+          "walking_track"
+        ],
+        "accessibility": "moderate",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "limited facilities"
+        ],
+        "best_for": [
+          "quiet swims",
+          "short walks"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "nearby_toilets"
+        ],
+        "ideal_times": [
+          "weekday",
+          "morning"
+        ],
+        "image_url": "",
+        "lat": -33.9918,
+        "lng": 151.237,
+        "map_x": 65,
+        "map_y": 79,
+        "name": "Little Congwong Beach",
+        "region": "Eastern Suburbs",
+        "suburb": "La Perouse",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "secluded",
+          "calm",
+          "walk"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "bay",
+        "id": "69fc84854b6e6047f9fb4967",
+        "score": 85.52,
+        "score_breakdown": {
+          "mood_score": 50.0,
+          "condition_score": 70.0,
+          "profile_score": 86.0,
+          "time_score": 60.0,
+          "region_score": 92.0,
+          "activity_score": 100.0,
+          "companion_score": 78.0,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: eastern",
+          "Strong fit for relax",
+          "Works well for solo",
+          "Soft boost from preferred beach",
+          "Reachable by public transport"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": 20.5,
+          "wind_kmh": 13.8,
+          "wind_direction": 159,
+          "uv_index": 4.35,
+          "wave_height_m": 1.38,
+          "wave_period": 9.0,
+          "fetched_at": "2026-05-10T02:53:11.401877+00:00"
+        }
+      },
+      {
+        "_id": "69fc84844b6e6047f9fb494e",
+        "slug": "obelisk-beach",
+        "access_tags": [
+          "walking_track"
+        ],
+        "accessibility": "moderate",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "limited facilities"
+        ],
+        "best_for": [
+          "quiet swims",
+          "views"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "nearby_toilets"
+        ],
+        "ideal_times": [
+          "midday",
+          "weekday"
+        ],
+        "image_url": "",
+        "lat": -33.8327,
+        "lng": 151.2676,
+        "map_x": 72,
+        "map_y": 42,
+        "name": "Obelisk Beach",
+        "region": "Lower North Shore",
+        "suburb": "Mosman",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "secluded",
+          "harbour",
+          "clothing_optional"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "harbour",
+        "id": "69fc84844b6e6047f9fb494e",
+        "score": 71.72,
+        "score_breakdown": {
+          "mood_score": 50.0,
+          "condition_score": 70.0,
+          "profile_score": 56.0,
+          "time_score": 90.0,
+          "region_score": 92.0,
+          "activity_score": 100.0,
+          "companion_score": 78.0,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: eastern",
+          "Strong fit for relax",
+          "Works well for solo"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": 20.5,
+          "wind_kmh": 13.8,
+          "wind_direction": 162,
+          "uv_index": 4.35,
+          "wave_height_m": 0.98,
+          "wave_period": 9.15,
+          "fetched_at": "2026-05-10T02:53:11.333441+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb496a",
+        "slug": "silver-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "strong wind",
+          "after heavy rain"
+        ],
+        "best_for": [
+          "dogs",
+          "calm walks",
+          "families"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "off_leash_zones",
+        "exposure": "protected",
+        "facilities": [
+          "toilets",
+          "parking",
+          "park"
+        ],
+        "ideal_times": [
+          "morning",
+          "late_afternoon"
+        ],
+        "image_url": "",
+        "lat": -34.0102,
+        "lng": 151.2053,
+        "map_x": 57,
+        "map_y": 81,
+        "name": "Silver Beach",
+        "region": "Sutherland Shire",
+        "suburb": "Kurnell",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "bay",
+          "dog_friendly",
+          "calm"
+        ],
+        "walk_suitability": "high",
+        "water_type": "bay",
+        "id": "69fc84854b6e6047f9fb496a",
+        "score": 71.32,
+        "score_breakdown": {
+          "mood_score": 50.0,
+          "condition_score": 60.0,
+          "profile_score": 86.0,
+          "time_score": 60.0,
+          "region_score": 92.0,
+          "activity_score": 100.0,
+          "companion_score": 78.0,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: eastern",
+          "Strong fit for relax",
+          "Works well for solo",
+          "Reachable by public transport"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability"
+        ],
+        "conditions": {
+          "temperature": 20.5,
+          "wind_kmh": 14.2,
+          "wind_direction": 162,
+          "uv_index": 4.35,
+          "wave_height_m": 1.62,
+          "wave_period": 9.15,
+          "fetched_at": "2026-05-10T02:53:11.334437+00:00"
+        }
+      },
+      {
+        "_id": "69fc84844b6e6047f9fb493f",
+        "slug": "clovelly-beach",
+        "access_tags": [
+          "bus",
+          "parking",
+          "coastal_walk"
+        ],
+        "accessibility": "easy",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "after heavy rain"
+        ],
+        "best_for": [
+          "snorkelling",
+          "calm swims",
+          "kids"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards",
+          "kiosk"
+        ],
+        "ideal_times": [
+          "morning",
+          "midday"
+        ],
+        "image_url": "",
+        "lat": -33.9123,
+        "lng": 151.2665,
+        "map_x": 70,
+        "map_y": 61,
+        "name": "Clovelly Beach",
+        "region": "Eastern Suburbs",
+        "suburb": "Clovelly",
+        "surf_suitability": "low",
+        "swim_suitability": "high",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "protected",
+          "snorkel",
+          "family"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "bay",
+        "id": "69fc84844b6e6047f9fb493f",
+        "score": 69.24,
+        "score_breakdown": {
+          "mood_score": 50.0,
+          "condition_score": 70.0,
+          "profile_score": 68.0,
+          "time_score": 90.0,
+          "region_score": 92.0,
+          "activity_score": 84.0,
+          "companion_score": 50.0,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: eastern",
+          "Strong fit for relax",
+          "Reachable by public transport"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": 20.3,
+          "wind_kmh": 13.8,
+          "wind_direction": 162,
+          "uv_index": 4.35,
+          "wave_height_m": 1.12,
+          "wave_period": 9.0,
+          "fetched_at": "2026-05-10T02:53:11.334437+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb4968",
+        "slug": "frenchmans-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "strong wind"
+        ],
+        "best_for": [
+          "families",
+          "picnics",
+          "calm water"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "toilets",
+          "parking",
+          "cafes"
+        ],
+        "ideal_times": [
+          "morning",
+          "afternoon"
+        ],
+        "image_url": "",
+        "lat": -33.987,
+        "lng": 151.2322,
+        "map_x": 63,
+        "map_y": 77,
+        "name": "Frenchmans Beach",
+        "region": "Eastern Suburbs",
+        "suburb": "La Perouse",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "calm",
+          "family",
+          "heritage"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "bay",
+        "id": "69fc84854b6e6047f9fb4968",
+        "score": 69.24,
+        "score_breakdown": {
+          "mood_score": 50.0,
+          "condition_score": 70.0,
+          "profile_score": 68.0,
+          "time_score": 90.0,
+          "region_score": 92.0,
+          "activity_score": 84.0,
+          "companion_score": 50.0,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: eastern",
+          "Strong fit for relax",
+          "Reachable by public transport"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": 20.5,
+          "wind_kmh": 13.8,
+          "wind_direction": 159,
+          "uv_index": 4.35,
+          "wave_height_m": 1.38,
+          "wave_period": 9.0,
+          "fetched_at": "2026-05-10T02:53:11.265654+00:00"
+        }
+      }
+    ],
+    "rejected_beaches": [
+      {
+        "name": "Obelisk Beach",
+        "reason": "Yeah nah, Obelisk is a bit of a trek from Avalon, and it's on the Lower North Shore, not the Eastern Suburbs like you were after. Plus, it's clothing-optional, which might not be the vibe you're chasing for a solo chill-out."
+      },
+      {
+        "name": "Silver Beach",
+        "reason": "This one's way down in Kurnell, a fair hike from Avalon, and it's more for dog owners and families, not quite the solo relax you're after. Plus, the waves are a bit higher there today, making it less ideal for a calm swim."
+      },
+      {
+        "name": "Clovelly Beach",
+        "reason": "Clovelly is a good spot, but it can get a bit busier with families and snorkelers, which isn't quite the 'solo relax' vibe you're after. Little Congwong offers more solitude for a proper unwind."
+      },
+      {
+        "name": "Frenchmans Beach",
+        "reason": "Right next door to Little Congwong, but it tends to attract more families and can be a bit livelier. You're after proper quiet, and Little Congwong delivers that better for your solo day."
+      }
+    ],
+    "confidence": 100,
+    "recommendation_type": "beach_plan",
+    "input_context": {
+      "selected_mood": "solo",
+      "companion_context": "solo",
+      "experience_tags": [
+        "solo",
+        "relax",
+        "solo"
+      ],
+      "region": "eastern",
+      "activity": "relax",
+      "companion": "solo",
+      "preferred_beach_slug": "little-congwong-beach"
+    },
+    "user_notes": "",
+    "created_at": "2026-05-10T02:37:26.068000",
+    "updated_at": "2026-05-10T07:53:12.238000",
+    "replayed_at": "2026-05-10T02:53:25.170000"
+  },
+  {
+    "_id": "6a004640f5ef98bcbb93d28a",
+    "user_id": "6a0043aff5ef98bcbb93d289",
+    "mood_phrase": "I want a beach day near Camp Cove.",
+    "region": "harbour",
+    "activity": "relax",
+    "companion": "solo",
+    "preferred_beach_slug": "camp-cove",
+    "selected_beach_name": "Camp Cove",
+    "selected_beach_slug": "camp-cove",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Camp_Cove%2C_Sydney.jpg/960px-Camp_Cove%2C_Sydney.jpg",
+    "mood_reading": {
+      "energy": "low",
+      "social_level": "low",
+      "desired_feeling": "relaxed",
+      "pace": "slow",
+      "summary": "Sounds like you're after a proper chill-out, just you and the harbour, right near your preferred spot. No fuss, just good vibes and a bit of a squiz at the water."
+    },
+    "plan": {
+      "where": "Head straight to Camp Cove in Watsons Bay. You can't miss it, it's a cracker of a spot right there.",
+      "when": "Anytime you like, but the arvo is usually pretty good for a bit of sun and calm. Just dodge the peak school holiday rush if you're after true tranquility.",
+      "why": "It's exactly what you asked for – a proper harbour beach day, perfect for unwinding solo. You'll get those lovely calm waters, a bit of shade, and a kiosk if you fancy a snack. It's got everything you need for a no-stress day by the water.",
+      "bring": [
+        "A good book",
+        "Sunscreen (even if it's a bit cooler)",
+        "Your swimmers (if you're brave enough for a quick dip)",
+        "A picnic lunch or some cash for the kiosk",
+        "A hat"
+      ],
+      "conditions_summary": "The water's a bit on the fresh side at 18.5°C, so maybe not a full send into the waves, but still fine for a quick dip if you're keen. Wind's a gentle 14.4 km/h, so it won't be blowing your hat off.",
+      "gentle_warning": "Just a heads-up, Camp Cove can get a bit busy, especially on a nice day. If you're after absolute solitude, maybe aim for a weekday. And always keep an eye on your belongings, mate."
+    },
+    "conditions": {
+      "temperature": 18.5,
+      "wind_kmh": 14.4,
+      "wind_direction": 176,
+      "uv_index": 0,
+      "wave_height_m": 1.34,
+      "wave_period": 8.5,
+      "fetched_at": "2026-05-10T08:47:31.941576+00:00"
+    },
+    "candidate_snapshot": [
+      {
+        "_id": "69fc84844b6e6047f9fb4948",
+        "slug": "camp-cove",
+        "access_tags": [
+          "ferry",
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Camp Cove photo by Martinvl, CC BY-SA 4.0, via Wikimedia Commons",
+        "avoid_when": [
+          "parking pressure"
+        ],
+        "best_for": [
+          "sunset",
+          "calm swims",
+          "families"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "high",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "toilets",
+          "showers",
+          "kiosk"
+        ],
+        "ideal_times": [
+          "morning",
+          "sunset"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Camp_Cove%2C_Sydney.jpg/960px-Camp_Cove%2C_Sydney.jpg",
+        "lat": -33.8414,
+        "lng": 151.2816,
+        "map_x": 75,
+        "map_y": 45,
+        "name": "Camp Cove",
+        "region": "Harbour",
+        "suburb": "Watsons Bay",
+        "surf_suitability": "low",
+        "swim_suitability": "high",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "harbour",
+          "sunset",
+          "calm"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "harbour",
+        "image_license": "CC BY-SA 4.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:Camp_Cove,_Sydney.jpg",
+        "id": "69fc84844b6e6047f9fb4948",
+        "score": 77.94,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 55,
+          "profile_score": 68,
+          "time_score": 90,
+          "region_score": 92,
+          "activity_score": 84,
+          "companion_score": 50,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: harbour",
+          "Strong fit for relax",
+          "Soft boost from preferred beach",
+          "Reachable by public transport"
+        ],
+        "penalties": [
+          "Cooler temperature reduces swim appeal"
+        ],
+        "conditions": {
+          "temperature": 18.5,
+          "wind_kmh": 14.4,
+          "wind_direction": 176,
+          "uv_index": 0,
+          "wave_height_m": 1.34,
+          "wave_period": 8.5,
+          "fetched_at": "2026-05-10T08:47:31.941576+00:00"
+        }
+      },
+      {
+        "_id": "69fc84844b6e6047f9fb494c",
+        "slug": "chinamans-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "limited cafes"
+        ],
+        "best_for": [
+          "picnics",
+          "calm swims",
+          "kids"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "toilets",
+          "park"
+        ],
+        "ideal_times": [
+          "morning",
+          "afternoon"
+        ],
+        "image_url": "",
+        "lat": -33.8172,
+        "lng": 151.2485,
+        "map_x": 67,
+        "map_y": 39,
+        "name": "Chinamans Beach",
+        "region": "Lower North Shore",
+        "suburb": "Mosman",
+        "surf_suitability": "low",
+        "swim_suitability": "high",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "quiet",
+          "harbour",
+          "family"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "harbour",
+        "id": "69fc84844b6e6047f9fb494c",
+        "score": 68.3,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 55,
+          "profile_score": 86,
+          "time_score": 60,
+          "region_score": 92,
+          "activity_score": 84,
+          "companion_score": 78,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: harbour",
+          "Strong fit for relax",
+          "Works well for solo",
+          "Reachable by public transport"
+        ],
+        "penalties": [
+          "Cooler temperature reduces swim appeal"
+        ],
+        "conditions": {
+          "temperature": 17.7,
+          "wind_kmh": 14.2,
+          "wind_direction": 179,
+          "uv_index": 0,
+          "wave_height_m": 1.18,
+          "wave_period": 8.6,
+          "fetched_at": "2026-05-10T08:47:31.870460+00:00"
+        }
+      },
+      {
+        "_id": "69fc84844b6e6047f9fb4946",
+        "slug": "milk-beach",
+        "access_tags": [
+          "bus",
+          "walking_track"
+        ],
+        "accessibility": "moderate",
+        "attribution": "Milk Beach photo by -wuppertaler, CC BY 4.0, via Wikimedia Commons",
+        "avoid_when": [
+          "high tide",
+          "limited shade"
+        ],
+        "best_for": [
+          "harbour views",
+          "dates",
+          "picnics"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "nearby_toilets"
+        ],
+        "ideal_times": [
+          "sunrise",
+          "weekday"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/AUS_Sydney%2C_Woollahra%2C_Milk_Beach_001.jpg/960px-AUS_Sydney%2C_Woollahra%2C_Milk_Beach_001.jpg",
+        "lat": -33.8537,
+        "lng": 151.2711,
+        "map_x": 72,
+        "map_y": 47,
+        "name": "Milk Beach",
+        "region": "Harbour",
+        "suburb": "Vaucluse",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "harbour",
+          "views",
+          "boutique"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "harbour",
+        "image_license": "CC BY 4.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:AUS_Sydney,_Woollahra,_Milk_Beach_001.jpg",
+        "id": "69fc84844b6e6047f9fb4946",
+        "score": 66.84,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 70,
+          "profile_score": 68,
+          "time_score": 60,
+          "region_score": 92,
+          "activity_score": 84,
+          "companion_score": 50,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: harbour",
+          "Strong fit for relax",
+          "Reachable by public transport"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": 18.5,
+          "wind_kmh": 14.4,
+          "wind_direction": 176,
+          "uv_index": 0,
+          "wave_height_m": 1.34,
+          "wave_period": 8.5,
+          "fetched_at": "2026-05-10T08:47:31.941576+00:00"
+        }
+      },
+      {
+        "_id": "69fc84844b6e6047f9fb4949",
+        "slug": "lady-bay-beach",
+        "access_tags": [
+          "ferry",
+          "walking_track"
+        ],
+        "accessibility": "moderate",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "limited access",
+          "family facilities needed"
+        ],
+        "best_for": [
+          "quiet swims",
+          "views"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "nearby_toilets"
+        ],
+        "ideal_times": [
+          "midday",
+          "weekday"
+        ],
+        "image_url": "",
+        "lat": -33.8338,
+        "lng": 151.2808,
+        "map_x": 75,
+        "map_y": 43,
+        "name": "Lady Bay Beach",
+        "region": "Harbour",
+        "suburb": "Watsons Bay",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "secluded",
+          "harbour",
+          "clothing_optional"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "harbour",
+        "id": "69fc84844b6e6047f9fb4949",
+        "score": 66.84,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 70,
+          "profile_score": 68,
+          "time_score": 60,
+          "region_score": 92,
+          "activity_score": 84,
+          "companion_score": 50,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: harbour",
+          "Strong fit for relax",
+          "Reachable by public transport"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": 18.1,
+          "wind_kmh": 14.2,
+          "wind_direction": 179,
+          "uv_index": 0,
+          "wave_height_m": 1.34,
+          "wave_period": 8.5,
+          "fetched_at": "2026-05-10T08:47:31.986306+00:00"
+        }
+      },
+      {
+        "_id": "69fc84844b6e6047f9fb494a",
+        "slug": "nielsen-park-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Nielsen Park photo by Sardaka, CC BY-SA 4.0, via Wikimedia Commons",
+        "avoid_when": [
+          "peak weekend crowds"
+        ],
+        "best_for": [
+          "picnics",
+          "families",
+          "calm swims"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "high",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "toilets",
+          "showers",
+          "kiosk",
+          "park"
+        ],
+        "ideal_times": [
+          "early_morning",
+          "weekday"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/%281%29Nielsen_Park_Sydney.jpg/960px-%281%29Nielsen_Park_Sydney.jpg",
+        "lat": -33.8512,
+        "lng": 151.2686,
+        "map_x": 71,
+        "map_y": 47,
+        "name": "Nielsen Park Beach",
+        "region": "Harbour",
+        "suburb": "Vaucluse",
+        "surf_suitability": "low",
+        "swim_suitability": "high",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "classic",
+          "harbour",
+          "family"
+        ],
+        "walk_suitability": "high",
+        "water_type": "harbour",
+        "image_license": "CC BY-SA 4.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:(1)Nielsen_Park_Sydney.jpg",
+        "id": "69fc84844b6e6047f9fb494a",
+        "score": 66.18,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 67,
+          "profile_score": 68,
+          "time_score": 60,
+          "region_score": 92,
+          "activity_score": 84,
+          "companion_score": 50,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: harbour",
+          "Strong fit for relax",
+          "Reachable by public transport",
+          "Cooler weather suits a walk"
+        ],
+        "penalties": [
+          "Cooler temperature reduces swim appeal"
+        ],
+        "conditions": {
+          "temperature": 18.5,
+          "wind_kmh": 14.4,
+          "wind_direction": 176,
+          "uv_index": 0,
+          "wave_height_m": 1.34,
+          "wave_period": 8.5,
+          "fetched_at": "2026-05-10T08:47:31.861431+00:00"
+        }
+      }
+    ],
+    "rejected_beaches": [
+      {
+        "name": "Chinamans Beach",
+        "reason": "Chinamans is lovely for a quiet day, but it's a bit of a trek from the Camp Cove area you were keen on. Not quite the vibe you asked for, geographically speaking."
+      },
+      {
+        "name": "Lady Bay Beach",
+        "reason": "Lady Bay is right next door, but it's known for being clothing-optional. Probably not what you had in mind for a general 'beach day near Camp Cove' unless you're feeling adventurous, eh?"
+      }
+    ],
+    "confidence": 95,
+    "recommendation_type": "beach_plan",
+    "input_context": {
+      "selected_mood": "calm",
+      "companion_context": "solo",
+      "experience_tags": [
+        "calm",
+        "relax",
+        "solo"
+      ],
+      "region": "harbour",
+      "activity": "relax",
+      "companion": "solo",
+      "preferred_beach_slug": "camp-cove"
+    },
+    "user_notes": "",
+    "created_at": "2026-05-10T08:48:00.697000",
+    "updated_at": "2026-05-10T08:48:00.697000",
+    "replayed_at": null
+  },
+  {
+    "_id": "6a00495df5ef98bcbb93d28d",
+    "user_id": "6a0043aff5ef98bcbb93d289",
+    "mood_phrase": "I want a beach day near Bilgola Beach.",
+    "region": "northern",
+    "activity": "relax",
+    "companion": "solo",
+    "preferred_beach_slug": "bilgola-beach",
+    "selected_beach_name": "Avalon Beach",
+    "selected_beach_slug": "avalon-beach",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Avalon%2Cnew_south_wales.jpg/960px-Avalon%2Cnew_south_wales.jpg",
+    "mood_reading": {
+      "energy": "low",
+      "social_level": "low",
+      "desired_feeling": "relaxed",
+      "pace": "slow",
+      "summary": "You're after a proper chilled-out beach day, just you and the sand, somewhere close to home. No fuss, just good vibes and a bit of a wander. Sounds like you want to keep it local and easy, which is smart."
+    },
+    "plan": {
+      "where": "Avalon Beach, mate. It's your local, so no big drama getting there.",
+      "when": "Head down whenever you fancy this arvo, it's your local and perfect for a relaxed solo session.",
+      "why": "It's your local, mate! Easy to get to, got a relaxed feel, and you can grab a coffee or just chill out. Perfect for a solo session without the hassle of a big trip.",
+      "bring": [
+        "Towel",
+        "A good book",
+        "Sunscreen",
+        "Cash for a coffee"
+      ],
+      "conditions_summary": "It's a bit cooler today, around 18 degrees, with a moderate southerly breeze at about 17 km/h. Waves are around 1.2 metres, so it's good for a squiz or a walk along the sand. UV is low, so no need to fry.",
+      "gentle_warning": "Always keep an eye on the surf, even if you're just dipping your toes. Rips can be sneaky, so stick to the patrolled areas if you're heading for a swim."
+    },
+    "conditions": {
+      "temperature": 18.1,
+      "wind_kmh": 17.1,
+      "wind_direction": 181,
+      "uv_index": 0,
+      "wave_height_m": 1.18,
+      "wave_period": 7.85,
+      "fetched_at": "2026-05-10T09:00:50.570771+00:00"
+    },
+    "candidate_snapshot": [
+      {
+        "_id": "69fc84844b6e6047f9fb4955",
+        "slug": "long-reef-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "moderate",
+        "attribution": "Long Reef Beach photo by Dietmar Rabich, CC BY-SA 4.0, via Wikimedia Commons",
+        "avoid_when": [
+          "strong wind",
+          "large swell"
+        ],
+        "best_for": [
+          "headland walks",
+          "surfing",
+          "space"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "exposed",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards"
+        ],
+        "ideal_times": [
+          "morning",
+          "sunset"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Sydney_%28AU%29%2C_Long_Reef_Beach_--_2019_--_2616.jpg/960px-Sydney_%28AU%29%2C_Long_Reef_Beach_--_2019_--_2616.jpg",
+        "lat": -33.7398,
+        "lng": 151.3106,
+        "map_x": 81,
+        "map_y": 24,
+        "name": "Long Reef Beach",
+        "region": "Northern Beaches",
+        "suburb": "Collaroy",
+        "surf_suitability": "high",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "wild",
+          "walks",
+          "surf"
+        ],
+        "walk_suitability": "high",
+        "water_type": "ocean",
+        "image_license": "CC BY-SA 4.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:Sydney_(AU),_Long_Reef_Beach_--_2019_--_2616.jpg",
+        "id": "69fc84844b6e6047f9fb4955",
+        "score": 67.8,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 82,
+          "profile_score": 68,
+          "time_score": 90,
+          "region_score": 92,
+          "activity_score": 50,
+          "companion_score": 50,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: northern",
+          "Reachable by public transport",
+          "Cooler weather suits a walk"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": 18.2,
+          "wind_kmh": 15.8,
+          "wind_direction": 182,
+          "uv_index": 0,
+          "wave_height_m": 1.18,
+          "wave_period": 8.65,
+          "fetched_at": "2026-05-10T09:00:51.087856+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb495d",
+        "slug": "avalon-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Avalon Beach photo by Adam.J.W.C., CC BY 3.0, via Wikimedia Commons",
+        "avoid_when": [
+          "large swell"
+        ],
+        "best_for": [
+          "surfing",
+          "cafes",
+          "local days"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "exposed",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards",
+          "cafes"
+        ],
+        "ideal_times": [
+          "morning",
+          "sunset"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Avalon%2Cnew_south_wales.jpg/960px-Avalon%2Cnew_south_wales.jpg",
+        "lat": -33.6374,
+        "lng": 151.3317,
+        "map_x": 84,
+        "map_y": 7,
+        "name": "Avalon Beach",
+        "region": "Northern Beaches",
+        "suburb": "Avalon Beach",
+        "surf_suitability": "high",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "village",
+          "surf",
+          "relaxed"
+        ],
+        "walk_suitability": "high",
+        "water_type": "ocean",
+        "image_license": "CC BY 3.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:Avalon,new_south_wales.jpg",
+        "id": "69fc84854b6e6047f9fb495d",
+        "score": 67.8,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 82,
+          "profile_score": 68,
+          "time_score": 90,
+          "region_score": 92,
+          "activity_score": 50,
+          "companion_score": 50,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: northern",
+          "Reachable by public transport",
+          "Cooler weather suits a walk"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": 18.1,
+          "wind_kmh": 17.1,
+          "wind_direction": 181,
+          "uv_index": 0,
+          "wave_height_m": 1.18,
+          "wave_period": 7.85,
+          "fetched_at": "2026-05-10T09:00:50.570771+00:00"
+        }
+      },
+      {
+        "_id": "69fc84844b6e6047f9fb4953",
+        "slug": "curl-curl-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "strong rips"
+        ],
+        "best_for": [
+          "surfing",
+          "long walks",
+          "space"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "exposed",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards"
+        ],
+        "ideal_times": [
+          "early_morning",
+          "late_afternoon"
+        ],
+        "image_url": "",
+        "lat": -33.7683,
+        "lng": 151.2964,
+        "map_x": 78,
+        "map_y": 29,
+        "name": "Curl Curl Beach",
+        "region": "Northern Beaches",
+        "suburb": "Curl Curl",
+        "surf_suitability": "high",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "wide",
+          "surf",
+          "space"
+        ],
+        "walk_suitability": "high",
+        "water_type": "ocean",
+        "id": "69fc84844b6e6047f9fb4953",
+        "score": 65.4,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 82,
+          "profile_score": 68,
+          "time_score": 60,
+          "region_score": 92,
+          "activity_score": 50,
+          "companion_score": 50,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: northern",
+          "Reachable by public transport",
+          "Cooler weather suits a walk"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": 18,
+          "wind_kmh": 14,
+          "wind_direction": 180,
+          "uv_index": 0,
+          "wave_height_m": 1.18,
+          "wave_period": 8.65,
+          "fetched_at": "2026-05-10T09:00:51.244706+00:00"
+        }
+      },
+      {
+        "_id": "69fc84844b6e6047f9fb4957",
+        "slug": "narrabeen-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "North Narrabeen photo by Poyt448, Public domain, via Wikimedia Commons",
+        "avoid_when": [
+          "strong rips"
+        ],
+        "best_for": [
+          "surfing",
+          "long walks",
+          "space"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "exposed",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards"
+        ],
+        "ideal_times": [
+          "early_morning"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/North_Narrabeen_sand.JPG/960px-North_Narrabeen_sand.JPG",
+        "lat": -33.7139,
+        "lng": 151.3034,
+        "map_x": 79,
+        "map_y": 20,
+        "name": "Narrabeen Beach",
+        "region": "Northern Beaches",
+        "suburb": "Narrabeen",
+        "surf_suitability": "high",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "long",
+          "surf",
+          "local"
+        ],
+        "walk_suitability": "high",
+        "water_type": "ocean",
+        "image_license": "Public domain",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:North_Narrabeen_sand.JPG",
+        "id": "69fc84844b6e6047f9fb4957",
+        "score": 65.4,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 82,
+          "profile_score": 68,
+          "time_score": 60,
+          "region_score": 92,
+          "activity_score": 50,
+          "companion_score": 50,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: northern",
+          "Reachable by public transport",
+          "Cooler weather suits a walk"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": 17.8,
+          "wind_kmh": 15.8,
+          "wind_direction": 182,
+          "uv_index": 0,
+          "wave_height_m": 1.38,
+          "wave_period": 8.25,
+          "fetched_at": "2026-05-10T09:00:50.747334+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb495f",
+        "slug": "palm-beach",
+        "access_tags": [
+          "bus",
+          "parking",
+          "walking_track"
+        ],
+        "accessibility": "moderate",
+        "attribution": "Palm Beach photo by KSpilling, Public domain, via Wikimedia Commons",
+        "avoid_when": [
+          "holiday crowds",
+          "strong wind"
+        ],
+        "best_for": [
+          "day trips",
+          "surfing",
+          "lighthouse walks"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "high",
+        "dog_access": "restricted",
+        "exposure": "exposed",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards",
+          "cafes"
+        ],
+        "ideal_times": [
+          "early_morning",
+          "sunset"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Palm_Beach_NSW.jpg/960px-Palm_Beach_NSW.jpg",
+        "lat": -33.5967,
+        "lng": 151.3239,
+        "map_x": 82,
+        "map_y": 2,
+        "name": "Palm Beach",
+        "region": "Northern Beaches",
+        "suburb": "Palm Beach",
+        "surf_suitability": "high",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "destination",
+          "scenic",
+          "surf"
+        ],
+        "walk_suitability": "high",
+        "water_type": "ocean",
+        "image_license": "Public domain",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:Palm_Beach_NSW.jpg",
+        "id": "69fc84854b6e6047f9fb495f",
+        "score": 60.76,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 50,
+          "profile_score": 68,
+          "time_score": 90,
+          "region_score": 92,
+          "activity_score": 50,
+          "companion_score": 50,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: northern",
+          "Reachable by public transport"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": null,
+          "wind_kmh": null,
+          "wind_direction": null,
+          "uv_index": null,
+          "wave_height_m": null,
+          "wave_period": null,
+          "fetched_at": "2026-05-10T09:00:49.601544+00:00",
+          "conditions_unavailable": true,
+          "error": "Client error '429 Too Many Requests' for url 'https://api.open-meteo.com/v1/forecast?latitude=-33.5967&longitude=151.3239&current=temperature_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cuv_index&hourly=temperature_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cuv_index&forecast_hours=1&timezone=Australia%2FSydney&wind_speed_unit=kmh'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429"
+        }
+      }
+    ],
+    "rejected_beaches": [
+      {
+        "name": "Palm Beach",
+        "reason": "Nah, Palm Beach is a bit of a trek up north, and we can't even get a proper read on the conditions right now. Best to skip it."
+      },
+      {
+        "name": "Long Reef Beach",
+        "reason": "Long Reef's a bit further south, a bit more of a mission on public transport when you've got a perfectly good beach right where you are."
+      },
+      {
+        "name": "Curl Curl Beach",
+        "reason": "Curl Curl's another one that's a fair way down the coast. You're after a local, relaxed day, not a big bus trip."
+      },
+      {
+        "name": "Narrabeen Beach",
+        "reason": "Narrabeen's a decent stretch of sand, but it's a bit of a haul from Avalon, and you're looking for something close and easy today."
+      }
+    ],
+    "confidence": 95,
+    "recommendation_type": "beach_plan",
+    "input_context": {
+      "selected_mood": "solo",
+      "companion_context": "solo",
+      "experience_tags": [
+        "solo",
+        "relax",
+        "solo"
+      ],
+      "region": "northern",
+      "activity": "relax",
+      "companion": "solo",
+      "preferred_beach_slug": "bilgola-beach"
+    },
+    "user_notes": "",
+    "created_at": "2026-05-10T09:01:17.839000",
+    "updated_at": "2026-05-10T09:01:17.839000",
+    "replayed_at": null
+  },
+  {
+    "_id": "6a004c5ff5ef98bcbb93d28e",
+    "user_id": "6a0043aff5ef98bcbb93d289",
+    "mood_phrase": "I want a beach day near Elouera Beach.",
+    "region": "cronulla",
+    "activity": "relax",
+    "companion": "solo",
+    "preferred_beach_slug": "elouera-beach",
+    "selected_beach_name": "Elouera Beach",
+    "selected_beach_slug": "elouera-beach",
+    "image_url": "",
+    "mood_reading": {
+      "energy": "low",
+      "social_level": "low",
+      "desired_feeling": "calm and peaceful",
+      "pace": "slow",
+      "summary": "Sounds like you're after a proper chill-out day, just you and the sand. No need for big crowds or a huge party scene, just some peace and quiet near Elouera."
+    },
+    "plan": {
+      "where": "Elouera Beach, Cronulla. It's right there in the Shire, easy to find.",
+      "when": "Head down in the morning to beat any potential crowds and really stretch out that relaxed feeling. The arvo might get a bit breezy.",
+      "why": "It's perfect for a solo mission when you just want to clear your head. The wide-open sand means you won't feel squashed, and you can just wander along the shore at your own pace. With the waves up, it's a great spot to watch the surfers and just breathe it all in.",
+      "bring": [
+        "Towel",
+        "Water bottle",
+        "Sunscreen",
+        "Good book",
+        "Headphones for tunes or a podcast",
+        "Comfy shoes for walking"
+      ],
+      "conditions_summary": "It's a bit cool at 18.2°C, with a decent southerly breeze at 15.9 km/h. The waves are a solid 1.84m, so it's more for a good walk and watching the surf than a calm dip. UV is low, so no need to stress too much about getting burnt, but still slip, slop, slap.",
+      "gentle_warning": "Just a heads-up, those waves are a bit punchy today at 1.84m. If you're keen for a swim, stick between the flags and have a squiz at what the lifeguards are saying. Rips can be a bit sneaky out there, so be smart."
+    },
+    "conditions": {
+      "temperature": 18.2,
+      "wind_kmh": 15.9,
+      "wind_direction": 177,
+      "uv_index": 0,
+      "wave_height_m": 1.84,
+      "wave_period": 8.9,
+      "fetched_at": "2026-05-10T09:13:42.143247+00:00"
+    },
+    "candidate_snapshot": [
+      {
+        "_id": "69fc84854b6e6047f9fb4962",
+        "slug": "elouera-beach",
+        "access_tags": [
+          "train",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "strong rips"
+        ],
+        "best_for": [
+          "surfing",
+          "long walks",
+          "space"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "exposed",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards"
+        ],
+        "ideal_times": [
+          "morning"
+        ],
+        "image_url": "",
+        "lat": -34.0458,
+        "lng": 151.1586,
+        "map_x": 48,
+        "map_y": 88,
+        "name": "Elouera Beach",
+        "region": "Sutherland Shire",
+        "suburb": "Cronulla",
+        "surf_suitability": "high",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "surf",
+          "local",
+          "wide"
+        ],
+        "walk_suitability": "high",
+        "water_type": "ocean",
+        "id": "69fc84854b6e6047f9fb4962",
+        "score": 76.96,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 80,
+          "profile_score": 68,
+          "time_score": 60,
+          "region_score": 92,
+          "activity_score": 50,
+          "companion_score": 50,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: cronulla",
+          "Soft boost from preferred beach",
+          "Reachable by public transport",
+          "Cooler weather suits a walk"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability"
+        ],
+        "conditions": {
+          "temperature": 18.2,
+          "wind_kmh": 15.9,
+          "wind_direction": 177,
+          "uv_index": 0,
+          "wave_height_m": 1.84,
+          "wave_period": 8.9,
+          "fetched_at": "2026-05-10T09:13:42.143247+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb4963",
+        "slug": "wanda-beach",
+        "access_tags": [
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Wanda Beach photo by J Bar, CC BY-SA 3.0, via Wikimedia Commons",
+        "avoid_when": [
+          "strong rips",
+          "wind"
+        ],
+        "best_for": [
+          "surfing",
+          "long walks",
+          "quiet"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "exposed",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards"
+        ],
+        "ideal_times": [
+          "early_morning"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Wanda_Beach_1.JPG/960px-Wanda_Beach_1.JPG",
+        "lat": -34.0388,
+        "lng": 151.1609,
+        "map_x": 48,
+        "map_y": 86,
+        "name": "Wanda Beach",
+        "region": "Sutherland Shire",
+        "suburb": "Cronulla",
+        "surf_suitability": "high",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "wild",
+          "surf",
+          "space"
+        ],
+        "walk_suitability": "high",
+        "water_type": "ocean",
+        "image_license": "CC BY-SA 3.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:Wanda_Beach_1.JPG",
+        "id": "69fc84854b6e6047f9fb4963",
+        "score": 68.4,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 80,
+          "profile_score": 56,
+          "time_score": 60,
+          "region_score": 92,
+          "activity_score": 74,
+          "companion_score": 78,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: cronulla",
+          "Strong fit for relax",
+          "Works well for solo",
+          "Cooler weather suits a walk"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability"
+        ],
+        "conditions": {
+          "temperature": 18.3,
+          "wind_kmh": 15.9,
+          "wind_direction": 177,
+          "uv_index": 0,
+          "wave_height_m": 1.84,
+          "wave_period": 8.9,
+          "fetched_at": "2026-05-10T09:13:42.154014+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb4961",
+        "slug": "north-cronulla-beach",
+        "access_tags": [
+          "train",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "North Cronulla Beach photo by J Bar, CC BY-SA 3.0, via Wikimedia Commons",
+        "avoid_when": [
+          "crowded days"
+        ],
+        "best_for": [
+          "surfing",
+          "groups",
+          "cafes"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "high",
+        "dog_access": "restricted",
+        "exposure": "semi_protected",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards",
+          "cafes"
+        ],
+        "ideal_times": [
+          "morning",
+          "evening"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/North_Cronulla_Beach_1.JPG/960px-North_Cronulla_Beach_1.JPG",
+        "lat": -34.0535,
+        "lng": 151.1563,
+        "map_x": 47,
+        "map_y": 90,
+        "name": "North Cronulla Beach",
+        "region": "Sutherland Shire",
+        "suburb": "Cronulla",
+        "surf_suitability": "high",
+        "swim_suitability": "high",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "social",
+          "surf",
+          "cafes"
+        ],
+        "walk_suitability": "high",
+        "water_type": "ocean",
+        "image_license": "CC BY-SA 3.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:North_Cronulla_Beach_1.JPG",
+        "id": "69fc84854b6e6047f9fb4961",
+        "score": 61.86,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 55,
+          "profile_score": 68,
+          "time_score": 90,
+          "region_score": 92,
+          "activity_score": 50,
+          "companion_score": 50,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: cronulla",
+          "Reachable by public transport",
+          "Cooler weather suits a walk"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability",
+          "Cooler temperature reduces swim appeal"
+        ],
+        "conditions": {
+          "temperature": 18.3,
+          "wind_kmh": 15.9,
+          "wind_direction": 177,
+          "uv_index": 0,
+          "wave_height_m": 1.84,
+          "wave_period": 8.9,
+          "fetched_at": "2026-05-10T09:13:42.142247+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb4960",
+        "slug": "cronulla-beach",
+        "access_tags": [
+          "train",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Cronulla Beach photo by WatsonKat, CC BY-SA 4.0, via Wikimedia Commons",
+        "avoid_when": [
+          "busy weekends"
+        ],
+        "best_for": [
+          "surfing",
+          "cafes",
+          "easy transport"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "high",
+        "dog_access": "restricted",
+        "exposure": "semi_protected",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards",
+          "cafes"
+        ],
+        "ideal_times": [
+          "morning",
+          "weekday"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Cronulla_Beach_Sydney_September_2023.jpg/960px-Cronulla_Beach_Sydney_September_2023.jpg",
+        "lat": -34.0577,
+        "lng": 151.1547,
+        "map_x": 47,
+        "map_y": 91,
+        "name": "Cronulla Beach",
+        "region": "Sutherland Shire",
+        "suburb": "Cronulla",
+        "surf_suitability": "high",
+        "swim_suitability": "high",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "classic",
+          "surf",
+          "train_access"
+        ],
+        "walk_suitability": "high",
+        "water_type": "ocean",
+        "image_license": "CC BY-SA 4.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:Cronulla_Beach_Sydney_September_2023.jpg",
+        "id": "69fc84854b6e6047f9fb4960",
+        "score": 59.46,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 55,
+          "profile_score": 68,
+          "time_score": 60,
+          "region_score": 92,
+          "activity_score": 50,
+          "companion_score": 50,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: cronulla",
+          "Reachable by public transport",
+          "Cooler weather suits a walk"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability",
+          "Cooler temperature reduces swim appeal"
+        ],
+        "conditions": {
+          "temperature": 18.2,
+          "wind_kmh": 15.9,
+          "wind_direction": 177,
+          "uv_index": 0,
+          "wave_height_m": 1.84,
+          "wave_period": 8.9,
+          "fetched_at": "2026-05-10T09:13:42.194443+00:00"
+        }
+      }
+    ],
+    "rejected_beaches": [
+      {
+        "name": "Wanda Beach",
+        "reason": "Wanda's a cracker for quiet, but getting there by public transport is a bit more of a faff, and you specifically asked for Elouera. No need to trek further when Elouera's right there."
+      },
+      {
+        "name": "North Cronulla Beach",
+        "reason": "North Cronulla is usually buzzing, with more of a social vibe and cafes. Not really the go for a solo 'relax' day when you're after some peace and quiet."
+      },
+      {
+        "name": "Cronulla Beach",
+        "reason": "Similar to North Cronulla, it's a bit more of a bustling spot, especially for a solo chill. You'd be sharing the sand with more folks than you'd probably want for a proper relaxed day."
+      }
+    ],
+    "confidence": 95,
+    "recommendation_type": "beach_plan",
+    "input_context": {
+      "selected_mood": "active",
+      "companion_context": "solo",
+      "experience_tags": [
+        "active",
+        "relax",
+        "solo"
+      ],
+      "region": "cronulla",
+      "activity": "relax",
+      "companion": "solo",
+      "preferred_beach_slug": "elouera-beach"
+    },
+    "user_notes": "",
+    "created_at": "2026-05-10T09:14:07.061000",
+    "updated_at": "2026-05-10T09:14:07.061000",
+    "replayed_at": null
+  },
+  {
+    "_id": "6a0935c33d24033530ae24c4",
+    "user_id": "6a0176f4ae60c174f8c7d16a",
+    "mood_phrase": "Laidback",
+    "region": "cronulla",
+    "activity": "relax",
+    "companion": "solo",
+    "preferred_beach_slug": null,
+    "selected_beach_name": "Wanda Beach",
+    "selected_beach_slug": "wanda-beach",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Wanda_Beach_1.JPG/960px-Wanda_Beach_1.JPG",
+    "mood_reading": {
+      "energy": "low",
+      "social_level": "low",
+      "desired_feeling": "calm and peaceful",
+      "pace": "slow",
+      "summary": "Sounds like you're after a proper chill-out session, hey? Just you, the sand, and the waves. No fuss, no crowds, just some good old-fashioned unwinding."
+    },
+    "plan": {
+      "where": "Head down to Wanda Beach in Cronulla. It's the northern end of the main Cronulla stretch, a bit more spread out and less hectic.",
+      "when": "An arvo visit would be mint. You'll catch the good light and miss any morning rush, giving you that proper relaxed feel.",
+      "why": "You want to relax solo and get away from it all, and Wanda's got that wide-open, 'just breathe' kind of energy. It's perfect for a long walk or just finding a quiet spot to zone out.",
+      "bring": [
+        "Sunscreen",
+        "A good book",
+        "Water bottle",
+        "Towel"
+      ],
+      "conditions_summary": "The water's a pleasant 20.6°C, with a light breeze from the northeast. Waves are around 1.5 metres, so it's got a bit of a swell, but nothing too wild.",
+      "gentle_warning": "Just a heads-up, the waves are a bit up today, so if you're planning a swim, have a squiz at the conditions and stick to the patrolled areas. Rips can be a bit sneaky out here, so always be careful."
+    },
+    "conditions": {
+      "temperature": 20.6,
+      "wind_kmh": 8.8,
+      "wind_direction": 44,
+      "uv_index": 2.15,
+      "wave_height_m": 1.56,
+      "wave_period": 8.05,
+      "fetched_at": "2026-05-17T03:27:45.573939+00:00"
+    },
+    "candidate_snapshot": [
+      {
+        "_id": "69fc84854b6e6047f9fb4963",
+        "slug": "wanda-beach",
+        "access_tags": [
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Wanda Beach photo by J Bar, CC BY-SA 3.0, via Wikimedia Commons",
+        "avoid_when": [
+          "strong rips",
+          "wind"
+        ],
+        "best_for": [
+          "surfing",
+          "long walks",
+          "quiet"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "exposed",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards"
+        ],
+        "ideal_times": [
+          "early_morning"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Wanda_Beach_1.JPG/960px-Wanda_Beach_1.JPG",
+        "lat": -34.0388,
+        "lng": 151.1609,
+        "map_x": 48,
+        "map_y": 86,
+        "name": "Wanda Beach",
+        "region": "Sutherland Shire",
+        "suburb": "Cronulla",
+        "surf_suitability": "high",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "wild",
+          "surf",
+          "space"
+        ],
+        "walk_suitability": "high",
+        "water_type": "ocean",
+        "image_license": "CC BY-SA 3.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:Wanda_Beach_1.JPG",
+        "id": "69fc84854b6e6047f9fb4963",
+        "score": 65.76,
+        "score_breakdown": {
+          "mood_score": 50.0,
+          "condition_score": 68.0,
+          "profile_score": 56.0,
+          "time_score": 60.0,
+          "region_score": 92.0,
+          "activity_score": 74.0,
+          "companion_score": 78.0,
+          "profile_distance_km": 11.4
+        },
+        "matched_reasons": [
+          "Fits selected region: cronulla",
+          "Strong fit for relax",
+          "Works well for solo",
+          "Close to profile suburb: about 11km away"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability"
+        ],
+        "conditions": {
+          "temperature": 20.6,
+          "wind_kmh": 8.8,
+          "wind_direction": 44,
+          "uv_index": 2.15,
+          "wave_height_m": 1.56,
+          "wave_period": 8.05,
+          "fetched_at": "2026-05-17T03:27:45.573939+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb4962",
+        "slug": "elouera-beach",
+        "access_tags": [
+          "train",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "strong rips"
+        ],
+        "best_for": [
+          "surfing",
+          "long walks",
+          "space"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "exposed",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards"
+        ],
+        "ideal_times": [
+          "morning"
+        ],
+        "image_url": "",
+        "lat": -34.0458,
+        "lng": 151.1586,
+        "map_x": 48,
+        "map_y": 88,
+        "name": "Elouera Beach",
+        "region": "Sutherland Shire",
+        "suburb": "Cronulla",
+        "surf_suitability": "high",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "surf",
+          "local",
+          "wide"
+        ],
+        "walk_suitability": "high",
+        "water_type": "ocean",
+        "id": "69fc84854b6e6047f9fb4962",
+        "score": 62.32,
+        "score_breakdown": {
+          "mood_score": 50.0,
+          "condition_score": 68.0,
+          "profile_score": 68.0,
+          "time_score": 60.0,
+          "region_score": 92.0,
+          "activity_score": 50.0,
+          "companion_score": 50.0,
+          "profile_distance_km": 12.1
+        },
+        "matched_reasons": [
+          "Fits selected region: cronulla",
+          "Reachable by public transport"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability"
+        ],
+        "conditions": {
+          "temperature": 20.5,
+          "wind_kmh": 8.8,
+          "wind_direction": 44,
+          "uv_index": 2.15,
+          "wave_height_m": 1.56,
+          "wave_period": 8.05,
+          "fetched_at": "2026-05-17T03:27:45.579538+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb4960",
+        "slug": "cronulla-beach",
+        "access_tags": [
+          "train",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Cronulla Beach photo by WatsonKat, CC BY-SA 4.0, via Wikimedia Commons",
+        "avoid_when": [
+          "busy weekends"
+        ],
+        "best_for": [
+          "surfing",
+          "cafes",
+          "easy transport"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "high",
+        "dog_access": "restricted",
+        "exposure": "semi_protected",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards",
+          "cafes"
+        ],
+        "ideal_times": [
+          "morning",
+          "weekday"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Cronulla_Beach_Sydney_September_2023.jpg/960px-Cronulla_Beach_Sydney_September_2023.jpg",
+        "lat": -34.0577,
+        "lng": 151.1547,
+        "map_x": 47,
+        "map_y": 91,
+        "name": "Cronulla Beach",
+        "region": "Sutherland Shire",
+        "suburb": "Cronulla",
+        "surf_suitability": "high",
+        "swim_suitability": "high",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "classic",
+          "surf",
+          "train_access"
+        ],
+        "walk_suitability": "high",
+        "water_type": "ocean",
+        "image_license": "CC BY-SA 4.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:Cronulla_Beach_Sydney_September_2023.jpg",
+        "id": "69fc84854b6e6047f9fb4960",
+        "score": 60.12,
+        "score_breakdown": {
+          "mood_score": 50.0,
+          "condition_score": 58.0,
+          "profile_score": 68.0,
+          "time_score": 60.0,
+          "region_score": 92.0,
+          "activity_score": 50.0,
+          "companion_score": 50.0,
+          "profile_distance_km": 13.4
+        },
+        "matched_reasons": [
+          "Fits selected region: cronulla",
+          "Reachable by public transport"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability"
+        ],
+        "conditions": {
+          "temperature": 20.5,
+          "wind_kmh": 8.8,
+          "wind_direction": 44,
+          "uv_index": 2.15,
+          "wave_height_m": 1.56,
+          "wave_period": 8.05,
+          "fetched_at": "2026-05-17T03:27:45.586025+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb4961",
+        "slug": "north-cronulla-beach",
+        "access_tags": [
+          "train",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "North Cronulla Beach photo by J Bar, CC BY-SA 3.0, via Wikimedia Commons",
+        "avoid_when": [
+          "crowded days"
+        ],
+        "best_for": [
+          "surfing",
+          "groups",
+          "cafes"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "high",
+        "dog_access": "restricted",
+        "exposure": "semi_protected",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards",
+          "cafes"
+        ],
+        "ideal_times": [
+          "morning",
+          "evening"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/North_Cronulla_Beach_1.JPG/960px-North_Cronulla_Beach_1.JPG",
+        "lat": -34.0535,
+        "lng": 151.1563,
+        "map_x": 47,
+        "map_y": 90,
+        "name": "North Cronulla Beach",
+        "region": "Sutherland Shire",
+        "suburb": "Cronulla",
+        "surf_suitability": "high",
+        "swim_suitability": "high",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "social",
+          "surf",
+          "cafes"
+        ],
+        "walk_suitability": "high",
+        "water_type": "ocean",
+        "image_license": "CC BY-SA 3.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:North_Cronulla_Beach_1.JPG",
+        "id": "69fc84854b6e6047f9fb4961",
+        "score": 60.12,
+        "score_breakdown": {
+          "mood_score": 50.0,
+          "condition_score": 58.0,
+          "profile_score": 68.0,
+          "time_score": 60.0,
+          "region_score": 92.0,
+          "activity_score": 50.0,
+          "companion_score": 50.0,
+          "profile_distance_km": 12.9
+        },
+        "matched_reasons": [
+          "Fits selected region: cronulla",
+          "Reachable by public transport"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability"
+        ],
+        "conditions": {
+          "temperature": 20.6,
+          "wind_kmh": 8.8,
+          "wind_direction": 44,
+          "uv_index": 2.15,
+          "wave_height_m": 1.56,
+          "wave_period": 8.05,
+          "fetched_at": "2026-05-17T03:27:45.573846+00:00"
+        }
+      }
+    ],
+    "rejected_beaches": [
+      {
+        "name": "Elouera Beach",
+        "reason": "Elouera's not bad, but Wanda just has that extra bit of quiet space that's better for a proper solo relax."
+      },
+      {
+        "name": "Cronulla Beach",
+        "reason": "Yeah nah, Cronulla Beach itself can get a bit hectic, especially if you're after a truly laidback, solo escape. More for the social butterflies."
+      },
+      {
+        "name": "North Cronulla Beach",
+        "reason": "North Cronulla's got a good buzz, but it's probably too social for what you're after today. You want chill, not chatter."
+      }
+    ],
+    "confidence": 90,
+    "recommendation_type": "beach_plan",
+    "input_context": {
+      "selected_mood": "Laidback",
+      "companion_context": "solo",
+      "experience_tags": [],
+      "region": "cronulla",
+      "activity": "relax",
+      "companion": "solo",
+      "preferred_beach_slug": null
+    },
+    "user_notes": "",
+    "created_at": "2026-05-17T03:28:03.921000",
+    "updated_at": "2026-05-17T03:28:03.921000",
+    "replayed_at": null
+  },
+  {
+    "_id": "6a09360d3d24033530ae24c5",
+    "user_id": "6a0176f4ae60c174f8c7d16a",
+    "mood_phrase": "laidback",
+    "region": null,
+    "activity": "swim",
+    "companion": "solo",
+    "preferred_beach_slug": null,
+    "selected_beach_name": "Malabar Beach",
+    "selected_beach_slug": "malabar-beach",
+    "image_url": "",
+    "mood_reading": {
+      "energy": "low",
+      "social_level": "low",
+      "desired_feeling": "relaxed",
+      "pace": "slow",
+      "summary": "Sounds like you're after a proper chill-out, a bit of peace and quiet, maybe a gentle dip without the usual Sydney hustle. Just a cruisy arvo, eh?"
+    },
+    "plan": {
+      "where": "Malabar Beach, mate. Down in the Eastern Suburbs, but it feels a world away from the usual madness. Easy enough to get to by bus.",
+      "when": "Anytime really, but a mid-morning or arvo dip is usually spot on for a relaxed vibe when you're after a bit of peace.",
+      "why": "It's a sheltered bay, so the water's usually super calm, perfect for a cruisy swim. Plus, it's not usually packed, so you'll get that peace you're after. Proper low-key.",
+      "bring": [
+        "towel",
+        "book",
+        "sunscreen",
+        "water bottle"
+      ],
+      "conditions_summary": "Water's a decent 20.4 degrees, mate. Wind's a gentle 8.6 km/h from the northeast, so it'll feel pretty calm in the bay. UV is low at 2.55, but still worth a squiz.",
+      "gentle_warning": "It's a bay, so generally safe, but always keep an eye out, especially if you're swimming solo. There aren't lifeguards on duty here, so swim smart."
+    },
+    "conditions": {
+      "temperature": 20.4,
+      "wind_kmh": 8.6,
+      "wind_direction": 54,
+      "uv_index": 2.55,
+      "wave_height_m": 1.44,
+      "wave_period": 8.25,
+      "fetched_at": "2026-05-17T03:28:50.659044+00:00"
+    },
+    "candidate_snapshot": [
+      {
+        "_id": "69fc84844b6e6047f9fb4943",
+        "slug": "malabar-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "after heavy rain"
+        ],
+        "best_for": [
+          "calm swims",
+          "kids",
+          "low key days"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "toilets",
+          "showers",
+          "park"
+        ],
+        "ideal_times": [
+          "mid_morning",
+          "afternoon"
+        ],
+        "image_url": "",
+        "lat": -33.9637,
+        "lng": 151.2503,
+        "map_x": 67,
+        "map_y": 72,
+        "name": "Malabar Beach",
+        "region": "Eastern Suburbs",
+        "suburb": "Malabar",
+        "surf_suitability": "low",
+        "swim_suitability": "high",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "calm",
+          "local",
+          "family"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "bay",
+        "id": "69fc84844b6e6047f9fb4943",
+        "score": 70.16,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 70,
+          "profile_score": 86,
+          "time_score": 90,
+          "region_score": 50,
+          "activity_score": 94,
+          "companion_score": 78,
+          "profile_distance_km": 10.2
+        },
+        "matched_reasons": [
+          "Strong fit for swim",
+          "Works well for solo",
+          "Close to profile suburb: about 10km away",
+          "Reachable by public transport"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": 20.4,
+          "wind_kmh": 8.6,
+          "wind_direction": 54,
+          "uv_index": 2.55,
+          "wave_height_m": 1.44,
+          "wave_period": 8.25,
+          "fetched_at": "2026-05-17T03:28:50.659044+00:00"
+        }
+      },
+      {
+        "_id": "69fc84844b6e6047f9fb494c",
+        "slug": "chinamans-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "limited cafes"
+        ],
+        "best_for": [
+          "picnics",
+          "calm swims",
+          "kids"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "toilets",
+          "park"
+        ],
+        "ideal_times": [
+          "morning",
+          "afternoon"
+        ],
+        "image_url": "",
+        "lat": -33.8172,
+        "lng": 151.2485,
+        "map_x": 67,
+        "map_y": 39,
+        "name": "Chinamans Beach",
+        "region": "Lower North Shore",
+        "suburb": "Mosman",
+        "surf_suitability": "low",
+        "swim_suitability": "high",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "quiet",
+          "harbour",
+          "family"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "harbour",
+        "id": "69fc84844b6e6047f9fb494c",
+        "score": 70.16,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 70,
+          "profile_score": 86,
+          "time_score": 90,
+          "region_score": 50,
+          "activity_score": 94,
+          "companion_score": 78,
+          "profile_distance_km": 16.5
+        },
+        "matched_reasons": [
+          "Strong fit for swim",
+          "Works well for solo",
+          "Reachable by public transport"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": 20.4,
+          "wind_kmh": 10,
+          "wind_direction": 62,
+          "uv_index": 2.75,
+          "wave_height_m": 1.26,
+          "wave_period": 8.25,
+          "fetched_at": "2026-05-17T03:28:50.658959+00:00"
+        }
+      },
+      {
+        "_id": "69fc84844b6e6047f9fb493f",
+        "slug": "clovelly-beach",
+        "access_tags": [
+          "bus",
+          "parking",
+          "coastal_walk"
+        ],
+        "accessibility": "easy",
+        "attribution": "Clovelly Beach photo by J Bar, CC BY 3.0, via Wikimedia Commons",
+        "avoid_when": [
+          "after heavy rain"
+        ],
+        "best_for": [
+          "snorkelling",
+          "calm swims",
+          "kids"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards",
+          "kiosk"
+        ],
+        "ideal_times": [
+          "morning",
+          "midday"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Clovelly_1.JPG/960px-Clovelly_1.JPG",
+        "lat": -33.9123,
+        "lng": 151.2665,
+        "map_x": 70,
+        "map_y": 61,
+        "name": "Clovelly Beach",
+        "region": "Eastern Suburbs",
+        "suburb": "Clovelly",
+        "surf_suitability": "low",
+        "swim_suitability": "high",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "protected",
+          "snorkel",
+          "family"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "bay",
+        "image_license": "CC BY 3.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:Clovelly_1.JPG",
+        "id": "69fc84844b6e6047f9fb493f",
+        "score": 65.4,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 70,
+          "profile_score": 68,
+          "time_score": 90,
+          "region_score": 50,
+          "activity_score": 94,
+          "companion_score": 50,
+          "profile_distance_km": 11.6
+        },
+        "matched_reasons": [
+          "Strong fit for swim",
+          "Close to profile suburb: about 12km away",
+          "Reachable by public transport"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": 20.4,
+          "wind_kmh": 8.9,
+          "wind_direction": 62,
+          "uv_index": 2.55,
+          "wave_height_m": 1.32,
+          "wave_period": 8.15,
+          "fetched_at": "2026-05-17T03:28:50.659126+00:00"
+        }
+      },
+      {
+        "_id": "69fc84844b6e6047f9fb4940",
+        "slug": "gordons-bay",
+        "access_tags": [
+          "bus",
+          "coastal_walk"
+        ],
+        "accessibility": "moderate",
+        "attribution": "Gordons Bay photo by Tea and Toast, CC BY-SA 3.0, via Wikimedia Commons",
+        "avoid_when": [
+          "large swell",
+          "mobility needs"
+        ],
+        "best_for": [
+          "snorkelling",
+          "floating",
+          "romantic swims"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "nearby_toilets"
+        ],
+        "ideal_times": [
+          "morning"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gordons_Bay%2C_Sydney_panorama.JPG/960px-Gordons_Bay%2C_Sydney_panorama.JPG",
+        "lat": -33.9169,
+        "lng": 151.2662,
+        "map_x": 70,
+        "map_y": 62,
+        "name": "Gordons Bay",
+        "region": "Eastern Suburbs",
+        "suburb": "Coogee",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "snorkel",
+          "rocky",
+          "quiet"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "bay",
+        "image_license": "CC BY-SA 3.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:Gordons_Bay,_Sydney_panorama.JPG",
+        "id": "69fc84844b6e6047f9fb4940",
+        "score": 64.4,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 70,
+          "profile_score": 86,
+          "time_score": 60,
+          "region_score": 50,
+          "activity_score": 66,
+          "companion_score": 78,
+          "profile_distance_km": 11.5
+        },
+        "matched_reasons": [
+          "Works well for solo",
+          "Close to profile suburb: about 11km away",
+          "Reachable by public transport"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": 20.6,
+          "wind_kmh": 8.9,
+          "wind_direction": 62,
+          "uv_index": 2.55,
+          "wave_height_m": 1.44,
+          "wave_period": 8.25,
+          "fetched_at": "2026-05-17T03:28:50.658727+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb4967",
+        "slug": "little-congwong-beach",
+        "access_tags": [
+          "bus",
+          "walking_track"
+        ],
+        "accessibility": "moderate",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "limited facilities"
+        ],
+        "best_for": [
+          "quiet swims",
+          "short walks"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "nearby_toilets"
+        ],
+        "ideal_times": [
+          "weekday",
+          "morning"
+        ],
+        "image_url": "",
+        "lat": -33.9918,
+        "lng": 151.237,
+        "map_x": 65,
+        "map_y": 79,
+        "name": "Little Congwong Beach",
+        "region": "Eastern Suburbs",
+        "suburb": "La Perouse",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "secluded",
+          "calm",
+          "walk"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "bay",
+        "id": "69fc84854b6e6047f9fb4967",
+        "score": 64.4,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 70,
+          "profile_score": 86,
+          "time_score": 60,
+          "region_score": 50,
+          "activity_score": 66,
+          "companion_score": 78,
+          "profile_distance_km": 10.4
+        },
+        "matched_reasons": [
+          "Works well for solo",
+          "Close to profile suburb: about 10km away",
+          "Reachable by public transport"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": 20.5,
+          "wind_kmh": 8.6,
+          "wind_direction": 54,
+          "uv_index": 2.55,
+          "wave_height_m": 1.44,
+          "wave_period": 8.25,
+          "fetched_at": "2026-05-17T03:28:50.659083+00:00"
+        }
+      }
+    ],
+    "rejected_beaches": [
+      {
+        "name": "Chinamans Beach",
+        "reason": "Chinamans is lovely and quiet, but it's a bit more of a trek from Arncliffe (about 16.5km) for a similar vibe, and sometimes a touch busier than Malabar."
+      },
+      {
+        "name": "Little Congwong Beach",
+        "reason": "Little Congwong is super secluded and calm, which sounds good, but the swim isn't quite as straightforward as Malabar, and it's a bit more of a walk to get to the sand."
+      },
+      {
+        "name": "Clovelly Beach",
+        "reason": "Clovelly is great for a snorkel and a dip, but it can get a bit more family-heavy, and you're after a proper solo, laidback vibe without too much going on."
+      }
+    ],
+    "confidence": 90,
+    "recommendation_type": "beach_plan",
+    "input_context": {
+      "selected_mood": null,
+      "companion_context": "solo",
+      "experience_tags": [
+        "swim",
+        "solo"
+      ],
+      "region": null,
+      "activity": "swim",
+      "companion": "solo",
+      "preferred_beach_slug": null
+    },
+    "user_notes": "",
+    "created_at": "2026-05-17T03:29:17.514000",
+    "updated_at": "2026-05-17T03:29:17.514000",
+    "replayed_at": null
+  },
+  {
+    "_id": "6a0a9b053d24033530ae24c9",
+    "user_id": "6a0176f4ae60c174f8c7d16a",
+    "mood_phrase": "laidback",
+    "region": "manly",
+    "activity": "relax",
+    "companion": "family",
+    "preferred_beach_slug": null,
+    "selected_beach_name": "Shelly Beach",
+    "selected_beach_slug": "shelly-beach-manly",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Looking_over_Shelly_Beach_and_Cabbage_Tree_Bay_in_Sydney.jpg/960px-Looking_over_Shelly_Beach_and_Cabbage_Tree_Bay_in_Sydney.jpg",
+    "mood_reading": {
+      "energy": "low",
+      "social_level": "medium",
+      "desired_feeling": "calm",
+      "pace": "slow",
+      "summary": "You're after a proper chill-out, a bit of peace and quiet with the family, without too much fuss. Laidback is the name of the game, yeah?"
+    },
+    "plan": {
+      "where": "Shelly Beach, just a lovely, scenic stroll from Manly Wharf. You can't miss it.",
+      "when": "Head over in the morning, before it gets too busy, or later in the arvo for a bit more peace. Weekdays are always a bit more chill, if you can swing it.",
+      "why": "It's got that beautiful protected cove, so it's usually flat as a tack, perfect for the family to relax without worrying about big waves. You can snorkel, have a gentle paddle, or just kick back on the sand. Plus, the walk there from Manly is proper nice.",
+      "bring": [
+        "Swimmers (even if it's a bit brisk, worth a dip!)",
+        "Snorkel gear if you're keen for a squiz at the fish",
+        "Towels",
+        "Sunscreen and hats",
+        "A picnic – there's a kiosk, but a packed lunch is always a good shout"
+      ],
+      "conditions_summary": "The water's a bit cool at 18.9°C, but the wind's barely a whisper at 2.1 km/h, so it'll feel pretty calm. UV is low, so no need to stress too much about getting burnt, but still slip, slop, slap. While there are some waves out in the open ocean, Shelly's protected cove will be much calmer.",
+      "gentle_warning": "Even though it's protected, always keep a proper eye on the little ones, especially near the water. And remember, it can get a bit busy on sunny weekends, so an early start is a good idea for a truly laidback experience."
+    },
+    "conditions": {
+      "temperature": 18.9,
+      "wind_kmh": 2.1,
+      "wind_direction": 290,
+      "uv_index": 1.15,
+      "wave_height_m": 1.4,
+      "wave_period": 8.75,
+      "fetched_at": "2026-05-18T04:52:08.087056+00:00"
+    },
+    "candidate_snapshot": [
+      {
+        "_id": "69fc84844b6e6047f9fb4951",
+        "slug": "shelly-beach-manly",
+        "access_tags": [
+          "ferry",
+          "walking_track"
+        ],
+        "accessibility": "easy",
+        "attribution": "Shelly Beach photo by Hardlinerr, CC BY-SA 4.0, via Wikimedia Commons",
+        "avoid_when": [
+          "crowded weekends"
+        ],
+        "best_for": [
+          "snorkelling",
+          "calm swims",
+          "walks"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "high",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "toilets",
+          "showers",
+          "kiosk"
+        ],
+        "ideal_times": [
+          "morning",
+          "weekday"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Looking_over_Shelly_Beach_and_Cabbage_Tree_Bay_in_Sydney.jpg/960px-Looking_over_Shelly_Beach_and_Cabbage_Tree_Bay_in_Sydney.jpg",
+        "lat": -33.8008,
+        "lng": 151.2988,
+        "map_x": 79,
+        "map_y": 35,
+        "name": "Shelly Beach",
+        "region": "Northern Beaches",
+        "suburb": "Manly",
+        "surf_suitability": "low",
+        "swim_suitability": "high",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "snorkel",
+          "protected",
+          "scenic"
+        ],
+        "walk_suitability": "high",
+        "water_type": "cove",
+        "image_license": "CC BY-SA 4.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:Looking_over_Shelly_Beach_and_Cabbage_Tree_Bay_in_Sydney.jpg",
+        "id": "69fc84844b6e6047f9fb4951",
+        "score": 69.38,
+        "score_breakdown": {
+          "mood_score": 50.0,
+          "condition_score": 67.0,
+          "profile_score": 68.0,
+          "time_score": 60.0,
+          "region_score": 92.0,
+          "activity_score": 84.0,
+          "companion_score": 90.0,
+          "profile_distance_km": 20.8
+        },
+        "matched_reasons": [
+          "Fits selected region: manly",
+          "Strong fit for relax",
+          "Works well for family",
+          "Reachable by public transport",
+          "Cooler weather suits a walk"
+        ],
+        "penalties": [
+          "Cooler temperature reduces swim appeal"
+        ],
+        "conditions": {
+          "temperature": 18.9,
+          "wind_kmh": 2.1,
+          "wind_direction": 290,
+          "uv_index": 1.15,
+          "wave_height_m": 1.4,
+          "wave_period": 8.75,
+          "fetched_at": "2026-05-18T04:52:08.087056+00:00"
+        }
+      },
+      {
+        "_id": "69fc84844b6e6047f9fb4950",
+        "slug": "manly-beach",
+        "access_tags": [
+          "ferry",
+          "bus",
+          "paid_parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Manly Beach photo by Maksym Kozlenko, CC BY-SA 4.0, via Wikimedia Commons",
+        "avoid_when": [
+          "big crowds",
+          "strong rips"
+        ],
+        "best_for": [
+          "surfing",
+          "cafes",
+          "day trips"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "high",
+        "dog_access": "restricted",
+        "exposure": "exposed",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards",
+          "cafes"
+        ],
+        "ideal_times": [
+          "early_morning",
+          "evening"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/2020-10-24_Manly_Beach_3.jpg/960px-2020-10-24_Manly_Beach_3.jpg",
+        "lat": -33.7969,
+        "lng": 151.2873,
+        "map_x": 76,
+        "map_y": 34,
+        "name": "Manly Beach",
+        "region": "Northern Beaches",
+        "suburb": "Manly",
+        "surf_suitability": "high",
+        "swim_suitability": "high",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "iconic",
+          "surf",
+          "social"
+        ],
+        "walk_suitability": "high",
+        "water_type": "ocean",
+        "image_license": "CC BY-SA 4.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:2020-10-24_Manly_Beach_3.jpg",
+        "id": "69fc84844b6e6047f9fb4950",
+        "score": 64.34,
+        "score_breakdown": {
+          "mood_score": 50.0,
+          "condition_score": 67.0,
+          "profile_score": 68.0,
+          "time_score": 60.0,
+          "region_score": 92.0,
+          "activity_score": 50.0,
+          "companion_score": 78.0,
+          "profile_distance_km": 20.5
+        },
+        "matched_reasons": [
+          "Fits selected region: manly",
+          "Works well for family",
+          "Reachable by public transport",
+          "Cooler weather suits a walk"
+        ],
+        "penalties": [
+          "Cooler temperature reduces swim appeal"
+        ],
+        "conditions": {
+          "temperature": 18.9,
+          "wind_kmh": 2.1,
+          "wind_direction": 290,
+          "uv_index": 1.15,
+          "wave_height_m": 1.4,
+          "wave_period": 8.75,
+          "fetched_at": "2026-05-18T04:52:08.086975+00:00"
+        }
+      },
+      {
+        "_id": "69fc84844b6e6047f9fb4952",
+        "slug": "freshwater-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Freshwater Beach photo by Mhsb, Public domain, via Wikimedia Commons",
+        "avoid_when": [
+          "large swell"
+        ],
+        "best_for": [
+          "surfing",
+          "families",
+          "ocean pool"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "semi_protected",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards",
+          "kiosk"
+        ],
+        "ideal_times": [
+          "morning"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Freshwater_beach_NSW.jpg/960px-Freshwater_beach_NSW.jpg",
+        "lat": -33.7799,
+        "lng": 151.2907,
+        "map_x": 77,
+        "map_y": 31,
+        "name": "Freshwater Beach",
+        "region": "Northern Beaches",
+        "suburb": "Freshwater",
+        "surf_suitability": "high",
+        "swim_suitability": "high",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "surf",
+          "family",
+          "local"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "ocean",
+        "image_license": "Public domain",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:Freshwater_beach_NSW.jpg",
+        "id": "69fc84844b6e6047f9fb4952",
+        "score": 61.7,
+        "score_breakdown": {
+          "mood_score": 50.0,
+          "condition_score": 55.0,
+          "profile_score": 68.0,
+          "time_score": 60.0,
+          "region_score": 92.0,
+          "activity_score": 50.0,
+          "companion_score": 78.0,
+          "profile_distance_km": 22.1
+        },
+        "matched_reasons": [
+          "Fits selected region: manly",
+          "Works well for family",
+          "Reachable by public transport"
+        ],
+        "penalties": [
+          "Cooler temperature reduces swim appeal"
+        ],
+        "conditions": {
+          "temperature": 18.9,
+          "wind_kmh": 2.1,
+          "wind_direction": 290,
+          "uv_index": 1.15,
+          "wave_height_m": 1.4,
+          "wave_period": 8.75,
+          "fetched_at": "2026-05-18T04:52:08.086751+00:00"
+        }
+      }
+    ],
+    "rejected_beaches": [
+      {
+        "name": "Manly Beach",
+        "reason": "Manly Beach is a bit more of a full-on surf beach, and while it's iconic, it might be a bit too busy and exposed for the laidback, relaxing vibe you're after with the family. The waves are up a bit today too, so not ideal for just chilling out."
+      },
+      {
+        "name": "Freshwater Beach",
+        "reason": "Freshwater's a cracking local spot, but it's another surf beach, and a bit further to get to from Arncliffe by public transport. Not quite the 'relax and chill' vibe you're chasing today, mate."
+      }
+    ],
+    "confidence": 95,
+    "recommendation_type": "beach_plan",
+    "input_context": {
+      "selected_mood": "laidback",
+      "companion_context": "family",
+      "experience_tags": [],
+      "region": "manly",
+      "activity": "relax",
+      "companion": "family",
+      "preferred_beach_slug": null
+    },
+    "user_notes": "",
+    "created_at": "2026-05-18T04:52:21.058000",
+    "updated_at": "2026-05-18T04:52:21.058000",
+    "replayed_at": null
+  },
+  {
+    "_id": "6a0c0e654da8ac687ff99356",
+    "user_id": "69ffde007306703789c8f86a",
+    "mood_phrase": "alo",
+    "region": "eastern",
+    "activity": "swim",
+    "companion": "solo",
+    "preferred_beach_slug": null,
+    "selected_beach_name": "Little Congwong Beach",
+    "selected_beach_slug": "little-congwong-beach",
+    "image_url": "",
+    "mood_reading": {
+      "energy": "low",
+      "social_level": "low",
+      "desired_feeling": "calm, peaceful",
+      "pace": "slow",
+      "summary": "Sounds like you're after a bit of peace and quiet, a proper chill-out session away from the crowds. Just you and the water, taking it easy, yeah?"
+    },
+    "plan": {
+      "where": "Head down to La Perouse. Little Congwong is tucked away, so you'll need to walk a bit from the main Congwong Beach. It's worth the trip for the solitude, even coming from Avalon.",
+      "when": "Best to go during the day, maybe mid-morning, to catch the best light and avoid any potential late-arvo breezes. UV is low, so that's a bonus.",
+      "why": "This little bay is a cracker for a solo swim when you want to escape. It's got that 'secret spot' feel, and while the waves are up a bit, the protected bay should still let you have a decent, quiet paddle.",
+      "bring": [
+        "towel",
+        "water bottle",
+        "book",
+        "sunscreen (even with low UV, best to be safe)"
+      ],
+      "conditions_summary": "It's a mild 18.1°C in the water, with a light breeze around 10.5 km/h from the southwest. UV is super low, so no need to worry about getting cooked. The main thing to note is the wave height is a bit up at 2.08m, even in the bay. So, take it easy.",
+      "gentle_warning": "With those waves a bit higher than usual for a bay, just take a squiz before you jump in. It's still a protected spot, but always best to be aware. No lifeguards here, so swim within your limits, yeah?"
+    },
+    "conditions": {
+      "temperature": 18.1,
+      "wind_kmh": 10.5,
+      "wind_direction": 235,
+      "uv_index": 0.0,
+      "wave_height_m": 2.08,
+      "wave_period": 10.0,
+      "fetched_at": "2026-05-19T07:16:32.228862+00:00"
+    },
+    "candidate_snapshot": [
+      {
+        "_id": "69fc84854b6e6047f9fb496a",
+        "slug": "silver-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "strong wind",
+          "after heavy rain"
+        ],
+        "best_for": [
+          "dogs",
+          "calm walks",
+          "families"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "off_leash_zones",
+        "exposure": "protected",
+        "facilities": [
+          "toilets",
+          "parking",
+          "park"
+        ],
+        "ideal_times": [
+          "morning",
+          "late_afternoon"
+        ],
+        "image_url": "",
+        "lat": -34.0102,
+        "lng": 151.2053,
+        "map_x": 57,
+        "map_y": 81,
+        "name": "Silver Beach",
+        "region": "Sutherland Shire",
+        "suburb": "Kurnell",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "bay",
+          "dog_friendly",
+          "calm"
+        ],
+        "walk_suitability": "high",
+        "water_type": "bay",
+        "id": "69fc84854b6e6047f9fb496a",
+        "score": 67.44,
+        "score_breakdown": {
+          "mood_score": 50.0,
+          "condition_score": 50.0,
+          "profile_score": 86.0,
+          "time_score": 90.0,
+          "region_score": 92.0,
+          "activity_score": 66.0,
+          "companion_score": 78.0,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: eastern",
+          "Works well for solo",
+          "Reachable by public transport"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": null,
+          "wind_kmh": null,
+          "wind_direction": null,
+          "uv_index": null,
+          "wave_height_m": null,
+          "wave_period": null,
+          "fetched_at": "2026-05-19T07:16:32.241720+00:00",
+          "conditions_unavailable": true,
+          "error": "Client error '429 Too Many Requests' for url 'https://api.open-meteo.com/v1/forecast?latitude=-34.0102&longitude=151.2053&current=temperature_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cuv_index&hourly=temperature_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cuv_index&forecast_hours=1&timezone=Australia%2FSydney&wind_speed_unit=kmh'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb4969",
+        "slug": "yarra-bay-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "after heavy rain"
+        ],
+        "best_for": [
+          "calm walks",
+          "low key swims",
+          "families"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "toilets",
+          "parking",
+          "park"
+        ],
+        "ideal_times": [
+          "morning",
+          "sunset"
+        ],
+        "image_url": "",
+        "lat": -33.9781,
+        "lng": 151.2191,
+        "map_x": 60,
+        "map_y": 75,
+        "name": "Yarra Bay Beach",
+        "region": "Eastern Suburbs",
+        "suburb": "Phillip Bay",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "calm",
+          "local",
+          "bay"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "bay",
+        "id": "69fc84854b6e6047f9fb4969",
+        "score": 66.28,
+        "score_breakdown": {
+          "mood_score": 50.0,
+          "condition_score": 60.0,
+          "profile_score": 86.0,
+          "time_score": 90.0,
+          "region_score": 92.0,
+          "activity_score": 38.0,
+          "companion_score": 78.0,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: eastern",
+          "Works well for solo",
+          "Reachable by public transport"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability"
+        ],
+        "conditions": {
+          "temperature": 18.1,
+          "wind_kmh": 10.5,
+          "wind_direction": 235,
+          "uv_index": 0.0,
+          "wave_height_m": 2.08,
+          "wave_period": 10.0,
+          "fetched_at": "2026-05-19T07:16:32.259289+00:00"
+        }
+      },
+      {
+        "_id": "69fc84844b6e6047f9fb493c",
+        "slug": "bondi-beach",
+        "access_tags": [
+          "bus",
+          "paid_parking",
+          "coastal_walk"
+        ],
+        "accessibility": "easy",
+        "attribution": "Bondi Beach photo by Dietmar Rabich, CC BY-SA 4.0, via Wikimedia Commons",
+        "avoid_when": [
+          "big crowds",
+          "rough surf"
+        ],
+        "best_for": [
+          "surfing",
+          "people watching",
+          "cafes"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "high",
+        "dog_access": "restricted",
+        "exposure": "exposed",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards",
+          "cafes"
+        ],
+        "ideal_times": [
+          "early_morning",
+          "sunset"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Sydney_%28AU%29%2C_Bondi_Beach_--_2019_--_2349.jpg/960px-Sydney_%28AU%29%2C_Bondi_Beach_--_2019_--_2349.jpg",
+        "lat": -33.8915,
+        "lng": 151.2767,
+        "map_x": 73,
+        "map_y": 55,
+        "name": "Bondi Beach",
+        "region": "Eastern Suburbs",
+        "suburb": "Bondi Beach",
+        "surf_suitability": "high",
+        "swim_suitability": "high",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "iconic",
+          "busy",
+          "surf"
+        ],
+        "walk_suitability": "high",
+        "water_type": "ocean",
+        "image_license": "CC BY-SA 4.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:Sydney_(AU),_Bondi_Beach_--_2019_--_2349.jpg",
+        "id": "69fc84844b6e6047f9fb493c",
+        "score": 64.12,
+        "score_breakdown": {
+          "mood_score": 50.0,
+          "condition_score": 50.0,
+          "profile_score": 68.0,
+          "time_score": 90.0,
+          "region_score": 92.0,
+          "activity_score": 78.0,
+          "companion_score": 50.0,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: eastern",
+          "Strong fit for swim",
+          "Reachable by public transport"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": null,
+          "wind_kmh": null,
+          "wind_direction": null,
+          "uv_index": null,
+          "wave_height_m": null,
+          "wave_period": null,
+          "fetched_at": "2026-05-19T07:16:32.218880+00:00",
+          "conditions_unavailable": true,
+          "error": "Client error '429 Too Many Requests' for url 'https://api.open-meteo.com/v1/forecast?latitude=-33.8915&longitude=151.2767&current=temperature_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cuv_index&hourly=temperature_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cuv_index&forecast_hours=1&timezone=Australia%2FSydney&wind_speed_unit=kmh'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429"
+        }
+      },
+      {
+        "_id": "69fc84844b6e6047f9fb4940",
+        "slug": "gordons-bay",
+        "access_tags": [
+          "bus",
+          "coastal_walk"
+        ],
+        "accessibility": "moderate",
+        "attribution": "Gordons Bay photo by Tea and Toast, CC BY-SA 3.0, via Wikimedia Commons",
+        "avoid_when": [
+          "large swell",
+          "mobility needs"
+        ],
+        "best_for": [
+          "snorkelling",
+          "floating",
+          "romantic swims"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "nearby_toilets"
+        ],
+        "ideal_times": [
+          "morning"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gordons_Bay%2C_Sydney_panorama.JPG/960px-Gordons_Bay%2C_Sydney_panorama.JPG",
+        "lat": -33.9169,
+        "lng": 151.2662,
+        "map_x": 70,
+        "map_y": 62,
+        "name": "Gordons Bay",
+        "region": "Eastern Suburbs",
+        "suburb": "Coogee",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "snorkel",
+          "rocky",
+          "quiet"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "bay",
+        "image_license": "CC BY-SA 3.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:Gordons_Bay,_Sydney_panorama.JPG",
+        "id": "69fc84844b6e6047f9fb4940",
+        "score": 63.88,
+        "score_breakdown": {
+          "mood_score": 50.0,
+          "condition_score": 60.0,
+          "profile_score": 86.0,
+          "time_score": 60.0,
+          "region_score": 92.0,
+          "activity_score": 38.0,
+          "companion_score": 78.0,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: eastern",
+          "Works well for solo",
+          "Reachable by public transport"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability"
+        ],
+        "conditions": {
+          "temperature": 18.0,
+          "wind_kmh": 11.2,
+          "wind_direction": 240,
+          "uv_index": 0.0,
+          "wave_height_m": 2.08,
+          "wave_period": 10.0,
+          "fetched_at": "2026-05-19T07:16:32.239388+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb4967",
+        "slug": "little-congwong-beach",
+        "access_tags": [
+          "bus",
+          "walking_track"
+        ],
+        "accessibility": "moderate",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "limited facilities"
+        ],
+        "best_for": [
+          "quiet swims",
+          "short walks"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "nearby_toilets"
+        ],
+        "ideal_times": [
+          "weekday",
+          "morning"
+        ],
+        "image_url": "",
+        "lat": -33.9918,
+        "lng": 151.237,
+        "map_x": 65,
+        "map_y": 79,
+        "name": "Little Congwong Beach",
+        "region": "Eastern Suburbs",
+        "suburb": "La Perouse",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "secluded",
+          "calm",
+          "walk"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "bay",
+        "id": "69fc84854b6e6047f9fb4967",
+        "score": 63.88,
+        "score_breakdown": {
+          "mood_score": 50.0,
+          "condition_score": 60.0,
+          "profile_score": 86.0,
+          "time_score": 60.0,
+          "region_score": 92.0,
+          "activity_score": 38.0,
+          "companion_score": 78.0,
+          "profile_distance_km": null
+        },
+        "matched_reasons": [
+          "Fits selected region: eastern",
+          "Works well for solo",
+          "Reachable by public transport"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability"
+        ],
+        "conditions": {
+          "temperature": 18.1,
+          "wind_kmh": 10.5,
+          "wind_direction": 235,
+          "uv_index": 0.0,
+          "wave_height_m": 2.08,
+          "wave_period": 10.0,
+          "fetched_at": "2026-05-19T07:16:32.228862+00:00"
+        }
+      }
+    ],
+    "rejected_beaches": [
+      {
+        "name": "Bondi Beach",
+        "reason": "Bondi's usually a full send, buzzing with people and surf. Not quite the 'alo' vibe you're after, and anyway, we couldn't get a read on the live conditions today."
+      },
+      {
+        "name": "Yarra Bay Beach",
+        "reason": "Yarra Bay is calm, but with the waves sitting at over 2 metres, it's not ideal for a 'low key swim' right now. You'd be better off finding a spot with a bit more protection for a proper dip."
+      },
+      {
+        "name": "Gordons Bay",
+        "reason": "Gordons Bay is lovely for a snorkel, but with those higher waves, it might be a bit too choppy for a truly relaxing swim, especially with the rocky entry. Not the most chill option today."
+      }
+    ],
+    "confidence": 75,
+    "recommendation_type": "beach_plan",
+    "input_context": {
+      "selected_mood": "oke",
+      "companion_context": "solo",
+      "experience_tags": [
+        "ritual"
+      ],
+      "region": "eastern",
+      "activity": "swim",
+      "companion": "solo",
+      "preferred_beach_slug": null
+    },
+    "user_notes": "",
+    "created_at": "2026-05-19T07:16:53.581000",
+    "updated_at": "2026-05-19T07:16:53.581000",
+    "replayed_at": null
+  },
+  {
+    "_id": "6a1126a13d24033530ae24cb",
+    "user_id": "6a0176f4ae60c174f8c7d16a",
+    "mood_phrase": "I want a beach day near Cobblers Beach.",
+    "region": "eastern",
+    "activity": "relax",
+    "companion": "solo",
+    "preferred_beach_slug": "cobblers-beach",
+    "selected_beach_name": "Cobblers Beach",
+    "selected_beach_slug": "cobblers-beach",
+    "image_url": "",
+    "mood_reading": {
+      "energy": "low",
+      "social_level": "low",
+      "desired_feeling": "calm and peaceful",
+      "pace": "slow",
+      "summary": "You're after a proper chill-out day, just you and the harbour ripples. Somewhere quiet, a bit secluded, where you can just breathe and forget the city buzz. A bit of a wander and a quiet dip sounds like the go."
+    },
+    "plan": {
+      "where": "Cobblers Beach, Mosman. You'll find it tucked away in Sydney Harbour National Park.",
+      "when": "Head out a bit earlier in the arvo to make the most of the quiet and the light for your walk.",
+      "why": "It's a top spot for a bit of solitude and a proper relax. You can have a squiz at the harbour views, maybe a little dip, or just find a comfy spot to read your book.",
+      "bring": [
+        "Water",
+        "A good book",
+        "Hat",
+        "Sunscreen",
+        "Snacks",
+        "Comfy walking shoes"
+      ],
+      "conditions_summary": "It's a bit breezy out there with a moderate wind from the southeast at 15.3 km/h, and the water's a cool 18.3°C. The waves are up a bit for a harbour spot, around 1.9m, so it might be a bit choppy for a full-send swim, but still fine for a paddle. UV is low at 2.4.",
+      "gentle_warning": "Getting there by public transport from Arncliffe will be a bit of a journey, mate. You'll likely need a bus or two, plus a decent walk through the bushland to get to the sand. Plan your route and give yourself plenty of time, it's worth the trip for the seclusion."
+    },
+    "conditions": {
+      "temperature": 18.3,
+      "wind_kmh": 15.3,
+      "wind_direction": 148,
+      "uv_index": 2.4,
+      "wave_height_m": 1.9,
+      "wave_period": 10.35,
+      "fetched_at": "2026-05-23T04:00:56.490666+00:00"
+    },
+    "candidate_snapshot": [
+      {
+        "_id": "69fc84844b6e6047f9fb494f",
+        "slug": "cobblers-beach",
+        "access_tags": [
+          "walking_track"
+        ],
+        "accessibility": "moderate",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "limited facilities"
+        ],
+        "best_for": [
+          "quiet swims",
+          "bush walks",
+          "views"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "nearby_toilets"
+        ],
+        "ideal_times": [
+          "morning",
+          "weekday"
+        ],
+        "image_url": "",
+        "lat": -33.8268,
+        "lng": 151.2707,
+        "map_x": 73,
+        "map_y": 41,
+        "name": "Cobblers Beach",
+        "region": "Lower North Shore",
+        "suburb": "Mosman",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "secluded",
+          "bushland",
+          "harbour"
+        ],
+        "walk_suitability": "high",
+        "water_type": "harbour",
+        "id": "69fc84844b6e6047f9fb494f",
+        "score": 81.76,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 72,
+          "profile_score": 56,
+          "time_score": 60,
+          "region_score": 92,
+          "activity_score": 100,
+          "companion_score": 78,
+          "profile_distance_km": 16.9
+        },
+        "matched_reasons": [
+          "Fits selected region: eastern",
+          "Strong fit for relax",
+          "Works well for solo",
+          "Soft boost from preferred beach",
+          "Cooler weather suits a walk"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability"
+        ],
+        "conditions": {
+          "temperature": 18.3,
+          "wind_kmh": 15.3,
+          "wind_direction": 148,
+          "uv_index": 2.4,
+          "wave_height_m": 1.9,
+          "wave_period": 10.35,
+          "fetched_at": "2026-05-23T04:00:56.490666+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb496a",
+        "slug": "silver-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "strong wind",
+          "after heavy rain"
+        ],
+        "best_for": [
+          "dogs",
+          "calm walks",
+          "families"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "off_leash_zones",
+        "exposure": "protected",
+        "facilities": [
+          "toilets",
+          "parking",
+          "park"
+        ],
+        "ideal_times": [
+          "morning",
+          "late_afternoon"
+        ],
+        "image_url": "",
+        "lat": -34.0102,
+        "lng": 151.2053,
+        "map_x": 57,
+        "map_y": 81,
+        "name": "Silver Beach",
+        "region": "Sutherland Shire",
+        "suburb": "Kurnell",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "bay",
+          "dog_friendly",
+          "calm"
+        ],
+        "walk_suitability": "high",
+        "water_type": "bay",
+        "id": "69fc84854b6e6047f9fb496a",
+        "score": 73.96,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 72,
+          "profile_score": 86,
+          "time_score": 60,
+          "region_score": 92,
+          "activity_score": 100,
+          "companion_score": 78,
+          "profile_distance_km": 9.8
+        },
+        "matched_reasons": [
+          "Fits selected region: eastern",
+          "Strong fit for relax",
+          "Works well for solo",
+          "Close to profile suburb: about 10km away",
+          "Reachable by public transport",
+          "Cooler weather suits a walk"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability"
+        ],
+        "conditions": {
+          "temperature": 18.4,
+          "wind_kmh": 17.7,
+          "wind_direction": 152,
+          "uv_index": 3,
+          "wave_height_m": 2.52,
+          "wave_period": 9.65,
+          "fetched_at": "2026-05-23T04:00:57.047872+00:00"
+        }
+      },
+      {
+        "_id": "69fc84844b6e6047f9fb4940",
+        "slug": "gordons-bay",
+        "access_tags": [
+          "bus",
+          "coastal_walk"
+        ],
+        "accessibility": "moderate",
+        "attribution": "Gordons Bay photo by Tea and Toast, CC BY-SA 3.0, via Wikimedia Commons",
+        "avoid_when": [
+          "large swell",
+          "mobility needs"
+        ],
+        "best_for": [
+          "snorkelling",
+          "floating",
+          "romantic swims"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "nearby_toilets"
+        ],
+        "ideal_times": [
+          "morning"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gordons_Bay%2C_Sydney_panorama.JPG/960px-Gordons_Bay%2C_Sydney_panorama.JPG",
+        "lat": -33.9169,
+        "lng": 151.2662,
+        "map_x": 70,
+        "map_y": 62,
+        "name": "Gordons Bay",
+        "region": "Eastern Suburbs",
+        "suburb": "Coogee",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "snorkel",
+          "rocky",
+          "quiet"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "bay",
+        "image_license": "CC BY-SA 3.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:Gordons_Bay,_Sydney_panorama.JPG",
+        "id": "69fc84844b6e6047f9fb4940",
+        "score": 69.4,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 60,
+          "profile_score": 86,
+          "time_score": 60,
+          "region_score": 92,
+          "activity_score": 84,
+          "companion_score": 78,
+          "profile_distance_km": 11.5
+        },
+        "matched_reasons": [
+          "Fits selected region: eastern",
+          "Strong fit for relax",
+          "Works well for solo",
+          "Close to profile suburb: about 11km away",
+          "Reachable by public transport"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability"
+        ],
+        "conditions": {
+          "temperature": 18.3,
+          "wind_kmh": 15.6,
+          "wind_direction": 149,
+          "uv_index": 3,
+          "wave_height_m": 2.26,
+          "wave_period": 10,
+          "fetched_at": "2026-05-23T04:00:55.513447+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb4967",
+        "slug": "little-congwong-beach",
+        "access_tags": [
+          "bus",
+          "walking_track"
+        ],
+        "accessibility": "moderate",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "limited facilities"
+        ],
+        "best_for": [
+          "quiet swims",
+          "short walks"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "nearby_toilets"
+        ],
+        "ideal_times": [
+          "weekday",
+          "morning"
+        ],
+        "image_url": "",
+        "lat": -33.9918,
+        "lng": 151.237,
+        "map_x": 65,
+        "map_y": 79,
+        "name": "Little Congwong Beach",
+        "region": "Eastern Suburbs",
+        "suburb": "La Perouse",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "secluded",
+          "calm",
+          "walk"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "bay",
+        "id": "69fc84854b6e6047f9fb4967",
+        "score": 69.12,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 50,
+          "profile_score": 86,
+          "time_score": 60,
+          "region_score": 92,
+          "activity_score": 100,
+          "companion_score": 78,
+          "profile_distance_km": 10.4
+        },
+        "matched_reasons": [
+          "Fits selected region: eastern",
+          "Strong fit for relax",
+          "Works well for solo",
+          "Close to profile suburb: about 10km away",
+          "Reachable by public transport"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": null,
+          "wind_kmh": null,
+          "wind_direction": null,
+          "uv_index": null,
+          "wave_height_m": null,
+          "wave_period": null,
+          "fetched_at": "2026-05-23T04:00:54.403952+00:00",
+          "conditions_unavailable": true,
+          "error": "Client error '429 Too Many Requests' for url 'https://api.open-meteo.com/v1/forecast?latitude=-33.9918&longitude=151.237&current=temperature_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cuv_index&hourly=temperature_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cuv_index&forecast_hours=1&timezone=Australia%2FSydney&wind_speed_unit=kmh'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb4969",
+        "slug": "yarra-bay-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "after heavy rain"
+        ],
+        "best_for": [
+          "calm walks",
+          "low key swims",
+          "families"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "toilets",
+          "parking",
+          "park"
+        ],
+        "ideal_times": [
+          "morning",
+          "sunset"
+        ],
+        "image_url": "",
+        "lat": -33.9781,
+        "lng": 151.2191,
+        "map_x": 60,
+        "map_y": 75,
+        "name": "Yarra Bay Beach",
+        "region": "Eastern Suburbs",
+        "suburb": "Phillip Bay",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "calm",
+          "local",
+          "bay"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "bay",
+        "id": "69fc84854b6e6047f9fb4969",
+        "score": 69.12,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 50,
+          "profile_score": 86,
+          "time_score": 60,
+          "region_score": 92,
+          "activity_score": 100,
+          "companion_score": 78,
+          "profile_distance_km": 8.2
+        },
+        "matched_reasons": [
+          "Fits selected region: eastern",
+          "Strong fit for relax",
+          "Works well for solo",
+          "Close to profile suburb: about 8km away",
+          "Reachable by public transport"
+        ],
+        "penalties": [],
+        "conditions": {
+          "temperature": null,
+          "wind_kmh": null,
+          "wind_direction": null,
+          "uv_index": null,
+          "wave_height_m": null,
+          "wave_period": null,
+          "fetched_at": "2026-05-23T04:00:54.381574+00:00",
+          "conditions_unavailable": true,
+          "error": "Client error '429 Too Many Requests' for url 'https://api.open-meteo.com/v1/forecast?latitude=-33.9781&longitude=151.2191&current=temperature_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cuv_index&hourly=temperature_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cuv_index&forecast_hours=1&timezone=Australia%2FSydney&wind_speed_unit=kmh'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429"
+        }
+      }
+    ],
+    "rejected_beaches": [
+      {
+        "name": "Silver Beach",
+        "reason": "Yeah nah, Silver Beach is closer and good for public transport, but with those 2.5m waves, it's going to be a bit too wild for a relaxing swim today. Not the calm vibe you're after."
+      },
+      {
+        "name": "Gordons Bay",
+        "reason": "It's a nice spot, but the waves are pretty high at 2.2m, which isn't ideal for a calm, relaxing dip. Plus, it can get a bit busier than what you're looking for today."
+      },
+      {
+        "name": "Little Congwong Beach",
+        "reason": "Can't give you the lowdown on this one, mate. The live conditions data is playing hard to get, so it's a no-go for a recommendation today. Safety first, you know."
+      },
+      {
+        "name": "Yarra Bay Beach",
+        "reason": "Same deal as Little Congwong, mate. No live conditions means no recommendation from me. Can't send you off without knowing what's happening."
+      }
+    ],
+    "confidence": 90,
+    "recommendation_type": "beach_plan",
+    "input_context": {
+      "selected_mood": "solo",
+      "companion_context": "solo",
+      "experience_tags": [
+        "solo",
+        "relax",
+        "solo"
+      ],
+      "region": "eastern",
+      "activity": "relax",
+      "companion": "solo",
+      "preferred_beach_slug": "cobblers-beach"
+    },
+    "user_notes": "",
+    "created_at": "2026-05-23T04:01:37.942000",
+    "updated_at": "2026-05-23T04:01:37.942000",
+    "replayed_at": null
+  },
+  {
+    "_id": "6a11778d3d24033530ae24cd",
+    "user_id": "6a0176f4ae60c174f8c7d16a",
+    "mood_phrase": "I want a beach day near Cronulla Beach.",
+    "region": "cronulla",
+    "activity": "relax",
+    "companion": "solo",
+    "preferred_beach_slug": "cronulla-beach",
+    "selected_beach_name": "Cronulla Beach",
+    "selected_beach_slug": "cronulla-beach",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Cronulla_Beach_Sydney_September_2023.jpg/960px-Cronulla_Beach_Sydney_September_2023.jpg",
+    "mood_reading": {
+      "energy": "Chill",
+      "social_level": "Solo vibes",
+      "desired_feeling": "Relaxed and local",
+      "pace": "Slow and easy",
+      "summary": "Sounds like you're after a proper cruisy day out, just you and the beach, with that familiar Cronulla feel. No fuss, just good vibes."
+    },
+    "plan": {
+      "where": "Head straight to Cronulla Beach. It's the heart of the Cronulla strip, so you can't miss it. Perfect for a solo mission.",
+      "when": "Anytime you fancy, really. The arvo could be nice for a stroll and a coffee, or pop down earlier if you want to beat any potential crowds for your quiet time.",
+      "why": "You can grab a coffee, find a spot to chill and watch the waves, or just take a proper long walk along the sand. It's got a great vibe for just unwinding and soaking it all in, without needing to be super social.",
+      "bring": [
+        "A good book",
+        "Sunnies",
+        "Comfy shoes for a walk",
+        "Money for a coffee or a feed"
+      ],
+      "conditions_summary": "It's a bit on the cooler side today, around 16.7°C, with a light breeze. The waves are a bit chunky at 2.62m, so it's more for watching than a proper swim. Good walking weather, though!",
+      "gentle_warning": "With those waves being a bit high, probably best to keep out of the water for a proper swim today. Stick to the sand and enjoy the fresh air."
+    },
+    "conditions": {
+      "temperature": 16.7,
+      "wind_kmh": 4.3,
+      "wind_direction": 147,
+      "uv_index": 0,
+      "wave_height_m": 2.62,
+      "wave_period": 10.1,
+      "fetched_at": "2026-05-23T09:46:16.012647+00:00"
+    },
+    "candidate_snapshot": [
+      {
+        "_id": "69fc84854b6e6047f9fb4960",
+        "slug": "cronulla-beach",
+        "access_tags": [
+          "train",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Cronulla Beach photo by WatsonKat, CC BY-SA 4.0, via Wikimedia Commons",
+        "avoid_when": [
+          "busy weekends"
+        ],
+        "best_for": [
+          "surfing",
+          "cafes",
+          "easy transport"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "high",
+        "dog_access": "restricted",
+        "exposure": "semi_protected",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards",
+          "cafes"
+        ],
+        "ideal_times": [
+          "morning",
+          "weekday"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Cronulla_Beach_Sydney_September_2023.jpg/960px-Cronulla_Beach_Sydney_September_2023.jpg",
+        "lat": -34.0577,
+        "lng": 151.1547,
+        "map_x": 47,
+        "map_y": 91,
+        "name": "Cronulla Beach",
+        "region": "Sutherland Shire",
+        "suburb": "Cronulla",
+        "surf_suitability": "high",
+        "swim_suitability": "high",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "classic",
+          "surf",
+          "train_access"
+        ],
+        "walk_suitability": "high",
+        "water_type": "ocean",
+        "image_license": "CC BY-SA 4.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:Cronulla_Beach_Sydney_September_2023.jpg",
+        "id": "69fc84854b6e6047f9fb4960",
+        "score": 71.46,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 55,
+          "profile_score": 68,
+          "time_score": 60,
+          "region_score": 92,
+          "activity_score": 50,
+          "companion_score": 50,
+          "profile_distance_km": 13.4
+        },
+        "matched_reasons": [
+          "Fits selected region: cronulla",
+          "Soft boost from preferred beach",
+          "Reachable by public transport",
+          "Cooler weather suits a walk"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability",
+          "Cooler temperature reduces swim appeal"
+        ],
+        "conditions": {
+          "temperature": 16.7,
+          "wind_kmh": 4.3,
+          "wind_direction": 147,
+          "uv_index": 0,
+          "wave_height_m": 2.62,
+          "wave_period": 10.1,
+          "fetched_at": "2026-05-23T09:46:16.012647+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb4963",
+        "slug": "wanda-beach",
+        "access_tags": [
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Wanda Beach photo by J Bar, CC BY-SA 3.0, via Wikimedia Commons",
+        "avoid_when": [
+          "strong rips",
+          "wind"
+        ],
+        "best_for": [
+          "surfing",
+          "long walks",
+          "quiet"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "exposed",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards"
+        ],
+        "ideal_times": [
+          "early_morning"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Wanda_Beach_1.JPG/960px-Wanda_Beach_1.JPG",
+        "lat": -34.0388,
+        "lng": 151.1609,
+        "map_x": 48,
+        "map_y": 86,
+        "name": "Wanda Beach",
+        "region": "Sutherland Shire",
+        "suburb": "Cronulla",
+        "surf_suitability": "high",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "wild",
+          "surf",
+          "space"
+        ],
+        "walk_suitability": "high",
+        "water_type": "ocean",
+        "image_license": "CC BY-SA 3.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:Wanda_Beach_1.JPG",
+        "id": "69fc84854b6e6047f9fb4963",
+        "score": 68.4,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 80,
+          "profile_score": 56,
+          "time_score": 60,
+          "region_score": 92,
+          "activity_score": 74,
+          "companion_score": 78,
+          "profile_distance_km": 11.4
+        },
+        "matched_reasons": [
+          "Fits selected region: cronulla",
+          "Strong fit for relax",
+          "Works well for solo",
+          "Close to profile suburb: about 11km away",
+          "Cooler weather suits a walk"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability"
+        ],
+        "conditions": {
+          "temperature": 16.8,
+          "wind_kmh": 4.3,
+          "wind_direction": 147,
+          "uv_index": 0,
+          "wave_height_m": 2.62,
+          "wave_period": 10.1,
+          "fetched_at": "2026-05-23T09:46:16.012607+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb4962",
+        "slug": "elouera-beach",
+        "access_tags": [
+          "train",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "strong rips"
+        ],
+        "best_for": [
+          "surfing",
+          "long walks",
+          "space"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "exposed",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards"
+        ],
+        "ideal_times": [
+          "morning"
+        ],
+        "image_url": "",
+        "lat": -34.0458,
+        "lng": 151.1586,
+        "map_x": 48,
+        "map_y": 88,
+        "name": "Elouera Beach",
+        "region": "Sutherland Shire",
+        "suburb": "Cronulla",
+        "surf_suitability": "high",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "surf",
+          "local",
+          "wide"
+        ],
+        "walk_suitability": "high",
+        "water_type": "ocean",
+        "id": "69fc84854b6e6047f9fb4962",
+        "score": 64.96,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 80,
+          "profile_score": 68,
+          "time_score": 60,
+          "region_score": 92,
+          "activity_score": 50,
+          "companion_score": 50,
+          "profile_distance_km": 12.1
+        },
+        "matched_reasons": [
+          "Fits selected region: cronulla",
+          "Reachable by public transport",
+          "Cooler weather suits a walk"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability"
+        ],
+        "conditions": {
+          "temperature": 16.7,
+          "wind_kmh": 4.3,
+          "wind_direction": 147,
+          "uv_index": 0,
+          "wave_height_m": 2.62,
+          "wave_period": 10.1,
+          "fetched_at": "2026-05-23T09:46:16.012564+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb4961",
+        "slug": "north-cronulla-beach",
+        "access_tags": [
+          "train",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "North Cronulla Beach photo by J Bar, CC BY-SA 3.0, via Wikimedia Commons",
+        "avoid_when": [
+          "crowded days"
+        ],
+        "best_for": [
+          "surfing",
+          "groups",
+          "cafes"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "high",
+        "dog_access": "restricted",
+        "exposure": "semi_protected",
+        "facilities": [
+          "toilets",
+          "showers",
+          "lifeguards",
+          "cafes"
+        ],
+        "ideal_times": [
+          "morning",
+          "evening"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/North_Cronulla_Beach_1.JPG/960px-North_Cronulla_Beach_1.JPG",
+        "lat": -34.0535,
+        "lng": 151.1563,
+        "map_x": 47,
+        "map_y": 90,
+        "name": "North Cronulla Beach",
+        "region": "Sutherland Shire",
+        "suburb": "Cronulla",
+        "surf_suitability": "high",
+        "swim_suitability": "high",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "social",
+          "surf",
+          "cafes"
+        ],
+        "walk_suitability": "high",
+        "water_type": "ocean",
+        "image_license": "CC BY-SA 3.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:North_Cronulla_Beach_1.JPG",
+        "id": "69fc84854b6e6047f9fb4961",
+        "score": 61.86,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 55,
+          "profile_score": 68,
+          "time_score": 90,
+          "region_score": 92,
+          "activity_score": 50,
+          "companion_score": 50,
+          "profile_distance_km": 12.9
+        },
+        "matched_reasons": [
+          "Fits selected region: cronulla",
+          "Reachable by public transport",
+          "Cooler weather suits a walk"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability",
+          "Cooler temperature reduces swim appeal"
+        ],
+        "conditions": {
+          "temperature": 16.8,
+          "wind_kmh": 4.3,
+          "wind_direction": 147,
+          "uv_index": 0,
+          "wave_height_m": 2.62,
+          "wave_period": 10.1,
+          "fetched_at": "2026-05-23T09:46:16.012502+00:00"
+        }
+      }
+    ],
+    "rejected_beaches": [
+      {
+        "name": "Wanda Beach",
+        "reason": "Wanda's a bit further down the track and more for a wilder, less accessible vibe. Not quite the 'near Cronulla Beach' feel you're after, and a bit of a trek without the train access."
+      },
+      {
+        "name": "Elouera Beach",
+        "reason": "Elouera's decent for a walk, but it's not as central for cafes and that easy-going 'beach day' feel right in the thick of it like Cronulla Beach. Plus, the waves are up there too."
+      },
+      {
+        "name": "North Cronulla Beach",
+        "reason": "North Cronulla is right next door, yeah, but Cronulla Beach itself just edges it out for that classic, easy-access, 'I'm here to relax' vibe you're after, especially with the cafes right there."
+      }
+    ],
+    "confidence": 95,
+    "recommendation_type": "beach_plan",
+    "input_context": {
+      "selected_mood": "calm",
+      "companion_context": "solo",
+      "experience_tags": [
+        "calm",
+        "relax",
+        "solo"
+      ],
+      "region": "cronulla",
+      "activity": "relax",
+      "companion": "solo",
+      "preferred_beach_slug": "cronulla-beach"
+    },
+    "user_notes": "",
+    "created_at": "2026-05-23T09:46:53.440000",
+    "updated_at": "2026-05-23T09:46:53.440000",
+    "replayed_at": null
+  },
+  {
+    "_id": "6a1262773d24033530ae24ce",
+    "user_id": "6a0176f4ae60c174f8c7d16a",
+    "mood_phrase": "lalala",
+    "region": null,
+    "activity": "relax",
+    "companion": "solo",
+    "preferred_beach_slug": null,
+    "selected_beach_name": "Little Congwong Beach",
+    "selected_beach_slug": "little-congwong-beach",
+    "image_url": "",
+    "mood_reading": {
+      "energy": "low-medium",
+      "social_level": "low",
+      "desired_feeling": "peaceful, carefree",
+      "pace": "slow",
+      "summary": "Sounds like you're after a proper chill-out session, just you and the waves. A bit of 'lalala' in your step, wanting somewhere calm and easy to unwind. No fuss, just good vibes."
+    },
+    "plan": {
+      "where": "Head out to Little Congwong Beach, mate. It's tucked away in La Perouse, a real gem for a bit of solitude.",
+      "when": "Best to aim for a weekday morning if you can swing it. You'll get the place mostly to yourself before anyone else thinks about it.",
+      "why": "Because you want to relax, proper. This spot is calm, protected, and just the ticket for a quiet swim or a bit of sun-soaking without the usual crowds. It's got that 'get away from it all' feel, even though it's still Sydney.",
+      "bring": [
+        "towel",
+        "book",
+        "water bottle",
+        "sunscreen",
+        "snacks"
+      ],
+      "conditions_summary": "Today's looking pretty cruisy down there. Water temp is a decent 18.2°C, and the wind's barely a whisper at 2.9 km/h. UV is low, so no need to stress too much about getting burnt. The waves are a bit up out on the open ocean, but Little Congwong is a protected bay, so it should be nice and calm for a dip.",
+      "gentle_warning": "Just a heads-up, it's a bit of a walk from the bus stop and there aren't many facilities right on the sand. So, pack everything you need for your chill-out session. And remember, it's a bit more 'au naturel' down there sometimes, if you catch my drift, so be prepared for that."
+    },
+    "conditions": {
+      "temperature": 18.2,
+      "wind_kmh": 2.9,
+      "wind_direction": 4,
+      "uv_index": 2.05,
+      "wave_height_m": 2.4,
+      "wave_period": 11.2,
+      "fetched_at": "2026-05-24T02:28:43.532196+00:00"
+    },
+    "candidate_snapshot": [
+      {
+        "_id": "69fc84854b6e6047f9fb4967",
+        "slug": "little-congwong-beach",
+        "access_tags": [
+          "bus",
+          "walking_track"
+        ],
+        "accessibility": "moderate",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "limited facilities"
+        ],
+        "best_for": [
+          "quiet swims",
+          "short walks"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "nearby_toilets"
+        ],
+        "ideal_times": [
+          "weekday",
+          "morning"
+        ],
+        "image_url": "",
+        "lat": -33.9918,
+        "lng": 151.237,
+        "map_x": 65,
+        "map_y": 79,
+        "name": "Little Congwong Beach",
+        "region": "Eastern Suburbs",
+        "suburb": "La Perouse",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "secluded",
+          "calm",
+          "walk"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "bay",
+        "id": "69fc84854b6e6047f9fb4967",
+        "score": 66.28,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 60,
+          "profile_score": 86,
+          "time_score": 60,
+          "region_score": 50,
+          "activity_score": 100,
+          "companion_score": 78,
+          "profile_distance_km": 10.4
+        },
+        "matched_reasons": [
+          "Strong fit for relax",
+          "Works well for solo",
+          "Close to profile suburb: about 10km away",
+          "Reachable by public transport"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability"
+        ],
+        "conditions": {
+          "temperature": 18.2,
+          "wind_kmh": 2.9,
+          "wind_direction": 4,
+          "uv_index": 2.05,
+          "wave_height_m": 2.4,
+          "wave_period": 11.2,
+          "fetched_at": "2026-05-24T02:28:43.532196+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb4969",
+        "slug": "yarra-bay-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "after heavy rain"
+        ],
+        "best_for": [
+          "calm walks",
+          "low key swims",
+          "families"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "toilets",
+          "parking",
+          "park"
+        ],
+        "ideal_times": [
+          "morning",
+          "sunset"
+        ],
+        "image_url": "",
+        "lat": -33.9781,
+        "lng": 151.2191,
+        "map_x": 60,
+        "map_y": 75,
+        "name": "Yarra Bay Beach",
+        "region": "Eastern Suburbs",
+        "suburb": "Phillip Bay",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "calm",
+          "local",
+          "bay"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "bay",
+        "id": "69fc84854b6e6047f9fb4969",
+        "score": 66.28,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 60,
+          "profile_score": 86,
+          "time_score": 60,
+          "region_score": 50,
+          "activity_score": 100,
+          "companion_score": 78,
+          "profile_distance_km": 8.2
+        },
+        "matched_reasons": [
+          "Strong fit for relax",
+          "Works well for solo",
+          "Close to profile suburb: about 8km away",
+          "Reachable by public transport"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability"
+        ],
+        "conditions": {
+          "temperature": 18.2,
+          "wind_kmh": 2.9,
+          "wind_direction": 4,
+          "uv_index": 2.05,
+          "wave_height_m": 2.4,
+          "wave_period": 11.2,
+          "fetched_at": "2026-05-24T02:28:43.534643+00:00"
+        }
+      },
+      {
+        "_id": "69fc84854b6e6047f9fb496a",
+        "slug": "silver-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "strong wind",
+          "after heavy rain"
+        ],
+        "best_for": [
+          "dogs",
+          "calm walks",
+          "families"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "off_leash_zones",
+        "exposure": "protected",
+        "facilities": [
+          "toilets",
+          "parking",
+          "park"
+        ],
+        "ideal_times": [
+          "morning",
+          "late_afternoon"
+        ],
+        "image_url": "",
+        "lat": -34.0102,
+        "lng": 151.2053,
+        "map_x": 57,
+        "map_y": 81,
+        "name": "Silver Beach",
+        "region": "Sutherland Shire",
+        "suburb": "Kurnell",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "bay",
+          "dog_friendly",
+          "calm"
+        ],
+        "walk_suitability": "high",
+        "water_type": "bay",
+        "id": "69fc84854b6e6047f9fb496a",
+        "score": 66.28,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 60,
+          "profile_score": 86,
+          "time_score": 60,
+          "region_score": 50,
+          "activity_score": 100,
+          "companion_score": 78,
+          "profile_distance_km": 9.8
+        },
+        "matched_reasons": [
+          "Strong fit for relax",
+          "Works well for solo",
+          "Close to profile suburb: about 10km away",
+          "Reachable by public transport"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability"
+        ],
+        "conditions": {
+          "temperature": 19.3,
+          "wind_kmh": 2.7,
+          "wind_direction": 42,
+          "uv_index": 2.05,
+          "wave_height_m": 2.66,
+          "wave_period": 10.9,
+          "fetched_at": "2026-05-24T02:28:43.547083+00:00"
+        }
+      },
+      {
+        "_id": "69fc84844b6e6047f9fb4940",
+        "slug": "gordons-bay",
+        "access_tags": [
+          "bus",
+          "coastal_walk"
+        ],
+        "accessibility": "moderate",
+        "attribution": "Gordons Bay photo by Tea and Toast, CC BY-SA 3.0, via Wikimedia Commons",
+        "avoid_when": [
+          "large swell",
+          "mobility needs"
+        ],
+        "best_for": [
+          "snorkelling",
+          "floating",
+          "romantic swims"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "medium",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "nearby_toilets"
+        ],
+        "ideal_times": [
+          "morning"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gordons_Bay%2C_Sydney_panorama.JPG/960px-Gordons_Bay%2C_Sydney_panorama.JPG",
+        "lat": -33.9169,
+        "lng": 151.2662,
+        "map_x": 70,
+        "map_y": 62,
+        "name": "Gordons Bay",
+        "region": "Eastern Suburbs",
+        "suburb": "Coogee",
+        "surf_suitability": "low",
+        "swim_suitability": "medium",
+        "updated_at": "2026-05-10T08:07:19.367000",
+        "vibe_tags": [
+          "snorkel",
+          "rocky",
+          "quiet"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "bay",
+        "image_license": "CC BY-SA 3.0",
+        "image_source": "Wikimedia Commons",
+        "image_source_url": "https://commons.wikimedia.org/wiki/File:Gordons_Bay,_Sydney_panorama.JPG",
+        "id": "69fc84844b6e6047f9fb4940",
+        "score": 64.36,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 60,
+          "profile_score": 86,
+          "time_score": 60,
+          "region_score": 50,
+          "activity_score": 84,
+          "companion_score": 78,
+          "profile_distance_km": 11.5
+        },
+        "matched_reasons": [
+          "Strong fit for relax",
+          "Works well for solo",
+          "Close to profile suburb: about 11km away",
+          "Reachable by public transport"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability"
+        ],
+        "conditions": {
+          "temperature": 18,
+          "wind_kmh": 1.6,
+          "wind_direction": 360,
+          "uv_index": 2.05,
+          "wave_height_m": 2.4,
+          "wave_period": 11.2,
+          "fetched_at": "2026-05-24T02:28:43.553765+00:00"
+        }
+      },
+      {
+        "_id": "69fc84844b6e6047f9fb4943",
+        "slug": "malabar-beach",
+        "access_tags": [
+          "bus",
+          "parking"
+        ],
+        "accessibility": "easy",
+        "attribution": "Image placeholder. Replace with licensed beach photography before production.",
+        "avoid_when": [
+          "after heavy rain"
+        ],
+        "best_for": [
+          "calm swims",
+          "kids",
+          "low key days"
+        ],
+        "created_at": "2026-05-07T12:46:27.114000",
+        "crowd_level_default": "low",
+        "dog_access": "restricted",
+        "exposure": "protected",
+        "facilities": [
+          "toilets",
+          "showers",
+          "park"
+        ],
+        "ideal_times": [
+          "mid_morning",
+          "afternoon"
+        ],
+        "image_url": "",
+        "lat": -33.9637,
+        "lng": 151.2503,
+        "map_x": 67,
+        "map_y": 72,
+        "name": "Malabar Beach",
+        "region": "Eastern Suburbs",
+        "suburb": "Malabar",
+        "surf_suitability": "low",
+        "swim_suitability": "high",
+        "updated_at": "2026-05-07T12:46:27.114000",
+        "vibe_tags": [
+          "calm",
+          "local",
+          "family"
+        ],
+        "walk_suitability": "medium",
+        "water_type": "bay",
+        "id": "69fc84844b6e6047f9fb4943",
+        "score": 63.18,
+        "score_breakdown": {
+          "mood_score": 50,
+          "condition_score": 35,
+          "profile_score": 86,
+          "time_score": 90,
+          "region_score": 50,
+          "activity_score": 100,
+          "companion_score": 78,
+          "profile_distance_km": 10.2
+        },
+        "matched_reasons": [
+          "Strong fit for relax",
+          "Works well for solo",
+          "Close to profile suburb: about 10km away",
+          "Reachable by public transport"
+        ],
+        "penalties": [
+          "Higher waves reduce swim suitability",
+          "Cooler temperature reduces swim appeal"
+        ],
+        "conditions": {
+          "temperature": 18.1,
+          "wind_kmh": 2.9,
+          "wind_direction": 4,
+          "uv_index": 2.05,
+          "wave_height_m": 2.4,
+          "wave_period": 11.2,
+          "fetched_at": "2026-05-24T02:28:43.538797+00:00"
+        }
+      }
+    ],
+    "rejected_beaches": [
+      {
+        "name": "Yarra Bay Beach",
+        "reason": "Yarra Bay is closer, yeah, and it's a calm spot, but it's more of a local family beach. For a proper solo 'lalala' relax, Little Congwong just edges it out with that secluded vibe."
+      },
+      {
+        "name": "Silver Beach",
+        "reason": "Silver Beach is pretty good, and the water's a touch warmer, but it's known for being dog-friendly and a bit more for families. Not quite the solo escape you're after."
+      },
+      {
+        "name": "Malabar Beach",
+        "reason": "Malabar's usually a good calm bay, but the water's a bit cooler today, and the conditions aren't quite as inviting for a swim as other spots."
+      },
+      {
+        "name": "Gordons Bay",
+        "reason": "Gordons Bay is stunning, proper beautiful, but it can get a bit busy, and it's more for snorkelling and couples. Not quite the right fit for a solo chill-out."
+      }
+    ],
+    "confidence": 85,
+    "recommendation_type": "beach_plan",
+    "input_context": {
+      "selected_mood": null,
+      "companion_context": "solo",
+      "experience_tags": [
+        "relax",
+        "solo"
+      ],
+      "region": null,
+      "activity": "relax",
+      "companion": "solo",
+      "preferred_beach_slug": null
+    },
+    "user_notes": "",
+    "created_at": "2026-05-24T02:29:11.707000",
+    "updated_at": "2026-05-24T02:29:11.707000",
+    "replayed_at": null
+  }
+]
