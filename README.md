@@ -1,4 +1,8 @@
-# BeachPlease
+# BeachPlease Internet Programming Assesment
+
+Soham Mundhe | 25966209
+Nguyen Quang Tu | 26139333
+Mrinal Parashar | 26048254
 
 BeachPlease is a canvas-first Sydney beach recommendation app. It helps users choose and plan a Sydney beach day through a visual beach canvas, live conditions, an interactive coastal map, Gemini-generated plans, saved plan management, and an admin dashboard for managing the underlying data.
 
@@ -375,7 +379,7 @@ This allocation is based on the repository history and current file ownership.
 | Member | Main responsibilities | Representative files |
 | --- | --- | --- |
 | Nguyen Quang Tu (`125725836+tuwang2301@users.noreply.github.com`) | Authentication, JWT/profile flow, admin authorization, admin dashboard, activity logging, saved plans, clusters, data exports, validation/error handling | `backend/app/auth.py`, `backend/app/routes/auth_routes.py`, `backend/app/routes/user_routes.py`, `backend/app/routes/admin_routes.py`, `backend/app/routes/plan_routes.py`, `backend/app/routes/cluster_routes.py`, `backend/app/services/activity_log.py`, `frontend/src/pages/Admin.jsx`, `frontend/src/pages/Login.jsx`, `frontend/src/pages/Register.jsx`, `frontend/src/pages/Profile.jsx`, `frontend/src/components/SavedModeShell.jsx`, `database/*.json` |
-| Soham (`sohamdesigns98@gmail.com`) | Visual product direction, landing/canvas experience, cluster and generated-plan UI, saved-plan UI, walkthrough/help, audio, map integration polish, documentation updates | `frontend/src/components/LandingIntro.jsx`, `frontend/src/components/CircularBeachCanvas.jsx`, `frontend/src/components/CircularBeachTile.jsx`, `frontend/src/components/ClusterStackGallery.jsx`, `frontend/src/components/GeneratedPlanJournal.jsx`, `frontend/src/components/help/HowToUseOverlay.jsx`, `frontend/src/pages/MainExperience.jsx`, `frontend/src/pages/ResultExperience.jsx`, `frontend/src/styles/*.css`, `README.md`, `PRD.md` |
+| Soham (`soham.mundhe@student.uts.edu.au`) Main Webapp Architecture| Visual product direction, landing/canvas experience, cluster and generated-plan UI, saved-plan UI, walkthrough/help, audio, map integration polish, documentation updates | `frontend/src/components/LandingIntro.jsx`, `frontend/src/components/CircularBeachCanvas.jsx`, `frontend/src/components/CircularBeachTile.jsx`, `frontend/src/components/ClusterStackGallery.jsx`, `frontend/src/components/GeneratedPlanJournal.jsx`, `frontend/src/components/help/HowToUseOverlay.jsx`, `frontend/src/pages/MainExperience.jsx`, `frontend/src/pages/ResultExperience.jsx`, `frontend/src/styles/*.css`, `README.md`, `PRD.md` |
 | Mrinaluts (`Mrinal.Parashar@student.uts.edu.au`) | Map exploration contribution and geospatial interaction support | `frontend/src/components/map/leaflet/LeafletBeachMap.jsx`, `frontend/src/components/map/leaflet/LeafletMapMode.jsx`, `frontend/src/components/map/leaflet/LeafletMapSidebar.jsx`, `frontend/src/components/map/leaflet/leafletMapUtils.js`, map-related commits |
 
 The workload is intentionally split across backend/security, frontend/product experience, and mapping/interaction areas so the assignment does not rely on a single member.
