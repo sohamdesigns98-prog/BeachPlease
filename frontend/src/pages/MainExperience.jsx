@@ -15,7 +15,7 @@ import CircularBeachCanvas from "@/components/CircularBeachCanvas";
 import ClusterPickerDialog from "@/components/ClusterPickerDialog";
 import ClusterStackGallery from "@/components/ClusterStackGallery";
 import CreateClusterDialog from "@/components/CreateClusterDialog";
-import MapboxBeachMap from "@/components/map/MapboxBeachMap";
+import LeafletMapMode from "@/components/map/leaflet/LeafletMapMode";
 import ModeToggle from "@/components/ModeToggle";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
@@ -531,7 +531,7 @@ export default function MainExperience({ visible = false, modeOverride = "", onP
       </section>
 
       <section className={`mood-mode-layer ${activeMode === "map" ? "is-active" : ""}`} aria-hidden={activeMode !== "map"}>
-        <MapboxBeachMap
+        <LeafletMapMode
           beaches={beaches}
           isFallback={mapFallbackActive}
           candidateBeachSlugs={highlightedBeachSlugs}

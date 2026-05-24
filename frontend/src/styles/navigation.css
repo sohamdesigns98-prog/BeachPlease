@@ -6,6 +6,14 @@
     box-shadow: none;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    pointer-events: none;
+  }
+
+.app-navbar__left,
+  .app-navbar__right,
+  .app-navbar button,
+  .app-navbar a {
+    pointer-events: auto;
   }
 
 .app-navbar__mark {
@@ -86,7 +94,8 @@
   }
 
 .explore-mode-pill {
-    @apply fixed left-1/2 top-[14px] z-[80] -translate-x-1/2 rounded-full border border-background/55 bg-background/55 px-4 py-2 shadow-[0_12px_32px_rgb(17_17_17_/_0.08)] backdrop-blur-xl;
+    @apply fixed left-1/2 top-[14px] z-[140] -translate-x-1/2 rounded-full border border-background/55 bg-background/55 px-4 py-2 shadow-[0_12px_32px_rgb(17_17_17_/_0.08)] backdrop-blur-xl;
+    pointer-events: auto;
   }
 
 .mode-toggle button {
